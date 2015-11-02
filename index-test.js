@@ -72,6 +72,9 @@ describe(`reactElementToJSXString(ReactElement)`, () => {
     expect(
       reactElementToJSXString(<div></div>)
     ).toEqual(`<div />`);
+    expect(
+      reactElementToJSXString(<div></div>)
+    ).toEqual(`<div></div>`);
   });
 
   it(`reactElementToJSXString(<div z="3" a="1" b="2"/>)`, () => {
