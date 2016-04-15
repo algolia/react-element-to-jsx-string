@@ -164,6 +164,9 @@ export default function reactElementToJSXString(ReactElement, options = {}) {
 
 
 function getDefaultDisplayName(ReactElement) {
+  if (!ReactElement.type) {
+    return ReactElement.constructor ? ReactElement.constructor.name : 'No Display Name';
+  }
   return ReactElement.type.name || // function name
     ReactElement.type.displayName ||
     (typeof ReactElement.type === 'function' ? // function without a name, you should provide one
