@@ -20,7 +20,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.11.0",
     "babel-register": "^6.9.0",
-    "eslint-config-algolia": "^5.1.0",
+    "eslint-config-algolia": "^6.0.1",
     "expect": "^1.14.0",
     "mocha": "^3.0.1",
     "react": "^15.2.1"
