@@ -13,7 +13,8 @@ export default function reactElementToJSXString(
     filterProps = [],
     showDefaultProps = true,
     showFunctions = false,
-    useBooleanShorthandSyntax = true
+    tabStop = 2,
+    useBooleanShorthandSyntax = true,
   } = {}
 ) {
   const getDisplayName = displayName || getDefaultDisplayName;
@@ -66,7 +67,7 @@ got \`${typeof Element}\``
       if ((attributes.length === 1 || inline) && !isMultilineAttr) {
         out += ' ';
       } else {
-        out += `\n${spacer(lvl + 1)}`;
+        out += `\n${spacer(lvl + 1, tabStop)}`;
       }
 
       if (useBooleanShorthandSyntax && attribute.value === '{true}') {
@@ -77,7 +78,7 @@ got \`${typeof Element}\``
     });
 
     if ((attributes.length > 1 || containsMultilineAttr) && !inline) {
-      out += `\n${spacer(lvl)}`;
+      out += `\n${spacer(lvl, tabStop)}`;
     }
 
     if (children.length > 0) {
@@ -85,7 +86,7 @@ got \`${typeof Element}\``
       lvl++;
       if (!inline) {
         out += `\n`;
-        out += spacer(lvl);
+        out += spacer(lvl, tabStop);
       }
 
       if (typeof children === 'string') {
@@ -95,11 +96,11 @@ got \`${typeof Element}\``
         .reduce(mergePlainStringChildren, [])
         .map(
           recurse({lvl, inline})
-        ).join(`\n${spacer(lvl)}`);
+        ).join(`\n${spacer(lvl, tabStop)}`);
       }
       if (!inline) {
         out += `\n`;
-        out += spacer(lvl - 1);
+        out += spacer(lvl - 1, tabStop);
       }
       out += `</${tagName}>`;
     } else {
@@ -137,7 +138,7 @@ got \`${typeof Element}\``
       type: getValueType(value),
       value: formatJSXAttribute(value, inline, lvl)
         .replace(/'?<__reactElementToJSXString__Wrapper__>/g, '')
-        .replace(/<\/__reactElementToJSXString__Wrapper__>'?/g, '')
+        .replace(/<\/__reactElementToJSXString__Wrapper__>'?/g, ''),
     };
   }
 
@@ -214,11 +215,10 @@ got \`${typeof Element}\``
 
     // Replace tabs with spaces, and add necessary indentation in front of each new line
     return stringified
-      .replace(/\t/g, spacer(1))
-      .replace(/\n([^$])/g, `\n${spacer(lvl + 1)}$1`);
+      .replace(/\t/g, spacer(1, tabStop))
+      .replace(/\n([^$])/g, `\n${spacer(lvl + 1, tabStop)}$1`);
   }
 }
-
 
 function getDefaultDisplayName(ReactElement) {
   return ReactElement.type.displayName ||
@@ -248,8 +248,8 @@ function mergePlainStringChildren(prev, cur) {
   return prev;
 }
 
-function spacer(times) {
-  return fill(new Array(times), '  ').join('');
+function spacer(times, tabStop) {
+  return times === 0 ? '' : fill(new Array(times * tabStop), ' ').join('');
 }
 
 function noChildren(propName) {
