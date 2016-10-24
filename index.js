@@ -9,7 +9,6 @@ import {fill} from 'lodash';
 
 export default function reactElementToJSXString(
   ReactElement, {
-    collapseWhitespace = true,
     displayName,
     filterProps = [],
     showDefaultProps = true,
@@ -56,7 +55,7 @@ got \`${typeof Element}\``
     let containsMultilineAttr = false;
     attributes.forEach(attribute => {
       let isMultilineAttr = false;
-      if (!collapseWhitespace && ['plainObject', 'array', 'function'].indexOf(attribute.type) > -1) {
+      if (['plainObject', 'array', 'function'].indexOf(attribute.type) > -1) {
         isMultilineAttr = attribute.value.indexOf('\n') > -1;
       }
 
@@ -205,7 +204,7 @@ got \`${typeof Element}\``
 
     const stringified = stringify(obj);
 
-    if (collapseWhitespace || inline) {
+    if (inline) {
       return collapse(stringified)
         .replace(/{ /g, '{')
         .replace(/ }/g, '}')

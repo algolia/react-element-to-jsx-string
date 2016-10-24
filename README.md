@@ -61,12 +61,6 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
 ### reactElementToJSXString(ReactElement[, options])
 
-**options.collapseWhitespace: boolean, default true**
-
-  If true, props that are arrays or plain objects are rendered on a single line.
-
-  If false, array and plain object props are rendered using `stringifyObject` from the [`stringify-object`](https://github.com/yeoman/stringify-object) package. Each entry of the plain object or array is printed on a new line, and nested objects and arrays are rendered with proper indentation.
-
 **options.displayName: function(ReactElement)**
 
   Provide a different algorithm in charge of finding the right display name (name of the underlying Class) for your element.
