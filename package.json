@@ -29,7 +29,7 @@
     "eslint-plugin-react": "^6.7.0",
     "expect": "^1.14.0",
     "mocha": "^3.1.2",
-    "react": "^15.3.2",
+    "react": "^15.4.0",
     "webpack": "^1.13.3"
   },
   "peerDependencies": {
