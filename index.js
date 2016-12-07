@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {isValidElement as isElement} from 'react';
 import collapse from 'collapse-white-space';
-import {isElement} from 'react-addons-test-utils';
 import isPlainObject from 'is-plain-object';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';
@@ -85,7 +84,7 @@ got \`${typeof Element}\``
       out += '>';
       lvl++;
       if (!inline) {
-        out += `\n`;
+        out += '\n';
         out += spacer(lvl, tabStop);
       }
 
@@ -99,7 +98,7 @@ got \`${typeof Element}\``
         ).join(`\n${spacer(lvl, tabStop)}`);
       }
       if (!inline) {
-        out += `\n`;
+        out += '\n';
         out += spacer(lvl - 1, tabStop);
       }
       out += `</${tagName}>`;
@@ -210,7 +209,7 @@ got \`${typeof Element}\``
         .replace(/{ /g, '{')
         .replace(/ }/g, '}')
         .replace(/\[ /g, '[')
-        .replace(/ \]/g, ']');
+        .replace(/ ]/g, ']');
     }
 
     // Replace tabs with spaces, and add necessary indentation in front of each new line
