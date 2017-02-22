@@ -96,6 +96,11 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, Boolean prop values will be explicitly output like `prop={true}` and `prop={false}`
 
+**options.maxInlineAttributes: number, default 1**
+
+  Provide the max number of attributes to render inline with the tag name. If the number of attributes exceeds this number, then all attributes will be rendered
+  on a separate line.
+
 ## Environment requirements
 
 The environment you use to use `react-element-to-jsx-string` should have [ES2015](https://babeljs.io/learn-es2015/) support.

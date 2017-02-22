@@ -654,4 +654,53 @@ describe('reactElementToJSXString(ReactElement)', () => {
       reactElementToJSXString(<DisplayNamePrecedence />)
     ).toEqual('<This should take precedence />');
   });
+
+  // maxInlineAttributes tests
+  it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributes: 3 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2" />, {maxInlineAttributes: 3})
+    ).toEqual('<div aprop="1" bprop="2" />');
+  });
+  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" />, { maxInlineAttributes: 3 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" />, {maxInlineAttributes: 3})
+    ).toEqual('<div aprop="1" bprop="2" cprop="3" />');
+  });
+  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4" />, { maxInlineAttributes: 3 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4" />, {maxInlineAttributes: 3})
+    ).toEqual(`<div
+  aprop="1"
+  bprop="2"
+  cprop="3"
+  dprop="4"
+/>`);
+  });
+  it('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlineAttributes: 3 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2">content</div>, {maxInlineAttributes: 3})
+    ).toEqual(`<div aprop="1" bprop="2">
+  content
+</div>`);
+  });
+  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3">content</div>, { maxInlineAttributes: 3 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3">content</div>, {maxInlineAttributes: 3})
+    ).toEqual(`<div aprop="1" bprop="2" cprop="3">
+  content
+</div>`);
+  });
+  // eslint-disable-next-line max-len
+  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4">content</div>, {maxInlineAttributes: 3}))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4">content</div>, {maxInlineAttributes: 3})
+    ).toEqual(`<div
+  aprop="1"
+  bprop="2"
+  cprop="3"
+  dprop="4"
+>
+  content
+</div>`);
+  });
 });

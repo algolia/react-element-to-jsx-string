@@ -14,6 +14,7 @@ export default function reactElementToJSXString(
     showFunctions = false,
     tabStop = 2,
     useBooleanShorthandSyntax = true,
+    maxInlineAttributes = 1,
   } = {}
 ) {
   const getDisplayName = displayName || getDefaultDisplayName;
@@ -63,7 +64,7 @@ got \`${typeof Element}\``
         containsMultilineAttr = true;
       }
 
-      if ((attributes.length === 1 || inline) && !isMultilineAttr) {
+      if ((attributes.length <= maxInlineAttributes || inline) && !isMultilineAttr) {
         out += ' ';
       } else {
         out += `\n${spacer(lvl + 1, tabStop)}`;
@@ -76,7 +77,7 @@ got \`${typeof Element}\``
       }
     });
 
-    if ((attributes.length > 1 || containsMultilineAttr) && !inline) {
+    if ((attributes.length > maxInlineAttributes || containsMultilineAttr) && !inline) {
       out += `\n${spacer(lvl, tabStop)}`;
     }
 
@@ -103,7 +104,7 @@ got \`${typeof Element}\``
       }
       out += `</${tagName}>`;
     } else {
-      if (attributes.length <= 1) {
+      if (attributes.length <= maxInlineAttributes) {
         out += ' ';
       }
 
