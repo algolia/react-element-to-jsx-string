@@ -96,10 +96,11 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, Boolean prop values will be explicitly output like `prop={true}` and `prop={false}`
 
-**options.maxInlineAttributes: number, default 1**
+**options.maxInlineAttributesLineLength: number, default undefined**
 
-  Provide the max number of attributes to render inline with the tag name. If the number of attributes exceeds this number, then all attributes will be rendered
-  on a separate line.
+  Provide the max number of characters the render inline with the tag name. If the number of characters exceeds this number, then all attributes will be rendered
+  on a separate line. The default behavior if this option is undefined is render attributes inline if there is only one, and render attributes on multiple
+  lines if there are more than one attribute on the element. Note: Objects passed as attribute values are always rendered on multiple lines
 
 ## Environment requirements
 

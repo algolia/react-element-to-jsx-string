@@ -677,50 +677,57 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<This should take precedence />');
   });
 
-  // maxInlineAttributes tests
-  it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributes: 3 }))', () => {
+  // maxInlineAttributesLineLength tests
+  // Validate two props will stay inline if their length is less than the option
+  it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributesLineLength: 100 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2" />, {maxInlineAttributes: 3})
+      reactElementToJSXString(<div aprop="1" bprop="2" />, {maxInlineAttributesLineLength: 100})
     ).toEqual('<div aprop="1" bprop="2" />');
   });
-  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" />, { maxInlineAttributes: 3 }))', () => {
+  // Validate one prop will go to new line if length is greater than option. One prop is a special case since
+  // the old logic operated on whether or not two or more attributes were present. Making sure this overrides
+  // that older logic
+  it('reactElementToJSXString(<div aprop="1"/>, { maxInlineAttributesLineLength: 5 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" />, {maxInlineAttributes: 3})
-    ).toEqual('<div aprop="1" bprop="2" cprop="3" />');
+      reactElementToJSXString(<div aprop="1"/>, {maxInlineAttributesLineLength: 5})
+    ).toEqual(`<div
+  aprop="1"
+/>`);
   });
-  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4" />, { maxInlineAttributes: 3 }))', () => {
+  // Validate two props will go be multiline if their length is greater than the given option
+  it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributesLineLength: 10 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4" />, {maxInlineAttributes: 3})
+      reactElementToJSXString(<div aprop="1" bprop="2" />, {maxInlineAttributesLineLength: 10})
     ).toEqual(`<div
   aprop="1"
   bprop="2"
-  cprop="3"
-  dprop="4"
 />`);
   });
-  it('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlineAttributes: 3 }))', () => {
+
+  // Same tests as above but with elements that have children. The closing braces for elements with children and without children
+  // run through different code paths so we have both sets of test to specify the behavior of both when this option is present
+  it('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlineAttributesLineLength: 100 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2">content</div>, {maxInlineAttributes: 3})
+      reactElementToJSXString(<div aprop="1" bprop="2">content</div>, {maxInlineAttributesLineLength: 100})
     ).toEqual(`<div aprop="1" bprop="2">
   content
 </div>`);
   });
-  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3">content</div>, { maxInlineAttributes: 3 }))', () => {
+  it('reactElementToJSXString(<div aprop="1">content</div>, { maxInlineAttributesLineLength: 5 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3">content</div>, {maxInlineAttributes: 3})
-    ).toEqual(`<div aprop="1" bprop="2" cprop="3">
+      reactElementToJSXString(<div aprop="1">content</div>, {maxInlineAttributesLineLength: 5})
+    ).toEqual(`<div
+  aprop="1"
+>
   content
 </div>`);
   });
-  // eslint-disable-next-line max-len
-  it('reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4">content</div>, {maxInlineAttributes: 3}))', () => {
+  it('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlineAttributesLineLength: 10 }))', () => {
     expect(
-      reactElementToJSXString(<div aprop="1" bprop="2" cprop="3" dprop="4">content</div>, {maxInlineAttributes: 3})
+      reactElementToJSXString(<div aprop="1" bprop="2">content</div>, {maxInlineAttributesLineLength: 10})
     ).toEqual(`<div
   aprop="1"
   bprop="2"
-  cprop="3"
-  dprop="4"
 >
   content
 </div>`);
