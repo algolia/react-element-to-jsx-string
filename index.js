@@ -80,7 +80,7 @@ got \`${typeof Element}\``
 
     outMultilineAttr += `\n${spacer(lvl, tabStop)}`;
 
-    if (shouldRenderMultilineAttr(attributes, outInlineAttr, containsMultilineAttr, inline)) {
+    if (shouldRenderMultilineAttr(attributes, outInlineAttr, containsMultilineAttr, inline, lvl)) {
       out = outMultilineAttr;
     } else {
       out = outInlineAttr;
@@ -109,7 +109,7 @@ got \`${typeof Element}\``
       }
       out += `</${tagName}>`;
     } else {
-      if (!isInlineAttributeTooLong(attributes, outInlineAttr)) {
+      if (!isInlineAttributeTooLong(attributes, outInlineAttr, lvl)) {
         out += ' ';
       }
 
@@ -119,17 +119,17 @@ got \`${typeof Element}\``
     return out;
   }
 
-  function shouldRenderMultilineAttr(attributes, inlineAttributeString, containsMultilineAttr, inline) {
-    return (isInlineAttributeTooLong(attributes, inlineAttributeString) || containsMultilineAttr) && !inline;
+  function shouldRenderMultilineAttr(attributes, inlineAttributeString, containsMultilineAttr, inline, lvl) {
+    return (isInlineAttributeTooLong(attributes, inlineAttributeString, lvl) || containsMultilineAttr) && !inline;
   }
 
-  function isInlineAttributeTooLong(attributes, inlineAttributeString) {
+  function isInlineAttributeTooLong(attributes, inlineAttributeString, lvl) {
     if (typeof maxInlineAttributesLineLength === 'undefined') {
       // For backwards compatibility, if the new option is undefined, use previous logic to determine
       // whether or not to render multiline attributes based on the number of attributes
       return attributes.length > 1;
     } else {
-      return inlineAttributeString.length > maxInlineAttributesLineLength;
+      return spacer(lvl, tabStop).length + inlineAttributeString.length > maxInlineAttributesLineLength;
     }
   }
 

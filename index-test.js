@@ -732,4 +732,20 @@ describe('reactElementToJSXString(ReactElement)', () => {
   content
 </div>`);
   });
+
+  // Multi-level inline attribute test
+  it('reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttributesLineLength: 24 }))', () => {
+    expect(
+      reactElementToJSXString(<div aprop="1" bprop="2"><div cprop="3" dprop="4">content</div></div>, {
+        maxInlineAttributesLineLength: 24,
+      })
+    ).toEqual(`<div aprop="1" bprop="2">
+  <div
+    cprop="3"
+    dprop="4"
+  >
+    content
+  </div>
+</div>`);
+  });
 });
