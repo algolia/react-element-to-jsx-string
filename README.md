@@ -98,9 +98,10 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
 **options.maxInlineAttributesLineLength: number, default undefined**
 
-  Provide the max number of characters the render inline with the tag name. If the number of characters exceeds this number, then all attributes will be rendered
-  on a separate line. The default behavior if this option is undefined is render attributes inline if there is only one, and render attributes on multiple
-  lines if there are more than one attribute on the element. Note: Objects passed as attribute values are always rendered on multiple lines
+  Provide the max number of characters to render inline with the tag name. If the number of characters on the line (including spacing and the tag name)
+  exceeds this number, then all attributes will be rendered on a separate line. The default value of this option is `undefined`. If this option is `undefined`
+  then if there is more than one attribute on an element, they will render on their own line. Note: Objects passed as attribute values are always rendered
+  on multiple lines
 
 ## Environment requirements
 
