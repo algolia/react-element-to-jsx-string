@@ -12,6 +12,7 @@ export default function reactElementToJSXString(
     filterProps = [],
     showDefaultProps = true,
     showFunctions = false,
+    functionValue,
     tabStop = 2,
     useBooleanShorthandSyntax = true,
     maxInlineAttributesLineLength,
@@ -191,9 +192,13 @@ got \`${typeof Element}\``
 
   function formatValue(value, inline, lvl) {
     const wrapper = '__reactElementToJSXString__Wrapper__';
-
-    if (typeof value === 'function' && !showFunctions) {
+    const isValueFunction = typeof value === 'function';
+    if (isValueFunction && !showFunctions) {
       return function noRefCheck() {};
+    } else if (isValueFunction && functionValue) {
+      // Anonymous function shows up as 'functionValue' so we strip it out
+      return typeof functionValue === 'function' ?
+        functionValue.toString().replace('functionValue', '') : functionValue;
     } else if (isElement(value)) {
       // we use this delimiter hack in cases where the react element is a property
       // of an object from a root prop

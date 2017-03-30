@@ -86,6 +86,12 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, functions bodies are replaced with `function noRefCheck() {}`.
 
+**options.functionValue: string or function, default undefined**
+
+  Replaces the function body with a provided function or string value.
+
+  Must be used in conjunction with `showFunctions`.
+
 **options.tabStop: number, default 2**
 
   Provide a different number of columns for indentation.

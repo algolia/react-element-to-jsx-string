@@ -748,4 +748,28 @@ describe('reactElementToJSXString(ReactElement)', () => {
   </div>
 </div>`);
   });
+  it('should return the functionValue value when "showFunctions" is true and functionValue is a valid string', () => {
+    expect(
+      reactElementToJSXString(<div fn={() => 'value'}/>, {showFunctions: true, functionValue: 'Replace me'})
+  ).toEqual('<div fn={Replace me} />');
+  });
+  it('should return the functionValue as a string when "showFunctions" is true and functionValue is a function', () => {
+    expect(
+      reactElementToJSXString(<div fn={() => 'value'}/>, {showFunctions: true, functionValue: () => false})
+  ).toEqual(`<div
+  fn={function () {
+        return false;
+      }}
+ />`);
+  });
+  it('should return noRefCheck when "showFunctions" is false and "functionValue" is provided', () => {
+    expect(
+      reactElementToJSXString(<div fn={() => 'value'}/>, {showFunctions: false, functionValue: 'Replace me'})
+  ).toEqual('<div fn={function noRefCheck() {}} />');
+  });
+  it('should return noRefCheck when "showFunctions" is false and "functionValue" is not provided', () => {
+    expect(
+      reactElementToJSXString(<div fn={() => {}}/>)
+    ).toEqual('<div fn={function noRefCheck() {}} />');
+  });
 });
