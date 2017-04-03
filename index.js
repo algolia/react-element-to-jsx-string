@@ -195,10 +195,10 @@ got \`${typeof Element}\``
     const isValueFunction = typeof value === 'function';
     if (isValueFunction && !showFunctions) {
       return function noRefCheck() {};
-    } else if (isValueFunction && functionValue) {
+    } else if (isValueFunction && typeof functionValue === 'function') {
       // Anonymous function shows up as 'functionValue' so we strip it out
-      return typeof functionValue === 'function' ?
-        functionValue.toString().replace('functionValue', '') : functionValue;
+      const returnedValue = functionValue();
+      return typeof returnedValue === 'string' ? returnedValue : returnedValue.toString();
     } else if (isElement(value)) {
       // we use this delimiter hack in cases where the react element is a property
       // of an object from a root prop
