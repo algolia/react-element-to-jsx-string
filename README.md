@@ -86,7 +86,7 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, functions bodies are replaced with `function noRefCheck() {}`.
 
-**options.functionValue: function, default undefined**
+**options.functionValue: function, default `() => function noRefCheck() {}`**
 
   Returns the result of the provided functionValue callback. Coerces to string if value returned by functionValue is not a string by default.
 

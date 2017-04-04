@@ -190,16 +190,23 @@ got \`${typeof Element}\``
     return typeof value;
   }
 
+  function isFunction (value) {
+    return typeof value === 'function';
+  }
+
   function formatValue(value, inline, lvl) {
     const wrapper = '__reactElementToJSXString__Wrapper__';
-    const isValueFunction = typeof value === 'function';
-    if (isValueFunction && !showFunctions) {
-      return function noRefCheck() {};
-    } else if (isValueFunction && typeof functionValue === 'function') {
-      // Anonymous function shows up as 'functionValue' so we strip it out
-      const returnedValue = functionValue();
-      return typeof returnedValue === 'string' ? returnedValue : returnedValue.toString();
-    } else if (isElement(value)) {
+    if (isFunction(value)) {
+      const noRefFn = () => function noRefCheck() {};
+      if (!showFunctions) return noRefFn();
+      if (showFunctions && functionValue) {
+        functionValue = functionValue || noRefFn;
+        const returnedValue = functionValue();
+        return typeof returnedValue === 'string' ? returnedValue : returnedValue.toString();
+      }
+    }
+
+    if (isElement(value)) {
       // we use this delimiter hack in cases where the react element is a property
       // of an object from a root prop
       // i.e.
