@@ -86,11 +86,12 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, functions bodies are replaced with `function noRefCheck() {}`.
 
-**options.functionValue: function, default `() => function noRefCheck() {}`**
+**options.functionValue: function, default `(fn) => fn`**
 
-  Returns the result of the provided functionValue callback. Coerces to string if value returned by functionValue is not a string by default.
+  Allows you to override the default formatting of function values.
 
-  Must be used in conjunction with `showFunctions`.
+  `functionValue` receives the original function reference as input
+  and should send any value as output.
 
 **options.tabStop: number, default 2**
 

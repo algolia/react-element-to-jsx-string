@@ -6,13 +6,15 @@ import sortobject from 'sortobject';
 import traverse from 'traverse';
 import {fill} from 'lodash';
 
+const defaultFunctionValue = fn => fn;
+
 export default function reactElementToJSXString(
   ReactElement, {
     displayName,
     filterProps = [],
     showDefaultProps = true,
     showFunctions = false,
-    functionValue,
+    functionValue = defaultFunctionValue,
     tabStop = 2,
     useBooleanShorthandSyntax = true,
     maxInlineAttributesLineLength,
@@ -197,13 +199,11 @@ got \`${typeof Element}\``
   function formatValue(value, inline, lvl) {
     const wrapper = '__reactElementToJSXString__Wrapper__';
     if (isFunction(value)) {
-      const noRefFn = () => function noRefCheck() {};
-      if (!showFunctions) return noRefFn();
-      if (showFunctions && functionValue) {
-        functionValue = functionValue || noRefFn;
-        const returnedValue = functionValue();
-        return typeof returnedValue === 'string' ? returnedValue : returnedValue.toString();
-      }
+      return functionValue(
+        showFunctions === false && functionValue === defaultFunctionValue ?
+          function noRefCheck() {} : // eslint-disable-line prefer-arrow-callback
+          value
+      );
     }
 
     if (isElement(value)) {
