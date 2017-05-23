@@ -202,7 +202,7 @@ got \`${typeof Element}\``
 
   function formatJSXAttribute(propValue, inline, lvl) {
     if (typeof propValue === 'string') {
-      return `"${propValue}"`;
+      return `"${propValue.replace(/"/g, '&quot;')}"`;
     }
 
     if (typeof propValue === 'symbol') {
