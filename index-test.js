@@ -65,6 +65,14 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<div title="hello &quot;you&quot;" />');
   });
 
+  it("reactElementToJSXString(React.createElement('div', {title: '<'hello' you & you>'}))", () => {
+    expect(
+      reactElementToJSXString(
+        React.createElement('div', { title: "<'hello' you & you>" })
+      )
+    ).toEqual('<div title="&lt;&#39;hello&#39; you &amp; you&gt;" />');
+  });
+
   it("reactElementToJSXString(React.createElement('div', {title: Symbol('hello \"you\"')})", () => {
     expect(
       reactElementToJSXString(

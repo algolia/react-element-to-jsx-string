@@ -5,7 +5,7 @@ import isPlainObject from 'is-plain-object';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';
 import traverse from 'traverse';
-import { fill } from 'lodash';
+import { fill, escape } from 'lodash';
 
 const defaultFunctionValue = fn => fn;
 
@@ -202,7 +202,7 @@ got \`${typeof Element}\``
 
   function formatJSXAttribute(propValue, inline, lvl) {
     if (typeof propValue === 'string') {
-      return `"${propValue.replace(/"/g, '&quot;')}"`;
+      return `"${escape(propValue)}"`;
     }
 
     if (typeof propValue === 'symbol') {
