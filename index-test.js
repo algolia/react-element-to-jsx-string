@@ -73,6 +73,20 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<div title="&lt;&#39;hello&#39; you &amp; you&gt;" />');
   });
 
+  it("reactElementToJSXString(<div obj={{ nested: <div arr={['hello', 'you']} /> }} />)", () => {
+    expect(
+      reactElementToJSXString(
+        <div obj={{ nested: <div arr={['hello', 'you']} /> }} />
+      )
+    ).toEqual(
+      `<div
+  obj={{
+    nested: <div arr={['hello', 'you']} />
+  }}
+ />`
+    );
+  });
+
   it("reactElementToJSXString(React.createElement('div', {title: Symbol('hello \"you\"')})", () => {
     expect(
       reactElementToJSXString(
