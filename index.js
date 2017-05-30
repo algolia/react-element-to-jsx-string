@@ -289,6 +289,7 @@ got \`${typeof Element}\``
 
     // Replace tabs with spaces, and add necessary indentation in front of each new line
     return stringified
+      .replace(/\\\'/g, "'")
       .replace(/\t/g, spacer(1, tabStop))
       .replace(/\n([^$])/g, `\n${spacer(lvl + 1, tabStop)}$1`);
   }
