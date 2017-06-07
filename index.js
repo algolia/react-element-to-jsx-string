@@ -4,8 +4,9 @@ import isPlainObject from 'is-plain-object';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';
 import traverse from 'traverse';
-import { fill, escape } from 'lodash';
+import { fill } from 'lodash';
 
+const escape = s => s.replace(/"/g, '&quot;');
 const defaultFunctionValue = fn => fn;
 
 export default function reactElementToJSXString(
@@ -288,6 +289,7 @@ got \`${typeof Element}\``
 
     // Replace tabs with spaces, and add necessary indentation in front of each new line
     return stringified
+      .replace(/\\\'/g, "'")
       .replace(/\t/g, spacer(1, tabStop))
       .replace(/\n([^$])/g, `\n${spacer(lvl + 1, tabStop)}$1`);
   }
