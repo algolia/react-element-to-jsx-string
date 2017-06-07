@@ -1,3 +1,13 @@
+<a name="9.0.0"></a>
+# [9.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v8.0.0...v9.0.0) (2017-06-07)
+
+
+### Bug Fixes
+
+* **quotes:** fixes #82 #81 #80 ([3d96ddc](https://github.com/algolia/react-element-to-jsx-string/commit/3d96ddc)), closes [#82](https://github.com/algolia/react-element-to-jsx-string/issues/82) [#81](https://github.com/algolia/react-element-to-jsx-string/issues/81) [#80](https://github.com/algolia/react-element-to-jsx-string/issues/80)
+
+
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v7.0.0...v8.0.0) (2017-05-24)
 
