@@ -5,8 +5,9 @@ import isPlainObject from 'is-plain-object';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';
 import traverse from 'traverse';
-import { fill, escape } from 'lodash';
+import { fill } from 'lodash';
 
+const escape = s => s.replace(/"/g, '&quot;');
 const defaultFunctionValue = fn => fn;
 
 export default function reactElementToJSXString(
