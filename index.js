@@ -1,5 +1,4 @@
-import React from 'react';
-import { isElement } from 'react-dom/test-utils';
+import React, { isValidElement } from 'react';
 import collapse from 'collapse-white-space';
 import isPlainObject from 'is-plain-object';
 import stringify from 'stringify-object';
@@ -34,7 +33,7 @@ export default function reactElementToJSXString(
   }) {
     if (typeof Element === 'string' || typeof Element === 'number') {
       return Element;
-    } else if (!isElement(Element)) {
+    } else if (!isValidElement(Element)) {
       throw new Error(
         `react-element-to-jsx-string: Expected a ReactElement,
 got \`${typeof Element}\``
@@ -214,7 +213,7 @@ got \`${typeof Element}\``
   }
 
   function getValueType(value) {
-    if (isElement(value)) {
+    if (isValidElement(value)) {
       return 'element';
     }
 
@@ -243,7 +242,7 @@ got \`${typeof Element}\``
       );
     }
 
-    if (isElement(value)) {
+    if (isValidElement(value)) {
       // we use this delimiter hack in cases where the react element is a property
       // of an object from a root prop
       // i.e.
@@ -270,7 +269,7 @@ got \`${typeof Element}\``
     if (Object.keys(obj).length > 0 || obj.length > 0) {
       // eslint-disable-next-line array-callback-return
       obj = traverse(obj).map(function(value) {
-        if (isElement(value) || this.isLeaf) {
+        if (isValidElement(value) || this.isLeaf) {
           this.update(formatValue(value, inline, lvl));
         }
       });
