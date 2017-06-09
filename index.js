@@ -185,9 +185,9 @@ got \`${typeof Element}\``
       );
     }
 
-    return formatted
-      .sort()
-      .map(propName => getJSXAttribute(propName, props[propName], inline, lvl));
+    return formatted.map(propName =>
+      getJSXAttribute(propName, props[propName], inline, lvl)
+    );
   }
 
   function getJSXAttribute(name, value, inline, lvl) {
