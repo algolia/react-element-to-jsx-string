@@ -181,7 +181,10 @@ got \`${typeof Element}\``
 
     if (!showDefaultProps) {
       formatted = formatted.filter(
-        key => (defaultProps[key] ? defaultProps[key] !== props[key] : true)
+        key =>
+          (typeof defaultProps[key] === 'undefined'
+            ? typeof props[key] !== 'undefined'
+            : defaultProps[key] !== props[key])
       );
     }
 
