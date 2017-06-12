@@ -16,7 +16,12 @@ function NamedStatelessComponent(props) {
 
 class DefaultPropsComponent extends React.Component {}
 
-DefaultPropsComponent.defaultProps = { test: 'test', boolean: true };
+DefaultPropsComponent.defaultProps = {
+  test: 'test',
+  boolean: true,
+  number: 0,
+  undefinedProp: undefined,
+};
 
 class DisplayNamePrecedence extends React.Component {}
 
@@ -645,7 +650,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(reactElementToJSXString(<DefaultPropsComponent />)).toEqual(
       `<DefaultPropsComponent
   boolean
+  number={0}
   test="test"
+  undefinedProp={undefined}
 />`
     );
   });
