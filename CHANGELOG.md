@@ -1,3 +1,13 @@
+<a name="10.1.0"></a>
+# [10.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v10.0.1...v10.1.0) (2017-06-13)
+
+
+### Features
+
+* **sortProps:** add option to remove sorting of props ([66e8307](https://github.com/algolia/react-element-to-jsx-string/commit/66e8307))
+
+
+
 <a name="10.0.1"></a>
 ## [10.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v10.0.0...v10.0.1) (2017-06-12)
 
