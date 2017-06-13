@@ -20,6 +20,7 @@ export default function reactElementToJSXString(
     tabStop = 2,
     useBooleanShorthandSyntax = true,
     maxInlineAttributesLineLength,
+    sortProps = true,
   } = {}
 ) {
   const getDisplayName = displayName || getDefaultDisplayName;
@@ -47,6 +48,7 @@ got \`${typeof Element}\``
       Element.props,
       getDefaultProps(Element),
       inline,
+      sortProps,
       lvl
     );
     let attributes = [];
@@ -170,7 +172,7 @@ got \`${typeof Element}\``
     }
   }
 
-  function formatProps(props, defaultProps, inline, lvl) {
+  function formatProps(props, defaultProps, inline, sortProps, lvl) {
     let formatted = Object.keys(props).filter(noChildren);
 
     if (useBooleanShorthandSyntax) {
@@ -188,9 +190,13 @@ got \`${typeof Element}\``
       );
     }
 
-    return formatted
-      .sort()
-      .map(propName => getJSXAttribute(propName, props[propName], inline, lvl));
+    if (sortProps) {
+      formatted = formatted.sort();
+    }
+
+    return formatted.map(propName =>
+      getJSXAttribute(propName, props[propName], inline, lvl)
+    );
   }
 
   function getJSXAttribute(name, value, inline, lvl) {
