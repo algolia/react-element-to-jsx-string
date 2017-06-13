@@ -112,6 +112,10 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
   then if there is more than one attribute on an element, they will render on their own line. Note: Objects passed as attribute values are always rendered
   on multiple lines
 
+**options.sortProps: boolean, default true**
+
+  Either to sort or not props. If you use this lib to make some isomorphic rendering you should set it to false, otherwise this would lead to react invalid checksums as the prop order is part of react isomorphic checksum algorithm.
+
 ## Environment requirements
 
 The environment you use to use `react-element-to-jsx-string` should have [ES2015](https://babeljs.io/learn-es2015/) support.

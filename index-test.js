@@ -203,6 +203,19 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<div z="3" a="1" b="2"/>, {sortProps: false})', () => {
+    /* eslint react/jsx-sort-props: 0 */
+    expect(
+      reactElementToJSXString(<div z="3" a="1" b="2" />, { sortProps: false })
+    ).toEqual(
+      `<div
+  z="3"
+  a="1"
+  b="2"
+/>`
+    );
+  });
+
   it('reactElementToJSXString(<div a="1">Hello</div>)', () => {
     expect(reactElementToJSXString(<div a="1">Hello</div>)).toEqual(
       `<div a="1">
