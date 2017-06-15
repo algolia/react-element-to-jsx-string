@@ -3,6 +3,5 @@ node_js: stable
 branches:
   only:
     - master
-    - /^greenkeeper-.*$/
-    - /^greenkeeper/.*$/
+    - /^greenkeeper\/.*$/
 cache: yarn
