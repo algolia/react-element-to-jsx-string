@@ -1,5 +1,7 @@
 # react-element-to-jsx-string
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/algolia/react-element-to-jsx-string.svg)](https://greenkeeper.io/)
+
 [![Version][version-svg]][package-url] [![Build Status][travis-svg]][travis-url] [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url]
 
 [travis-svg]: https://img.shields.io/travis/algolia/react-element-to-jsx-string/master.svg?style=flat-square
