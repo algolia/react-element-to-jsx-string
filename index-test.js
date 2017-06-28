@@ -92,6 +92,26 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it("reactElementToJSXString(<div nested={{ hello: 'world', foo: 'esca'ped', bar: 42 }} root=\"root\"/>)", () => {
+    expect(
+      reactElementToJSXString(
+        <div
+          nested={{ hello: 'world', foo: 'esca\'"ped', bar: 42 }}
+          root="root"
+        />
+      )
+    ).toEqual(
+      `<div
+  nested={{
+    bar: 42,
+    foo: "esca'\\"ped",
+    hello: "world"
+  }}
+  root="root"
+/>`
+    );
+  });
+
   it("reactElementToJSXString(React.createElement('div', {title: Symbol('hello \"you\"')})", () => {
     expect(
       reactElementToJSXString(
