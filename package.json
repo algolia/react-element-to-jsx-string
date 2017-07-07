@@ -43,7 +43,7 @@
     "eslint-plugin-jest": "^19.0.1",
     "eslint-plugin-react": "^6.10.3",
     "expect": "^1.14.0",
-    "husky": "^0.13.3",
+    "husky": "0.14.3",
     "json": "^9.0.6",
     "lint-staged": "^3.4.0",
     "mocha": "^3.2.0",
