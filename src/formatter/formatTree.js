@@ -1,6 +1,5 @@
 /* @flow */
 
-import { isValidElement } from 'react';
 import { defaultFunctionValue } from './formatPropValue';
 import formatReactElementNode from './formatReactElementNode';
 import type { Options } from './../options';

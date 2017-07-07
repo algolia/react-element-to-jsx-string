@@ -1,16 +1,8 @@
 /* @flow */
 
-import sortobject from 'sortobject';
-import stringify from 'stringify-object';
-import React, { Element, isValidElement } from 'react';
-import traverse from 'traverse';
 import spacer from './spacer';
-import formatTreeNode from './formatTreeNode';
-import formatPropValue, { defaultFunctionValue } from './formatPropValue';
-import formatComplexDataStructure from './formatComplexDataStructure';
+import formatPropValue from './formatPropValue';
 import type { Options } from './../options';
-import parseReactElement from './../parser/parseReactElement';
-import type { TreeNode } from './../tree';
 
 export default (
   propName: string,

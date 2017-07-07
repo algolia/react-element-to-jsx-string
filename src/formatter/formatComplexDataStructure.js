@@ -1,7 +1,6 @@
 /* @flow */
 
 import collapse from 'collapse-white-space';
-import isPlainObject from 'is-plain-object';
 import { isValidElement } from 'react';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';

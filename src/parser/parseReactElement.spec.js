@@ -1,10 +1,6 @@
 /* @flow */
 
-/* eslint-env jest */
-/* eslint-disable react/no-multi-comp, react/prop-types */
-
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
 import parseReactElement from './parseReactElement';
 
 const options = {};

@@ -1,6 +1,8 @@
 /* @flow */
 
 import formatReactElementNode from './formatReactElementNode';
+import type { Options } from './../options';
+import type { TreeNode } from './../tree';
 
 export default (
   node: TreeNode,

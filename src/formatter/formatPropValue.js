@@ -32,7 +32,7 @@ const formatPropValue = (
   if (typeof propValue === 'function') {
     const { functionValue, showFunctions } = options;
     if (!showFunctions && functionValue === defaultFunctionValue) {
-      return `{${functionValue(function noRefCheck() {})}}`;
+      return `{${functionValue(() => {})}}`;
     }
 
     return `{${functionValue(propValue)}}`;

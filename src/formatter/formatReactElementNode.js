@@ -1,49 +1,22 @@
 /* @flow */
 
-import sortobject from 'sortobject';
-import stringify from 'stringify-object';
-import React, { Element, isValidElement } from 'react';
-import traverse from 'traverse';
 import spacer from './spacer';
 import formatTreeNode from './formatTreeNode';
-import formatPropValue, { defaultFunctionValue } from './formatPropValue';
-import formatComplexDataStructure from './formatComplexDataStructure';
 import formatProp from './formatProp';
 import propNameSorter from './propNameSorter';
 import type { Options } from './../options';
-import parseReactElement from './../parser/parseReactElement';
 import type { TreeNode } from './../tree';
 
-const recurse = (lvl: number, inline: boolean, options: Options) => {
-  return element => formatTreeNode(element, inline, lvl, options);
-};
+const recurse = (lvl: number, inline: boolean, options: Options) => element =>
+  formatTreeNode(element, inline, lvl, options);
 
 // FIXME: naming
-const onlyOriginalProps = (leftProps, rightProps) =>
-  propName => {
-    const isIncludedInLeft = Object.keys(leftProps).includes(propName);
-    return !isIncludedInLeft ||
-      (isIncludedInLeft && leftProps[propName] !== rightProps[propName]);
-  };
-
-const shouldRenderMultilineAttr = (
-  attributes: string[],
-  inlineAttributeString: string,
-  containsMultilineAttr: boolean,
-  inline: boolean,
-  lvl: number,
-  tabStop: number,
-  maxInlineAttributesLineLength: ?number
-): boolean => {
-  return (isInlineAttributeTooLong(
-    attributes,
-    inlineAttributeString,
-    lvl,
-    tabStop,
-    maxInlineAttributesLineLength
-  ) ||
-    containsMultilineAttr) &&
-    !inline;
+const onlyOriginalProps = (leftProps, rightProps) => propName => {
+  const isIncludedInLeft = Object.keys(leftProps).includes(propName);
+  return (
+    !isIncludedInLeft ||
+    (isIncludedInLeft && leftProps[propName] !== rightProps[propName])
+  );
 };
 
 const isInlineAttributeTooLong = (
@@ -57,9 +30,30 @@ const isInlineAttributeTooLong = (
     return attributes.length > 1;
   }
 
-  return spacer(lvl, tabStop).length + inlineAttributeString.length >
-    maxInlineAttributesLineLength;
+  return (
+    spacer(lvl, tabStop).length + inlineAttributeString.length >
+    maxInlineAttributesLineLength
+  );
 };
+
+const shouldRenderMultilineAttr = (
+  attributes: string[],
+  inlineAttributeString: string,
+  containsMultilineAttr: boolean,
+  inline: boolean,
+  lvl: number,
+  tabStop: number,
+  maxInlineAttributesLineLength: ?number
+): boolean =>
+  (isInlineAttributeTooLong(
+    attributes,
+    inlineAttributeString,
+    lvl,
+    tabStop,
+    maxInlineAttributesLineLength
+  ) ||
+    containsMultilineAttr) &&
+  !inline;
 
 // FIXME: Make this code more robust?
 const mergePlainStringChildren = (
@@ -115,7 +109,6 @@ export default (
 
   Object.keys(props)
     .filter(propName => filterProps.indexOf(propName) === -1)
-    // .filter(propName => Object.keys(defaultProps).includes(propName) && defaultProps[propName] !== props[propName])
     .filter(onlyOriginalProps(defaultProps, props))
     .forEach(propName => visibleAttributeNames.push(propName));
 
@@ -177,20 +170,17 @@ export default (
       out += spacer(lvl, tabStop);
     }
 
-    const onlyStringChildren = childrens.reduce(
-      (prev, children) => {
-        if (!prev) {
-          return false;
-        }
-
-        if (typeof children !== 'string' || typeof children !== 'number') {
-          return true;
-        }
-
+    const onlyStringChildren = childrens.reduce((prev, children) => {
+      if (!prev) {
         return false;
-      },
-      true
-    );
+      }
+
+      if (typeof children !== 'string' || typeof children !== 'number') {
+        return true;
+      }
+
+      return false;
+    }, true);
 
     out += childrens
       .reduce(mergePlainStringChildren, [])

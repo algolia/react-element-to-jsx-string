@@ -1,5 +1,7 @@
 /* @flow */
 
+/* eslint-disable react/no-string-refs */
+
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import reactElementToJSXString from './index';
@@ -77,6 +79,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it("reactElementToJSXString(<div obj={{ nested: <div arr={['hello', 'you']} /> }} />)", () => {
+    /* eslint-disable react/no-unescaped-entities */
     expect(
       reactElementToJSXString(
         <div obj={{ nested: <div arr={['hello', 'you']}>Hello "' you</div> }} />
@@ -755,22 +758,19 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<div />');
   });
 
-  it.only(
-    'should return the actual functions when "showFunctions" is true',
-    () => {
-      expect(
-        reactElementToJSXString(<div fn={() => 'value'} />, {
-          showFunctions: true,
-        })
-      ).toEqual(
-        `<div
+  it('should return the actual functions when "showFunctions" is true', () => {
+    expect(
+      reactElementToJSXString(<div fn={() => 'value'} />, {
+        showFunctions: true,
+      })
+    ).toEqual(
+      `<div
   fn={function fn() {
         return 'value';
       }}
  />`
-      );
-    }
-  );
+    );
+  });
 
   it('reactElementToJSXString(<DisplayNamePrecedence />)', () => {
     expect(reactElementToJSXString(<DisplayNamePrecedence />)).toEqual(
