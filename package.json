@@ -41,7 +41,6 @@
     "eslint": "^3.19.0",
     "eslint-config-algolia": "^7.0.2",
     "eslint-config-prettier": "^1.7.0",
-    "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-jest": "^19.0.1",
@@ -55,15 +54,14 @@
     "prettier": "^1.2.2",
     "react": "^15.4.2",
     "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
-    "webpack": "^2.4.1"
+    "react-test-renderer": "^15.5.4"
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.1"
   },
   "dependencies": {
-    "collapse-white-space": "^1.0.0",
-    "is-plain-object": "^2.0.1",
+    "collapse-white-space": "^1.0.3",
+    "is-plain-object": "^2.0.3",
     "lodash": "^4.17.4",
     "sortobject": "^1.0.0",
     "stringify-object": "^3.2.0",
