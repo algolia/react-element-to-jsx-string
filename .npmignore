@@ -1,7 +1,8 @@
 .babelrc
 .eslintignore
 .eslintrc.js
+.flowconfig
 .travis.yml
-*.js
-!index-dist.js
-mocha.opts
+src/*.js
+!dist/*
+release.sh

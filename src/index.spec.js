@@ -1,17 +1,15 @@
-/* eslint-env mocha */
-/* eslint-disable react/no-multi-comp, react/prop-types */
+/* @flow */
 
 import React from 'react';
-import expect from 'expect';
 import { createRenderer } from 'react-test-renderer/shallow';
 import reactElementToJSXString from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
 
 class TestComponent extends React.Component {}
 
-function NamedStatelessComponent(props) {
-  const { children } = props;
-  return <div>{children}</div>;
+function NamedStatelessComponent(props: { children: React.Children }) {
+  const { children, ...others } = props;
+  return <div {...others}>{children}</div>;
 }
 
 class DefaultPropsComponent extends React.Component {}
@@ -96,7 +94,12 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(
       reactElementToJSXString(
         <div
-          nested={{ hello: 'world', foo: 'esca\'"ped', bar: 42 }}
+          nested={{
+            hello: 'world',
+            foo: 'esca\'"ped',
+            bar: 42,
+            baz: ['abc', 'def'],
+          }}
           root="root"
         />
       )
@@ -104,8 +107,12 @@ describe('reactElementToJSXString(ReactElement)', () => {
       `<div
   nested={{
     bar: 42,
-    foo: "esca'\\"ped",
-    hello: "world"
+    baz: [
+      'abc',
+      'def'
+    ],
+    foo: 'esca\\'"ped',
+    hello: 'world'
   }}
   root="root"
 />`
@@ -526,7 +533,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<div>Hello {this.props.name}</div>', () => {
     class InlineProps extends React.Component {
       render() {
-        return <div>Hello {this.props.name}</div>;
+        return <div>Hello {this.props.name}</div>; // eslint-disable-line react/prop-types
       }
     }
 
@@ -735,30 +742,35 @@ describe('reactElementToJSXString(ReactElement)', () => {
  />`
     );
   });
+
   it('should omit true as value', () => {
     expect(
       reactElementToJSXString(<div primary={true} />) // eslint-disable-line react/jsx-boolean-value
     ).toEqual('<div primary />');
   });
+
   it('should omit attributes with false as value', () => {
     expect(
       reactElementToJSXString(<div primary={false} />) // eslint-disable-line react/jsx-boolean-value
     ).toEqual('<div />');
   });
 
-  it('should return the actual functions when "showFunctions" is true', () => {
-    expect(
-      reactElementToJSXString(<div fn={() => 'value'} />, {
-        showFunctions: true,
-      })
-    ).toEqual(
-      `<div
+  it.only(
+    'should return the actual functions when "showFunctions" is true',
+    () => {
+      expect(
+        reactElementToJSXString(<div fn={() => 'value'} />, {
+          showFunctions: true,
+        })
+      ).toEqual(
+        `<div
   fn={function fn() {
         return 'value';
       }}
  />`
-    );
-  });
+      );
+    }
+  );
 
   it('reactElementToJSXString(<DisplayNamePrecedence />)', () => {
     expect(reactElementToJSXString(<DisplayNamePrecedence />)).toEqual(
