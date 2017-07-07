@@ -172,7 +172,7 @@ got \`${typeof Element}\``
     }
   }
 
-  function formatProps(props, defaultProps, inline, sortProps, lvl) {
+  function formatProps(props, defaultProps, inline, formatSortProps, lvl) {
     let formatted = Object.keys(props).filter(noChildren);
 
     if (useBooleanShorthandSyntax) {
@@ -190,7 +190,7 @@ got \`${typeof Element}\``
       );
     }
 
-    if (sortProps) {
+    if (formatSortProps) {
       formatted = formatted.sort();
     }
 
@@ -298,7 +298,7 @@ got \`${typeof Element}\``
 
     // Replace tabs with spaces, and add necessary indentation in front of each new line
     return stringified
-      .replace(/\\\'/g, "'")
+      .replace(/\\\'/g, "'") // eslint-disable-line no-useless-escape
       .replace(/\t/g, spacer(1, tabStop))
       .replace(/\n([^$])/g, `\n${spacer(lvl + 1, tabStop)}$1`);
   }
