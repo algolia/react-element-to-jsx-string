@@ -7,9 +7,10 @@ import formatTreeNode from './formatTreeNode';
 import type { Options } from './../options';
 import parseReactElement from './../parser/parseReactElement';
 
-export const defaultFunctionValue = (fn: any): any => fn;
+const noRefCheck = () => {};
+const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
-const escape = s => s.replace(/"/g, '&quot;');
+export const defaultFunctionValue = (fn: any): any => fn;
 
 const formatPropValue = (
   propValue: any,
@@ -32,7 +33,7 @@ const formatPropValue = (
   if (typeof propValue === 'function') {
     const { functionValue, showFunctions } = options;
     if (!showFunctions && functionValue === defaultFunctionValue) {
-      return `{${functionValue(() => {})}}`;
+      return `{${functionValue(noRefCheck)}}`;
     }
 
     return `{${functionValue(propValue)}}`;
