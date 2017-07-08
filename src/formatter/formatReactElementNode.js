@@ -3,6 +3,7 @@
 import spacer from './spacer';
 import formatTreeNode from './formatTreeNode';
 import formatProp from './formatProp';
+import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import propNameSorter from './propNameSorter';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
@@ -55,27 +56,6 @@ const shouldRenderMultilineAttr = (
     containsMultilineAttr) &&
   !inline;
 
-// FIXME: Make this code more robust?
-const mergePlainStringChildren = (
-  prev: TreeNode[],
-  currentNode: any
-): TreeNode[] => {
-  const lastNode = prev[prev.length - 1];
-
-  if (currentNode.type === 'number') {
-    currentNode.type = 'string';
-    currentNode.value = String(currentNode.value);
-  }
-
-  if (lastNode && lastNode.type === 'string' && currentNode.type === 'string') {
-    prev[prev.length - 1].value += currentNode.value;
-  } else {
-    prev.push(currentNode);
-  }
-
-  return prev;
-};
-
 export default (
   node: TreeNode,
   inline: boolean,
@@ -84,7 +64,7 @@ export default (
 ): string => {
   const { displayName, childrens, props, defaultProps } = node;
 
-  // FIXME: should be necessary now
+  // FIXME: should not be necessary now
   if (!displayName) throw new Error('Oups: displayName attribute is missing.');
   if (!childrens) throw new Error('Oups: childrens attribute is missing.');
   if (!props) throw new Error('Oups: props attribute is missing.');
@@ -170,20 +150,8 @@ export default (
       out += spacer(lvl, tabStop);
     }
 
-    const onlyStringChildren = childrens.reduce((prev, children) => {
-      if (!prev) {
-        return false;
-      }
-
-      if (typeof children !== 'string' || typeof children !== 'number') {
-        return true;
-      }
-
-      return false;
-    }, true);
-
     out += childrens
-      .reduce(mergePlainStringChildren, [])
+      .reduce(mergeSiblingPlainStringChildrenReducer, [])
       .map(recurse(lvl, inline, options))
       .join(`\n${spacer(lvl, tabStop)}`);
 
