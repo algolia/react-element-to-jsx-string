@@ -591,13 +591,14 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('reactElementToJSXString(<div>Hello {this.props.name}</div>', () => {
+    /* eslint-disable react/prop-types */
     class InlineProps extends React.Component {
       render() {
         return (
           <div>
             Hello {this.props.name}
           </div>
-        ); // eslint-disable-line react/prop-types
+        );
       }
     }
 
