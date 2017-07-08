@@ -4,7 +4,8 @@ import React from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
 
 jest.mock('./formatReactElementNode.js', () => node =>
-  `<${node.displayName} />`);
+  `<${node.displayName} />`
+);
 
 const createFakeReactElement = (tagName = 'Foo') =>
   React.createElement(tagName, {}, null);

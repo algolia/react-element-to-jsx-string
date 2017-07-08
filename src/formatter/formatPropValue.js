@@ -40,7 +40,12 @@ const formatPropValue = (
   }
 
   if (isValidElement(propValue)) {
-    return `{${formatTreeNode(parseReactElement(propValue, options), true, lvl, options)}}`;
+    return `{${formatTreeNode(
+      parseReactElement(propValue, options),
+      true,
+      lvl,
+      options
+    )}}`;
   }
 
   if (isPlainObject(propValue) || Array.isArray(propValue)) {
