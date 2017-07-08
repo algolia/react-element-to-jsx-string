@@ -26,7 +26,7 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
 
 export default (
   element: Element<*> | string | number,
-  options: Options = {} // FIXME: no default value
+  options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
   const type = typeof element;

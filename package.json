@@ -12,6 +12,7 @@
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
     "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
     "test": "jest && npm run lint",
+    "test:watch": "jest --watch",
     "release": "./release.sh"
   },
   "lint-staged": {

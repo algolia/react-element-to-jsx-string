@@ -67,7 +67,7 @@ describe('parseReactElement', () => {
     };
 
     expect(
-      parseReactElement(<Foo foo="Hello Foo!" bar="Hello world!" />)
+      parseReactElement(<Foo foo="Hello Foo!" bar="Hello world!" />, options)
     ).toEqual({
       type: 'ReactElement',
       displayName: 'Foo',
