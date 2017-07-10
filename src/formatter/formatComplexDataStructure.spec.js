@@ -33,6 +33,24 @@ describe('formatComplexDataStructure', () => {
     );
   });
 
+  it('should format an empty object', () => {
+    expect(formatComplexDataStructure({}, false, 0, options)).toEqual('{}');
+  });
+
+  it('should order the object keys', () => {
+    const fixture = { b: { d: 'ddd', c: 'ccc' }, a: 1 };
+
+    expect(formatComplexDataStructure(fixture, false, 0, options)).toEqual(
+      `{
+    a: 1,
+    b: {
+      c: 'ccc',
+      d: 'ddd'
+    }
+  }`
+    );
+  });
+
   it('should format an array', () => {
     const fixture = [1, '2', true, false, null];
 
@@ -63,5 +81,9 @@ describe('formatComplexDataStructure', () => {
     a: <BarBar />
   }`
     );
+  });
+
+  it('should format an empty array', () => {
+    expect(formatComplexDataStructure([], false, 0, options)).toEqual('[]');
   });
 });

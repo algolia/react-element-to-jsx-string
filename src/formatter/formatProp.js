@@ -5,7 +5,7 @@ import formatPropValue from './formatPropValue';
 import type { Options } from './../options';
 
 export default (
-  propName: string,
+  name: string,
   hasValue: boolean,
   value: any,
   hasDefaultValue: boolean,
@@ -20,7 +20,7 @@ export default (
 } => {
   if (!hasValue && !hasDefaultValue) {
     throw new Error(
-      `The prop "${propName}" has no value and no default: could not be formatted`
+      `The prop "${name}" has no value and no default: could not be formatted`
     );
   }
 
@@ -31,7 +31,7 @@ export default (
 
   let attributeFormattedInline = ' ';
   let attributeFormattedMultiline = `\n${spacer(lvl + 1, options.tabStop)}`;
-  const isMultilineAttribute = formattedPropValue.indexOf('\n') > -1;
+  const isMultilineAttribute = formattedPropValue.includes('\n');
 
   if (
     useBooleanShorthandSyntax &&
@@ -42,11 +42,11 @@ export default (
     attributeFormattedInline = '';
     attributeFormattedMultiline = '';
   } else if (useBooleanShorthandSyntax && formattedPropValue === '{true}') {
-    attributeFormattedInline += `${propName}`;
-    attributeFormattedMultiline += `${propName}`;
+    attributeFormattedInline += `${name}`;
+    attributeFormattedMultiline += `${name}`;
   } else {
-    attributeFormattedInline += `${propName}=${formattedPropValue}`;
-    attributeFormattedMultiline += `${propName}=${formattedPropValue}`;
+    attributeFormattedInline += `${name}=${formattedPropValue}`;
+    attributeFormattedMultiline += `${name}=${formattedPropValue}`;
   }
 
   return {

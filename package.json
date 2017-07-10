@@ -16,7 +16,10 @@
     "release": "./release.sh"
   },
   "lint-staged": {
-    "*.js": ["prettier --write --single-quote --trailing-comma es5", "git add"]
+    "*.js": [
+      "prettier --write --single-quote --trailing-comma es5",
+      "git add"
+    ]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -62,7 +65,6 @@
     "is-plain-object": "^2.0.3",
     "lodash": "^4.17.4",
     "sortobject": "^1.0.0",
-    "stringify-object": "^3.2.0",
-    "traverse": "^0.6.6"
+    "stringify-object": "^3.2.0"
   }
 }

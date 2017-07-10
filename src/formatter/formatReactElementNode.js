@@ -11,12 +11,11 @@ import type { TreeNode } from './../tree';
 const recurse = (lvl: number, inline: boolean, options: Options) => element =>
   formatTreeNode(element, inline, lvl, options);
 
-// FIXME: naming
-const onlyOriginalProps = (leftProps, rightProps) => propName => {
-  const isIncludedInLeft = Object.keys(leftProps).includes(propName);
+const onlyPropsWithOriginalValue = (defaultProps, props) => propName => {
+  const haveDefaultValue = Object.keys(defaultProps).includes(propName);
   return (
-    !isIncludedInLeft ||
-    (isIncludedInLeft && leftProps[propName] !== rightProps[propName])
+    !haveDefaultValue ||
+    (haveDefaultValue && defaultProps[propName] !== props[propName])
   );
 };
 
@@ -62,14 +61,19 @@ export default (
   lvl: number,
   options: Options
 ): string => {
-  const { displayName, childrens, props, defaultProps } = node;
+  const {
+    type,
+    displayName = '',
+    childrens = [],
+    props = {},
+    defaultProps = {},
+  } = node;
 
-  // FIXME: should not be necessary now
-  if (!displayName) throw new Error('Oups: displayName attribute is missing.');
-  if (!childrens) throw new Error('Oups: childrens attribute is missing.');
-  if (!props) throw new Error('Oups: props attribute is missing.');
-  if (!defaultProps)
-    throw new Error('Oups: defaultProps attribute is missing.');
+  if (type !== 'ReactElement') {
+    throw new Error(
+      `The "formatReactElementNode" function could only format node of type "ReactElement". Given:  ${type}`
+    );
+  }
 
   const {
     filterProps,
@@ -89,7 +93,7 @@ export default (
 
   Object.keys(props)
     .filter(propName => filterProps.indexOf(propName) === -1)
-    .filter(onlyOriginalProps(defaultProps, props))
+    .filter(onlyPropsWithOriginalValue(defaultProps, props))
     .forEach(propName => visibleAttributeNames.push(propName));
 
   Object.keys(defaultProps)
@@ -143,21 +147,23 @@ export default (
   }
 
   if (childrens && childrens.length > 0) {
+    const newLvl = lvl + 1;
+
     out += '>';
-    lvl++;
+
     if (!inline) {
       out += '\n';
-      out += spacer(lvl, tabStop);
+      out += spacer(newLvl, tabStop);
     }
 
     out += childrens
       .reduce(mergeSiblingPlainStringChildrenReducer, [])
-      .map(recurse(lvl, inline, options))
-      .join(`\n${spacer(lvl, tabStop)}`);
+      .map(recurse(newLvl, inline, options))
+      .join(`\n${spacer(newLvl, tabStop)}`);
 
     if (!inline) {
       out += '\n';
-      out += spacer(lvl - 1, tabStop);
+      out += spacer(newLvl - 1, tabStop);
     }
     out += `</${displayName}>`;
   } else {
