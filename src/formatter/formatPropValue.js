@@ -10,7 +10,7 @@ import parseReactElement from './../parser/parseReactElement';
 const noRefCheck = () => {};
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
-export const defaultFunctionValue = (fn: any): any => fn;
+const defaultFunctionValue = (fn: any): any => fn;
 
 const formatPropValue = (
   propValue: any,
@@ -31,7 +31,7 @@ const formatPropValue = (
   }
 
   if (typeof propValue === 'function') {
-    const { functionValue, showFunctions } = options;
+    const { functionValue = defaultFunctionValue, showFunctions } = options;
     if (!showFunctions && functionValue === defaultFunctionValue) {
       return `{${functionValue(noRefCheck)}}`;
     }

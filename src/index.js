@@ -1,7 +1,6 @@
 /* @flow */
 
 import { Element } from 'react';
-import { defaultFunctionValue } from './formatter/formatPropValue';
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
 import type { Options } from './options';
@@ -12,7 +11,7 @@ const reactElementToJsxString = (
     filterProps = [],
     showDefaultProps = true,
     showFunctions = false,
-    functionValue = defaultFunctionValue,
+    functionValue,
     tabStop = 2,
     useBooleanShorthandSyntax = true,
     sortProps = true,

@@ -7,8 +7,6 @@ const defaultOptions = {
   filterProps: [],
   showDefaultProps: true,
   showFunctions: false,
-  // FIXME: do not use a default for funtion value, it leed to leak it in all tests
-  // functionValue: defaultFunctionValue,
   tabStop: 2,
   useBooleanShorthandSyntax: true,
   sortProps: true,
