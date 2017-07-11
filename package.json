@@ -51,7 +51,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",
-    "webpack": "3.1.0"
+    "webpack": "3.2.0"
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.1"
