@@ -1,5 +1,7 @@
 /* @flow */
 
+import { Element } from 'react';
+
 export type Options = {|
   filterProps: string[],
   showDefaultProps: boolean,

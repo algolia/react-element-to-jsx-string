@@ -1,7 +1,6 @@
 /* @flow */
 
-import { Element, isValidElement } from 'react';
-import parseChildren from './parseChildren';
+import { Children, Element, isValidElement } from 'react';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
@@ -14,6 +13,12 @@ const getReactElementDisplayName = (element: Element<*>): string =>
 
 const noChildren = (propsValue, propName) => propName !== 'children';
 
+const onlyMeaningfulChildren = (children): boolean =>
+  children !== true &&
+  children !== false &&
+  children !== null &&
+  children !== '';
+
 const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
   const filteredProps = {};
 
@@ -24,7 +29,7 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
   return filteredProps;
 };
 
-export default (
+const parseReactElement = (
   element: Element<*> | string | number,
   options: Options
 ): TreeNode => {
@@ -42,23 +47,23 @@ export default (
     );
   }
 
-  const displayName = displayNameFn
-    ? displayNameFn(element)
-    : getReactElementDisplayName(element);
+  const displayName = displayNameFn(element);
 
-  const props = filterProps({ ...element.props }, noChildren);
+  const props = filterProps(element.props, noChildren);
   if (element.ref !== null) {
     props.ref = element.ref;
   }
 
-  const key = element.key || '';
-  if (key && !/^\./.test(key)) {
+  const key = element.key;
+  if (typeof key === 'string' && key.search(/^\./)) {
     // React automatically add key=".X" when there are some children
     props.key = key;
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = parseChildren(element, options);
+  const childrens = Children.toArray(element.props.children)
+    .filter(onlyMeaningfulChildren)
+    .map(child => parseReactElement(child, options));
 
   return {
     type: 'ReactElement',
@@ -68,3 +73,5 @@ export default (
     childrens,
   };
 };
+
+export default parseReactElement;

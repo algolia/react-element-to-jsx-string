@@ -1,11 +1,11 @@
 /* @flow */
 
 export type TreeNode = {|
-  displayName?: string,
-  type: 'ReactElement' | 'Object' | 'Array' | 'string' | 'number',
+  type: 'ReactElement' | 'string' | 'number',
 
   value?: string | number,
 
+  displayName?: string,
   props?: { [key: string]: TreeNode },
   defaultProps?: { [key: string]: TreeNode },
   childrens?: TreeNode[],

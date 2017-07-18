@@ -101,7 +101,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
-  it("reactElementToJSXString(<div nested={{ hello: 'world', foo: 'esca'ped', bar: 42 }} root=\"root\"/>)", () => {
+  it("reactElementToJSXString(<div nested={{ hello: 'world', foo: 'esca\\'\"ped', bar: 42 }} root=\"root\"/>)", () => {
     expect(
       reactElementToJSXString(
         <div
@@ -285,6 +285,14 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(reactElementToJSXString(<div>Hello</div>)).toEqual(
       `<div>
   Hello
+</div>`
+    );
+  });
+
+  it('reactElementToJSXString(<div>Hello "Jonh" and \'Mike\'</div>)', () => {
+    expect(reactElementToJSXString(<div>Hello "Jonh" and 'Mike'</div>)).toEqual(
+      `<div>
+  Hello "Jonh" and 'Mike'
 </div>`
     );
   });

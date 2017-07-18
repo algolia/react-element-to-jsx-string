@@ -21,6 +21,37 @@ describe('parseReactElement', () => {
     });
   });
 
+  it('should filter empty childrens', () => {
+    expect(
+      parseReactElement(
+        <h1>
+          Hello
+          {null}
+          {true}
+          {false}
+          {''}
+          world
+        </h1>,
+        options
+      )
+    ).toEqual({
+      type: 'ReactElement',
+      displayName: 'h1',
+      defaultProps: {},
+      props: {},
+      childrens: [
+        {
+          type: 'string',
+          value: 'Hello',
+        },
+        {
+          type: 'string',
+          value: 'world',
+        },
+      ],
+    });
+  });
+
   it('should parse a single depth react element', () => {
     expect(parseReactElement(<aaa foo="41" />, options)).toEqual({
       type: 'ReactElement',
@@ -79,6 +110,43 @@ describe('parseReactElement', () => {
         bar: 'Hello world!',
         baz: 'Hello Baz!',
         foo: 'Hello Foo!',
+      },
+      childrens: [],
+    });
+  });
+
+  it('should extract the component key', () => {
+    expect(parseReactElement(<div key="foo-1" />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {
+        key: 'foo-1',
+      },
+      childrens: [],
+    });
+  });
+
+  it('should extract the component ref', () => {
+    const refFn = () => 'foo';
+
+    expect(parseReactElement(<div ref={refFn} />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {
+        ref: refFn,
+      },
+      childrens: [],
+    });
+
+    // eslint-disable-next-line react/no-string-refs
+    expect(parseReactElement(<div ref="foo" />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {
+        ref: 'foo',
       },
       childrens: [],
     });

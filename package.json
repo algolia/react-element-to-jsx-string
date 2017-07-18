@@ -1,12 +1,13 @@
 {
   "name": "@rezzza/react-element-to-jsx-string",
-  "version": "11.0.0-beta.1",
+  "version": "11.0.0-beta.2",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/",
     "lint": "node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
+    "flow": "flow",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
