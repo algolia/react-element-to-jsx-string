@@ -82,6 +82,12 @@ describe('formatPropValue', () => {
     expect(formatTreeNode).toHaveBeenCalledTimes(1);
   });
 
+  it('should format a date prop value', () => {
+    expect(
+      formatPropValue(new Date('2017-01-01T11:00:00.000Z'), false, 0, {})
+    ).toBe('{new Date("2017-01-01T11:00:00.000Z")}');
+  });
+
   it('should format an object prop value', () => {
     expect(formatPropValue({ foo: 42 }, false, 0, {})).toBe(
       '{*Mocked formatComplexDataStructure result*}'
@@ -116,8 +122,6 @@ describe('formatPropValue', () => {
       '{[object Set]}'
     );
 
-    expect(
-      formatPropValue(new Date(2017, 0, 1, 12, 0, 0, 0), false, 0, {})
-    ).toBe('{Sun Jan 01 2017 12:00:00 GMT+0100 (CET)}');
+    expect(formatPropValue(new Map(), false, 0, {})).toBe('{[object Map]}');
   });
 });

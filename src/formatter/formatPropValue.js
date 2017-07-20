@@ -48,6 +48,10 @@ const formatPropValue = (
     )}}`;
   }
 
+  if (propValue instanceof Date) {
+    return `{new Date("${propValue.toISOString()}")}`;
+  }
+
   if (isPlainObject(propValue) || Array.isArray(propValue)) {
     return `{${formatComplexDataStructure(propValue, inline, lvl, options)}}`;
   }
