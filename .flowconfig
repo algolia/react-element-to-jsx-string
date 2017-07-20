@@ -1,0 +1,17 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/.*/test/.*
+<PROJECT_ROOT>/node_modules/.*.spec\.js
+<PROJECT_ROOT>/dist/.*
+# FIXME: do not ignore local tests
+<PROJECT_ROOT>/.*\.spec\.js
+
+[include]
+
+[libs]
+
+[options]
+emoji=true
+#experimental.const_params=true
+munge_underscores=true
+
+[lints]
