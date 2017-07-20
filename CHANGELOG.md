@@ -1,3 +1,19 @@
+<a name="11.0.0"></a>
+# [11.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v10.1.0...v11.0.0) (2017-07-20)
+
+### Bug Fixes
+
+* **release:** Missing `mversion` package in dev dependencies ([0f82ee7](https://github.com/algolia/react-element-to-jsx-string/commit/0f82ee7))
+* **escaping:** Complete lib refactor to handle more escaping cases ([9f3c671](https://github.com/algolia/react-element-to-jsx-string/commit/9f3c671))
+
+### BREAKING CHANGES
+
+* Fix escaping issue with quotes (in props value or in children of type string)
+* Handle props value of `Date` type: `<div foo={new Date("2017-01-01T11:00:00.000Z")} />`
+* Escape brace chars (`{}`) in a children string: `<script type="application/json+ld">&lbrace; hello: 'world' &rbrace;</script>`
+
+
+
 <a name="10.1.0"></a>
 # [10.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v10.0.1...v10.1.0) (2017-06-13)
 
