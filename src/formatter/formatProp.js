@@ -26,11 +26,12 @@ export default (
 
   const usedValue = hasValue ? value : defaultValue;
 
-  const { useBooleanShorthandSyntax } = options;
+  const { useBooleanShorthandSyntax, tabStop } = options;
+
   const formattedPropValue = formatPropValue(usedValue, inline, lvl, options);
 
   let attributeFormattedInline = ' ';
-  let attributeFormattedMultiline = `\n${spacer(lvl + 1, options.tabStop)}`;
+  let attributeFormattedMultiline = `\n${spacer(lvl + 1, tabStop)}`;
   const isMultilineAttribute = formattedPropValue.includes('\n');
 
   if (
