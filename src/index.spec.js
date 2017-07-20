@@ -206,6 +206,56 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<script type="application/json+ld">&lbrace; hello: \'world\' &rbrace;</script>)', () => {
+    expect(
+      reactElementToJSXString(
+        <script type="application/json+ld">
+          &lbrace; hello: 'world' &rbrace;
+        </script>
+      )
+    ).toEqual(
+      `<script type="application/json+ld">
+  &lbrace; hello: 'world' &rbrace;
+</script>`
+    );
+  });
+
+  it('reactElementToJSXString(<script type="application/json+ld">&#123; hello: \'world\' &#125;</script>)', () => {
+    expect(
+      reactElementToJSXString(
+        <script type="application/json+ld">&#123; hello: 'world' &#125;</script>
+      )
+    ).toEqual(
+      `<script type="application/json+ld">
+  &lbrace; hello: 'world' &rbrace;
+</script>`
+    );
+  });
+
+  it('reactElementToJSXString(<script type="application/json+ld">\\u007B hello: \'world\' \\u007D</script>)', () => {
+    expect(
+      reactElementToJSXString(
+        <script type="application/json+ld">\u007B hello: 'world' \u007D</script>
+      )
+    ).toEqual(
+      `<script type="application/json+ld">
+  \\u007B hello: 'world' \\u007D
+</script>`
+    );
+  });
+
+  it('reactElementToJSXString(<script type="application/json+ld">{ hello: \'world\' }</script>)', () => {
+    expect(
+      reactElementToJSXString(
+        <script type="application/json+ld">{`{ hello: 'world' }`}</script>
+      )
+    ).toEqual(
+      `<script type="application/json+ld">
+  &lbrace; hello: 'world' &rbrace;
+</script>`
+    );
+  });
+
   it('reactElementToJSXString(<div obj={{hello: [1, 2], world: {nested: true}}}/>)', () => {
     expect(
       reactElementToJSXString(
