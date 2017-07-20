@@ -6,3 +6,4 @@
 src/*.js
 !dist/*
 release.sh
+.flowconfig
