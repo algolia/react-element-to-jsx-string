@@ -27,7 +27,7 @@ const formatPropValue = (
   }
 
   if (typeof propValue === 'symbol') {
-    return `{${propValue.toString()}}`;
+    return `{${String(propValue)}}`;
   }
 
   if (typeof propValue === 'function') {
@@ -52,7 +52,7 @@ const formatPropValue = (
     return `{${formatComplexDataStructure(propValue, inline, lvl, options)}}`;
   }
 
-  return `{${propValue}}`;
+  return `{${String(propValue)}}`;
 };
 
 export default formatPropValue;
