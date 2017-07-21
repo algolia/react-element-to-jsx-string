@@ -64,7 +64,7 @@ export default (
   const {
     type,
     displayName = '',
-    childrens = [],
+    childrens,
     props = {},
     defaultProps = {},
   } = node;
@@ -146,7 +146,7 @@ export default (
     out = outInlineAttr;
   }
 
-  if (childrens.length > 0) {
+  if (childrens && childrens.length > 0) {
     const newLvl = lvl + 1;
 
     out += '>';
