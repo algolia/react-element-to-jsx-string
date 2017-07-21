@@ -1,22 +1,35 @@
 /* @flow */
 
+import { createStringTreeNode } from './../tree';
 import type { TreeNode } from './../tree';
-
-const areMergeable = (nodeA: TreeNode, nodeB: TreeNode): boolean =>
-  (nodeA.type === 'string' || nodeA.type === 'number') &&
-  (nodeB.type === 'string' || nodeB.type === 'number');
 
 export default (
   previousNodes: TreeNode[],
   currentNode: TreeNode
 ): TreeNode[] => {
-  const lastNode = previousNodes[previousNodes.length - 1];
+  const nodes = previousNodes.slice(
+    0,
+    previousNodes.length > 0 ? previousNodes.length - 1 : 0
+  );
+  const previousNode = previousNodes[previousNodes.length - 1];
 
-  if (lastNode && areMergeable(lastNode, currentNode)) {
-    lastNode.value = String(lastNode.value) + String(currentNode.value);
+  if (
+    previousNode &&
+    (currentNode.type === 'string' || currentNode.type === 'number') &&
+    (previousNode.type === 'string' || previousNode.type === 'number')
+  ) {
+    nodes.push(
+      createStringTreeNode(
+        String(previousNode.value) + String(currentNode.value)
+      )
+    );
   } else {
-    previousNodes.push(currentNode);
+    if (previousNode) {
+      nodes.push(previousNode);
+    }
+
+    nodes.push(currentNode);
   }
 
-  return previousNodes;
+  return nodes;
 };

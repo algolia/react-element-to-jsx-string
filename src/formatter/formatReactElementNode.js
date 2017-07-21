@@ -6,7 +6,7 @@ import formatProp from './formatProp';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import propNameSorter from './propNameSorter';
 import type { Options } from './../options';
-import type { TreeNode } from './../tree';
+import type { ReactElementTreeNode } from './../tree';
 
 const recurse = (lvl: number, inline: boolean, options: Options) => element =>
   formatTreeNode(element, inline, lvl, options);
@@ -56,7 +56,7 @@ const shouldRenderMultilineAttr = (
   !inline;
 
 export default (
-  node: TreeNode,
+  node: ReactElementTreeNode,
   inline: boolean,
   lvl: number,
   options: Options
@@ -146,7 +146,7 @@ export default (
     out = outInlineAttr;
   }
 
-  if (childrens && childrens.length > 0) {
+  if (childrens.length > 0) {
     const newLvl = lvl + 1;
 
     out += '>';

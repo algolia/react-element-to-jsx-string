@@ -5,7 +5,7 @@ import { isValidElement } from 'react';
 import stringify from 'stringify-object';
 import sortobject from 'sortobject';
 import parseReactElement from './../parser/parseReactElement';
-import formatReactElementNode from './formatReactElementNode';
+import formatTreeNode from './formatTreeNode';
 import spacer from './spacer';
 import type { Options } from './../options';
 
@@ -24,7 +24,7 @@ export default (
       const currentValue = currentObj[prop];
 
       if (currentValue && isValidElement(currentValue)) {
-        return formatReactElementNode(
+        return formatTreeNode(
           parseReactElement(currentValue, options),
           true,
           lvl,

@@ -4,23 +4,32 @@
 type PropsType = { [key: string]: any };
 type DefaultPropsType = { [key: string]: any };
 
-export type TreeNode = {|
-  type: 'ReactElement' | 'string' | 'number',
-
-  value?: string | number,
-
-  displayName?: string,
-  props?: PropsType,
-  defaultProps?: DefaultPropsType,
-  childrens?: TreeNode[],
+export type StringTreeNode = {|
+  type: 'string',
+  value: string,
 |};
 
-export const createStringTreeNode = (value: string): TreeNode => ({
+export type NumberTreeNode = {|
+  type: 'number',
+  value: number,
+|};
+
+export type ReactElementTreeNode = {|
+  type: 'ReactElement',
+  displayName: string,
+  props: PropsType,
+  defaultProps: DefaultPropsType,
+  childrens: TreeNode[],
+|};
+
+export type TreeNode = StringTreeNode | NumberTreeNode | ReactElementTreeNode;
+
+export const createStringTreeNode = (value: string): StringTreeNode => ({
   type: 'string',
   value,
 });
 
-export const createNumberTreeNode = (value: number): TreeNode => ({
+export const createNumberTreeNode = (value: number): NumberTreeNode => ({
   type: 'number',
   value,
 });
@@ -29,8 +38,8 @@ export const createReactElementTreeNode = (
   displayName: string,
   props: PropsType,
   defaultProps: DefaultPropsType,
-  childrens: TreeNode[] = []
-): TreeNode => ({
+  childrens: TreeNode[]
+): ReactElementTreeNode => ({
   type: 'ReactElement',
   displayName,
   props,
