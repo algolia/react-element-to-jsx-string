@@ -1,3 +1,13 @@
+<a name="11.0.1"></a>
+## [11.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v11.0.0...v11.0.1) (2017-07-21)
+
+
+### Bug Fixes
+
+* **formatting:** fix an edge case where number and string childrens are not correctly merged ([47572e0](https://github.com/algolia/react-element-to-jsx-string/commit/47572e0))
+
+
+
 <a name="11.0.0"></a>
 # [11.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v10.1.0...v11.0.0) (2017-07-20)
 
