@@ -24,22 +24,35 @@ test('mergeSiblingPlainStringChildrenReducer should merge sibling string tree no
   ]);
 });
 
-test('mergeSiblingPlainStringChildrenReducer should merge consider number as string', () => {
-  const childrens: TreeNode[] = [
-    createScalarTreeNode('string', 'a'),
-    createScalarTreeNode('number', 51),
-    createScalarTreeNode('string', 'c'),
-  ];
-
-  expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
+test('mergeSiblingPlainStringChildrenReducer should consider number as string', () => {
+  expect(
+    [
+      createScalarTreeNode('string', 'a'),
+      createScalarTreeNode('number', 51),
+      createScalarTreeNode('string', 'c'),
+    ].reduce(mergeSiblingPlainStringChildrenReducer, [])
+  ).toEqual([
     {
       type: 'string',
       value: 'a51c',
     },
   ]);
+
+  expect(
+    [
+      createScalarTreeNode('string', 5),
+      createScalarTreeNode('number', 1),
+      createScalarTreeNode('string', 'a'),
+    ].reduce(mergeSiblingPlainStringChildrenReducer, [])
+  ).toEqual([
+    {
+      type: 'string',
+      value: '51a',
+    },
+  ]);
 });
 
-test('mergeSiblingPlainStringChildrenReducer should merge detect non string node', () => {
+test('mergeSiblingPlainStringChildrenReducer should detect non string node', () => {
   const childrens: TreeNode[] = [
     createReactElementTreeNode(['foo']),
     createScalarTreeNode('string', 'a'),
