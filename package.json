@@ -12,7 +12,7 @@
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
     "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
-    "test": "jest && npm run lint",
+    "test": "jest && npm run lint && yarn run flow",
     "test:watch": "jest --watch",
     "release": "./release.sh"
   },

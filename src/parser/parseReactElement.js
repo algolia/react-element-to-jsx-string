@@ -2,6 +2,11 @@
 
 import { Children, Element, isValidElement } from 'react';
 import type { Options } from './../options';
+import {
+  createStringTreeNode,
+  createNumberTreeNode,
+  createReactElementTreeNode,
+} from './../tree';
 import type { TreeNode } from './../tree';
 
 const getReactElementDisplayName = (element: Element<*>): string =>
@@ -34,13 +39,11 @@ const parseReactElement = (
   options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
-  const type = typeof element;
 
-  if (type === 'string' || type === 'number') {
-    return {
-      type,
-      value: element,
-    };
+  if (typeof element === 'string') {
+    return createStringTreeNode(element);
+  } else if (typeof element === 'number') {
+    return createNumberTreeNode(element);
   } else if (!isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
@@ -65,13 +68,12 @@ const parseReactElement = (
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
 
-  return {
-    type: 'ReactElement',
+  return createReactElementTreeNode(
     displayName,
     props,
     defaultProps,
-    childrens,
-  };
+    childrens
+  );
 };
 
 export default parseReactElement;

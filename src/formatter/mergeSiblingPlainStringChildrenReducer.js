@@ -1,29 +1,35 @@
 /* @flow */
 
+import { createStringTreeNode } from './../tree';
 import type { TreeNode } from './../tree';
 
 export default (
   previousNodes: TreeNode[],
   currentNode: TreeNode
 ): TreeNode[] => {
-  const lastNode = previousNodes[previousNodes.length - 1];
-  const newNode = { ...currentNode };
-
-  if (newNode.type === 'number') {
-    newNode.type = 'string';
-    newNode.value = String(newNode.value);
-  }
+  const nodes = previousNodes.slice(
+    0,
+    previousNodes.length > 0 ? previousNodes.length - 1 : 0
+  );
+  const previousNode = previousNodes[previousNodes.length - 1];
 
   if (
-    lastNode &&
-    lastNode.type === 'string' &&
-    typeof lastNode.value === 'string' &&
-    newNode.type === 'string'
+    previousNode &&
+    (currentNode.type === 'string' || currentNode.type === 'number') &&
+    (previousNode.type === 'string' || previousNode.type === 'number')
   ) {
-    lastNode.value += newNode.value || '';
+    nodes.push(
+      createStringTreeNode(
+        String(previousNode.value) + String(currentNode.value)
+      )
+    );
   } else {
-    previousNodes.push(newNode);
+    if (previousNode) {
+      nodes.push(previousNode);
+    }
+
+    nodes.push(currentNode);
   }
 
-  return previousNodes;
+  return nodes;
 };
