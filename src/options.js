@@ -1,6 +1,6 @@
 /* @flow */
 
-import { Element } from 'react';
+import * as React from 'react';
 
 export type Options = {|
   filterProps: string[],
@@ -12,5 +12,5 @@ export type Options = {|
   sortProps: boolean,
 
   maxInlineAttributesLineLength?: number,
-  displayName?: (element: Element<*>) => string,
+  displayName?: (element: React.Element<*>) => string,
 |};
