@@ -3,7 +3,6 @@
 .eslintrc.js
 .flowconfig
 .travis.yml
-src/*.js
-!dist/*
+src/
+!dist/
 release.sh
-.flowconfig
