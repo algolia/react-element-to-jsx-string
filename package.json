@@ -4,7 +4,7 @@
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/",
+    "build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/ && flow-copy-source -v --ignore=*.spec.js src/ dist/",
     "lint": "node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
     "flow": "flow",
@@ -28,6 +28,9 @@
   },
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
+  "renovate": {
+    "rebaseStalePrs": true
+  },
   "devDependencies": {
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -49,6 +52,7 @@
     "eslint-plugin-react": "7.1.0",
     "expect": "1.20.2",
     "flow-bin": "0.50.0",
+    "flow-copy-source": "^1.2.0",
     "husky": "0.14.3",
     "jest": "20.0.4",
     "json": "9.0.6",
