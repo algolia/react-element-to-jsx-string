@@ -29,6 +29,7 @@
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
   "renovate": {
+    "semanticCommits": true,
     "rebaseStalePrs": true
   },
   "devDependencies": {
