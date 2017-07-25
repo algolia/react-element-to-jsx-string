@@ -30,7 +30,8 @@
   "repository": "algolia/react-element-to-jsx-string",
   "renovate": {
     "semanticCommits": true,
-    "rebaseStalePrs": true
+    "rebaseStalePrs": true,
+    "automerge": "minor"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
