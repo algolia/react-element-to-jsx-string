@@ -2045,7 +2045,7 @@ flow-bin@0.51.0:
   version "0.51.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.51.0.tgz#97a3c511a17caa25d8fad58fc17aaabcb86319fe"
 
-flow-copy-source@^1.2.0:
+flow-copy-source@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/flow-copy-source/-/flow-copy-source-1.2.0.tgz#0ce7267cca593e347da69fcf75f82a768291e730"
   dependencies:
