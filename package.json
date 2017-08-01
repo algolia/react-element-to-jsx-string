@@ -66,7 +66,7 @@
     "react-test-renderer": "15.6.1"
   },
   "peerDependencies": {
-    "react": "^0.14.8 || ^15.0.1"
+    "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^16.0.0-beta || ^16.0.0-alpha"
   },
   "dependencies": {
     "collapse-white-space": "^1.0.3",
