@@ -94,4 +94,35 @@ describe('formatReactElementNode', () => {
       '<div a={<span b="42" />} />'
     );
   });
+
+  it('should format a react element with multiline children', () => {
+    const tree = {
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {},
+      childrens: [
+        {
+          type: 'string',
+          value: 'first line\nsecond line\nthird line',
+        },
+      ],
+    };
+
+    expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
+      `<div>
+  first line
+  second line
+  third line
+</div>`
+    );
+
+    expect(formatReactElementNode(tree, false, 2, defaultOptions)).toEqual(
+      `<div>
+      first line
+      second line
+      third line
+    </div>`
+    );
+  });
 });

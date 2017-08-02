@@ -347,6 +347,40 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<div>{`{"foo":"bar"}`}</div>)', () => {
+    expect(reactElementToJSXString(<script>{`{"foo":"bar"}`}</script>)).toEqual(
+      `<script>
+  {\`{
+    "foo": "bar"
+  }\`}
+</script>`
+    );
+  });
+
+  it('reactElementToJSXString(<div>{`foo\nbar`}</div>)', () => {
+    expect(reactElementToJSXString(<div>{`foo\nbar`}</div>)).toEqual(
+      `<div>
+  foo
+  bar
+</div>`
+    );
+
+    expect(
+      reactElementToJSXString(
+        <div>
+          <div>{`foo\nbar`}</div>
+        </div>
+      )
+    ).toEqual(
+      `<div>
+  <div>
+    foo
+    bar
+  </div>
+</div>`
+    );
+  });
+
   it('reactElementToJSXString(<div>Hello</div>, {tabStop: 4})', () => {
     expect(reactElementToJSXString(<div>Hello</div>, { tabStop: 4 })).toEqual(
       `<div>
