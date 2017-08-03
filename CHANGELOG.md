@@ -1,3 +1,36 @@
+<a name="12.0.0"></a>
+# [12.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v11.0.1...v12.0.0) (2017-08-03)
+
+
+### Bug Fixes
+
+* **flow:** export flow definitions in the released bundle and fix the npm ignore too restrictive ([#115](https://github.com/algolia/react-element-to-jsx-string/issues/115)) ([c4f91b9](https://github.com/algolia/react-element-to-jsx-string/commit/c4f91b9))
+* **formatting:** Children with multiline string are now correctly indented ([d18809e](https://github.com/algolia/react-element-to-jsx-string/commit/d18809e))
+* **formatting:** Fix JSX delimiters escaping in string ([6e0eea3](https://github.com/algolia/react-element-to-jsx-string/commit/6e0eea3))
+* **release:** revert change made by error in commit 86697517 ([903fd5c](https://github.com/algolia/react-element-to-jsx-string/commit/903fd5c))
+* **travis:** manually install yarn on Travis CI ([b8a4c1a](https://github.com/algolia/react-element-to-jsx-string/commit/b8a4c1a))
+
+
+### BREAKING CHANGES
+
+* **formatting:** Improve string escaping of string that contains JSX delimiters (`{`,`}`,`<`,`>`)
+
+Before:
+```
+console.log(reactElementToJsxString(<div>{`Mustache :{`}</div>);
+
+// <div>Mustache :&lbrace;</div>
+```
+
+Now:
+```
+console.log(reactElementToJsxString(<div>{`Mustache :{`}</div>);
+
+// <div>{`Mustache :{`}</div>
+```
+
+
+
 <a name="11.0.1"></a>
 ## [11.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v11.0.0...v11.0.1) (2017-07-21)
 
