@@ -13,8 +13,25 @@ export default (
   lvl: number,
   options: Options
 ): string => {
-  if (node.type === 'string' || node.type === 'number') {
-    return node.value ? escape(node.value.toString()) : '';
+  const { tabStop } = options;
+
+  if (node.type === 'number') {
+    return node.value.toString();
+  }
+
+  if (node.type === 'string') {
+    let str;
+    try {
+      if (inline) {
+        str = `{\`${JSON.stringify(JSON.parse(node.value))}\`}`;
+      } else {
+        str = `{\`${JSON.stringify(JSON.parse(node.value), null, tabStop)}\`}`;
+      }
+    } catch (error) {
+      str = node.value ? escape(node.value.toString()) : '';
+    }
+
+    return str;
   }
 
   if (node.type === 'ReactElement') {
