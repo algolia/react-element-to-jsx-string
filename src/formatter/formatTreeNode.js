@@ -4,8 +4,17 @@ import formatReactElementNode from './formatReactElementNode';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
-const escape = (s: string): string =>
-  s.replace(/{/g, '&lbrace;').replace(/}/g, '&rbrace;');
+const jsxStopChars = ['<', '>', '{', '}'];
+const shouldBeEscaped = (s: string) =>
+  jsxStopChars.some(jsxStopChar => s.includes(jsxStopChar));
+
+const escape = (s: string) => {
+  if (!shouldBeEscaped(s)) {
+    return s;
+  }
+
+  return `{\`${s}\`}`;
+};
 
 export default (
   node: TreeNode,
@@ -13,8 +22,12 @@ export default (
   lvl: number,
   options: Options
 ): string => {
-  if (node.type === 'string' || node.type === 'number') {
-    return node.value ? escape(node.value.toString()) : '';
+  if (node.type === 'number') {
+    return String(node.value);
+  }
+
+  if (node.type === 'string') {
+    return node.value ? escape(String(node.value)) : '';
   }
 
   if (node.type === 'ReactElement') {
