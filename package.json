@@ -53,7 +53,7 @@
     "eslint-plugin-prettier": "2.1.2",
     "eslint-plugin-react": "7.1.0",
     "expect": "1.20.2",
-    "flow-bin": "0.51.1",
+    "flow-bin": "0.52.0",
     "flow-copy-source": "1.2.0",
     "husky": "0.14.3",
     "jest": "20.0.4",
@@ -69,10 +69,10 @@
     "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^16.0.0-rc || ^16.0.0-beta || ^16.0.0-alpha"
   },
   "dependencies": {
-    "collapse-white-space": "^1.0.3",
-    "is-plain-object": "^2.0.4",
-    "lodash": "^4.17.4",
-    "sortobject": "^1.0.0",
-    "stringify-object": "^3.2.0"
+    "collapse-white-space": "1.0.3",
+    "is-plain-object": "2.0.4",
+    "lodash": "4.17.4",
+    "sortobject": "1.1.1",
+    "stringify-object": "3.2.0"
   }
 }
