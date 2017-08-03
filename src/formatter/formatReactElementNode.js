@@ -8,8 +8,43 @@ import propNameSorter from './propNameSorter';
 import type { Options } from './../options';
 import type { ReactElementTreeNode } from './../tree';
 
-const recurse = (lvl: number, inline: boolean, options: Options) => element =>
-  formatTreeNode(element, inline, lvl, options);
+const compensateMultilineStringElementIndentation = (
+  element,
+  formattedElement: string,
+  inline: boolean,
+  lvl: number,
+  options: Options
+) => {
+  const { tabStop } = options;
+
+  if (element.type === 'string') {
+    return formattedElement
+      .split('\n')
+      .map((line, offset) => {
+        if (offset === 0) {
+          return line;
+        }
+
+        return `${spacer(lvl, tabStop)}${line}`;
+      })
+      .join('\n');
+  }
+
+  return formattedElement;
+};
+
+const formatOneChildren = (
+  inline: boolean,
+  lvl: number,
+  options: Options
+) => element =>
+  compensateMultilineStringElementIndentation(
+    element,
+    formatTreeNode(element, inline, lvl, options),
+    inline,
+    lvl,
+    options
+  );
 
 const onlyPropsWithOriginalValue = (defaultProps, props) => propName => {
   const haveDefaultValue = Object.keys(defaultProps).includes(propName);
@@ -158,7 +193,7 @@ export default (
 
     out += childrens
       .reduce(mergeSiblingPlainStringChildrenReducer, [])
-      .map(recurse(newLvl, inline, options))
+      .map(formatOneChildren(inline, newLvl, options))
       .join(`\n${spacer(newLvl, tabStop)}`);
 
     if (!inline) {
