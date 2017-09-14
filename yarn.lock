@@ -2849,7 +2849,7 @@ jest-changed-files@^21.1.0:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^21.0.2:
+jest-cli@^21.1.0:
   version "21.1.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-21.1.0.tgz#4f671885ea3521803c96a1fd95baaa6a1ba8d70f"
   dependencies:
@@ -3082,11 +3082,11 @@ jest-validate@^21.1.0:
     leven "^2.1.0"
     pretty-format "^21.1.0"
 
-jest@21.0.2:
-  version "21.0.2"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-21.0.2.tgz#a5c9bdc9d4322ae672fe8cb3eaf25c268c5f04b2"
+jest@21.1.0:
+  version "21.1.0"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-21.1.0.tgz#77c7baa8aa9e8bace7fe41a30d748ab56e89476a"
   dependencies:
-    jest-cli "^21.0.2"
+    jest-cli "^21.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
