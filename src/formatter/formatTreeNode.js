@@ -4,7 +4,7 @@ import formatReactElementNode from './formatReactElementNode';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
-const jsxStopChars = ['<', '>', '{', '}'];
+const jsxStopChars = ['<', '>', '{', '}', '\n'];
 const shouldBeEscaped = (s: string) =>
   jsxStopChars.some(jsxStopChar => s.includes(jsxStopChar));
 

@@ -49,8 +49,8 @@ describe('formatTreeNode', () => {
 
   it('should preserve the format of string', () => {
     expect(formatTreeNode({ type: 'string', value: 'foo\nbar' }, true, 0, {}))
-      .toBe(`foo
-bar`);
+      .toBe(`{\`foo
+bar\`}`);
 
     expect(
       formatTreeNode(

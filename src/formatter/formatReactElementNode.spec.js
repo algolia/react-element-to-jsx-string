@@ -111,17 +111,17 @@ describe('formatReactElementNode', () => {
 
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
       `<div>
-  first line
+  {\`first line
   second line
-  third line
+  third line\`}
 </div>`
     );
 
     expect(formatReactElementNode(tree, false, 2, defaultOptions)).toEqual(
       `<div>
-      first line
+      {\`first line
       second line
-      third line
+      third line\`}
     </div>`
     );
   });
