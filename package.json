@@ -62,7 +62,7 @@
     "mversion": "1.10.1",
     "prettier": "1.5.3",
     "react": "15.6.2",
-    "react-dom": "15.6.1",
+    "react-dom": "15.6.2",
     "react-test-renderer": "15.6.1"
   },
   "peerDependencies": {
