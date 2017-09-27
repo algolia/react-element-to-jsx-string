@@ -4,23 +4,22 @@
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/ && flow-copy-source -v --ignore=*.spec.js src/ dist/",
+    "build":
+      "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/ && flow-copy-source -v --ignore=*.spec.js src/ dist/",
     "lint": "node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
     "flow": "flow",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
-    "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
+    "prettier:fix":
+      "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
     "test": "jest && npm run lint && yarn run flow",
     "test:watch": "jest --watch",
     "release": "./release.sh"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write --single-quote --trailing-comma es5",
-      "git add"
-    ]
+    "*.js": ["prettier --write --single-quote --trailing-comma es5", "git add"]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -60,7 +59,7 @@
     "json": "9.0.6",
     "lint-staged": "4.2.3",
     "mversion": "1.10.1",
-    "prettier": "1.5.3",
+    "prettier": "1.7.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-test-renderer": "16.0.0"
