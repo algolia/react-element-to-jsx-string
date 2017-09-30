@@ -59,7 +59,7 @@
     "json": "9.0.6",
     "lint-staged": "4.2.3",
     "mversion": "1.10.1",
-    "prettier": "1.7.2",
+    "prettier": "1.7.3",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-test-renderer": "16.0.0"
