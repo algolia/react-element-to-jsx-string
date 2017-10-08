@@ -30,7 +30,12 @@ describe('formatPropValue', () => {
   });
 
   it('should format a symbol prop value', () => {
-    expect(formatPropValue(Symbol('Foo'), false, 0, {})).toBe('{Symbol(Foo)}');
+    expect(formatPropValue(Symbol('Foo'), false, 0, {})).toBe(
+      "{Symbol('Foo')}"
+    );
+
+    // eslint-disable-next-line symbol-description
+    expect(formatPropValue(Symbol(), false, 0, {})).toBe('{Symbol()}');
   });
 
   it('should replace a function prop value by a an empty generic function by default', () => {

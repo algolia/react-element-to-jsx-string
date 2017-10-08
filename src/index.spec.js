@@ -131,7 +131,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       reactElementToJSXString(
         React.createElement('div', { title: Symbol('hello "you"') })
       )
-    ).toEqual('<div title={Symbol(hello "you")} />');
+    ).toEqual('<div title={Symbol(\'hello "you"\')} />');
   });
 
   it('reactElementToJSXString(<div/>)', () => {
@@ -660,7 +660,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('reactElementToJSXString(<div type={Symbol("test")}/>)', () => {
     expect(reactElementToJSXString(<div type={Symbol('test')} />)).toEqual(
-      '<div type={Symbol(test)} />'
+      "<div type={Symbol('test')} />"
     );
   });
 
