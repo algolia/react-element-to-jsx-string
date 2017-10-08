@@ -556,6 +556,22 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<div>\nfoo <span>bar</span> baz\n</div>)', () => {
+    expect(
+      reactElementToJSXString(
+        <div>
+          foo <span>bar</span> baz
+        </div>
+      )
+    ).toEqual(`<div>
+  foo{' '}
+  <span>
+    bar
+  </span>
+  {' '}baz
+</div>`);
+  });
+
   it('reactElementToJSXString(<div a={[1, 2, 3, 4]} />', () => {
     expect(reactElementToJSXString(<div a={[1, 2, 3, 4]} />)).toEqual(
       `<div
@@ -722,7 +738,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('reactElementToJSXString(<div> {false} </div>)', () => {
     expect(reactElementToJSXString(<div> {false} </div>)).toEqual(
-      '<div>\n    \n</div>'
+      `<div>
+  {'  '}
+</div>`
     );
   });
 
