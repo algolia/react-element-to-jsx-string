@@ -16,6 +16,19 @@ const escape = (s: string) => {
   return `{\`${s}\`}`;
 };
 
+const preserveTrailingSpace = (s: string) => {
+  let result = s;
+  if (result.endsWith(' ')) {
+    result = result.replace(/^(\S*)(\s*)$/, "$1{'$2'}");
+  }
+
+  if (result.startsWith(' ')) {
+    result = result.replace(/^(\s*)(\S*)$/, "{'$1'}$2");
+  }
+
+  return result;
+};
+
 export default (
   node: TreeNode,
   inline: boolean,
@@ -27,7 +40,9 @@ export default (
   }
 
   if (node.type === 'string') {
-    return node.value ? escape(String(node.value)) : '';
+    return node.value
+      ? `${preserveTrailingSpace(escape(String(node.value)))}`
+      : '';
   }
 
   if (node.type === 'ReactElement') {
