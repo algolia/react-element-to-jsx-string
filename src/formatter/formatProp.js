@@ -39,7 +39,7 @@ export default (
     formattedPropValue === '{false}' &&
     !hasDefaultValue
   ) {
-    // If a boolean is false an is not different from it's default, we do not render the attribute
+    // If a boolean is false and not different from it's default, we do not render the attribute
     attributeFormattedInline = '';
     attributeFormattedMultiline = '';
   } else if (useBooleanShorthandSyntax && formattedPropValue === '{true}') {

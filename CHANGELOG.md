@@ -1,3 +1,50 @@
+<a name="13.0.0"></a>
+# [13.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v12.0.0...v13.0.0) (2017-10-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency stringify-object to v3.2.1 ([539ea56](https://github.com/algolia/react-element-to-jsx-string/commit/539ea56))
+* **formatting:** symbol description are now quoted ([2747f1b](https://github.com/algolia/react-element-to-jsx-string/commit/2747f1b)), closes [#134](https://github.com/algolia/react-element-to-jsx-string/issues/134)
+* **formatting:** trailing space ([2a07d5e](https://github.com/algolia/react-element-to-jsx-string/commit/2a07d5e)), closes [#135](https://github.com/algolia/react-element-to-jsx-string/issues/135)
+
+
+### BREAKING CHANGES
+
+* **formatting:** Trailing are now preserved. In some rare case, `react-element-to-jsx-string` failed to respect the JSX specs for the trailing space. Event is the space were in the final output. There were silentrly ignored by JSX parser. This commit fix this bug by protecting the trailing space in the output.
+
+If we take the JSX:
+```jsx
+<div>
+  foo <strong>bar</strong> baz
+</div>
+```
+
+Before it was converted to (the trailing space are replace by `*` for the readability):
+```html
+<div>
+  foo*
+  <strong>
+    bar
+  </strong>
+  *baz
+</div>
+```
+
+Now there are preserved:
+```html
+<div>
+  foo{' '}
+  <strong>
+    bar
+  </strong>
+  {' '}baz
+</div>
+```
+* **formatting:** Symbol description are now correctly quoted. This change the output if you use Symbol in your code
+
+
+
 <a name="12.0.0"></a>
 # [12.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v11.0.1...v12.0.0) (2017-08-03)
 
