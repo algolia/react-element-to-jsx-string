@@ -1,6 +1,6 @@
 /* @flow */
 
-import * as React from 'react';
+import React, { type Element as ReactElement } from 'react';
 import type { Options } from './../options';
 import {
   createStringTreeNode,
@@ -9,7 +9,7 @@ import {
 } from './../tree';
 import type { TreeNode } from './../tree';
 
-const getReactElementDisplayName = (element: React.Element<*>): string =>
+const getReactElementDisplayName = (element: ReactElement<*>): string =>
   element.type.displayName ||
   element.type.name || // function name
   (typeof element.type === 'function' // function without a name, you should provide one
@@ -35,7 +35,7 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
 };
 
 const parseReactElement = (
-  element: React.Element<*> | string | number,
+  element: ReactElement<*> | string | number,
   options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
