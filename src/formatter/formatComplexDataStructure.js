@@ -40,7 +40,7 @@ export default (
   });
 
   if (inline) {
-    return collapse(stringifiedValue)
+    return stringifiedValue
       .replace(/\s+/g, ' ')
       .replace(/{ /g, '{')
       .replace(/ }/g, '}')
