@@ -64,8 +64,7 @@ const parseReactElement = (
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = React.Children
-    .toArray(element.props.children)
+  const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
 
