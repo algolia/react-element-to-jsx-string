@@ -33,8 +33,8 @@
     "automerge": "minor"
   },
   "devDependencies": {
-    "@commitlint/cli": "^4.2.2",
-    "@commitlint/config-angular": "^4.2.1",
+    "@commitlint/cli": "4.2.2",
+    "@commitlint/config-angular": "4.2.1",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.0.2",
     "babel-jest": "21.2.0",
