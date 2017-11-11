@@ -1,9 +1,20 @@
+/* @flow */
+
+import fs from 'fs';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import flow from 'rollup-plugin-flow';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
+
+const extractPackagePeerDependencies = () => {
+  const packageNpm = JSON.parse(
+    fs.readFileSync('./package.json', { encoding: 'utf8' })
+  );
+
+  return Object.keys(packageNpm.peerDependencies || {});
+};
 
 export default {
   input: 'src/index.js',
@@ -12,6 +23,7 @@ export default {
     format: 'cjs',
   },
   sourcemap: true,
+  external: extractPackagePeerDependencies(),
   plugins: [
     babel({
       babelrc: false,
