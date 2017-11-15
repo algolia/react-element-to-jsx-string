@@ -69,7 +69,6 @@
     "react": "^0.14.8 || ^15.0.1 || ^16.0.0"
   },
   "dependencies": {
-    "collapse-white-space": "1.0.3",
     "is-plain-object": "2.0.4",
     "sortobject": "1.1.1",
     "stringify-object": "3.2.1"
