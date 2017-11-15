@@ -1,6 +1,5 @@
 /* @flow */
 
-import collapse from 'collapse-white-space';
 import { isValidElement } from 'react';
 import stringify from 'stringify-object';
 import sortObject from './sortObject';
@@ -41,7 +40,8 @@ export default (
   });
 
   if (inline) {
-    return collapse(stringifiedValue)
+    return stringifiedValue
+      .replace(/\s+/g, ' ')
       .replace(/{ /g, '{')
       .replace(/ }/g, '}')
       .replace(/\[ /g, '[')
