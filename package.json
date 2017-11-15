@@ -1,25 +1,26 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "13.0.0",
+  "version": "13.1.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/index.js",
   "scripts": {
-    "build":
-      "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/ && flow-copy-source -v --ignore=*.spec.js src/ dist/",
+    "build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/ && flow-copy-source -v --ignore=*.spec.js src/ dist/",
     "lint": "node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
     "flow": "flow",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
-    "prettier:fix":
-      "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
+    "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
     "test": "jest && npm run lint && npm run flow",
     "test:watch": "jest --watch",
     "release": "./release.sh"
   },
   "lint-staged": {
-    "*.js": ["prettier --write --single-quote --trailing-comma es5", "git add"]
+    "*.js": [
+      "prettier --write --single-quote --trailing-comma es5",
+      "git add"
+    ]
   },
   "author": {
     "name": "Algolia, Inc.",

@@ -1,3 +1,15 @@
+<a name="13.1.0"></a>
+# [13.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.0.0...v13.1.0) (2017-11-15)
+
+
+### Bug Fixes
+
+* **formatting:** Date/RegExp values output by formatComplexDataStructure ([#250](https://github.com/algolia/react-element-to-jsx-string/issues/250)) ([0387b72](https://github.com/algolia/react-element-to-jsx-string/commit/0387b72))
+* **react:** Fix warning about access to PropTypes using React 15.5+ (fixes [#213](https://github.com/algolia/react-element-to-jsx-string/issues/213)) ([2dcfd10](https://github.com/algolia/react-element-to-jsx-string/commit/2dcfd10))
+* **test:** Fix usage of yarn instead of npm in test script ([0db5aa4](https://github.com/algolia/react-element-to-jsx-string/commit/0db5aa4))
+
+
+
 <a name="13.0.0"></a>
 # [13.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v12.0.0...v13.0.0) (2017-10-09)
 
