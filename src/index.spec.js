@@ -11,11 +11,7 @@ class TestComponent extends React.Component {}
 
 function NamedStatelessComponent(props: { children: React.Children }) {
   const { children } = props;
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }
 
 class DefaultPropsComponent extends React.Component {}
@@ -135,7 +131,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       reactElementToJSXString(
         React.createElement('div', { title: Symbol('hello "you"') })
       )
-    ).toEqual('<div title={Symbol(hello "you")} />');
+    ).toEqual('<div title={Symbol(\'hello "you"\')} />');
   });
 
   it('reactElementToJSXString(<div/>)', () => {
@@ -209,9 +205,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<script type="application/json+ld">{`{ hello: \'world\' }`}</script>)', () => {
     expect(
       reactElementToJSXString(
-        <script type="application/json+ld">
-          {`{ hello: 'world' }`}
-        </script>
+        <script type="application/json+ld">{`{ hello: 'world' }`}</script>
       )
     ).toEqual(
       `<script type="application/json+ld">
@@ -562,6 +556,22 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<div>\nfoo <span>bar</span> baz\n</div>)', () => {
+    expect(
+      reactElementToJSXString(
+        <div>
+          foo <span>bar</span> baz
+        </div>
+      )
+    ).toEqual(`<div>
+  foo{' '}
+  <span>
+    bar
+  </span>
+  {' '}baz
+</div>`);
+  });
+
   it('reactElementToJSXString(<div a={[1, 2, 3, 4]} />', () => {
     expect(reactElementToJSXString(<div a={[1, 2, 3, 4]} />)).toEqual(
       `<div
@@ -628,9 +638,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       class MyDecorator extends React.Component {
         render() {
           return (
-            <div>
-              {React.createElement(ComposedComponent.type, this.props)}
-            </div>
+            <div>{React.createElement(ComposedComponent.type, this.props)}</div>
           );
         }
       }
@@ -652,11 +660,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
     /* eslint-disable react/prop-types */
     class InlineProps extends React.Component {
       render() {
-        return (
-          <div>
-            Hello {this.props.name}
-          </div>
-        );
+        return <div>Hello {this.props.name}</div>;
       }
     }
 
@@ -672,7 +676,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('reactElementToJSXString(<div type={Symbol("test")}/>)', () => {
     expect(reactElementToJSXString(<div type={Symbol('test')} />)).toEqual(
-      '<div type={Symbol(test)} />'
+      "<div type={Symbol('test')} />"
     );
   });
 
@@ -715,73 +719,37 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('reactElementToJSXString(<div>\\n  {null}\\n</div>', () => {
-    const element = (
-      <div>
-        {null}
-      </div>
-    );
+    const element = <div>{null}</div>;
 
     expect(reactElementToJSXString(element)).toEqual('<div />');
   });
 
   it('reactElementToJSXString(<div>{true}</div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {true}
-        </div>
-      )
-    ).toEqual('<div />');
+    expect(reactElementToJSXString(<div>{true}</div>)).toEqual('<div />');
   });
 
   it('reactElementToJSXString(<div>{false}</div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {false}
-        </div>
-      )
-    ).toEqual('<div />');
+    expect(reactElementToJSXString(<div>{false}</div>)).toEqual('<div />');
   });
 
   it('reactElementToJSXString(<div>\n{false}\n</div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {false}
-        </div>
-      )
-    ).toEqual('<div />');
+    expect(reactElementToJSXString(<div>{false}</div>)).toEqual('<div />');
   });
 
   it('reactElementToJSXString(<div> {false} </div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {' '}{false}{' '}
-        </div>
-      )
-    ).toEqual('<div>\n    \n</div>');
+    expect(reactElementToJSXString(<div> {false} </div>)).toEqual(
+      `<div>
+  {'  '}
+</div>`
+    );
   });
 
   it('reactElementToJSXString(<div>{null}</div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {null}
-        </div>
-      )
-    ).toEqual('<div />');
+    expect(reactElementToJSXString(<div>{null}</div>)).toEqual('<div />');
   });
 
   it('reactElementToJSXString(<div>{123}</div>)', () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {123}
-        </div>
-      )
-    ).toEqual(
+    expect(reactElementToJSXString(<div>{123}</div>)).toEqual(
       `<div>
   123
 </div>`
@@ -789,22 +757,14 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it("reactElementToJSXString(<div>{''}</div>)", () => {
-    expect(
-      reactElementToJSXString(
-        <div>
-          {''}
-        </div>
-      )
-    ).toEqual(reactElementToJSXString(<div />));
+    expect(reactElementToJSXString(<div>{''}</div>)).toEqual(
+      reactElementToJSXString(<div />)
+    );
   });
 
   it('reactElementToJSXString(<div>String with {1} js expression</div>)', () => {
     expect(
-      reactElementToJSXString(
-        <div>
-          String with {1} js number
-        </div>
-      )
+      reactElementToJSXString(<div>String with {1} js number</div>)
     ).toEqual(
       `<div>
   String with 1 js number

@@ -1,6 +1,6 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "12.0.0",
+  "version": "13.1.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
     "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
-    "test": "jest && npm run lint && yarn run flow",
+    "test": "jest && npm run lint && npm run flow",
     "test:watch": "jest --watch",
     "release": "./release.sh"
   },
@@ -34,45 +34,43 @@
     "automerge": "minor"
   },
   "devDependencies": {
+    "@commitlint/cli": "4.3.0",
+    "@commitlint/config-angular": "4.3.0",
     "babel-cli": "6.26.0",
-    "babel-eslint": "8.0.0",
-    "babel-jest": "21.0.2",
-    "babel-plugin-lodash": "3.2.11",
+    "babel-eslint": "8.0.2",
+    "babel-jest": "21.2.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-flow": "6.23.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "babel-register": "6.26.0",
-    "conventional-changelog-cli": "1.3.3",
+    "conventional-changelog-cli": "1.3.5",
     "doctoc": "1.3.0",
-    "eslint": "4.6.1",
+    "eslint": "4.11.0",
     "eslint-config-algolia": "12.0.0",
-    "eslint-config-prettier": "2.4.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jest": "21.1.0",
-    "eslint-plugin-prettier": "2.2.0",
-    "eslint-plugin-react": "7.3.0",
-    "expect": "21.1.0",
-    "flow-bin": "0.52.0",
+    "eslint-config-prettier": "2.7.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jest": "21.3.2",
+    "eslint-plugin-prettier": "2.3.1",
+    "eslint-plugin-react": "7.4.0",
+    "expect": "21.2.1",
+    "flow-bin": "0.59.0",
     "flow-copy-source": "1.2.1",
     "husky": "0.14.3",
-    "jest": "21.1.0",
+    "jest": "21.2.1",
     "json": "9.0.6",
-    "lint-staged": "4.1.3",
+    "lint-staged": "5.0.0",
     "mversion": "1.10.1",
-    "prettier": "1.5.3",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "react-test-renderer": "15.6.1"
+    "prettier": "1.8.2",
+    "react": "16.1.1",
+    "react-dom": "16.1.1",
+    "react-test-renderer": "16.1.1"
   },
   "peerDependencies": {
-    "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^16.0.0-rc || ^16.0.0-beta || ^16.0.0-alpha"
+    "react": "^0.14.8 || ^15.0.1 || ^16.0.0"
   },
   "dependencies": {
-    "collapse-white-space": "1.0.3",
     "is-plain-object": "2.0.4",
-    "lodash": "4.17.4",
-    "sortobject": "1.1.1",
-    "stringify-object": "3.2.0"
+    "stringify-object": "3.2.1"
   }
 }

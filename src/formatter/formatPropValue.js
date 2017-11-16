@@ -30,7 +30,16 @@ const formatPropValue = (
   // @see: https://flow.org/en/docs/types/primitives/
   // $FlowFixMe: Flow does not support Symbol
   if (typeof propValue === 'symbol') {
-    return `{${String(propValue)}}`;
+    const symbolDescription = propValue
+      .valueOf()
+      .toString()
+      .replace(/Symbol\((.*)\)/, '$1');
+
+    if (!symbolDescription) {
+      return `{Symbol()}`;
+    }
+
+    return `{Symbol('${symbolDescription}')}`;
   }
 
   if (typeof propValue === 'function') {

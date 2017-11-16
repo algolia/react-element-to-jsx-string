@@ -1,12 +1,12 @@
 /* @flow */
 
-import { Element } from 'react';
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
+import type { Element as ReactElement } from 'react';
 import type { Options } from './options';
 
 const reactElementToJsxString = (
-  element: Element<any>,
+  element: ReactElement<any>,
   {
     filterProps = [],
     showDefaultProps = true,

@@ -1,6 +1,6 @@
 /* @flow */
 
-import { Children, Element, isValidElement } from 'react';
+import React, { type Element as ReactElement } from 'react';
 import type { Options } from './../options';
 import {
   createStringTreeNode,
@@ -9,7 +9,7 @@ import {
 } from './../tree';
 import type { TreeNode } from './../tree';
 
-const getReactElementDisplayName = (element: Element<*>): string =>
+const getReactElementDisplayName = (element: ReactElement<*>): string =>
   element.type.displayName ||
   element.type.name || // function name
   (typeof element.type === 'function' // function without a name, you should provide one
@@ -35,7 +35,7 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
 };
 
 const parseReactElement = (
-  element: Element<*> | string | number,
+  element: ReactElement<*> | string | number,
   options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
@@ -44,7 +44,7 @@ const parseReactElement = (
     return createStringTreeNode(element);
   } else if (typeof element === 'number') {
     return createNumberTreeNode(element);
-  } else if (!isValidElement(element)) {
+  } else if (!React.isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
     );
@@ -64,7 +64,7 @@ const parseReactElement = (
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = Children.toArray(element.props.children)
+  const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
 

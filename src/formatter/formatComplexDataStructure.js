@@ -1,9 +1,8 @@
 /* @flow */
 
-import collapse from 'collapse-white-space';
 import { isValidElement } from 'react';
 import stringify from 'stringify-object';
-import sortobject from 'sortobject';
+import sortObject from './sortObject';
 import parseReactElement from './../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
 import spacer from './spacer';
@@ -17,7 +16,7 @@ export default (
   lvl: number,
   options: Options
 ): string => {
-  const normalizedValue = sortobject(value);
+  const normalizedValue = sortObject(value);
 
   const stringifiedValue = stringify(normalizedValue, {
     transform: (currentObj, prop, originalResult) => {
@@ -41,7 +40,8 @@ export default (
   });
 
   if (inline) {
-    return collapse(stringifiedValue)
+    return stringifiedValue
+      .replace(/\s+/g, ' ')
       .replace(/{ /g, '{')
       .replace(/ }/g, '}')
       .replace(/\[ /g, '[')
