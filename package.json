@@ -52,7 +52,7 @@
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jest": "21.3.2",
     "eslint-plugin-prettier": "2.3.1",
-    "eslint-plugin-react": "7.5.0",
+    "eslint-plugin-react": "7.5.1",
     "expect": "21.2.1",
     "flow-bin": "0.59.0",
     "flow-copy-source": "1.2.1",
