@@ -62,7 +62,7 @@
     "lint-staged": "5.0.0",
     "mversion": "1.10.1",
     "prettier": "1.8.2",
-    "react": "16.1.1",
+    "react": "16.2.0",
     "react-dom": "16.1.1",
     "react-test-renderer": "16.1.1"
   },
