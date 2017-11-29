@@ -116,6 +116,18 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   Either to sort or not props. If you use this lib to make some isomorphic rendering you should set it to false, otherwise this would lead to react invalid checksums as the prop order is part of react isomorphic checksum algorithm.
 
+**options.useFragmentShortSyntax: boolean, default true**
+
+  If true, fragment will be represented with the JSX short synthax `<>...</>` (when possible).
+
+  If false, fragment will always be represented with the JSX explicit synthax `<React.Fragment>...</React.Fragment>`.
+
+  According to [the specs](https://reactjs.org/docs/fragments.html):
+  - A keyed fragment will always use the explicit synthax: `<React.Fragment key={...}>...</React.Fragment>`
+  - An empty fragment will always use the explicit synthax: `<React.Fragment />`
+
+  Note: to use fragment you must use React >= 16.2
+
 ## Environment requirements
 
 The environment you use to use `react-element-to-jsx-string` should have [ES2015](https://babeljs.io/learn-es2015/) support.

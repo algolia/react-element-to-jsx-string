@@ -4,6 +4,7 @@ import {
   createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
+  createReactFragmentTreeNode,
 } from './tree';
 
 describe('createStringTreeNode', () => {
@@ -35,6 +36,16 @@ describe('createReactElementTreeNode', () => {
       displayName: 'MyComponent',
       props: { foo: 42 },
       defaultProps: { bar: 51 },
+      childrens: ['abc'],
+    });
+  });
+});
+
+describe('createReactFragmentTreeNode', () => {
+  it('generate a react fragment typed node payload', () => {
+    expect(createReactFragmentTreeNode('foo', ['abc'])).toEqual({
+      type: 'ReactFragment',
+      key: 'foo',
       childrens: ['abc'],
     });
   });
