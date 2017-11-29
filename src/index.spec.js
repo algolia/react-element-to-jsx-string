@@ -145,6 +145,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('reactElementToJSXString(<div fn={function hello(){}}/>)', () => {
+    // eslint-disable-next-line react/jsx-no-bind
     expect(reactElementToJSXString(<div fn={function hello() {}} />)).toEqual(
       '<div fn={function noRefCheck() {}} />'
     );
