@@ -55,11 +55,11 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.1.1.tgz#214cd97c45bd1965c4ff2a5b266516017458c00f"
+"@commitlint/cli@5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.2.0.tgz#ec28f6488371ffade98f7fc9a3b3fd8ba25da7bd"
   dependencies:
-    "@commitlint/core" "^5.1.1"
+    "@commitlint/core" "^5.2.0"
     babel-polyfill "6.26.0"
     chalk "2.3.0"
     get-stdin "5.0.1"
@@ -76,9 +76,9 @@
   dependencies:
     "@commitlint/config-angular-type-enum" "^5.1.1"
 
-"@commitlint/core@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-5.1.1.tgz#72163b9b6083fe44bb4a902f69edf14f70b75afc"
+"@commitlint/core@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-5.2.0.tgz#ebdd3f93a54ca281c36fae238aed72fe185a1c20"
   dependencies:
     "@marionebl/conventional-commits-parser" "^3.0.0"
     "@marionebl/git-raw-commits" "^1.2.0"
@@ -89,7 +89,6 @@
     cosmiconfig "^3.0.1"
     find-up "^2.1.0"
     lodash "^4.17.4"
-    path-exists "^3.0.0"
     require-uncached "^1.0.3"
     resolve-from "^4.0.0"
     resolve-global "^0.1.0"
