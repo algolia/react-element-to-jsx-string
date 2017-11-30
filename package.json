@@ -29,9 +29,16 @@
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
   "renovate": {
+    "extends": [
+      "config:library"
+    ],
     "semanticCommits": true,
     "rebaseStalePrs": true,
-    "automerge": "minor"
+    "automerge": true,
+    "major": {
+      "automerge": false
+    },
+    "automergeType": "branch-push"
   },
   "devDependencies": {
     "@commitlint/cli": "5.2.0",
