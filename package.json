@@ -12,12 +12,16 @@
     "prepublish": "npm run build",
     "prebuild": "mkdir -p dist && rm -rf ./dist/*",
     "prettier:fix": "prettier --write \"**/*.{js,json}\"",
-    "test": "jest && npm run lint && npm run flow",
+    "test": "jest",
     "test:watch": "jest --watch",
-    "release": "./release.sh"
+    "release": "./release.sh",
+    "smoke": "node tests/smoke/run"
   },
   "lint-staged": {
-    "*.js": ["prettier --write \"**/*.{js,json}\"", "git add"]
+    "*.js": [
+      "prettier --write \"**/*.{js,json}\"",
+      "git add"
+    ]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -67,7 +71,6 @@
     "mversion": "1.10.1",
     "prettier": "1.8.2",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
     "react-test-renderer": "16.2.0"
   },
   "peerDependencies": {
