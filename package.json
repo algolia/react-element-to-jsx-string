@@ -42,7 +42,7 @@
     "automergeType": "branch-push"
   },
   "devDependencies": {
-    "@commitlint/cli": "5.2.0",
+    "@commitlint/cli": "5.2.5",
     "@commitlint/config-angular": "5.1.1",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.0.2",
