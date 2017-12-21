@@ -63,11 +63,11 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.2.5.tgz#5662b71c10642ac0aba885c473ca458172414646"
+"@commitlint/cli@5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.2.6.tgz#1107f9567b588b3641b71a88bce6cd6a673253ab"
   dependencies:
-    "@commitlint/core" "^5.2.5"
+    "@commitlint/core" "^5.2.6"
     babel-polyfill "6.26.0"
     chalk "2.3.0"
     get-stdin "5.0.1"
@@ -84,9 +84,9 @@
   dependencies:
     "@commitlint/config-angular-type-enum" "^5.1.1"
 
-"@commitlint/core@^5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-5.2.5.tgz#e4be2730652f051d30e245ce16ac037a775750b6"
+"@commitlint/core@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-5.2.6.tgz#faba40ef1bf46531d40531990615b483d6b51958"
   dependencies:
     "@marionebl/sander" "^0.6.0"
     babel-runtime "^6.23.0"
