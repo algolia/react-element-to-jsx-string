@@ -65,7 +65,7 @@
     "flow-bin": "0.63.1",
     "flow-copy-source": "1.2.1",
     "husky": "0.14.3",
-    "jest": "22.1.0",
+    "jest": "22.1.1",
     "json": "9.0.6",
     "lint-staged": "6.0.0",
     "mversion": "1.10.1",
