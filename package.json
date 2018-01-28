@@ -48,7 +48,7 @@
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jest": "21.7.0",
     "eslint-plugin-prettier": "2.5.0",
-    "eslint-plugin-react": "7.5.1",
+    "eslint-plugin-react": "7.6.0",
     "expect": "22.1.0",
     "flow-bin": "0.63.1",
     "flow-copy-source": "1.2.2",
