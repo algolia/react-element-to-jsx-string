@@ -46,7 +46,7 @@
     "eslint-config-algolia": "13.0.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jest": "21.7.1",
+    "eslint-plugin-jest": "21.8.0",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.6.1",
     "expect": "22.1.0",
