@@ -66,6 +66,6 @@
   },
   "dependencies": {
     "is-plain-object": "2.0.4",
-    "stringify-object": "3.2.1"
+    "stringify-object": "3.2.2"
   }
 }
