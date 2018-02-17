@@ -2147,9 +2147,9 @@ eslint-plugin-import@2.8.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-jest@21.8.0:
-  version "21.8.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.8.0.tgz#4f3155e2898c1efb0ce548f3e084e07db5e21c07"
+eslint-plugin-jest@21.12.1:
+  version "21.12.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.12.1.tgz#0a70b3e2be5172ab558f46bbff02ed11069266d6"
 
 eslint-plugin-prettier@2.6.0:
   version "2.6.0"
