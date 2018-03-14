@@ -1,3 +1,13 @@
+<a name="13.2.0"></a>
+# [13.2.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.1.0...v13.2.0) (2018-03-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency stringify-object to v3.2.2 ([b1a4c5e](https://github.com/algolia/react-element-to-jsx-string/commit/b1a4c5e))
+
+
+
 <a name="13.1.0"></a>
 # [13.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.0.0...v13.1.0) (2017-11-15)
 
