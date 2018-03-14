@@ -1,13 +1,16 @@
 /* @flow */
 
-import React, { type Element as ReactElement } from 'react';
+import React, { type Element as ReactElement, Fragment } from 'react';
 import type { Options } from './../options';
 import {
   createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
+  createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
+
+const supportFragment = Boolean(Fragment);
 
 const getReactElementDisplayName = (element: ReactElement<*>): string =>
   element.type.displayName ||
@@ -67,6 +70,10 @@ const parseReactElement = (
   const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
+
+  if (supportFragment && element.type === Fragment) {
+    return createReactFragmentTreeNode(key, childrens);
+  }
 
   return createReactElementTreeNode(
     displayName,

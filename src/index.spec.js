@@ -2,7 +2,7 @@
 
 /* eslint-disable react/no-string-refs */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import reactElementToJSXString from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
@@ -1031,5 +1031,60 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(reactElementToJSXString(<div fn={() => {}} />)).toEqual(
       '<div fn={function noRefCheck() {}} />'
     );
+  });
+
+  it('reactElementToJSXString(<Fragment><h1>foo</h1><p>bar</p></Fragment>)', () => {
+    expect(
+      reactElementToJSXString(
+        <Fragment>
+          <h1>foo</h1>
+          <p>bar</p>
+        </Fragment>
+      )
+    ).toEqual(
+      `<>
+  <h1>
+    foo
+  </h1>
+  <p>
+    bar
+  </p>
+</>`
+    );
+  });
+
+  it('reactElementToJSXString(<Fragment key="foo"><div /><div /></Fragment>)', () => {
+    expect(
+      reactElementToJSXString(
+        <Fragment key="foo">
+          <div />
+          <div />
+        </Fragment>
+      )
+    ).toEqual(
+      `<React.Fragment key="foo">
+  <div />
+  <div />
+</React.Fragment>`
+    );
+  });
+
+  it('reactElementToJSXString(<Fragment />)', () => {
+    expect(reactElementToJSXString(<Fragment />)).toEqual(`<React.Fragment />`);
+  });
+
+  it('reactElementToJSXString(<div render={<Fragment><div /><div /></Fragment>} />)', () => {
+    expect(
+      reactElementToJSXString(
+        <div
+          render={
+            <Fragment>
+              <div />
+              <div />
+            </Fragment>
+          }
+        />
+      )
+    ).toEqual(`<div render={<><div /><div /></>} />`);
   });
 });

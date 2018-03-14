@@ -1,6 +1,7 @@
 /* @flow */
 
 import formatReactElementNode from './formatReactElementNode';
+import formatReactFragmentNode from './formatReactFragmentNode';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
@@ -47,6 +48,10 @@ export default (
 
   if (node.type === 'ReactElement') {
     return formatReactElementNode(node, inline, lvl, options);
+  }
+
+  if (node.type === 'ReactFragment') {
+    return formatReactFragmentNode(node, inline, lvl, options);
   }
 
   throw new TypeError(`Unknow format type "${node.type}"`);

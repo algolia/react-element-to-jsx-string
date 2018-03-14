@@ -196,7 +196,7 @@ export default (
     out += childrens
       .reduce(mergeSiblingPlainStringChildrenReducer, [])
       .map(formatOneChildren(inline, newLvl, options))
-      .join(`\n${spacer(newLvl, tabStop)}`);
+      .join(!inline ? `\n${spacer(newLvl, tabStop)}` : '');
 
     if (!inline) {
       out += '\n';

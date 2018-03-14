@@ -1,6 +1,8 @@
 /* @flow */
 /* eslint-disable no-use-before-define */
 
+import type { Key } from 'react';
+
 type PropsType = { [key: string]: any };
 type DefaultPropsType = { [key: string]: any };
 
@@ -22,7 +24,17 @@ export type ReactElementTreeNode = {|
   childrens: TreeNode[],
 |};
 
-export type TreeNode = StringTreeNode | NumberTreeNode | ReactElementTreeNode;
+export type ReactFragmentTreeNode = {|
+  type: 'ReactFragment',
+  key: ?Key,
+  childrens: TreeNode[],
+|};
+
+export type TreeNode =
+  | StringTreeNode
+  | NumberTreeNode
+  | ReactElementTreeNode
+  | ReactFragmentTreeNode;
 
 export const createStringTreeNode = (value: string): StringTreeNode => ({
   type: 'string',
@@ -44,5 +56,14 @@ export const createReactElementTreeNode = (
   displayName,
   props,
   defaultProps,
+  childrens,
+});
+
+export const createReactFragmentTreeNode = (
+  key: ?Key,
+  childrens: TreeNode[]
+): ReactFragmentTreeNode => ({
+  type: 'ReactFragment',
+  key,
   childrens,
 });

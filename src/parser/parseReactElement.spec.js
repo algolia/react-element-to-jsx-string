@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import parseReactElement from './parseReactElement';
 
 const options = {};
@@ -149,6 +149,37 @@ describe('parseReactElement', () => {
         ref: 'foo',
       },
       childrens: [],
+    });
+  });
+
+  it('should parse a react fragment', () => {
+    expect(
+      parseReactElement(
+        <Fragment key="foo">
+          <div />
+          <div />
+        </Fragment>,
+        options
+      )
+    ).toEqual({
+      type: 'ReactFragment',
+      key: 'foo',
+      childrens: [
+        {
+          type: 'ReactElement',
+          displayName: 'div',
+          defaultProps: {},
+          props: {},
+          childrens: [],
+        },
+        {
+          type: 'ReactElement',
+          displayName: 'div',
+          defaultProps: {},
+          props: {},
+          childrens: [],
+        },
+      ],
     });
   });
 });

@@ -9,6 +9,7 @@ export type Options = {|
   functionValue: Function,
   tabStop: number,
   useBooleanShorthandSyntax: boolean,
+  useFragmentShortSyntax: boolean,
   sortProps: boolean,
 
   maxInlineAttributesLineLength?: number,
