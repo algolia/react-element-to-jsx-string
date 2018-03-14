@@ -118,13 +118,13 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
 **options.useFragmentShortSyntax: boolean, default true**
 
-  If true, fragment will be represented with the JSX short synthax `<>...</>` (when possible).
+  If true, fragment will be represented with the JSX short syntax `<>...</>` (when possible).
 
-  If false, fragment will always be represented with the JSX explicit synthax `<React.Fragment>...</React.Fragment>`.
+  If false, fragment will always be represented with the JSX explicit syntax `<React.Fragment>...</React.Fragment>`.
 
   According to [the specs](https://reactjs.org/docs/fragments.html):
-  - A keyed fragment will always use the explicit synthax: `<React.Fragment key={...}>...</React.Fragment>`
-  - An empty fragment will always use the explicit synthax: `<React.Fragment />`
+  - A keyed fragment will always use the explicit syntax: `<React.Fragment key={...}>...</React.Fragment>`
+  - An empty fragment will always use the explicit syntax: `<React.Fragment />`
 
   Note: to use fragment you must use React >= 16.2
 

@@ -9,8 +9,8 @@ import type {
   TreeNode,
 } from './../tree';
 
-const REACT_FRAGMENT_TAG_NAME_SHORT_SYNTHAX = '';
-const REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTHAX = 'React.Fragment';
+const REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX = '';
+const REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX = 'React.Fragment';
 
 const toReactElementTreeNode = (
   displayName: string,
@@ -56,12 +56,12 @@ export default (
   let displayName;
   if (useFragmentShortSyntax) {
     if (hasNoChildren(node) || isKeyedFragment(node)) {
-      displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTHAX;
+      displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
     } else {
-      displayName = REACT_FRAGMENT_TAG_NAME_SHORT_SYNTHAX;
+      displayName = REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX;
     }
   } else {
-    displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTHAX;
+    displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
   }
 
   return formatReactElementNode(
