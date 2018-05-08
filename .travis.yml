@@ -20,7 +20,11 @@ script:
   - yarn run test
   - yarn run lint
   - yarn run flow
-  - yarn run smoke 15.6.2
-  - yarn run smoke 16.1.0
-  - yarn run smoke default
-  - yarn run smoke next
+  - yarn run smoke cjs 15.6.2
+  - yarn run smoke esm 15.6.2
+  - yarn run smoke cjs 16.1.0
+  - yarn run smoke esm 16.1.0
+  - yarn run smoke cjs default
+  - yarn run smoke esm default
+  - yarn run smoke cjs next
+  - yarn run smoke esm next

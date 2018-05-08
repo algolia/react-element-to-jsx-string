@@ -1,5 +1,3 @@
-/* @flow */
-
 import fs from 'fs';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
@@ -19,10 +17,10 @@ const extractPackagePeerDependencies = () => {
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/cjs/bundle.js',
+    file: 'dist/cjs/index.js',
     format: 'cjs',
+    sourcemap: true,
   },
-  sourcemap: true,
   external: extractPackagePeerDependencies(),
   plugins: [
     babel({
