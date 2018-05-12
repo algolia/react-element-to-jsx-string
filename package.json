@@ -55,7 +55,7 @@
     "husky": "0.14.3",
     "jest": "22.3.0",
     "json": "9.0.6",
-    "lint-staged": "7.0.5",
+    "lint-staged": "7.1.0",
     "mversion": "1.10.1",
     "prettier": "1.8.2",
     "react": "16.3.2",
