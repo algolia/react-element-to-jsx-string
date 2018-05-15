@@ -3,9 +3,19 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 
+const requireReactElementToJsxString = buildType => {
+  if (buildType === 'esm') {
+    return require(`./../../dist/esm`).default;
+  } else if (buildType === 'cjs') {
+    return require('./../../dist/cjs');
+  }
+
+  throw new Error(`Unknown build type: "${buildType}"`);
+};
+
 const expect = require('expect');
 const React = require('react');
-const reactElementToJsxString = require('./../../dist/').default;
+const reactElementToJsxString = requireReactElementToJsxString(process.argv[2]);
 
 console.log(`Tested "react" version: "${React.version}"`);
 
