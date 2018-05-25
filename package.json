@@ -1,6 +1,6 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "13.2.0",
+  "version": "14.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -9,8 +9,7 @@
     "clean": "npm run esm:clean && npm run cjs:clean",
     "build": "npm run esm:build && npm run cjs:build",
     "preesm:build": "npm run esm:clean",
-    "esm:build":
-      "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/esm && flow-copy-source -v --ignore=*.spec.js src/ dist/esm",
+    "esm:build": "babel ./src/ --ignore=*.spec.js --source-maps --out-dir ./dist/esm && flow-copy-source -v --ignore=*.spec.js src/ dist/esm",
     "esm:clean": "rm -rf ./dist/esm/*",
     "precjs:build": "npm run cjs:clean",
     "cjs:build": "rollup --config rollup.config.js",
@@ -20,8 +19,7 @@
     "flow": "flow",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
-    "prettier:fix":
-      "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
+    "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "release": "./release.sh",
