@@ -1,3 +1,26 @@
+<a name="14.0.0"></a>
+# [14.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.2.0...v14.0.0) (2018-05-25)
+
+
+### Features
+
+* **browser:** build a dedicated version for the browser ([#242](https://github.com/algolia/react-element-to-jsx-string/issues/242)) ([574d850](https://github.com/algolia/react-element-to-jsx-string/commit/574d850))
+
+
+### BREAKING CHANGES
+
+* **browser:** This PR change of the internal directory structure of the exported code. The previous code has move from the `dist/` into the `dist/esm` directory (but remender that we do not avice you to do use internals code  🤓)
+
+* fix(bunble): do not bundle peer dependencies
+
+* qa(ci): Avoid duplicate runs of checks on CI
+
+* qa(dependencies): Upgrade to latest rollup versions
+
+* qa(test): Allow to run the smoke tests aggaint all builded versions
+
+
+
 <a name="13.2.0"></a>
 # [13.2.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.1.0...v13.2.0) (2018-03-14)
 
