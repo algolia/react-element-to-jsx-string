@@ -1,25 +1,27 @@
-import fs from 'fs';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
+import pkg from './package.json';
 
-const extractPackagePeerDependencies = () => {
-  const packageNpm = JSON.parse(
-    fs.readFileSync('./package.json', { encoding: 'utf8' })
-  );
-
-  return Object.keys(packageNpm.peerDependencies || {});
-};
+const extractPackagePeerDependencies = () =>
+  Object.keys(pkg.peerDependencies) || [];
 
 export default {
   input: 'src/index.js',
-  output: {
-    file: 'dist/cjs/index.js',
-    format: 'cjs',
-    sourcemap: true,
-  },
+  output: [
+    {
+      file: pkg.main,
+      format: 'cjs',
+      sourcemap: true,
+    },
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: true,
+    },
+  ],
   external: extractPackagePeerDependencies(),
   plugins: [
     babel({
