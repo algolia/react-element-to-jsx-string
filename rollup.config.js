@@ -40,8 +40,6 @@ export default {
         'react',
         'flow',
       ],
-      plugins: ['external-helpers'],
-      externalHelpers: true,
     }),
     resolve({
       module: true,
