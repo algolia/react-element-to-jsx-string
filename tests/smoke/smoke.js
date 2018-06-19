@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console, import/no-extraneous-dependencies, no-global-assign */
+
+require = require('esm')(module);
 
 const requireReactElementToJsxString = buildType => {
   if (buildType === 'esm') {
