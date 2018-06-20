@@ -1,3 +1,14 @@
+<a name="14.0.1"></a>
+## [14.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.0...v14.0.1) (2018-06-20)
+
+
+### Bug Fixes
+
+* **browser:** Add IE 11 support ([#288](https://github.com/algolia/react-element-to-jsx-string/issues/288)) ([6c071b6](https://github.com/algolia/react-element-to-jsx-string/commit/6c071b6)), closes [#211](https://github.com/algolia/react-element-to-jsx-string/issues/211) [#285](https://github.com/algolia/react-element-to-jsx-string/issues/285)
+* **build:** missing babel helpers, true esm modules, simplify ([#290](https://github.com/algolia/react-element-to-jsx-string/issues/290)) ([faa8f46](https://github.com/algolia/react-element-to-jsx-string/commit/faa8f46))
+
+
+
 <a name="14.0.0"></a>
 # [14.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v13.2.0...v14.0.0) (2018-05-25)
 
