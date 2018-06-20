@@ -31,10 +31,6 @@ const deleteExistingDependencies = () => () => {
 };
 
 const preparePackageJson = reactVersion => () => {
-  if (reactVersion === 'default') {
-    return;
-  }
-
   const packageJson = {
     name: 'smoke',
     version: '0.0.1',
