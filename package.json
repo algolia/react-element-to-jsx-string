@@ -54,7 +54,7 @@
     "eslint-plugin-jest": "21.17.0",
     "eslint-plugin-prettier": "2.6.1",
     "eslint-plugin-react": "7.9.1",
-    "esm": "3.0.52",
+    "esm": "3.0.53",
     "expect": "22.3.0",
     "flow-bin": "0.75.0",
     "flow-copy-source": "2.0.0",
