@@ -52,7 +52,7 @@
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jest": "21.17.0",
-    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-prettier": "2.6.1",
     "eslint-plugin-react": "7.9.1",
     "esm": "3.0.51",
     "expect": "22.3.0",
