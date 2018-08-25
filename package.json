@@ -51,7 +51,7 @@
     "eslint-config-algolia": "13.1.0",
     "eslint-config-prettier": "2.10.0",
     "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jest": "21.21.0",
+    "eslint-plugin-jest": "21.22.0",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.11.1",
     "esm": "3.0.77",
