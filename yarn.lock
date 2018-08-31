@@ -86,14 +86,14 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.0.0.tgz#3bf86d8ab2fbd5074c3114b7ba3f4b41b775f3dc"
+"@commitlint/cli@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.1.tgz#3d2d1f71cd2598fc85474ff1bc59a124cf1f4b97"
   dependencies:
-    "@commitlint/format" "^7.0.0"
-    "@commitlint/lint" "^7.0.0"
-    "@commitlint/load" "^7.0.0"
-    "@commitlint/read" "^7.0.0"
+    "@commitlint/format" "^7.1.1"
+    "@commitlint/lint" "^7.1.1"
+    "@commitlint/load" "^7.1.1"
+    "@commitlint/read" "^7.1.1"
     babel-polyfill "6.26.0"
     chalk "2.3.1"
     get-stdin "5.0.1"
@@ -101,19 +101,19 @@
     lodash.pick "4.4.0"
     meow "^5.0.0"
 
-"@commitlint/config-angular-type-enum@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-angular-type-enum/-/config-angular-type-enum-7.0.0.tgz#69702ba80a56a3d8bab3cc32898e496045d13323"
+"@commitlint/config-angular-type-enum@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-angular-type-enum/-/config-angular-type-enum-7.1.1.tgz#971be030aac7bb9566c205e68e8c6f5275493d76"
 
-"@commitlint/config-angular@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-angular/-/config-angular-7.0.1.tgz#559db668855076fe7e845a71ed490eacb7314903"
+"@commitlint/config-angular@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-angular/-/config-angular-7.1.1.tgz#21633f92049bb3c7756fd342d5d97f13f7e4c217"
   dependencies:
-    "@commitlint/config-angular-type-enum" "^7.0.0"
+    "@commitlint/config-angular-type-enum" "^7.1.1"
 
-"@commitlint/ensure@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.0.0.tgz#3d5210bb988416844926895a782a55815731779d"
+"@commitlint/ensure@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.1.1.tgz#cc202010173b1fbbfbd6a367a6f9f6469ba7502b"
   dependencies:
     lodash.camelcase "4.3.0"
     lodash.kebabcase "4.1.1"
@@ -121,41 +121,41 @@
     lodash.startcase "4.4.0"
     lodash.upperfirst "4.3.1"
 
-"@commitlint/execute-rule@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/execute-rule/-/execute-rule-7.0.0.tgz#cbc65314fa9ebb9cd2c5b8cdd4dca6185b3aca4c"
+"@commitlint/execute-rule@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/execute-rule/-/execute-rule-7.1.1.tgz#c1c792a6b43dde3529ac15d9aba35cc42cc3f882"
   dependencies:
     babel-runtime "6.26.0"
 
-"@commitlint/format@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.0.0.tgz#3be1fdf0c3c41feb98e275b4f605c598c509b920"
+"@commitlint/format@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.1.1.tgz#2be40514005284f264995802de16180b3535b6dc"
   dependencies:
     babel-runtime "^6.23.0"
     chalk "^2.0.1"
 
-"@commitlint/is-ignored@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.0.0.tgz#d328a2976274c9f106e319b1cac75dd848360fc9"
+"@commitlint/is-ignored@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.1.1.tgz#6753ff45fe67c4e636af31a7ed2e04598674c537"
   dependencies:
     semver "5.5.0"
 
-"@commitlint/lint@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.0.0.tgz#aede9e15f551b822af7d9da55df4881ad38390d9"
+"@commitlint/lint@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.1.1.tgz#84b3237a15b3a4cf5bc11a29f645f53c4b91de52"
   dependencies:
-    "@commitlint/is-ignored" "^7.0.0"
-    "@commitlint/parse" "^7.0.0"
-    "@commitlint/rules" "^7.0.0"
+    "@commitlint/is-ignored" "^7.1.1"
+    "@commitlint/parse" "^7.1.1"
+    "@commitlint/rules" "^7.1.1"
     babel-runtime "^6.23.0"
     lodash.topairs "4.3.0"
 
-"@commitlint/load@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.0.0.tgz#d924f4c5c06d8845b16a50b563829a7fffa230a8"
+"@commitlint/load@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.1.1.tgz#c84a888ed1e3ad9a9d16329607274081437a4295"
   dependencies:
-    "@commitlint/execute-rule" "^7.0.0"
-    "@commitlint/resolve-extends" "^7.0.0"
+    "@commitlint/execute-rule" "^7.1.1"
+    "@commitlint/resolve-extends" "^7.1.1"
     babel-runtime "^6.23.0"
     cosmiconfig "^4.0.0"
     lodash.merge "4.6.1"
@@ -164,29 +164,29 @@
     lodash.topairs "4.3.0"
     resolve-from "4.0.0"
 
-"@commitlint/message@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/message/-/message-7.0.0.tgz#6fb22563e31901ff5da4391db1346fda7115fa53"
+"@commitlint/message@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/message/-/message-7.1.1.tgz#5e7f0692fb847e5e1acaf690b322919828acb812"
 
-"@commitlint/parse@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/parse/-/parse-7.0.0.tgz#ed024cc4d8f0874421a8dd6d16674233b68592d4"
+"@commitlint/parse@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/parse/-/parse-7.1.1.tgz#51e00246f1a885fce5ff1d39bd4f1c1d1c53d0f0"
   dependencies:
     conventional-changelog-angular "^1.3.3"
     conventional-commits-parser "^2.1.0"
 
-"@commitlint/read@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/read/-/read-7.0.0.tgz#c9bf222e37e04c33c1e25b498657fef68377e2c8"
+"@commitlint/read@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/read/-/read-7.1.1.tgz#c2fca5c1ea6de7fbc431566536f32f2fb502e4ca"
   dependencies:
-    "@commitlint/top-level" "^7.0.0"
+    "@commitlint/top-level" "^7.1.1"
     "@marionebl/sander" "^0.6.0"
     babel-runtime "^6.23.0"
     git-raw-commits "^1.3.0"
 
-"@commitlint/resolve-extends@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/resolve-extends/-/resolve-extends-7.0.0.tgz#34937525ea3bc037365c530bce9b1c73ef4eb74d"
+"@commitlint/resolve-extends@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/resolve-extends/-/resolve-extends-7.1.1.tgz#80043d1031ba8eb836aa74d673ab43ab041cc179"
   dependencies:
     babel-runtime "6.26.0"
     lodash.merge "4.6.1"
@@ -195,22 +195,22 @@
     resolve-from "^4.0.0"
     resolve-global "^0.1.0"
 
-"@commitlint/rules@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.0.0.tgz#9a710891c350c10d6f62debb820fee4fdef1e026"
+"@commitlint/rules@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.1.1.tgz#0881297b960eb91c92be06406fd13f88afc283ab"
   dependencies:
-    "@commitlint/ensure" "^7.0.0"
-    "@commitlint/message" "^7.0.0"
-    "@commitlint/to-lines" "^7.0.0"
+    "@commitlint/ensure" "^7.1.1"
+    "@commitlint/message" "^7.1.1"
+    "@commitlint/to-lines" "^7.1.1"
     babel-runtime "^6.23.0"
 
-"@commitlint/to-lines@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/to-lines/-/to-lines-7.0.0.tgz#adb229368e2b6c7a657c909754fb40ec47363ce2"
+"@commitlint/to-lines@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/to-lines/-/to-lines-7.1.1.tgz#2633e4bbe0c2ff92b90e848f74ae9aa3c7b95714"
 
-"@commitlint/top-level@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/top-level/-/top-level-7.0.0.tgz#ff28580ab8c1431290e37b1d507e0ef370c38d99"
+"@commitlint/top-level@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/top-level/-/top-level-7.1.1.tgz#cee257085362f2f3be01c6bb5a34f90b584eca2c"
   dependencies:
     find-up "^2.1.0"
 
