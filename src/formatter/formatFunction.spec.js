@@ -7,7 +7,7 @@ jest.mock('./formatReactElementNode.js', () => node =>
 );
 
 describe('formatFunction', () => {
-  it('should replace a function with noRefCheck', () => {
+  it('should replace a function with noRefCheck without showFunctions option', () => {
     expect(
       formatFunction(function hello() {
         return 1;
@@ -15,7 +15,18 @@ describe('formatFunction', () => {
     ).toEqual('function noRefCheck() {}');
   });
 
-  it('should format a function', () => {
+  it('should replace a function with noRefCheck if showFunctions is false', () => {
+    expect(
+      formatFunction(
+        function hello() {
+          return 1;
+        },
+        { showFunctions: false }
+      )
+    ).toEqual('function noRefCheck() {}');
+  });
+
+  it('should format a function if showFunctions is true', () => {
     expect(
       formatFunction(
         function hello() {
@@ -26,7 +37,7 @@ describe('formatFunction', () => {
     ).toEqual('function hello() {return 1;}');
   });
 
-  it('should format a function without name', () => {
+  it('should format a function without name if showFunctions is true', () => {
     expect(
       formatFunction(
         function() {
@@ -44,6 +55,28 @@ describe('formatFunction', () => {
           return 1;
         },
         { functionValue: () => '<Test />' }
+      )
+    ).toEqual('<Test />');
+  });
+
+  it('should use the functionValue option even if showFunctions is true', () => {
+    expect(
+      formatFunction(
+        function hello() {
+          return 1;
+        },
+        { showFunctions: true, functionValue: () => '<Test />' }
+      )
+    ).toEqual('<Test />');
+  });
+
+  it('should use the functionValue option even if showFunctions is false', () => {
+    expect(
+      formatFunction(
+        function hello() {
+          return 1;
+        },
+        { showFunctions: false, functionValue: () => '<Test />' }
       )
     ).toEqual('<Test />');
   });
