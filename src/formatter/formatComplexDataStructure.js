@@ -5,10 +5,9 @@ import stringify from 'stringify-object';
 import sortObject from './sortObject';
 import parseReactElement from './../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
+import formatFunction from './formatFunction';
 import spacer from './spacer';
 import type { Options } from './../options';
-
-function noRefCheck() {}
 
 export default (
   value: Object | Array<any>,
@@ -32,7 +31,7 @@ export default (
       }
 
       if (typeof currentValue === 'function') {
-        return noRefCheck;
+        return formatFunction(currentValue, options);
       }
 
       return originalResult;

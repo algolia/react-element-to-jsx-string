@@ -102,4 +102,46 @@ describe('formatComplexDataStructure', () => {
       `{a: /test/g}`
     );
   });
+
+  it('should replace a function with noRefCheck', () => {
+    const fixture = {
+      a: function hello() {
+        return 1;
+      },
+    };
+
+    expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
+      '{a: function noRefCheck() {}}'
+    );
+  });
+
+  it('should format a function', () => {
+    const fixture = {
+      a: function hello() {
+        return 1;
+      },
+    };
+
+    expect(
+      formatComplexDataStructure(fixture, true, 0, {
+        ...options,
+        showFunctions: true,
+      })
+    ).toEqual('{a: function hello() {return 1;}}');
+  });
+
+  it('should use the functionValue option', () => {
+    const fixture = {
+      a: function hello() {
+        return 1;
+      },
+    };
+
+    expect(
+      formatComplexDataStructure(fixture, true, 0, {
+        ...options,
+        functionValue: () => '<Test />',
+      })
+    ).toEqual('{a: <Test />}');
+  });
 });

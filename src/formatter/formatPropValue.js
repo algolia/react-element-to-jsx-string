@@ -3,14 +3,12 @@
 import isPlainObject from 'is-plain-object';
 import { isValidElement } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
+import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
 import type { Options } from './../options';
 import parseReactElement from './../parser/parseReactElement';
 
-const noRefCheck = () => {};
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
-
-const defaultFunctionValue = (fn: any): any => fn;
 
 const formatPropValue = (
   propValue: any,
@@ -43,12 +41,7 @@ const formatPropValue = (
   }
 
   if (typeof propValue === 'function') {
-    const { functionValue = defaultFunctionValue, showFunctions } = options;
-    if (!showFunctions && functionValue === defaultFunctionValue) {
-      return `{${functionValue(noRefCheck)}}`;
-    }
-
-    return `{${functionValue(propValue)}}`;
+    return `{${formatFunction(propValue, options)}}`;
   }
 
   if (isValidElement(propValue)) {
