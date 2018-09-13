@@ -20,6 +20,9 @@ export default function sortObject(value: any): any {
   return Object.keys(value)
     .sort()
     .reduce((result, key) => {
+      if (key === '_owner') {
+        return result;
+      }
       // eslint-disable-next-line no-param-reassign
       result[key] = sortObject(value[key]);
       return result;
