@@ -67,7 +67,7 @@
     "react": "16.5.1",
     "react-dom": "16.5.1",
     "react-test-renderer": "16.5.1",
-    "rollup": "0.66.0",
+    "rollup": "0.66.2",
     "rollup-plugin-babel": "3.0.7",
     "rollup-plugin-commonjs": "9.1.6",
     "rollup-plugin-node-builtins": "2.1.2",
