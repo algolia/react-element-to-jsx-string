@@ -30,15 +30,9 @@ export default {
       // and minification in older versions of Uglify.
       exclude: 'node_modules/!(stringify-object)/**',
       presets: [
-        [
-          'es2015',
-          {
-            modules: false,
-          },
-        ],
-        'stage-2',
-        'react',
-        'flow',
+        '@babel/preset-env',
+        '@babel/preset-react',
+        '@babel/preset-flow',
       ],
     }),
     resolve({
