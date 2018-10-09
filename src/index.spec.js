@@ -2,8 +2,9 @@
 
 /* eslint-disable react/no-string-refs */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
+import { mount } from 'enzyme';
 import reactElementToJSXString from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
 
@@ -1086,5 +1087,30 @@ describe('reactElementToJSXString(ReactElement)', () => {
         />
       )
     ).toEqual(`<div render={<><div /><div /></>} />`);
+  });
+
+  it('should not cause recursive loop when prop object contains an element', () => {
+    const Test = () => <div>Test</div>;
+
+    const Container = ({ title: { component } }) => <div>{component}</div>;
+
+    class App extends Component {
+      render() {
+        const inside = <Container title={{ component: <Test /> }} />;
+
+        const insideString = reactElementToJSXString(inside);
+
+        return (
+          <div>
+            {insideString}
+
+            <div id="hello" />
+
+            <p>Start editing to see some magic happen :)</p>
+          </div>
+        );
+      }
+    }
+    expect(mount(<App />).find('#hello')).toHaveLength(1);
   });
 });
