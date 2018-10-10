@@ -1,3 +1,14 @@
+<a name="14.0.2"></a>
+## [14.0.2](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.1...v14.0.2) (2018-10-10)
+
+
+### Bug Fixes
+
+* **formatting:** Fix JSX element in prop object recursive loop ([#309](https://github.com/algolia/react-element-to-jsx-string/issues/309)) ([fd4f53b](https://github.com/algolia/react-element-to-jsx-string/commit/fd4f53b))
+* **functionValue:** handle nested datastructures ([94d1aeb](https://github.com/algolia/react-element-to-jsx-string/commit/94d1aeb))
+
+
+
 <a name="14.0.1"></a>
 ## [14.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.0...v14.0.1) (2018-06-20)
 
