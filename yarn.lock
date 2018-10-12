@@ -88,13 +88,13 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.2.0.tgz#04fb5ba1d28bba100a7f71d51d35aa9a8fd5faba"
+"@commitlint/cli@7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.2.1.tgz#dbb9eeb1f5015a129bb0801fbc1115eb1dcd513b"
   dependencies:
-    "@commitlint/format" "^7.2.0"
-    "@commitlint/lint" "^7.2.0"
-    "@commitlint/load" "^7.2.0"
+    "@commitlint/format" "^7.2.1"
+    "@commitlint/lint" "^7.2.1"
+    "@commitlint/load" "^7.2.1"
     "@commitlint/read" "^7.1.2"
     babel-polyfill "6.26.0"
     chalk "2.3.1"
@@ -102,6 +102,8 @@
     lodash.merge "4.6.1"
     lodash.pick "4.4.0"
     meow "5.0.0"
+    resolve-from "^4.0.0"
+    resolve-global "^0.1.0"
 
 "@commitlint/config-angular-type-enum@^7.1.2":
   version "7.1.2"
@@ -129,32 +131,32 @@
   dependencies:
     babel-runtime "6.26.0"
 
-"@commitlint/format@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.2.0.tgz#7eeec3543ed2754a2fc4c21c46da540b7232ec2e"
+"@commitlint/format@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.2.1.tgz#7d8b25002792d6481f0f8f9614736e43106749c1"
   dependencies:
     babel-runtime "^6.23.0"
     chalk "^2.0.1"
 
-"@commitlint/is-ignored@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.2.0.tgz#483beee993997f3cefc2120e1e2f029e113bee48"
+"@commitlint/is-ignored@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.2.1.tgz#624b3703ca88a4b6573176439b1126b7eb3708d4"
   dependencies:
-    semver "5.5.0"
+    semver "5.6.0"
 
-"@commitlint/lint@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.2.0.tgz#2ef51c32b6cea4aba0d6d88768375ca641882f38"
+"@commitlint/lint@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.2.1.tgz#4511a9acada6870042ca3244417b401ad1043d46"
   dependencies:
-    "@commitlint/is-ignored" "^7.2.0"
+    "@commitlint/is-ignored" "^7.2.1"
     "@commitlint/parse" "^7.1.2"
     "@commitlint/rules" "^7.2.0"
     babel-runtime "^6.23.0"
     lodash.topairs "4.3.0"
 
-"@commitlint/load@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.2.0.tgz#b8428ac8cbcd4984666a238f8a7bd25195bab017"
+"@commitlint/load@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.2.1.tgz#f1a49cb2ecf53e235e4f3523f75a553f5b481f5c"
   dependencies:
     "@commitlint/execute-rule" "^7.1.2"
     "@commitlint/resolve-extends" "^7.1.2"
@@ -6546,7 +6548,11 @@ semver-diff@^2.0.0:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
-semver@5.5.0, semver@^5.1.0, semver@^5.4.1, semver@^5.5.0:
+semver@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
+
+semver@^5.1.0, semver@^5.4.1, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
