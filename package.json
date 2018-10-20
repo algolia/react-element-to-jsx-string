@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "is-plain-object": "2.0.4",
-    "stringify-object": "3.2.2"
+    "stringify-object": "3.3.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>tests/setupTests.js"
