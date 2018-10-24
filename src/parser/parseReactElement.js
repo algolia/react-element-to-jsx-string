@@ -41,7 +41,6 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
 const parseReactElement = (
   element: ReactElement<*> | string | number,
   options: Options
-  // preserveVariables: boolean = false
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 

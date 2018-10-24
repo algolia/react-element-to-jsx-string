@@ -18,7 +18,6 @@ export type NumberTreeNode = {|
 
 export type ReactFunctionTreeNode = {|
   type: 'ReactFunction',
-  baseFunction: Function,
   childrens: TreeNode[],
 |};
 
