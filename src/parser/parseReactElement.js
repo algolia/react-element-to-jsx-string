@@ -6,6 +6,7 @@ import {
   createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
+  createReactFunctionTreeNode,
   createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
@@ -40,6 +41,7 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
 const parseReactElement = (
   element: ReactElement<*> | string | number,
   options: Options
+  // preserveVariables: boolean = false
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 
@@ -67,9 +69,19 @@ const parseReactElement = (
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
+
   const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
+
+  if (typeof element.props.children === 'function') {
+    const functionChildrens = parseReactElement(
+      element.props.children(),
+      options,
+      true
+    );
+    childrens.push(createReactFunctionTreeNode(functionChildrens));
+  }
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, childrens);

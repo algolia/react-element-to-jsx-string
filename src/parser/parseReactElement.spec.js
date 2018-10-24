@@ -21,6 +21,29 @@ describe('parseReactElement', () => {
     });
   });
 
+  it('should parse a react element with a function as children', () => {
+    expect(
+      parseReactElement(<h1>{() => <div>hello world</div>}</h1>, options)
+    ).toEqual({
+      childrens: [
+        {
+          childrens: {
+            childrens: [{ type: 'string', value: 'hello world' }],
+            defaultProps: {},
+            displayName: 'div',
+            props: {},
+            type: 'ReactElement',
+          },
+          type: 'ReactFunction',
+        },
+      ],
+      defaultProps: {},
+      displayName: 'h1',
+      props: {},
+      type: 'ReactElement',
+    });
+  });
+
   it('should filter empty childrens', () => {
     expect(
       parseReactElement(
