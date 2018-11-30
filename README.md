@@ -70,9 +70,13 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   Just return the name you want for the provided ReactElement, as a string.
 
-**options.filterProps: array, default []**
+**options.filterProps: array | (val: any, key: string) => boolean, default []**
 
-  Provide an array of props to filter for every component. For example ['key'] will suppress the key="" prop from being added.
+  If an array of strings is passed, filter out any prop who's name is in
+  the array. For example ['key'] will suppress the key="" prop from being added.
+
+  If a function is passed, it will be called with the prop value and
+  key, and will filter out any that return false.
 
 **options.showDefaultProps: boolean, default true**
 
