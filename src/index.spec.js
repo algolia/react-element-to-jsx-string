@@ -794,6 +794,17 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<TestComponent a="b" />');
   });
 
+  it("reactElementToJSXString(<TestComponent />, { filterProps: () => !key.startsWith('some')) })", () => {
+    expect(
+      reactElementToJSXString(
+        <TestComponent a="b" someProp="foo" someOtherProp={false} />,
+        {
+          filterProps: (val, key) => !key.startsWith('some'),
+        }
+      )
+    ).toEqual('<TestComponent a="b" />');
+  });
+
   it('reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: false })', () => {
     expect(
       reactElementToJSXString(

@@ -125,4 +125,30 @@ describe('formatReactElementNode', () => {
     </div>`
     );
   });
+
+  it('should allow filtering props by function', () => {
+    const tree = {
+      type: 'ReactElement',
+      displayName: 'h1',
+      defaultProps: {},
+      props: { className: 'myClass', onClick: () => {} },
+      childrens: [
+        {
+          value: 'Hello world',
+          type: 'string',
+        },
+      ],
+    };
+
+    const options = {
+      ...defaultOptions,
+      filterProps: (val, key) => !key.startsWith('on'),
+    };
+
+    expect(formatReactElementNode(tree, false, 0, options)).toEqual(
+      `<h1 className="myClass">
+  Hello world
+</h1>`
+    );
+  });
 });
