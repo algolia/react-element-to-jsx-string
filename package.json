@@ -86,6 +86,7 @@
     "stringify-object": "3.3.0"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>tests/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>tests/setupTests.js",
+    "testURL": "http://localhost"
   }
 }
