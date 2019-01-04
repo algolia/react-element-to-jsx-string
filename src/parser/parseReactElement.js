@@ -75,10 +75,9 @@ const parseReactElement = (
   if (typeof element.props.children === 'function') {
     const functionChildrens = parseReactElement(
       element.props.children(),
-      options,
-      true
+      options
     );
-    childrens.push(createReactFunctionTreeNode(functionChildrens));
+    childrens.push(createReactFunctionTreeNode([functionChildrens]));
   }
 
   if (supportFragment && element.type === Fragment) {

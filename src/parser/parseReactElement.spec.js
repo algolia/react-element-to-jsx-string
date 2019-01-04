@@ -27,13 +27,15 @@ describe('parseReactElement', () => {
     ).toEqual({
       childrens: [
         {
-          childrens: {
-            childrens: [{ type: 'string', value: 'hello world' }],
-            defaultProps: {},
-            displayName: 'div',
-            props: {},
-            type: 'ReactElement',
-          },
+          childrens: [
+            {
+              childrens: [{ type: 'string', value: 'hello world' }],
+              defaultProps: {},
+              displayName: 'div',
+              props: {},
+              type: 'ReactElement',
+            },
+          ],
           type: 'ReactFunction',
         },
       ],

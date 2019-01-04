@@ -39,7 +39,8 @@ export type TreeNode =
   | StringTreeNode
   | NumberTreeNode
   | ReactElementTreeNode
-  | ReactFragmentTreeNode;
+  | ReactFragmentTreeNode
+  | ReactFunctionTreeNode;
 
 export const createStringTreeNode = (value: string): StringTreeNode => ({
   type: 'string',

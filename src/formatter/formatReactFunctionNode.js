@@ -22,7 +22,11 @@ export default (
     );
   }
 
-  const functionRender = formatTreeNode(childrens, false, lvl + 1, options);
+  const functionRender = Array.isArray(childrens)
+    ? childrens
+        .map(children => formatTreeNode(children, false, lvl + 1, options))
+        .join('\n')
+    : formatTreeNode(childrens, false, lvl + 1, options);
 
   const out = `{() => (
 ${spacer(lvl + 1, tabStop)}${functionRender}
