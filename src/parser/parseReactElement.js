@@ -6,6 +6,7 @@ import {
   createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
+  createReactFunctionTreeNode,
   createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
@@ -70,6 +71,15 @@ const parseReactElement = (
   const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map(child => parseReactElement(child, options));
+
+  if (typeof element.props.children === 'function') {
+    const functionChildrens = parseReactElement(
+      element.props.children(),
+      options,
+      true
+    );
+    childrens.push(createReactFunctionTreeNode(functionChildrens));
+  }
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, childrens);
