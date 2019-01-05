@@ -8,7 +8,7 @@ const requireReactElementToJsxString = buildType => {
   if (buildType === 'esm') {
     return require(`./../../dist/esm`).default;
   } else if (buildType === 'cjs') {
-    return require('./../../dist/cjs');
+    return require('./../../dist/cjs').default;
   }
 
   throw new Error(`Unknown build type: "${buildType}"`);
