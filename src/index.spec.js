@@ -5,7 +5,7 @@
 import React, { Fragment, Component } from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import { mount } from 'enzyme';
-import reactElementToJSXString from './index';
+import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
 
 class TestComponent extends React.Component {}
@@ -889,13 +889,25 @@ describe('reactElementToJSXString(ReactElement)', () => {
       reactElementToJSXString(<div fn={fn} />, {
         showFunctions: true,
       })
-    ).toEqual(
-      `<div
+    ).toEqual(`<div fn={function fn() {return 'value';}} />`);
+  });
+
+  it('should expose the multiline "functionValue" formatter', () => {
+    /* eslint-disable arrow-body-style */
+    const fn = () => {
+      return 'value';
+    };
+
+    expect(
+      reactElementToJSXString(<div fn={fn} />, {
+        showFunctions: true,
+        functionValue: preserveFunctionLineBreak,
+      })
+    ).toEqual(`<div
   fn={function fn() {
       return 'value';
     }}
- />`
-    );
+ />`);
   });
 
   it('reactElementToJSXString(<DisplayNamePrecedence />)', () => {
