@@ -106,9 +106,7 @@ export default (
 
   if (type !== 'ReactElement') {
     throw new Error(
-      `The "formatReactElementNode" function could only format node of type "ReactElement". Given:  ${
-        type
-      }`
+      `The "formatReactElementNode" function could only format node of type "ReactElement". Given:  ${type}`
     );
   }
 
