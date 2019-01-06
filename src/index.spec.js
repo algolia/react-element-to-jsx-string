@@ -547,7 +547,8 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(
       reactElementToJSXString(
         <div>
-          foo<div />
+          foo
+          <div />
         </div>
       )
     ).toEqual(

@@ -1,13 +1,17 @@
 /* @flow */
 
+const isKeyOrRefProps = (propName: string) => ['key', 'ref'].includes(propName);
+
 export default (sortProps: boolean) => (a: string, b: string): -1 | 0 | 1 => {
   if (a === b) {
     return 0;
   }
 
-  if (['key', 'ref'].includes(a)) {
+  if (isKeyOrRefProps(a) && isKeyOrRefProps(b)) {
+    return 1;
+  } else if (isKeyOrRefProps(a)) {
     return -1;
-  } else if (['key', 'ref'].includes(b)) {
+  } else if (isKeyOrRefProps(b)) {
     return 1;
   }
 

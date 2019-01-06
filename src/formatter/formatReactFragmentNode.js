@@ -45,9 +45,7 @@ export default (
 
   if (type !== 'ReactFragment') {
     throw new Error(
-      `The "formatReactFragmentNode" function could only format node of type "ReactFragment". Given: ${
-        type
-      }`
+      `The "formatReactFragmentNode" function could only format node of type "ReactFragment". Given: ${type}`
     );
   }
 
