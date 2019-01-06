@@ -16,9 +16,7 @@ export default (
 
   if (type !== 'ReactFunction') {
     throw new Error(
-      `The "formatReactFunctionNode" function could only format node of type "ReactFunction". Given:  ${
-        type
-      }`
+      `The "formatReactFunctionNode" function could only format node of type "ReactFunction". Given:  ${type}`
     );
   }
 
