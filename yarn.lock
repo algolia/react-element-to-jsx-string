@@ -2660,9 +2660,9 @@ eslint-plugin-prettier@3.0.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-react@7.12.3:
-  version "7.12.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.12.3.tgz#b9ca4cd7cd3f5d927db418a1950366a12d4568fd"
+eslint-plugin-react@7.12.4:
+  version "7.12.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.12.4.tgz#b1ecf26479d61aee650da612e425c53a99f48c8c"
   dependencies:
     array-includes "^3.0.3"
     doctrine "^2.1.0"
