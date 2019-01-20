@@ -22,10 +22,9 @@ describe('formatFunction', () => {
   });
 
   it('should format a function if showFunctions is true', () => {
-    expect(formatFunction(hello, { showFunctions: true }))
-      .toEqual(`function hello() {
-  return 1;
-}`);
+    expect(formatFunction(hello, { showFunctions: true })).toEqual(
+      'function hello() {return 1;}'
+    );
   });
 
   it('should format a function without name if showFunctions is true', () => {

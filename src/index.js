@@ -41,3 +41,8 @@ const reactElementToJsxString = (
 };
 
 export default reactElementToJsxString;
+
+export {
+  inlineFunction,
+  preserveFunctionLineBreak,
+} from './formatter/formatFunction';
