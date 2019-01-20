@@ -15,7 +15,7 @@
     "lint:fix": "npm run lint -- --fix",
     "flow": "flow",
     "precommit": "lint-staged",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
