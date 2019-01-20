@@ -5,6 +5,12 @@ module.exports = {
     es6: true,
   },
 
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+
   rules: {
     'max-params': ['error', 10],
     'no-warning-comments': 'error',
