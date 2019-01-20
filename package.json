@@ -16,17 +16,14 @@
     "flow": "flow",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
-    "prettier:fix": "prettier --write --single-quote --trailing-comma es5 \"{src/**/*.js,package.json}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "release": "./release.sh",
     "smoke": "node tests/smoke/run"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write \"**/*.{js,json}\"",
-      "git add"
-    ]
+    "*.js": ["prettier --write \"**/*.{js,json}\"", "git add"]
   },
   "author": {
     "name": "Algolia, Inc.",
