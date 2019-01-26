@@ -28,15 +28,9 @@ export default {
       babelrc: false,
       exclude: 'node_modules/**',
       presets: [
-        [
-          'es2015',
-          {
-            modules: false,
-          },
-        ],
-        'stage-2',
-        'react',
-        'flow',
+        '@babel/preset-env',
+        '@babel/preset-react',
+        '@babel/preset-flow',
       ],
     }),
     resolve({
