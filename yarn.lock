@@ -88,12 +88,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.3.2.tgz#61abf30b48861e4fbd521690e6d4a3e1258980bb"
+"@commitlint/cli@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.4.0.tgz#18dd304d2e4c87edd5e575f3ae671da6c64b5d7d"
   dependencies:
-    "@commitlint/format" "^7.3.1"
-    "@commitlint/lint" "^7.3.2"
+    "@commitlint/format" "^7.4.0"
+    "@commitlint/lint" "^7.4.0"
     "@commitlint/load" "^7.3.1"
     "@commitlint/read" "^7.3.1"
     babel-polyfill "6.26.0"
@@ -126,9 +126,9 @@
   dependencies:
     babel-runtime "6.26.0"
 
-"@commitlint/format@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.3.1.tgz#a099eabe3bb6f3825831da465daab269ca76c0d5"
+"@commitlint/format@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.4.0.tgz#fc927fd99835f73d17076e065296159a41592ee0"
   dependencies:
     babel-runtime "^6.23.0"
     chalk "^2.0.1"
@@ -139,13 +139,13 @@
   dependencies:
     semver "5.6.0"
 
-"@commitlint/lint@^7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.3.2.tgz#e5323ce5b65512e37089ca9e5dfd065849edbf80"
+"@commitlint/lint@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.4.0.tgz#69a690c37c3fb7f3b55bd7bad24cf018a0b9a19b"
   dependencies:
     "@commitlint/is-ignored" "^7.3.1"
     "@commitlint/parse" "^7.3.1"
-    "@commitlint/rules" "^7.3.1"
+    "@commitlint/rules" "^7.4.0"
     babel-runtime "^6.23.0"
     lodash "4.17.11"
 
@@ -191,9 +191,9 @@
     resolve-from "^4.0.0"
     resolve-global "^0.1.0"
 
-"@commitlint/rules@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.3.1.tgz#7aed328af4887bcf7e06e8a7605aeac17ae1f12a"
+"@commitlint/rules@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.4.0.tgz#282329528faca3a9c1bb608b01a42e02520ec3fd"
   dependencies:
     "@commitlint/ensure" "^7.3.1"
     "@commitlint/message" "^7.3.1"
