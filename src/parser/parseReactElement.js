@@ -14,7 +14,7 @@ const supportFragment = Boolean(Fragment);
 
 const getReactElementDisplayName = (element: ReactElement<*>): string =>
   element.type.displayName ||
-  element.type.name || // function name
+  (element.type.name !== '_default' ? element.type.name : null) || // function name
   (typeof element.type === 'function' // function without a name, you should provide one
     ? 'No Display Name'
     : element.type);
