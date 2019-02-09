@@ -32,7 +32,7 @@
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
   "devDependencies": {
-    "@commitlint/cli": "7.5.0",
+    "@commitlint/cli": "7.5.1",
     "@commitlint/config-angular": "7.5.0",
     "babel-cli": "6.26.0",
     "babel-eslint": "10.0.1",
