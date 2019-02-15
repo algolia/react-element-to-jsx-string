@@ -94,12 +94,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@commitlint/cli@7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.5.1.tgz#370e465df67325c964c6255f865e914b47405ede"
+"@commitlint/cli@7.5.2":
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.5.2.tgz#2475cd8f7ed3b2f9c2ab96c06bc24d61d23f8716"
   dependencies:
     "@commitlint/format" "^7.5.0"
-    "@commitlint/lint" "^7.5.1"
+    "@commitlint/lint" "^7.5.2"
     "@commitlint/load" "^7.5.0"
     "@commitlint/read" "^7.5.0"
     babel-polyfill "6.26.0"
@@ -120,9 +120,9 @@
   dependencies:
     "@commitlint/config-angular-type-enum" "^7.5.0"
 
-"@commitlint/ensure@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.5.0.tgz#57e885365ef4d6104be8005df9f8419f83d39f23"
+"@commitlint/ensure@^7.5.2":
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.5.2.tgz#57bb7dcbf1e9913e27c3b294325d0d68dd14cebf"
   dependencies:
     lodash "4.17.11"
 
@@ -145,13 +145,13 @@
   dependencies:
     semver "5.6.0"
 
-"@commitlint/lint@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.5.1.tgz#e0ff67c759a5633609a3f50318a382005be22fff"
+"@commitlint/lint@^7.5.2":
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.5.2.tgz#26cb819c74f8770413c4f6ef1e7abf1b739eda77"
   dependencies:
     "@commitlint/is-ignored" "^7.5.1"
     "@commitlint/parse" "^7.5.0"
-    "@commitlint/rules" "^7.5.0"
+    "@commitlint/rules" "^7.5.2"
     babel-runtime "^6.23.0"
     lodash "4.17.11"
 
@@ -197,11 +197,11 @@
     resolve-from "^4.0.0"
     resolve-global "^0.1.0"
 
-"@commitlint/rules@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.5.0.tgz#5aebc6caeb07b27a2bca2ff12c6ae93f42c01ee4"
+"@commitlint/rules@^7.5.2":
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.5.2.tgz#da03d754625b2e67c0a6b8b9ab89eae1952a4f2e"
   dependencies:
-    "@commitlint/ensure" "^7.5.0"
+    "@commitlint/ensure" "^7.5.2"
     "@commitlint/message" "^7.5.0"
     "@commitlint/to-lines" "^7.5.0"
     babel-runtime "^6.23.0"
