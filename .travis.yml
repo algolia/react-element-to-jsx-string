@@ -3,7 +3,8 @@ sudo: false
 
 language: node_js
 
-node_js: node # lastest
+node_js:
+  - "10.15.3"
 
 cache: yarn
 
