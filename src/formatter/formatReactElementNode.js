@@ -4,7 +4,7 @@ import spacer from './spacer';
 import formatTreeNode from './formatTreeNode';
 import formatProp from './formatProp';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
-import propNameSorter from './propNameSorter';
+import sortPropsByNames from './sortPropsByNames';
 import type { Options } from './../options';
 import type { ReactElementTreeNode } from './../tree';
 
@@ -137,7 +137,7 @@ export default (
     .filter(defaultPropName => !visibleAttributeNames.includes(defaultPropName))
     .forEach(defaultPropName => visibleAttributeNames.push(defaultPropName));
 
-  const attributes = visibleAttributeNames.sort(propNameSorter(sortProps));
+  const attributes = sortPropsByNames(sortProps)(visibleAttributeNames);
 
   attributes.forEach(attributeName => {
     const {
