@@ -79,7 +79,7 @@
     "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0"
   },
   "dependencies": {
-    "is-plain-object": "2.0.4",
+    "is-plain-object": "3.0.0",
     "stringify-object": "3.3.0"
   },
   "jest": {
