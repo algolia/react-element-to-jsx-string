@@ -3081,9 +3081,9 @@ flow-bin@0.98.1:
   version "0.98.1"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.98.1.tgz#a8d781621c91703df69928acc83c9777e2fcbb49"
 
-flow-copy-source@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/flow-copy-source/-/flow-copy-source-2.0.4.tgz#e4a566334c672c862aa5ae55fc9c0afe2969788a"
+flow-copy-source@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/flow-copy-source/-/flow-copy-source-2.0.6.tgz#9049401cfb14f8080adfc753791c98117f49a0d1"
   dependencies:
     chokidar "^3.0.0"
     fs-extra "^7.0.0"
