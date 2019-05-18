@@ -57,7 +57,7 @@
     "expect": "23.6.0",
     "flow-bin": "0.98.1",
     "flow-copy-source": "2.0.6",
-    "husky": "2.2.0",
+    "husky": "2.3.0",
     "jest": "23.6.0",
     "json": "9.0.6",
     "lint-staged": "8.1.6",
