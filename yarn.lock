@@ -2599,9 +2599,9 @@ escodegen@^1.9.0:
   optionalDependencies:
     source-map "~0.5.6"
 
-eslint-config-algolia@13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-algolia/-/eslint-config-algolia-13.3.0.tgz#7f24c71600e6a8dfe202aafec5cd779207ffd8c5"
+eslint-config-algolia@13.4.0:
+  version "13.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-algolia/-/eslint-config-algolia-13.4.0.tgz#d622ae33ca6129a712a3880efd6e7c7511f08207"
 
 eslint-config-prettier@3.6.0:
   version "3.6.0"
