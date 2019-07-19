@@ -1,3 +1,34 @@
+## [14.0.3](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.2...v14.0.3) (2019-07-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency is-plain-object to v3 ([#361](https://github.com/algolia/react-element-to-jsx-string/issues/361)) ([b58cbbd](https://github.com/algolia/react-element-to-jsx-string/commit/b58cbbd))
+* Rework the propNameSorter to be less dependents of node sort internals ([a9ee312](https://github.com/algolia/react-element-to-jsx-string/commit/a9ee312))
+* **deps:** update dependency stringify-object to v3.3.0 ([bfe9a9f](https://github.com/algolia/react-element-to-jsx-string/commit/bfe9a9f))
+* **formatting:** Make the props "key" and "ref" order predictibale ([#340](https://github.com/algolia/react-element-to-jsx-string/issues/340)) ([3853463](https://github.com/algolia/react-element-to-jsx-string/commit/3853463))
+
+
+### chore
+
+* **deps:** update jest monorepo to v23 (major) ([#305](https://github.com/algolia/react-element-to-jsx-string/issues/305)) ([aef55a2](https://github.com/algolia/react-element-to-jsx-string/commit/aef55a2))
+
+
+### Features
+
+* **sortObject:** Add a test for issue 344 ([#357](https://github.com/algolia/react-element-to-jsx-string/issues/357)) ([5fe7604](https://github.com/algolia/react-element-to-jsx-string/commit/5fe7604)), closes [#334](https://github.com/algolia/react-element-to-jsx-string/issues/334)
+
+
+### BREAKING CHANGES
+
+* **deps:** If you use the `showFunctions: true` option, the function are now always inlined in the output by default. Before it was not always the case (depending one the engine, platform or babel versions)
+
+You could get back to the previous behavior by using the `preserveFunctionLineBreak` function export as a value of the option `functionValue`.
+
+* test(smoke): Adapt the CommonJS bundle import
+
+
+
 <a name="14.0.2"></a>
 ## [14.0.2](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.1...v14.0.2) (2018-10-10)
 
