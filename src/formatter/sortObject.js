@@ -23,8 +23,13 @@ export default function sortObject(value: any): any {
       if (key === '_owner') {
         return result;
       }
-      // eslint-disable-next-line no-param-reassign
-      result[key] = sortObject(value[key]);
+      if (key === 'current') {
+        // eslint-disable-next-line no-param-reassign
+        result[key] = '[Circular]';
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        result[key] = sortObject(value[key]);
+      }
       return result;
     }, {});
 }

@@ -1126,4 +1126,27 @@ describe('reactElementToJSXString(ReactElement)', () => {
     }
     expect(mount(<App />).find('#hello')).toHaveLength(1);
   });
+
+  it('should not cause recursive loop when an element contains a ref', () => {
+    expect.assertions(1);
+    class App extends Component {
+      constructor(props) {
+        super(props);
+        this.inputRef = React.createRef();
+      }
+      componentDidMount() {
+        expect(reactElementToJSXString(<input ref={this.inputRef} />)).toEqual(
+          `<input
+  ref={{
+    current: '[Circular]'
+  }}
+ />`
+        );
+      }
+      render() {
+        return <input ref={this.inputRef} />;
+      }
+    }
+    mount(<App />);
+  });
 });
