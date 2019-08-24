@@ -59,7 +59,7 @@
     "esm": "3.2.25",
     "expect": "23.6.0",
     "flow-bin": "0.106.1",
-    "flow-copy-source": "2.0.7",
+    "flow-copy-source": "2.0.8",
     "husky": "2.7.0",
     "jest": "23.6.0",
     "json": "9.0.6",
