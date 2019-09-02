@@ -1,7 +1,7 @@
 /* @flow */
 
 import { isValidElement } from 'react';
-import stringify from 'stringify-object';
+import { prettyPrint } from '@base2/pretty-print-object';
 import sortObject from './sortObject';
 import parseReactElement from './../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
@@ -17,7 +17,7 @@ export default (
 ): string => {
   const normalizedValue = sortObject(value);
 
-  const stringifiedValue = stringify(normalizedValue, {
+  const stringifiedValue = prettyPrint(normalizedValue, {
     transform: (currentObj, prop, originalResult) => {
       const currentValue = currentObj[prop];
 
