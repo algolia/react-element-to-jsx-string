@@ -1,3 +1,13 @@
+# [14.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.3...v14.1.0) (2019-09-15)
+
+
+### Bug Fixes
+
+* **deps:** Remove dependency stringify-object ([6dc6d8d](https://github.com/algolia/react-element-to-jsx-string/commit/6dc6d8d))
+* **deps:** Replace dependency stringify-object with pretty-print-object ([940a413](https://github.com/algolia/react-element-to-jsx-string/commit/940a413))
+
+
+
 ## [14.0.3](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.2...v14.0.3) (2019-07-19)
 
 
