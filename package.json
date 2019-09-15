@@ -82,7 +82,7 @@
     "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0"
   },
   "dependencies": {
-    "@base2/pretty-print-object": "^1.0.0",
+    "@base2/pretty-print-object": "1.0.0",
     "is-plain-object": "3.0.0"
   },
   "jest": {
