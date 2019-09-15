@@ -26,9 +26,7 @@ export default {
   plugins: [
     babel({
       babelrc: false,
-      // Don't transpile `node_modules` except for `stringify-object`. This enables IE 11 support
-      // and minification in older versions of Uglify.
-      exclude: 'node_modules/!(stringify-object)/**',
+      exclude: 'node_modules/**',
       presets: [
         [
           'es2015',
