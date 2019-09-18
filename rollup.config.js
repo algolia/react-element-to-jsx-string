@@ -34,10 +34,7 @@ export default {
       ],
     }),
     resolve({
-      module: true,
-      jsnext: true,
-      main: true,
-      browser: true,
+      mainFields: ['module', 'main', 'jsnext', 'browser'],
     }),
     commonjs({
       sourceMap: true,
