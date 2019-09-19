@@ -5,7 +5,7 @@ language: node_js
 
 node_js:
   - "10.16.0"
-  - "12.6.0"
+  - "12.10.0"
 
 cache: yarn
 
