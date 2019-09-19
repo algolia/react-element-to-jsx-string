@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 sudo: false
 
 language: node_js
@@ -16,7 +16,7 @@ before_install:
   - yarn --version
 
 install:
-  - yarn install
+  - yarn install --frozen-lockfile
 
 script:
   - yarn run test
