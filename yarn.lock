@@ -3414,10 +3414,10 @@ eslint@6.4.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-esm@3.2.5:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.5.tgz#036e410a2373ea81bfe62166c419ca0b0cf85c09"
-  integrity sha512-rukU6Nd3agbHQCJWV4rrlZxqpbO3ix8qhUxK1BhKALGS2E465O0BFwgCOqJjNnYfO/I2MwpUBmPsW8DXoe8tcA==
+esm@3.2.25:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
 
 espree@^6.1.1:
   version "6.1.1"
