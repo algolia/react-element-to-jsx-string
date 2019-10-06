@@ -4,5 +4,6 @@
 .flowconfig
 .travis.yml
 src/
+tests/
 !dist/
 release.sh
