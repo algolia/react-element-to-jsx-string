@@ -5,5 +5,7 @@
 .travis.yml
 src/
 tests/
+**/*.spec.js
+**/*.spec.js.flow
 !dist/
 release.sh
