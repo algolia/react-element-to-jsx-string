@@ -48,7 +48,7 @@
     "conventional-changelog-cli": "2.0.25",
     "doctoc": "1.4.0",
     "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.14.0",
+    "enzyme-adapter-react-16": "1.15.1",
     "eslint": "6.5.1",
     "eslint-config-algolia": "14.0.1",
     "eslint-config-prettier": "6.4.0",
