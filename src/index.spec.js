@@ -57,6 +57,27 @@ describe('reactElementToJSXString(ReactElement)', () => {
     delete AnonymousStatelessComponent.displayName;
   });
 
+  it('reactElementToJSXString forwardRef with a displayName', () => {
+    const createReactComponent = tagName => {
+      const createForwardRef = ReactComponent => {
+        const forwardRef = (props, ref) => {
+          return <ReactComponent {...props} forwardedRef={ref} />;
+        };
+        forwardRef.displayName = tagName;
+
+        return React.forwardRef(forwardRef);
+      };
+
+      return createForwardRef(React.createElement(tagName));
+    };
+
+    const MyComponent = createReactComponent('my-component');
+
+    expect(reactElementToJSXString(<MyComponent />)).toEqual(
+      '<my-component />'
+    );
+  });
+
   it("reactElementToJSXString(React.createElement('div'))", () => {
     expect(reactElementToJSXString(React.createElement('div'))).toEqual(
       '<div />'
