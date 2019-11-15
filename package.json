@@ -58,7 +58,7 @@
     "eslint-plugin-react": "7.16.0",
     "esm": "3.2.25",
     "expect": "24.9.0",
-    "flow-bin": "0.111.3",
+    "flow-bin": "0.112.0",
     "flow-copy-source": "2.0.8",
     "husky": "3.0.9",
     "jest": "24.9.0",
