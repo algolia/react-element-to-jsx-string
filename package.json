@@ -47,7 +47,7 @@
     "babel-register": "6.26.0",
     "conventional-changelog-cli": "2.0.31",
     "doctoc": "1.4.0",
-    "enzyme": "3.10.0",
+    "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.1",
     "eslint": "6.7.2",
     "eslint-config-algolia": "14.0.1",
