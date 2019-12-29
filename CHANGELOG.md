@@ -1,3 +1,18 @@
+# [14.2.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.1.0...v14.2.0) (2019-12-29)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency @base2/pretty-print-object to 1.0.0 ([07f19f9](https://github.com/algolia/react-element-to-jsx-string/commit/07f19f95844681fc4a04e440138e41e385f98a75))
+* **formatting:** fix the anonymous functional component detection after babel upgrade ([7a1b93e](https://github.com/algolia/react-element-to-jsx-string/commit/7a1b93eca7446c4183298a03178f737678d85678))
+
+
+### Features
+
+* **typescript:** Add TypeScript declaration file. ([#475](https://github.com/algolia/react-element-to-jsx-string/issues/475)) ([f9ea4e5](https://github.com/algolia/react-element-to-jsx-string/commit/f9ea4e54c3d01f45ace0038f2031bf9095a48138))
+
+
+
 # [14.1.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.0.3...v14.1.0) (2019-09-15)
 
 
