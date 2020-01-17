@@ -1,3 +1,12 @@
+# [14.3.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.2.0...v14.3.0) (2020-01-17)
+
+
+### Features
+
+* allow filterProps to be a function ([#417](https://github.com/algolia/react-element-to-jsx-string/issues/417)) ([c4908bb](https://github.com/algolia/react-element-to-jsx-string/commit/c4908bb))
+
+
+
 # [14.2.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.1.0...v14.2.0) (2019-12-29)
 
 
