@@ -5,6 +5,7 @@ import formatTreeNode from './formatTreeNode';
 import formatProp from './formatProp';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import sortPropsByNames from './sortPropsByNames';
+import createPropFilter from './createPropFilter';
 import type { Options } from './../options';
 import type { ReactElementTreeNode } from './../tree';
 
@@ -126,13 +127,15 @@ export default (
 
   const visibleAttributeNames = [];
 
+  const propFilter = createPropFilter(props, filterProps);
+
   Object.keys(props)
-    .filter(propName => filterProps.indexOf(propName) === -1)
+    .filter(propFilter)
     .filter(onlyPropsWithOriginalValue(defaultProps, props))
     .forEach(propName => visibleAttributeNames.push(propName));
 
   Object.keys(defaultProps)
-    .filter(defaultPropName => filterProps.indexOf(defaultPropName) === -1)
+    .filter(propFilter)
     .filter(() => showDefaultProps)
     .filter(defaultPropName => !visibleAttributeNames.includes(defaultPropName))
     .forEach(defaultPropName => visibleAttributeNames.push(defaultPropName));
