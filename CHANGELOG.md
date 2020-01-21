@@ -1,3 +1,12 @@
+## [14.3.1](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.0...v14.3.1) (2020-01-21)
+
+
+### Bug Fixes
+
+* Fix TypeScript type declaration ([#516](https://github.com/algolia/react-element-to-jsx-string/issues/516)) ([c4fe54a](https://github.com/algolia/react-element-to-jsx-string/commit/c4fe54adcafbe688d397fe652e61952a56e7cffe))
+
+
+
 # [14.3.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.2.0...v14.3.0) (2020-01-17)
 
 
