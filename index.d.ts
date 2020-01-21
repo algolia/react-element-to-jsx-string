@@ -1,9 +1,11 @@
 declare module 'react-element-to-jsx-string' {
   import { ReactNode } from 'react';
 
+  type FilterPropsFunction = (value: any, key: string) => boolean
+
   interface ReactElementToJSXStringOptions {
     displayName?: (element: ReactNode) => string;
-    filterProps?: string[];
+    filterProps?: string[] | FilterPropsFunction;
     showDefaultProps?: boolean;
     showFunctions?: boolean;
     functionValue?: (fn: any) => any;
@@ -15,5 +17,8 @@ declare module 'react-element-to-jsx-string' {
   }
 
   const reactElementToJSXString: (element: ReactNode, options?: ReactElementToJSXStringOptions) => string;
-  export = reactElementToJSXString;
+
+  export { ReactElementToJSXStringOptions as Options };
+
+  export default reactElementToJSXString;
 }
