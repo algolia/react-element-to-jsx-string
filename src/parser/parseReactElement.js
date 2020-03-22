@@ -9,15 +9,20 @@ import {
   createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
+import * as ReactIs from 'react-is';
 
 const supportFragment = Boolean(Fragment);
 
-const getReactElementDisplayName = (element: ReactElement<*>): string =>
-  element.type.displayName ||
-  (element.type.name !== '_default' ? element.type.name : null) || // function name
-  (typeof element.type === 'function' // function without a name, you should provide one
-    ? 'No Display Name'
-    : element.type);
+const getReactElementDisplayName = (element: ReactElement<>): string => {
+  return (
+    element.type.displayName ||
+    (element.type.name !== '_default' ? element.type.name : null) || // function name
+    (ReactIs.isForwardRef(element) ? element.type.render.displayName : null) ||
+    (typeof element.type === 'function' // function without a name, you should provide one
+      ? 'No Display Name'
+      : element.type)
+  );
+};
 
 const noChildren = (propsValue, propName) => propName !== 'children';
 
