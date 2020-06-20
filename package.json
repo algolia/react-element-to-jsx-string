@@ -65,7 +65,7 @@
     "jest": "24.9.0",
     "json": "9.0.6",
     "lint-staged": "10.2.11",
-    "mversion": "1.13.0",
+    "mversion": "2.0.0",
     "prettier": "1.19.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
