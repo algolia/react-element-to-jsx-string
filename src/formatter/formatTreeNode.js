@@ -20,11 +20,11 @@ const escape = (s: string) => {
 const preserveTrailingSpace = (s: string) => {
   let result = s;
   if (result.endsWith(' ')) {
-    result = result.replace(/^(\S*)(\s*)$/, "$1{'$2'}");
+    result = result.replace(/^(.*?)(\s+)$/, "$1{'$2'}");
   }
 
   if (result.startsWith(' ')) {
-    result = result.replace(/^(\s*)(\S*)$/, "{'$1'}$2");
+    result = result.replace(/^(\s+)(.*)$/, "{'$1'}$2");
   }
 
   return result;
