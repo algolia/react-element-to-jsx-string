@@ -559,19 +559,19 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
-  it('reactElementToJSXString(<div>\nfoo <span>bar</span> baz\n</div>)', () => {
+  it('reactElementToJSXString(<div>\nfoo bar <span> baz </span> qux quux\n</div>)', () => {
     expect(
       reactElementToJSXString(
         <div>
-          foo <span>bar</span> baz
+          foo bar <span> baz </span> qux quux
         </div>
       )
     ).toEqual(`<div>
-  foo{' '}
+  foo bar{' '}
   <span>
-    bar
+    {' '}baz{' '}
   </span>
-  {' '}baz
+  {' '}qux quux
 </div>`);
   });
 
