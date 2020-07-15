@@ -203,7 +203,7 @@ export default (
       out += '\n';
       out += spacer(newLvl - 1, tabStop);
     }
-    out += `</${displayName}>`;
+    out += `</${displayName.toString()}>`;
   } else {
     if (
       !isInlineAttributeTooLong(
