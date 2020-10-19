@@ -182,4 +182,19 @@ describe('parseReactElement', () => {
       ],
     });
   });
+
+  it(`should parse a component encapsulated in a forward ref`, () => {
+    const B = React.forwardRef(function B(props, ref) {
+      return <div ref={ref}>hey</div>;
+    });
+    expect(parseReactElement(<B foo="41" />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'B',
+      defaultProps: {},
+      props: {
+        foo: '41',
+      },
+      childrens: [],
+    });
+  });
 });
