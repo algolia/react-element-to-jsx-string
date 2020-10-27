@@ -79,8 +79,8 @@
     "rollup-plugin-sourcemaps": "0.6.2"
   },
   "peerDependencies": {
-    "react": "^0.14.8 || ^15.0.1 || ^16.0.0",
-    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0"
+    "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1",
+    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1"
   },
   "dependencies": {
     "@base2/pretty-print-object": "1.0.0",
