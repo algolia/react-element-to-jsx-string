@@ -1,3 +1,13 @@
+## [14.3.2](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.1...v14.3.2) (2020-10-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency is-plain-object to v3.0.1 ([4974512](https://github.com/algolia/react-element-to-jsx-string/commit/4974512273c86c72415376fea89f9d6e07e2b2e5))
+* Handle multiple words before trailing space ([#572](https://github.com/algolia/react-element-to-jsx-string/issues/572)) ([e0c082e](https://github.com/algolia/react-element-to-jsx-string/commit/e0c082eb1d1e9fe2ed2918db157079d17af3af09))
+
+
+
 ## [14.3.1](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.0...v14.3.1) (2020-01-21)
 
 
