@@ -1,9 +1,8 @@
-name: Continuous Integration
-
 on: pull_request
 
 jobs:
-  unit-tests:
+  continuous-integration:
+    name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

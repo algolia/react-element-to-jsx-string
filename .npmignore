@@ -1,6 +1,7 @@
 **/*.spec.js
 **/*.spec.js.flow
 
+.github/
 !dist/
 src/
 tests/
