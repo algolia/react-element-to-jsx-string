@@ -37,8 +37,8 @@
   "repository": "algolia/react-element-to-jsx-string",
   "devDependencies": {
     "@babel/cli": "7.8.4",
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.5",
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.9.6",
     "@babel/preset-flow": "7.9.0",
     "@babel/preset-react": "7.9.4",
     "@commitlint/cli": "8.3.5",
@@ -70,13 +70,13 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-test-renderer": "16.13.1",
-    "rollup": "1.32.1",
+    "rollup": "2.7.6",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-sourcemaps": "0.5.0"
+    "rollup-plugin-sourcemaps": "0.6.0"
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.1 || ^16.0.0",
