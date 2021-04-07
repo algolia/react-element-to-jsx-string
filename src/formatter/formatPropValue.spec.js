@@ -93,6 +93,12 @@ describe('formatPropValue', () => {
     ).toBe('{new Date("2017-01-01T11:00:00.000Z")}');
   });
 
+  it('should format an invalid date prop value', () => {
+    expect(formatPropValue(new Date(NaN), false, 0, {})).toBe(
+      '{new Date(NaN)}'
+    );
+  });
+
   it('should format an object prop value', () => {
     expect(formatPropValue({ foo: 42 }, false, 0, {})).toBe(
       '{*Mocked formatComplexDataStructure result*}'

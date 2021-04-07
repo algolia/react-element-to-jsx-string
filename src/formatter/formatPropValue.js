@@ -54,6 +54,9 @@ const formatPropValue = (
   }
 
   if (propValue instanceof Date) {
+    if (isNaN(propValue.valueOf())) {
+      return `{new Date(NaN)}`;
+    }
     return `{new Date("${propValue.toISOString()}")}`;
   }
 
