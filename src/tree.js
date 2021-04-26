@@ -16,6 +16,11 @@ export type NumberTreeNode = {|
   value: number,
 |};
 
+export type FunctionTreeNode = {|
+  type: 'function',
+  value: Function,
+|};
+
 export type ReactElementTreeNode = {|
   type: 'ReactElement',
   displayName: string,
@@ -33,6 +38,7 @@ export type ReactFragmentTreeNode = {|
 export type TreeNode =
   | StringTreeNode
   | NumberTreeNode
+  | FunctionTreeNode
   | ReactElementTreeNode
   | ReactFragmentTreeNode;
 
@@ -43,6 +49,11 @@ export const createStringTreeNode = (value: string): StringTreeNode => ({
 
 export const createNumberTreeNode = (value: number): NumberTreeNode => ({
   type: 'number',
+  value,
+});
+
+export const createFunctionTreeNode = (value: Function): FunctionTreeNode => ({
+  type: 'function',
   value,
 });
 
