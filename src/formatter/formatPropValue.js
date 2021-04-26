@@ -12,6 +12,7 @@ const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
 const formatPropValue = (
   propValue: any,
+  propName: string,
   inline: boolean,
   lvl: number,
   options: Options
@@ -41,7 +42,7 @@ const formatPropValue = (
   }
 
   if (typeof propValue === 'function') {
-    return `{${formatFunction(propValue, true, lvl, options)}}`;
+    return `{${formatFunction(propValue, propName, true, lvl, options)}}`;
   }
 
   if (isValidElement(propValue)) {
@@ -61,7 +62,13 @@ const formatPropValue = (
   }
 
   if (isPlainObject(propValue) || Array.isArray(propValue)) {
-    return `{${formatComplexDataStructure(propValue, inline, lvl, options)}}`;
+    return `{${formatComplexDataStructure(
+      propValue,
+      propName,
+      inline,
+      lvl,
+      options
+    )}}`;
   }
 
   return `{${String(propValue)}}`;

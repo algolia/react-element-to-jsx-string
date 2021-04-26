@@ -48,7 +48,7 @@ export default (
   }
 
   if (node.type === 'function') {
-    return `{${formatFunction(node.value, inline, lvl, options)}}`;
+    return `{${formatFunction(node.value, 'children', inline, lvl, options)}}`;
   }
 
   if (node.type === 'ReactElement') {

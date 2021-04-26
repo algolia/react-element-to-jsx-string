@@ -12,38 +12,40 @@ function hello() {
 
 describe('formatFunction', () => {
   it('should replace a function with noRefCheck without showFunctions option', () => {
-    expect(formatFunction(hello, true, 0, {})).toEqual(
+    expect(formatFunction(hello, 'prop', true, 0, {})).toEqual(
       'function noRefCheck() {}'
     );
   });
 
   it('should replace a function with noRefCheck if showFunctions is false', () => {
-    expect(formatFunction(hello, true, 0, { showFunctions: false })).toEqual(
-      'function noRefCheck() {}'
-    );
+    expect(
+      formatFunction(hello, 'prop', true, 0, { showFunctions: false })
+    ).toEqual('function noRefCheck() {}');
   });
 
   it('should format a function if showFunctions is true', () => {
-    expect(formatFunction(hello, true, 0, { showFunctions: true })).toEqual(
-      'function hello() {return 1;}'
-    );
+    expect(
+      formatFunction(hello, 'prop', true, 0, { showFunctions: true })
+    ).toEqual('function hello() {return 1;}');
   });
 
   it('should format a function without name if showFunctions is true', () => {
-    expect(formatFunction(() => 1, true, 0, { showFunctions: true })).toEqual(
-      'function () {return 1;}'
-    );
+    expect(
+      formatFunction(() => 1, 'prop', true, 0, { showFunctions: true })
+    ).toEqual('function () {return 1;}');
   });
 
   it('should use the functionValue option', () => {
     expect(
-      formatFunction(hello, true, 0, { functionValue: () => '<Test />' })
+      formatFunction(hello, 'prop', true, 0, {
+        functionValue: () => '<Test />',
+      })
     ).toEqual('<Test />');
   });
 
   it('should use the functionValue option even if showFunctions is true', () => {
     expect(
-      formatFunction(hello, true, 0, {
+      formatFunction(hello, 'prop', true, 0, {
         showFunctions: true,
         functionValue: () => '<Test />',
       })
@@ -52,7 +54,7 @@ describe('formatFunction', () => {
 
   it('should use the functionValue option even if showFunctions is false', () => {
     expect(
-      formatFunction(hello, true, 0, {
+      formatFunction(hello, 'prop', true, 0, {
         showFunctions: false,
         functionValue: () => '<Test />',
       })
@@ -61,13 +63,19 @@ describe('formatFunction', () => {
 
   it('should format multi-line function', () => {
     expect(
-      formatFunction(hello, false, 0, { showFunctions: true, tabStop: 2 })
+      formatFunction(hello, 'prop', false, 0, {
+        showFunctions: true,
+        tabStop: 2,
+      })
     ).toEqual('function hello() {\n  return 1;\n}');
   });
 
   it('should format multi-line function with indentation', () => {
     expect(
-      formatFunction(hello, false, 1, { showFunctions: true, tabStop: 2 })
+      formatFunction(hello, 'prop', false, 1, {
+        showFunctions: true,
+        tabStop: 2,
+      })
     ).toEqual('function hello() {\n    return 1;\n  }');
   });
 });

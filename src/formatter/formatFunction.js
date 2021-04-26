@@ -14,6 +14,7 @@ export const preserveFunctionLineBreak = (fn: any): string => fn.toString();
 
 export default (
   fn: Function,
+  prop: string,
   inline: boolean,
   lvl: number,
   options: Options
@@ -21,9 +22,14 @@ export default (
   const { functionValue, showFunctions } = options;
   const functionFn =
     functionValue || (inline ? inlineFunction : preserveFunctionLineBreak);
-  const shouldShowFunction = showFunctions || functionValue;
+  const shouldShowFunction = Boolean(
+    functionValue ||
+      (typeof showFunctions === 'function'
+        ? showFunctions(fn, prop)
+        : showFunctions)
+  );
 
-  return String(functionFn(shouldShowFunction ? fn : noRefCheck))
+  return String(functionFn(shouldShowFunction ? fn : noRefCheck, prop))
     .split('\n')
     .map(ln => spacer(lvl, options.tabStop) + ln)
     .join('\n')

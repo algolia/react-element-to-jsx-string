@@ -5,8 +5,8 @@ import * as React from 'react';
 export type Options = {|
   filterProps: string[],
   showDefaultProps: boolean,
-  showFunctions: boolean,
-  functionValue: Function,
+  showFunctions: boolean | ((fn: Function, prop: string) => boolean),
+  functionValue: (fn: Function, prop: string) => Function | string,
   tabStop: number,
   useBooleanShorthandSyntax: boolean,
   useFragmentShortSyntax: boolean,

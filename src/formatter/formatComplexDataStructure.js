@@ -11,6 +11,7 @@ import type { Options } from './../options';
 
 export default (
   value: Object | Array<any>,
+  name: string,
   inline: boolean,
   lvl: number,
   options: Options
@@ -31,7 +32,7 @@ export default (
       }
 
       if (typeof currentValue === 'function') {
-        return formatFunction(currentValue, true, lvl, options);
+        return formatFunction(currentValue, name, true, lvl, options);
       }
 
       return originalResult;
