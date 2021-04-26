@@ -1136,6 +1136,17 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual(`<div render={<><div /><div /></>} />`);
   });
 
+  it('reactElementToJSXString(<div>{() => <div />}</div>)', () => {
+    const renderJSX = jsx =>
+      reactElementToJSXString(jsx, {
+        showFunctions: (_, prop) => prop === 'children',
+        functionValue: fn => `() => ${renderJSX(fn())}`,
+      });
+    expect(renderJSX(<div>{() => <div />}</div>)).toEqual(
+      `<div>\n  {() => <div />}\n</div>`
+    );
+  });
+
   it('should not cause recursive loop when prop object contains an element', () => {
     const Test = () => <div>Test</div>;
 
