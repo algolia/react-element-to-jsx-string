@@ -903,6 +903,29 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual(`<div fn={function fn() {return 'value';}} />`);
   });
 
+  it('should ident deeply nested multi-line functions correctly', () => {
+    /* eslint-disable arrow-body-style */
+    const fn = () => {
+      return 'value';
+    };
+
+    expect(
+      reactElementToJSXString(
+        <div fn={fn}>
+          <div fn={fn}>
+            <div fn={fn} />
+          </div>
+        </div>,
+        {
+          showFunctions: true,
+          functionValue: preserveFunctionLineBreak,
+        }
+      )
+    ).toEqual(
+      "<div\n  fn={function fn() {\n      return 'value';\n    }}\n>\n  <div\n    fn={function fn() {\n        return 'value';\n      }}\n  >\n    <div\n      fn={function fn() {\n          return 'value';\n        }}\n     />\n  </div>\n</div>"
+    );
+  });
+
   it('should expose the multiline "functionValue" formatter', () => {
     /* eslint-disable arrow-body-style */
     const fn = () => {

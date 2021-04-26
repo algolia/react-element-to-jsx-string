@@ -41,7 +41,7 @@ const formatPropValue = (
   }
 
   if (typeof propValue === 'function') {
-    return `{${formatFunction(propValue, options)}}`;
+    return `{${formatFunction(propValue, true, lvl, options)}}`;
   }
 
   if (isValidElement(propValue)) {

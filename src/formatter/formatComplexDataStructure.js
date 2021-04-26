@@ -31,7 +31,7 @@ export default (
       }
 
       if (typeof currentValue === 'function') {
-        return formatFunction(currentValue, options);
+        return formatFunction(currentValue, true, lvl, options);
       }
 
       return originalResult;

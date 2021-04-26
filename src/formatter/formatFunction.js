@@ -1,4 +1,5 @@
 import type { Options } from './../options';
+import spacer from './spacer';
 
 function noRefCheck() {}
 
@@ -11,13 +12,20 @@ export const inlineFunction = (fn: any): string =>
 
 export const preserveFunctionLineBreak = (fn: any): string => fn.toString();
 
-const defaultFunctionValue = inlineFunction;
+export default (
+  fn: Function,
+  inline: boolean,
+  lvl: number,
+  options: Options
+): string => {
+  const { functionValue, showFunctions } = options;
+  const functionFn =
+    functionValue || (inline ? inlineFunction : preserveFunctionLineBreak);
+  const shouldShowFunction = showFunctions || functionValue;
 
-export default (fn: Function, options: Options): string => {
-  const { functionValue = defaultFunctionValue, showFunctions } = options;
-  if (!showFunctions && functionValue === defaultFunctionValue) {
-    return functionValue(noRefCheck);
-  }
-
-  return functionValue(fn);
+  return String(functionFn(shouldShowFunction ? fn : noRefCheck))
+    .split('\n')
+    .map(ln => spacer(lvl, options.tabStop) + ln)
+    .join('\n')
+    .trim();
 };
