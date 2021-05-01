@@ -1,0 +1,57 @@
+yarn run v1.22.10
+$ /workspaces/react-element-to-jsx-string/node_modules/.bin/tsc --noEmit -p .
+src/formatter/formatReactElementNode.ts(13,3): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(41,6): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(50,37): error TS7006: Parameter 'defaultProps' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(50,51): error TS7006: Parameter 'props' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(50,61): error TS7006: Parameter 'propName' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(63,34): error TS8020: JSDoc types can only be used inside documentation comments.
+src/formatter/formatReactElementNode.ts(82,34): error TS8020: JSDoc types can only be used inside documentation comments.
+src/formatter/formatReactElementNode.ts(128,9): error TS7034: Variable 'visibleAttributeNames' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/formatter/formatReactElementNode.ts(140,33): error TS7005: Variable 'visibleAttributeNames' implicitly has an 'any[]' type.
+src/formatter/formatReactElementNode.ts(143,50): error TS7005: Variable 'visibleAttributeNames' implicitly has an 'any[]' type.
+src/formatter/formatReactElementNode.ts(179,7): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number | null'.
+  Type 'undefined' is not assignable to type 'number | null'.
+src/formatter/formatReactElementNode.ts(214,9): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number | null'.
+src/formatter/formatReactFragmentNode.ts(17,8): error TS8020: JSDoc types can only be used inside documentation comments.
+src/formatter/formatTreeNode.ts(57,51): error TS2339: Property 'type' does not exist on type 'never'.
+src/formatter/sortObject.ts(26,9): error TS7053: Element implicitly has an 'any' type because expression of type '"current"' can't be used to index type '{}'.
+  Property 'current' does not exist on type '{}'.
+src/formatter/sortObject.ts(29,9): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/index.ts(5,15): error TS2724: '"react"' has no exported member named 'Element'. Did you mean 'CElement'?
+src/index.ts(10,3): error TS2740: Type '{}' is missing the following properties from type 'Options': filterProps, showDefaultProps, showFunctions, functionValue, and 4 more.
+src/options.ts(14,33): error TS2724: 'React' has no exported member named 'Element'. Did you mean 'CElement'?
+src/options.ts(14,41): error TS8020: JSDoc types can only be used inside documentation comments.
+src/parser/parseReactElement.ts(18,18): error TS2339: Property 'displayName' does not exist on type 'string | JSXElementConstructor<any>'.
+  Property 'displayName' does not exist on type 'string'.
+src/parser/parseReactElement.ts(19,19): error TS2339: Property 'name' does not exist on type 'string | JSXElementConstructor<any>'.
+  Property 'name' does not exist on type 'string'.
+src/parser/parseReactElement.ts(19,54): error TS2339: Property 'name' does not exist on type 'string | JSXElementConstructor<any>'.
+  Property 'name' does not exist on type 'string'.
+src/parser/parseReactElement.ts(20,51): error TS2339: Property 'render' does not exist on type 'string | JSXElementConstructor<any>'.
+  Property 'render' does not exist on type 'string'.
+src/parser/parseReactElement.ts(27,21): error TS7006: Parameter 'propsValue' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(27,33): error TS7006: Parameter 'propName' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(29,33): error TS7006: Parameter 'children' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(35,46): error TS7051: Parameter has a name but no type. Did you mean 'arg0: any'?
+src/parser/parseReactElement.ts(35,51): error TS7051: Parameter has a name but no type. Did you mean 'arg1: string'?
+src/parser/parseReactElement.ts(39,23): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(40,22): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(40,43): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(46,12): error TS2304: Cannot find name 'ReactElement'.
+src/parser/parseReactElement.ts(46,25): error TS8020: JSDoc types can only be used inside documentation comments.
+src/parser/parseReactElement.ts(63,29): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '{}'.
+src/parser/parseReactElement.ts(64,15): error TS2339: Property 'ref' does not exist on type 'ReactElement<unknown, string | JSXElementConstructor<any>>'.
+src/parser/parseReactElement.ts(65,11): error TS2339: Property 'ref' does not exist on type '{}'.
+src/parser/parseReactElement.ts(65,25): error TS2339: Property 'ref' does not exist on type 'ReactElement<unknown, string | JSXElementConstructor<any>>'.
+src/parser/parseReactElement.ts(71,11): error TS2339: Property 'key' does not exist on type '{}'.
+src/parser/parseReactElement.ts(74,49): error TS2339: Property 'defaultProps' does not exist on type 'string | JSXElementConstructor<any>'.
+  Property 'defaultProps' does not exist on type 'string'.
+src/parser/parseReactElement.ts(75,44): error TS2571: Object is of type 'unknown'.
+src/tree.ts(28,8): error TS8020: JSDoc types can only be used inside documentation comments.
+src/tree.ts(62,8): error TS8020: JSDoc types can only be used inside documentation comments.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
