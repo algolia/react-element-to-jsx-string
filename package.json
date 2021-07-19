@@ -24,10 +24,7 @@
     "smoke": "node tests/smoke/run"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write \"**/*.{js,json}\"",
-      "git add"
-    ]
+    "*.js": ["prettier --write \"**/*.{js,json}\"", "git add"]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -80,15 +77,14 @@
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1",
-    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1"
+    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1",
+    "react-is": "^16.0.0"
   },
   "dependencies": {
     "@base2/pretty-print-object": "1.0.0",
     "is-plain-object": "3.0.1"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setupTests.js"
-    ]
+    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.js"]
   }
 }

@@ -2,7 +2,14 @@
 
 /* eslint-disable react/no-string-refs */
 
-import React, { Fragment, Component } from 'react';
+import React, {
+  Fragment,
+  Component,
+  Suspense,
+  createContext,
+  Profiler,
+  StrictMode,
+} from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import { mount } from 'enzyme';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
@@ -1111,6 +1118,53 @@ describe('reactElementToJSXString(ReactElement)', () => {
         />
       )
     ).toEqual(`<div render={<><div /><div /></>} />`);
+  });
+
+  it('reactElementToJSXString(<Suspense fallback="loading" />)', () => {
+    expect(reactElementToJSXString(<Suspense fallback="loading" />)).toEqual(
+      `<Suspense fallback="loading" />`
+    );
+  });
+
+  it('reactElementToJSXString(<Profiler id="Main" />)', () => {
+    expect(reactElementToJSXString(<Profiler id="Main" />)).toEqual(
+      `<Profiler id="Main" />`
+    );
+  });
+
+  it('reactElementToJSXString(<StrictMode />)', () => {
+    expect(reactElementToJSXString(<StrictMode />)).toEqual(`<StrictMode />`);
+  });
+
+  it('reactElementToJSXString(<Context.Provider><Context.Consumer/></Context.Provider>)', () => {
+    const Context = createContext('Custom Context');
+    expect(
+      reactElementToJSXString(
+        <Context.Provider>
+          <Context.Consumer />
+        </Context.Provider>
+      )
+    ).toEqual(
+      `<Context.Provider>
+  <Context.Consumer />
+</Context.Provider>`
+    );
+  });
+
+  it('reactElementToJSXString: context with displayName', () => {
+    const Context = createContext('Custom Context');
+    Context.displayName = 'CustomContext';
+    expect(
+      reactElementToJSXString(
+        <Context.Provider>
+          <Context.Consumer />
+        </Context.Provider>
+      )
+    ).toEqual(
+      `<CustomContext.Provider>
+  <CustomContext.Consumer />
+</CustomContext.Provider>`
+    );
   });
 
   it('should not cause recursive loop when prop object contains an element', () => {

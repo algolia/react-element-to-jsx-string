@@ -9,15 +9,22 @@ import {
   createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
+import getComponentNameFromType from '../libs/getComponentNameFromType';
 
 const supportFragment = Boolean(Fragment);
 
-const getReactElementDisplayName = (element: ReactElement<*>): string =>
-  element.type.displayName ||
-  (element.type.name !== '_default' ? element.type.name : null) || // function name
-  (typeof element.type === 'function' // function without a name, you should provide one
-    ? 'No Display Name'
-    : element.type);
+const getReactElementDisplayName = (element: ReactElement<*>): string => {
+  const displayName = getComponentNameFromType(element.type);
+  if (
+    displayName === '_default' ||
+    displayName === null ||
+    displayName === undefined
+  ) {
+    return 'No Display Name';
+  }
+
+  return displayName;
+};
 
 const noChildren = (propsValue, propName) => propName !== 'children';
 
