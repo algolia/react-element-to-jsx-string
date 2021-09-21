@@ -1,6 +1,6 @@
 /* @flow */
 
-export default function sortObject(value: any, seen = new Set()): any {
+export default function sortObject(value: any, seen = []): any {
   // return non-object value as is
   if (value === null || typeof value !== 'object') {
     return value;
@@ -11,22 +11,25 @@ export default function sortObject(value: any, seen = new Set()): any {
     return value;
   }
 
-  if (seen.has(value)) return '[Circular]';
-  seen.add(value);
+  if (seen.includes(value)) return '[Circular]';
+  seen.push(value);
 
-  // make a copy of array with each item passed through sortObject()
   if (Array.isArray(value)) {
-    return value.map(value => sortObject(value, seen));
+    // make a copy of array with each item passed through sortObject()
+    value = value.map(value => sortObject(value, seen));
+  } else {
+    // make a copy of object with key sorted
+    value = Object.keys(value)
+      .sort()
+      .reduce((result, key) => {
+        if (key !== '_owner') {
+          // eslint-disable-next-line no-param-reassign
+          result[key] = sortObject(value[key], seen);
+        }
+        return result;
+      }, {});
   }
 
-  // make a copy of object with key sorted
-  return Object.keys(value)
-    .sort()
-    .reduce((result, key) => {
-      if (key !== '_owner') {
-        // eslint-disable-next-line no-param-reassign
-        result[key] = sortObject(value[key], seen);
-      }
-      return result;
-    }, {});
+  seen.pop();
+  return value;
 }
