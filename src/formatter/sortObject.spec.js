@@ -46,6 +46,7 @@ describe('sortObject', () => {
   it('should detect circular references', () => {
     const fixture = { a: {} };
     fixture.a.b = fixture;
+    fixture.array = [fixture.a];
 
     expect(sortObject(fixture)).toMatchInlineSnapshot(`
       Object {
