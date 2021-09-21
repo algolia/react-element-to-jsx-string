@@ -47,6 +47,12 @@ describe('sortObject', () => {
     const fixture = { a: {} };
     fixture.a.b = fixture;
 
-    expect(sortObject(fixture)).toMatchInlineSnapshot();
+    expect(sortObject(fixture)).toMatchInlineSnapshot(`
+      Object {
+        "a": Object {
+          "b": "[Circular]",
+        },
+      }
+    `);
   });
 });
