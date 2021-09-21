@@ -42,4 +42,11 @@ describe('sortObject', () => {
       c: date,
     });
   });
+
+  it('should detect circular references', () => {
+    const fixture = { a: {} };
+    fixture.a.b = fixture;
+
+    expect(sortObject(fixture)).toMatchInlineSnapshot();
+  });
 });
