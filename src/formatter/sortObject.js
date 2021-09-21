@@ -23,13 +23,7 @@ export default function sortObject(value: any, seen = new Set()): any {
   return Object.keys(value)
     .sort()
     .reduce((result, key) => {
-      if (key === '_owner') {
-        return result;
-      }
-      if (key === 'current') {
-        // eslint-disable-next-line no-param-reassign
-        result[key] = '[Circular]';
-      } else {
+      if (key !== '_owner') {
         // eslint-disable-next-line no-param-reassign
         result[key] = sortObject(value[key], seen);
       }
