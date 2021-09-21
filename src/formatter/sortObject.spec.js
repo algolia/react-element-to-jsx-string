@@ -53,6 +53,11 @@ describe('sortObject', () => {
         "a": Object {
           "b": "[Circular]",
         },
+        "array": Array [
+          Object {
+            "b": "[Circular]",
+          },
+        ],
       }
     `);
   });
