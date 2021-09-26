@@ -1160,4 +1160,13 @@ describe('reactElementToJSXString(ReactElement)', () => {
     }
     mount(<App />);
   });
+
+  it('should use inferred function name as display name for `forwardRef` element', () => {
+    const Tag = React.forwardRef(function Tag({ text }, ref) {
+      return <span ref={ref}>{text}</span>;
+    });
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<Tag text="some label" />`
+    );
+  });
 });
