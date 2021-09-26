@@ -13,16 +13,17 @@ import type { TreeNode } from './../tree';
 const supportFragment = Boolean(Fragment);
 
 const getReactElementDisplayName = ({ type }: ReactElement<*>): string => {
-  if (type.displayName) {
-    return type.displayName;
+  switch (true) {
+    case Boolean(type.displayName):
+      return type.displayName;
+    case typeof type === 'function':
+      if (!type.name || type.name === '_default') {
+        return 'No Display Name';
+      }
+      return type.name;
+    default:
+      return type;
   }
-  if (type.name && type.name !== '_default') {
-    return type.name;
-  }
-  if (typeof type === 'function') {
-    return 'No Display Name';
-  }
-  return type;
 };
 
 const noChildren = (propsValue, propName) => propName !== 'children';
