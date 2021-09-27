@@ -18,6 +18,13 @@ export default (
   const normalizedValue = sortObject(value);
 
   const stringifiedValue = prettyPrint(normalizedValue, {
+    // `prettyPrint` first calls `filter`, then stringifies the value
+    // and only after that calls `transform` (with stringified value as 3rd argument - `originalResult`)
+    // since we don't care about `originalResult` for valid React elements and functions
+    // we can "skip" stringifying step by filtering out all of the keys using custom `filter`
+    // this acts as a perf optimization since React elements can hold fiber data and it can be a deeply nested structure
+    filter: currentValue =>
+      !isValidElement(currentValue) && typeof currentValue !== 'function',
     transform: (currentObj, prop, originalResult) => {
       const currentValue = currentObj[prop];
 
