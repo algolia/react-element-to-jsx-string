@@ -1,4 +1,5 @@
 /* @flow */
+import * as React from 'react';
 
 export default function sortObject(value: any): any {
   // return non-object value as is
@@ -6,8 +7,12 @@ export default function sortObject(value: any): any {
     return value;
   }
 
-  // return date and regexp values as is
-  if (value instanceof Date || value instanceof RegExp) {
+  // return date, regexp and react element values as is
+  if (
+    value instanceof Date ||
+    value instanceof RegExp ||
+    React.isValidElement(value)
+  ) {
     return value;
   }
 
