@@ -1169,4 +1169,165 @@ describe('reactElementToJSXString(ReactElement)', () => {
       `<Tag text="some label" />`
     );
   });
+
+  it('should use `displayName` instead of inferred function name as display name for `forwardRef` element', () => {
+    const Tag = React.forwardRef(function Tag({ text }, ref) {
+      return <span ref={ref}>{text}</span>;
+    });
+    Tag.displayName = 'MyTag';
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<MyTag text="some label" />`
+    );
+  });
+
+  it('should use inferred function name as display name for `memo` element', () => {
+    const Tag = React.memo(function Tag({ text }) {
+      return <span>{text}</span>;
+    });
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<Tag text="some label" />`
+    );
+  });
+
+  it('should use `displayName` instead of inferred function name as display name for `memo` element', () => {
+    const Tag = React.memo(function Tag({ text }) {
+      return <span>{text}</span>;
+    });
+    Tag.displayName = 'MyTag';
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<MyTag text="some label" />`
+    );
+  });
+
+  it('should use inferred function name as display name for a `forwardRef` wrapped in `memo`', () => {
+    const Tag = React.memo(
+      React.forwardRef(function Tag({ text }, ref) {
+        return <span ref={ref}>{text}</span>;
+      })
+    );
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<Tag text="some label" />`
+    );
+  });
+
+  it('should use inferred function name as display name for a component wrapped in `memo` multiple times', () => {
+    const Tag = React.memo(
+      React.memo(
+        React.memo(function Tag({ text }) {
+          return <span>{text}</span>;
+        })
+      )
+    );
+    expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
+      `<Tag text="some label" />`
+    );
+  });
+
+  it('should stringify `StrictMode` correctly', () => {
+    const App = () => null;
+
+    expect(
+      reactElementToJSXString(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      )
+    ).toEqual(`<StrictMode>
+  <App />
+</StrictMode>`);
+  });
+
+  it('should stringify `Suspense` correctly', () => {
+    const Spinner = () => null;
+    const ProfilePage = () => null;
+
+    expect(
+      reactElementToJSXString(
+        <React.Suspense fallback={<Spinner />}>
+          <ProfilePage />
+        </React.Suspense>
+      )
+    ).toEqual(`<Suspense fallback={<Spinner />}>
+  <ProfilePage />
+</Suspense>`);
+  });
+
+  it('should stringify `Profiler` correctly', () => {
+    const Navigation = () => null;
+
+    expect(
+      reactElementToJSXString(
+        <React.Profiler id="Navigation" onRender={() => {}}>
+          <Navigation />
+        </React.Profiler>
+      )
+    ).toEqual(`<Profiler
+  id="Navigation"
+  onRender={function noRefCheck() {}}
+>
+  <Navigation />
+</Profiler>`);
+  });
+
+  it('should stringify `Contex.Provider` correctly', () => {
+    const Ctx = React.createContext();
+    const App = () => {};
+
+    expect(
+      reactElementToJSXString(
+        <Ctx.Provider value={null}>
+          <App />
+        </Ctx.Provider>
+      )
+    ).toEqual(`<Context.Provider value={null}>
+  <App />
+</Context.Provider>`);
+  });
+
+  it('should stringify `Contex.Provider` with `displayName` correctly', () => {
+    const Ctx = React.createContext();
+    Ctx.displayName = 'MyCtx';
+
+    const App = () => {};
+
+    expect(
+      reactElementToJSXString(
+        <Ctx.Provider value={null}>
+          <App />
+        </Ctx.Provider>
+      )
+    ).toEqual(`<MyCtx.Provider value={null}>
+  <App />
+</MyCtx.Provider>`);
+  });
+
+  it('should stringify `Contex.Consumer` correctly', () => {
+    const Ctx = React.createContext();
+    const Button = () => null;
+
+    expect(
+      reactElementToJSXString(
+        <Ctx.Consumer>{theme => <Button theme={theme} />}</Ctx.Consumer>
+      )
+    ).toEqual(`<Context.Consumer />`);
+  });
+
+  it('should stringify `Contex.Consumer` with `displayName` correctly', () => {
+    const Ctx = React.createContext();
+    Ctx.displayName = 'MyCtx';
+
+    const Button = () => null;
+
+    expect(
+      reactElementToJSXString(
+        <Ctx.Consumer>{theme => <Button theme={theme} />}</Ctx.Consumer>
+      )
+    ).toEqual(`<MyCtx.Consumer />`);
+  });
+
+  it('should stringify `lazy` component correctly', () => {
+    const Lazy = React.lazy(() => Promise.resolve(() => {}));
+
+    expect(reactElementToJSXString(<Lazy />)).toEqual(`<Lazy />`);
+  });
 });
