@@ -1,6 +1,6 @@
 /* @flow */
 
-import isPlainObject from 'is-plain-object';
+import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';

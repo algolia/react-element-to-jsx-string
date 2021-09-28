@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 /* @flow */
 
 /* eslint-disable react/no-string-refs */
