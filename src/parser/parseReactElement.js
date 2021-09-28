@@ -71,7 +71,9 @@ const getReactElementDisplayName = (element: ReactElement<*>): string => {
     case isSuspense(element):
       return 'Suspense';
     default:
-      return element;
+      // this is "unknown" case and will most likely result in `[object Object]`
+      // it's fine though as we can't display anything meaningful anyway here
+      return String(element);
   }
 };
 
