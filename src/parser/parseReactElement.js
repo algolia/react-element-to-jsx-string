@@ -1,6 +1,18 @@
 /* @flow */
 
 import React, { type Element as ReactElement, Fragment } from 'react';
+import {
+  ForwardRef,
+  isContextConsumer,
+  isContextProvider,
+  isForwardRef,
+  isLazy,
+  isMemo,
+  isProfiler,
+  isStrictMode,
+  isSuspense,
+  Memo,
+} from 'react-is';
 import type { Options } from './../options';
 import {
   createStringTreeNode,
@@ -12,12 +24,56 @@ import type { TreeNode } from './../tree';
 
 const supportFragment = Boolean(Fragment);
 
-const getReactElementDisplayName = (element: ReactElement<*>): string =>
-  element.type.displayName ||
-  (element.type.name !== '_default' ? element.type.name : null) || // function name
-  (typeof element.type === 'function' // function without a name, you should provide one
-    ? 'No Display Name'
-    : element.type);
+const getFunctionTypeName = (functionType): string => {
+  if (!functionType.name || functionType.name === '_default') {
+    return 'No Display Name';
+  }
+  return functionType.name;
+};
+
+const getWrappedComponentDisplayName = (Component: *): string => {
+  switch (true) {
+    case Boolean(Component.displayName):
+      return Component.displayName;
+    case Component.$$typeof === Memo:
+      return getWrappedComponentDisplayName(Component.type);
+    case Component.$$typeof === ForwardRef:
+      return getWrappedComponentDisplayName(Component.render);
+    default:
+      return getFunctionTypeName(Component);
+  }
+};
+
+// heavily inspired by:
+// https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
+const getReactElementDisplayName = (element: ReactElement<*>): string => {
+  switch (true) {
+    case typeof element.type === 'string':
+      return element.type;
+    case typeof element.type === 'function':
+      if (element.type.displayName) {
+        return element.type.displayName;
+      }
+      return getFunctionTypeName(element.type);
+    case isForwardRef(element):
+    case isMemo(element):
+      return getWrappedComponentDisplayName(element.type);
+    case isContextConsumer(element):
+      return `${element.type._context.displayName || 'Context'}.Consumer`;
+    case isContextProvider(element):
+      return `${element.type._context.displayName || 'Context'}.Provider`;
+    case isLazy(element):
+      return 'Lazy';
+    case isProfiler(element):
+      return 'Profiler';
+    case isStrictMode(element):
+      return 'StrictMode';
+    case isSuspense(element):
+      return 'Suspense';
+    default:
+      return 'UnknownElementType';
+  }
+};
 
 const noChildren = (propsValue, propName) => propName !== 'children';
 
