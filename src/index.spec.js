@@ -1335,7 +1335,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
     expect(reactElementToJSXString(<Lazy />)).toEqual(`<Lazy />`);
   });
 
-  it('should not crash when stringifying circular `forwardRef` element', () => {
+  it('should stringify `forwardRef` element with a circular property', () => {
     function TagList({ tags }) {
       return tags;
     }
@@ -1345,10 +1345,14 @@ describe('reactElementToJSXString(ReactElement)', () => {
     });
     Tag.emotionReal = Tag;
 
-    expect(() =>
+    expect(
       reactElementToJSXString(
         <TagList tags={[<Tag key="oops" text="oops, circular" />]} />
       )
-    ).not.toThrow();
+    ).toEqual(`<TagList
+  tags={[
+    <Tag key="oops" text="oops, circular"/>
+  ]}
+ />`);
   });
 });
