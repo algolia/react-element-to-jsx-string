@@ -1334,4 +1334,25 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
     expect(reactElementToJSXString(<Lazy />)).toEqual(`<Lazy />`);
   });
+
+  it('should stringify `forwardRef` element with a circular property', () => {
+    function TagList({ tags }) {
+      return tags;
+    }
+
+    const Tag = React.forwardRef(function Tag({ text }, ref) {
+      return <span ref={ref}>{text}</span>;
+    });
+    Tag.emotionReal = Tag;
+
+    expect(
+      reactElementToJSXString(
+        <TagList tags={[<Tag key="oops" text="oops, circular" />]} />
+      )
+    ).toEqual(`<TagList
+  tags={[
+    <Tag key="oops" text="oops, circular"/>
+  ]}
+ />`);
+  });
 });
