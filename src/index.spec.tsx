@@ -285,7 +285,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('reactElementToJSXString(<div z="3" a="1" b="2"/>, {sortProps: false})', () => {
     /* eslint react/jsx-sort-props: 0 */
-
     expect(
       reactElementToJSXString(<div z="3" a="1" b="2" />, {
         sortProps: false,
@@ -923,9 +922,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
       '<This should take precedence />'
     );
   });
+
   // maxInlineAttributesLineLength tests
   // Validate two props will stay inline if their length is less than the option
-
   it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributesLineLength: 100 }))', () => {
     expect(
       reactElementToJSXString(<div aprop="1" bprop="2" />, {
@@ -933,10 +932,10 @@ describe('reactElementToJSXString(ReactElement)', () => {
       })
     ).toEqual('<div aprop="1" bprop="2" />');
   });
+
   // Validate one prop will go to new line if length is greater than option. One prop is a special case since
   // the old logic operated on whether or not two or more attributes were present. Making sure this overrides
   // that older logic
-
   it('reactElementToJSXString(<div aprop="1"/>, { maxInlineAttributesLineLength: 5 }))', () => {
     expect(
       reactElementToJSXString(<div aprop="1" />, {
@@ -946,8 +945,8 @@ describe('reactElementToJSXString(ReactElement)', () => {
   aprop="1"
 />`);
   });
-  // Validate two props will go be multiline if their length is greater than the given option
 
+  // Validate two props will go be multiline if their length is greater than the given option
   it('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributesLineLength: 10 }))', () => {
     expect(
       reactElementToJSXString(<div aprop="1" bprop="2" />, {
@@ -958,9 +957,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
   bprop="2"
 />`);
   });
+
   // Same tests as above but with elements that have children. The closing braces for elements with children and without children
   // run through different code paths so we have both sets of test to specify the behavior of both when this option is present
-
   it('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlineAttributesLineLength: 100 }))', () => {
     expect(
       reactElementToJSXString(
@@ -1005,8 +1004,8 @@ describe('reactElementToJSXString(ReactElement)', () => {
   content
 </div>`);
   });
-  // Multi-level inline attribute test
 
+  // Multi-level inline attribute test
   it('reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttributesLineLength: 24 }))', () => {
     expect(
       reactElementToJSXString(
@@ -1040,9 +1039,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('sends the original fn to functionValue', () => {
     const fn = () => {};
-
     const functionValue = (receivedFn) => expect(receivedFn).toBe(fn);
-
     reactElementToJSXString(<div fn={fn} />, {
       functionValue,
     });
@@ -1119,7 +1116,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
             }}
           />
         );
+
         const insideString = reactElementToJSXString(inside);
+
         return (
           <div>
             {insideString}
@@ -1254,7 +1253,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('should stringify `Suspense` correctly', () => {
     const Spinner = () => null;
-
     const ProfilePage = () => null;
 
     expect(
@@ -1287,7 +1285,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('should stringify `Contex.Provider` correctly', () => {
     const Ctx = React.createContext();
-
     const App = () => {};
 
     expect(
@@ -1335,7 +1332,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('should stringify `Contex.Consumer` correctly', () => {
     const Ctx = React.createContext();
-
     const Button = () => null;
 
     expect(
