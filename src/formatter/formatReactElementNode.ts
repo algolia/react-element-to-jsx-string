@@ -119,12 +119,16 @@ export default (
   let outInlineAttr = out;
   let outMultilineAttr = out;
   let containsMultilineAttr = false;
+
   const visibleAttributeNames: Array<string> = [];
+
   const propFilter = createPropFilter(props, filterProps);
+
   Object.keys(props)
     .filter(propFilter)
     .filter(onlyPropsWithOriginalValue(defaultProps, props))
     .forEach((propName) => visibleAttributeNames.push(propName));
+
   Object.keys(defaultProps)
     .filter(propFilter)
     .filter(() => showDefaultProps)
@@ -132,7 +136,9 @@ export default (
       (defaultPropName) => !visibleAttributeNames.includes(defaultPropName)
     )
     .forEach((defaultPropName) => visibleAttributeNames.push(defaultPropName));
+
   const attributes = sortPropsByNames(sortProps)(visibleAttributeNames);
+
   attributes.forEach((attributeName) => {
     const {
       attributeFormattedInline,
@@ -156,6 +162,7 @@ export default (
     outInlineAttr += attributeFormattedInline;
     outMultilineAttr += attributeFormattedMultiline;
   });
+
   outMultilineAttr += `\n${spacer(lvl, tabStop)}`;
 
   if (
@@ -176,6 +183,7 @@ export default (
 
   if (childrens && childrens.length > 0) {
     const newLvl = lvl + 1;
+
     out += '>';
 
     if (!inline) {
