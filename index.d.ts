@@ -1,7 +1,7 @@
 declare module 'react-element-to-jsx-string' {
   import { ReactNode } from 'react';
 
-  type FilterPropsFunction = (value: any, key: string) => boolean
+  type FilterPropsFunction = (value: any, key: string) => boolean;
 
   interface ReactElementToJSXStringOptions {
     displayName?: (element: ReactNode) => string;
@@ -16,7 +16,10 @@ declare module 'react-element-to-jsx-string' {
     useFragmentShortSyntax?: boolean;
   }
 
-  const reactElementToJSXString: (element: ReactNode, options?: ReactElementToJSXStringOptions) => string;
+  const reactElementToJSXString: (
+    element: ReactNode,
+    options?: ReactElementToJSXStringOptions
+  ) => string;
 
   export { ReactElementToJSXStringOptions as Options };
 
