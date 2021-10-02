@@ -31,7 +31,7 @@ export default {
       presets: [
         '@babel/preset-env',
         '@babel/preset-react',
-        '@babel/preset-flow',
+        '@babel/preset-typescript',
       ],
     }),
     resolve({

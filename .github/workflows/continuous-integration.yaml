@@ -13,7 +13,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run test
       - run: yarn run lint
-      - run: yarn run flow
+      - run: yarn run tsc --noEmit
       - run: yarn run smoke cjs 19.0.0
       - run: yarn run smoke esm 19.0.0
       - run: yarn run smoke cjs latest
