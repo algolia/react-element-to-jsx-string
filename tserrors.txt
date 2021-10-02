@@ -1,0 +1,35 @@
+src/AnonymousStatelessComponent.tsx(3,26): error TS7006: Parameter 'props' implicitly has an 'any' type.
+src/formatter/createPropFilter.ts(8,36): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/formatter/formatFunction.ts(9,11): error TS7006: Parameter 'line' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(11,3): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(36,56): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(45,37): error TS7006: Parameter 'defaultProps' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(45,51): error TS7006: Parameter 'props' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(45,62): error TS7006: Parameter 'propName' implicitly has an 'any' type.
+src/formatter/formatReactElementNode.ts(120,9): error TS7034: Variable 'visibleAttributeNames' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/formatter/formatReactElementNode.ts(130,29): error TS7005: Variable 'visibleAttributeNames' implicitly has an 'any[]' type.
+src/formatter/formatReactElementNode.ts(133,50): error TS7005: Variable 'visibleAttributeNames' implicitly has an 'any[]' type.
+src/formatter/formatTreeNode.ts(56,51): error TS2339: Property 'type' does not exist on type 'never'.
+src/index.ts(3,15): error TS2724: '"react"' has no exported member named 'Element'. Did you mean 'CElement'?
+src/index.ts(8,3): error TS2740: Type '{}' is missing the following properties from type 'Options': filterProps, showDefaultProps, showFunctions, functionValue, and 4 more.
+src/parser/parseReactElement.ts(1,15): error TS2724: '"react"' has no exported member named 'Element'. Did you mean 'CElement'?
+src/parser/parseReactElement.ts(26,30): error TS7006: Parameter 'functionType' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(91,21): error TS7006: Parameter 'propsValue' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(91,33): error TS7006: Parameter 'propName' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(93,33): error TS7006: Parameter 'children' implicitly has an 'any' type.
+src/parser/parseReactElement.ts(105,25): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(106,24): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(106,45): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/parser/parseReactElement.ts(130,11): error TS2339: Property 'ref' does not exist on type '{}'.
+src/parser/parseReactElement.ts(137,11): error TS2339: Property 'key' does not exist on type '{}'.
+src/parser/parseReactElement.ts(143,11): error TS7006: Parameter 'child' implicitly has an 'any' type.
+tests/smoke/prepare.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'path'.
+tests/smoke/prepare.ts(11,7): error TS2451: Cannot redeclare block-scoped variable 'requestedReactVersion'.
+tests/smoke/prepare.ts(36,28): error TS7006: Parameter 'reactVersion' implicitly has an 'any' type.
+tests/smoke/run.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'path'.
+tests/smoke/run.ts(13,7): error TS2451: Cannot redeclare block-scoped variable 'requestedReactVersion'.
+tests/smoke/smoke.ts(6,40): error TS7006: Parameter 'buildType' implicitly has an 'any' type.

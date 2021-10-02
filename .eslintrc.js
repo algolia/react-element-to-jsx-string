@@ -1,5 +1,13 @@
 module.exports = {
-  extends: ['algolia', 'algolia/jest', 'algolia/react'],
+  extends: ['airbnb-typescript', 'prettier'],
+
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+  },
+
+  // ecmaFeatures: {
+  //   jsx: true,
+  // },
 
   env: {
     es6: true,
@@ -11,12 +19,12 @@ module.exports = {
     },
   },
 
-  rules: {
-    'max-params': ['error', 10],
-    'no-warning-comments': 'error',
+  // rules: {
+  //   'max-params': ['error', 10],
+  //   'no-warning-comments': 'error',
 
-    'import/no-commonjs': 'off',
-  },
+  //   'import/no-commonjs': 'off',
+  // },
 
   overrides: [
     {
