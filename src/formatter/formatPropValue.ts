@@ -22,9 +22,6 @@ const formatPropValue = (
     return `"${escape(propValue)}"`;
   }
 
-  // > "Symbols (new in ECMAScript 2015, not yet supported in Flow)"
-  // @see: https://flow.org/en/docs/types/primitives/
-  // $FlowFixMe: Flow does not support Symbol
   if (typeof propValue === 'symbol') {
     const symbolDescription = propValue
       .valueOf()
