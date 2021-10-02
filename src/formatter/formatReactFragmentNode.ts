@@ -51,6 +51,7 @@ export default (
   }
 
   const { useFragmentShortSyntax } = options;
+
   let displayName;
 
   if (useFragmentShortSyntax) {

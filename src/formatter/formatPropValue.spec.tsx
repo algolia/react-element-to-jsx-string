@@ -5,11 +5,9 @@ import formatTreeNode from './formatTreeNode';
 import formatComplexDataStructure from './formatComplexDataStructure';
 
 jest.mock('./../parser/parseReactElement');
-
 jest.mock('./formatTreeNode', () =>
   jest.fn().mockReturnValue('<MockedFormatTreeNodeResult />')
 );
-
 jest.mock('./formatComplexDataStructure', () =>
   jest.fn().mockReturnValue('*Mocked formatComplexDataStructure result*')
 );
@@ -109,6 +107,7 @@ describe('formatPropValue', () => {
         {}
       )
     ).toBe('{*Mocked formatComplexDataStructure result*}');
+
     expect(formatComplexDataStructure).toHaveBeenCalledTimes(1);
   });
 
@@ -116,11 +115,13 @@ describe('formatPropValue', () => {
     expect(formatPropValue(['a', 'b', 'c'], false, 0, {})).toBe(
       '{*Mocked formatComplexDataStructure result*}'
     );
+
     expect(formatComplexDataStructure).toHaveBeenCalledTimes(1);
   });
 
   it('should format a boolean prop value', () => {
     expect(formatPropValue(true, false, 0, {})).toBe('{true}');
+
     expect(formatPropValue(false, false, 0, {})).toBe('{false}');
   });
 
@@ -136,6 +137,7 @@ describe('formatPropValue', () => {
     expect(formatPropValue(new Set(['a', 'b', 42]), false, 0, {})).toBe(
       '{[object Set]}'
     );
+
     expect(formatPropValue(new Map(), false, 0, {})).toBe('{[object Map]}');
   });
 });

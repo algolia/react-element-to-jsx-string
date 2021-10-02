@@ -115,7 +115,9 @@ export default (
     sortProps,
     tabStop,
   } = options;
+
   let out = `<${displayName}`;
+
   let outInlineAttr = out;
   let outMultilineAttr = out;
   let containsMultilineAttr = false;

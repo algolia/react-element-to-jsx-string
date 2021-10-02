@@ -1,4 +1,5 @@
 import formatFunction from './formatFunction';
+
 jest.mock(
   './formatReactElementNode.js',
   () => (node) => `<${node.displayName} />`
