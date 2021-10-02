@@ -29,11 +29,11 @@ export default function sortObject(value: any): any {
       }
 
       if (key === 'current') {
-        // eslint-disable-next-line no-param-reassign
-        result[key] = '[Circular]';
+        // @ts-expect-error: flow to TS
+        result[key] = '[Circular]'; // eslint-disable-line no-param-reassign
       } else {
-        // eslint-disable-next-line no-param-reassign
-        result[key] = sortObject(value[key]);
+        // @ts-expect-error: flow to TS
+        result[key] = sortObject(value[key]); // eslint-disable-line no-param-reassign
       }
 
       return result;

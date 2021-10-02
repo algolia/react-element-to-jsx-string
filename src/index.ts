@@ -1,10 +1,10 @@
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
-import type { Element as ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import type { Options } from './options';
 
 const reactElementToJsxString = (
-  element: ReactElement<any>,
+  element: ReactElement<any> | string | number,
   {
     filterProps = [],
     showDefaultProps = true,
@@ -16,13 +16,13 @@ const reactElementToJsxString = (
     sortProps = true,
     maxInlineAttributesLineLength,
     displayName,
-  }: Options = {}
-) => {
+  }: Partial<Options> = {}
+): string => {
   if (!element) {
     throw new Error('react-element-to-jsx-string: Expected a ReactElement');
   }
 
-  const options = {
+  const options: Options = {
     filterProps,
     showDefaultProps,
     showFunctions,
@@ -34,10 +34,12 @@ const reactElementToJsxString = (
     maxInlineAttributesLineLength,
     displayName,
   };
+
   return formatTree(parseReactElement(element, options), options);
 };
 
 export default reactElementToJsxString;
+
 export {
   inlineFunction,
   preserveFunctionLineBreak,

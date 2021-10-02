@@ -8,7 +8,7 @@ import type { Options } from './../options';
 import type { ReactElementTreeNode } from './../tree';
 
 const compensateMultilineStringElementIndentation = (
-  element,
+  element: any,
   formattedElement: string,
   inline: boolean,
   lvl: number,
@@ -33,7 +33,7 @@ const compensateMultilineStringElementIndentation = (
 };
 
 const formatOneChildren =
-  (inline: boolean, lvl: number, options: Options) => (element) =>
+  (inline: boolean, lvl: number, options: Options) => (element: any) =>
     compensateMultilineStringElementIndentation(
       element,
       formatTreeNode(element, inline, lvl, options),
@@ -42,13 +42,15 @@ const formatOneChildren =
       options
     );
 
-const onlyPropsWithOriginalValue = (defaultProps, props) => (propName) => {
-  const haveDefaultValue = Object.keys(defaultProps).includes(propName);
-  return (
-    !haveDefaultValue ||
-    (haveDefaultValue && defaultProps[propName] !== props[propName])
-  );
-};
+const onlyPropsWithOriginalValue =
+  (defaultProps: Record<string, any>, props: Record<string, any>) =>
+  (propName: string) => {
+    const haveDefaultValue = Object.keys(defaultProps).includes(propName);
+    return (
+      !haveDefaultValue ||
+      (haveDefaultValue && defaultProps[propName] !== props[propName])
+    );
+  };
 
 const isInlineAttributeTooLong = (
   attributes: string[],
@@ -117,7 +119,7 @@ export default (
   let outInlineAttr = out;
   let outMultilineAttr = out;
   let containsMultilineAttr = false;
-  const visibleAttributeNames = [];
+  const visibleAttributeNames: Array<string> = [];
   const propFilter = createPropFilter(props, filterProps);
   Object.keys(props)
     .filter(propFilter)

@@ -2,15 +2,21 @@ import type { Options } from './../options';
 
 function noRefCheck() {}
 
-export const inlineFunction = (fn: any): string =>
+type FunctionType = (...args: Array<any>) => any;
+
+export const inlineFunction = (fn: FunctionType): string =>
   fn
     .toString()
     .split('\n')
     .map((line) => line.trim())
     .join('');
-export const preserveFunctionLineBreak = (fn: any): string => fn.toString();
+
+export const preserveFunctionLineBreak = (fn: FunctionType): string =>
+  fn.toString();
+
 const defaultFunctionValue = inlineFunction;
-export default (fn: (...args: Array<any>) => any, options: Options): string => {
+
+export default (fn: FunctionType, options: Options): string => {
   const { functionValue = defaultFunctionValue, showFunctions } = options;
 
   if (!showFunctions && functionValue === defaultFunctionValue) {

@@ -28,13 +28,13 @@
     "@babel/cli": "7.15.7",
     "@babel/core": "7.15.5",
     "@babel/preset-env": "7.15.6",
-    "@babel/preset-flow": "7.14.5",
     "@babel/preset-react": "7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-angular": "8.3.4",
-    "@khanacademy/flow-to-ts": "^0.5.2",
     "@types/enzyme": "^3.10.9",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^27.0.2",
     "@types/react": "^17.0.26",
     "@types/react-is": "^17.0.2",
     "babel-eslint": "10.1.0",
@@ -72,7 +72,7 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-sourcemaps": "0.6.3",
-    "typescript": "4.2.4"
+    "typescript": "4.4.3"
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1",
@@ -84,8 +84,6 @@
     "react-is": "17.0.2"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setupTests.js"
-    ]
+    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.ts"]
   }
 }

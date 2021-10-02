@@ -1,4 +1,4 @@
-import type { Element as ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import React, { Fragment } from 'react';
 import {
   ForwardRef,
@@ -23,7 +23,9 @@ import type { TreeNode } from './../tree';
 
 const supportFragment = Boolean(Fragment);
 
-const getFunctionTypeName = (functionType): string => {
+const getFunctionTypeName = (
+  functionType: (...args: Array<any>) => any
+): string => {
   if (!functionType.name || functionType.name === '_default') {
     return 'No Display Name';
   }
@@ -49,16 +51,20 @@ const getWrappedComponentDisplayName = (Component: any): string => {
 
 // heavily inspired by:
 // https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
-const getReactElementDisplayName = (element: ReactElement<any>): string => {
+const getReactElementDisplayName = (element: ReactElement): string => {
   switch (true) {
     case typeof element.type === 'string':
+      // @ts-expect-error: flow to TS
       return element.type;
 
     case typeof element.type === 'function':
+      // @ts-expect-error: flow to TS
       if (element.type.displayName) {
+        // @ts-expect-error: flow to TS
         return element.type.displayName;
       }
 
+      // @ts-expect-error: flow to TS
       return getFunctionTypeName(element.type);
 
     case isForwardRef(element):
@@ -66,9 +72,11 @@ const getReactElementDisplayName = (element: ReactElement<any>): string => {
       return getWrappedComponentDisplayName(element.type);
 
     case isContextConsumer(element):
+      // @ts-expect-error: flow to TS
       return `${element.type._context.displayName || 'Context'}.Consumer`;
 
     case isContextProvider(element):
+      // @ts-expect-error: flow to TS
       return `${element.type._context.displayName || 'Context'}.Provider`;
 
     case isLazy(element):
@@ -88,19 +96,20 @@ const getReactElementDisplayName = (element: ReactElement<any>): string => {
   }
 };
 
-const noChildren = (propsValue, propName) => propName !== 'children';
+const noChildren = (propsValue: unknown, propName: string) =>
+  propName !== 'children';
 
-const onlyMeaningfulChildren = (children): boolean =>
+const onlyMeaningfulChildren = (children: ReactNode): boolean =>
   children !== true &&
   children !== false &&
   children !== null &&
   children !== '';
 
 const filterProps = (
-  originalProps: {},
-  cb: (arg0: any, arg1: string) => boolean
-) => {
-  const filteredProps = {};
+  originalProps: Record<string, any>,
+  cb: (propsValue: any, propsName: string) => boolean
+): Record<string, any> => {
+  const filteredProps: Record<string, any> = {};
   Object.keys(originalProps)
     .filter((key) => cb(originalProps[key], key))
     .forEach((key) => (filteredProps[key] = originalProps[key]));
@@ -126,7 +135,9 @@ const parseReactElement = (
   const displayName = displayNameFn(element);
   const props = filterProps(element.props, noChildren);
 
+  // @ts-expect-error: flow to TS
   if (element.ref !== null) {
+    // @ts-expect-error: flow to TS
     props.ref = element.ref;
   }
 
@@ -137,21 +148,17 @@ const parseReactElement = (
     props.key = key;
   }
 
+  // @ts-expect-error: flow to TS
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = React.Children.toArray(element.props.children)
+  const children = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
-    .map((child) => parseReactElement(child, options));
+    .map((child: ReactElement<any>) => parseReactElement(child, options));
 
   if (supportFragment && element.type === Fragment) {
-    return createReactFragmentTreeNode(key, childrens);
+    return createReactFragmentTreeNode(key, children);
   }
 
-  return createReactElementTreeNode(
-    displayName,
-    props,
-    defaultProps,
-    childrens
-  );
+  return createReactElementTreeNode(displayName, props, defaultProps, children);
 };
 
 export default parseReactElement;
