@@ -1,5 +1,5 @@
 {
-  "parser": "flow",
+  "parser": "babel-ts",
   "singleQuote": true,
   "trailingComma": "es5",
   "overrides": [
