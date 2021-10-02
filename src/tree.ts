@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
+
 import type { Key } from 'react';
 
 type PropsType = Record<string, any>;
-
 type DefaultPropsType = Record<string, any>;
 
 export type StringTreeNode = {

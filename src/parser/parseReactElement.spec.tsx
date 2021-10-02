@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import parseReactElement from './parseReactElement';
+
 const options = {};
+
 describe('parseReactElement', () => {
   it('should parse a react element with a string as children', () => {
     expect(parseReactElement(<h1>Hello world</h1>, options)).toEqual({
@@ -16,6 +18,7 @@ describe('parseReactElement', () => {
       ],
     });
   });
+
   it('should filter empty childrens', () => {
     expect(
       parseReactElement(
@@ -46,6 +49,7 @@ describe('parseReactElement', () => {
       ],
     });
   });
+
   it('should parse a single depth react element', () => {
     expect(parseReactElement(<aaa foo="41" />, options)).toEqual({
       type: 'ReactElement',
@@ -57,6 +61,7 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should parse a react element with an object as props', () => {
     expect(
       parseReactElement(
@@ -85,6 +90,7 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should parse a react element with another react element as props', () => {
     expect(parseReactElement(<div a={<span b="42" />} />, options)).toEqual({
       type: 'ReactElement',
@@ -96,13 +102,14 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should parse the react element defaultProps', () => {
     const Foo = () => {};
-
     Foo.defaultProps = {
       bar: 'Hello Bar!',
       baz: 'Hello Baz!',
     };
+
     expect(
       parseReactElement(<Foo foo="Hello Foo!" bar="Hello world!" />, options)
     ).toEqual({
@@ -120,6 +127,7 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should extract the component key', () => {
     expect(parseReactElement(<div key="foo-1" />, options)).toEqual({
       type: 'ReactElement',
@@ -131,6 +139,7 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should extract the component ref', () => {
     const refFn = () => 'foo';
 
@@ -143,6 +152,7 @@ describe('parseReactElement', () => {
       },
       childrens: [],
     });
+
     // eslint-disable-next-line react/no-string-refs
     expect(parseReactElement(<div ref="foo" />, options)).toEqual({
       type: 'ReactElement',
@@ -154,6 +164,7 @@ describe('parseReactElement', () => {
       childrens: [],
     });
   });
+
   it('should parse a react fragment', () => {
     expect(
       parseReactElement(
