@@ -7,6 +7,7 @@ describe('formatTree', () => {
   it('should format the node as a root node', () => {
     const tree = {};
     const options = {};
+
     const result = formatTree(tree, options);
 
     expect(formatTreeNode).toHaveBeenCalledWith(tree, false, 0, options);
