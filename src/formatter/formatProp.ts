@@ -1,6 +1,7 @@
 import spacer from './spacer';
 import formatPropValue from './formatPropValue';
 import type { Options } from './../options';
+
 export default (
   name: string,
   hasValue: boolean,
@@ -22,8 +23,11 @@ export default (
   }
 
   const usedValue = hasValue ? value : defaultValue;
+
   const { useBooleanShorthandSyntax, tabStop } = options;
+
   const formattedPropValue = formatPropValue(usedValue, inline, lvl, options);
+
   let attributeFormattedInline = ' ';
   let attributeFormattedMultiline = `\n${spacer(lvl + 1, tabStop)}`;
   const isMultilineAttribute = formattedPropValue.includes('\n');
