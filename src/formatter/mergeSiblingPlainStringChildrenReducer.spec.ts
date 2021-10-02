@@ -5,12 +5,14 @@ import {
   createReactElementTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
+
 test('mergeSiblingPlainStringChildrenReducer should merge sibling string tree nodes', () => {
   const childrens: TreeNode[] = [
     createStringTreeNode('a'),
     createStringTreeNode('b'),
     createStringTreeNode('c'),
   ];
+
   expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
     {
       type: 'string',
@@ -18,6 +20,7 @@ test('mergeSiblingPlainStringChildrenReducer should merge sibling string tree no
     },
   ]);
 });
+
 test('mergeSiblingPlainStringChildrenReducer should consider number as string', () => {
   expect(
     [
@@ -31,6 +34,7 @@ test('mergeSiblingPlainStringChildrenReducer should consider number as string', 
       value: 'a51c',
     },
   ]);
+
   expect(
     [
       createStringTreeNode(5),
@@ -44,6 +48,7 @@ test('mergeSiblingPlainStringChildrenReducer should consider number as string', 
     },
   ]);
 });
+
 test('mergeSiblingPlainStringChildrenReducer should detect non string node', () => {
   const childrens: TreeNode[] = [
     createReactElementTreeNode('MyFoo', {}, {}, ['foo']),
@@ -54,6 +59,7 @@ test('mergeSiblingPlainStringChildrenReducer should detect non string node', () 
     createNumberTreeNode(42),
     createReactElementTreeNode('MyBaz', {}, {}, ['baz']),
   ];
+
   expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
     {
       type: 'ReactElement',
@@ -86,6 +92,7 @@ test('mergeSiblingPlainStringChildrenReducer should detect non string node', () 
     },
   ]);
 });
+
 test('mergeSiblingPlainStringChildrenReducer should reduce empty array to an empty array', () => {
   expect([].reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([]);
 });

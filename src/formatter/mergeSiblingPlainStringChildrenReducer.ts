@@ -1,5 +1,6 @@
 import { createStringTreeNode } from './../tree';
 import type { TreeNode } from './../tree';
+
 export default (
   previousNodes: TreeNode[],
   currentNode: TreeNode
