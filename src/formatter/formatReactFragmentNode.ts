@@ -15,7 +15,6 @@ const toReactElementTreeNode = (
   childrens: TreeNode[]
 ): ReactElementTreeNode => {
   let props = {};
-
   if (key) {
     props = {
       key,
@@ -32,7 +31,6 @@ const toReactElementTreeNode = (
 };
 
 const isKeyedFragment = ({ key }: ReactFragmentTreeNode) => Boolean(key);
-
 const hasNoChildren = ({ childrens }: ReactFragmentTreeNode) =>
   childrens.length === 0;
 
@@ -53,7 +51,6 @@ export default (
   const { useFragmentShortSyntax } = options;
 
   let displayName;
-
   if (useFragmentShortSyntax) {
     if (hasNoChildren(node) || isKeyedFragment(node)) {
       displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
