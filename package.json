@@ -12,7 +12,7 @@
     "prebuild": "rm -rf dist/",
     "lint": "eslint --ext ts --ext tsx src/",
     "lint:fix": "yarn run lint -- --fix",
-    "prettier:fix": "prettier --write \"**/*.{ts,tsx,js}\"",
+    "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "release": "./release.sh",

@@ -1,17 +1,22 @@
 import formatProp from './formatProp';
 import formatPropValue from './formatPropValue';
+
 jest.mock('./formatPropValue');
+
 const defaultOptions = {
   useBooleanShorthandSyntax: true,
   tabStop: 2,
 };
+
 describe('formatProp', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetAllMocks();
   });
+
   it('should format prop with only a value', () => {
     formatPropValue.mockReturnValue('"MockedPropValue"');
+
     expect(
       formatProp('foo', true, 'bar', false, null, true, 0, defaultOptions)
     ).toEqual({
@@ -20,6 +25,7 @@ describe('formatProp', () => {
   foo="MockedPropValue"`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(
       'bar',
       true,
@@ -27,8 +33,10 @@ describe('formatProp', () => {
       defaultOptions
     );
   });
+
   it('should format prop with only a default value', () => {
     formatPropValue.mockReturnValue('"MockedPropValue"');
+
     expect(
       formatProp('foo', false, null, true, 'baz', true, 0, defaultOptions)
     ).toEqual({
@@ -37,6 +45,7 @@ describe('formatProp', () => {
   foo="MockedPropValue"`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(
       'baz',
       true,
@@ -44,8 +53,10 @@ describe('formatProp', () => {
       defaultOptions
     );
   });
+
   it('should format prop with a value and a default value', () => {
     formatPropValue.mockReturnValue('"MockedPropValue"');
+
     expect(
       formatProp('foo', true, 'bar', true, 'baz', true, 0, defaultOptions)
     ).toEqual({
@@ -54,6 +65,7 @@ describe('formatProp', () => {
   foo="MockedPropValue"`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(
       'bar',
       true,
@@ -61,12 +73,14 @@ describe('formatProp', () => {
       defaultOptions
     );
   });
+
   it('should format a truthy boolean prop (with short syntax)', () => {
     const options = {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     };
     formatPropValue.mockReturnValue('{true}');
+
     expect(
       formatProp('foo', true, true, false, false, true, 0, options)
     ).toEqual({
@@ -75,14 +89,17 @@ describe('formatProp', () => {
   foo`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
   });
+
   it('should ignore a falsy boolean prop (with short syntax)', () => {
     const options = {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     };
     formatPropValue.mockReturnValue('{false}');
+
     expect(
       formatProp('foo', true, false, false, null, true, 0, options)
     ).toEqual({
@@ -90,14 +107,17 @@ describe('formatProp', () => {
       attributeFormattedMultiline: '',
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
   });
+
   it('should format a truthy boolean prop (with explicit syntax)', () => {
     const options = {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     };
     formatPropValue.mockReturnValue('{true}');
+
     expect(
       formatProp('foo', true, true, false, false, true, 0, options)
     ).toEqual({
@@ -106,14 +126,17 @@ describe('formatProp', () => {
   foo={true}`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
   });
+
   it('should format a falsy boolean prop (with explicit syntax)', () => {
     const options = {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     };
     formatPropValue.mockReturnValue('{false}');
+
     expect(
       formatProp('foo', true, false, false, false, true, 0, options)
     ).toEqual({
@@ -122,13 +145,16 @@ describe('formatProp', () => {
   foo={false}`,
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
   });
+
   it('should format a mulitline props', () => {
     formatPropValue.mockReturnValue(`{[
 "a",
 "b"
 ]}`);
+
     expect(
       formatProp(
         'foo',
@@ -152,6 +178,7 @@ describe('formatProp', () => {
 ]}`,
       isMultilineAttribute: true,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith(
       ['a', 'b'],
       false,
@@ -159,6 +186,7 @@ describe('formatProp', () => {
       defaultOptions
     );
   });
+
   it('should indent the formatted string', () => {
     /*
      * lvl 4 and tabStop 2 :
@@ -171,6 +199,7 @@ describe('formatProp', () => {
       tabStop: 2,
     };
     formatPropValue.mockReturnValue('"MockedPropValue"');
+
     expect(
       formatProp('foo', true, 'bar', false, null, true, 4, options)
     ).toEqual({
@@ -180,6 +209,7 @@ describe('formatProp', () => {
       // 10 spaces
       isMultilineAttribute: false,
     });
+
     expect(formatPropValue).toHaveBeenCalledWith('bar', true, 4, options);
   });
 });

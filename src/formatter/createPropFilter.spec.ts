@@ -7,8 +7,8 @@ describe('createPropFilter', () => {
       b: 2,
       c: 3,
     };
-
     const filter = createPropFilter(props, ['b']);
+
     const filteredPropKeys = Object.keys(props).filter(filter);
 
     expect(filteredPropKeys).toEqual(['a', 'c']);
@@ -20,11 +20,11 @@ describe('createPropFilter', () => {
       b: 2,
       c: 3,
     };
-
     const filter = createPropFilter(
       props,
       (val, key) => key !== 'b' && val < 3
     );
+
     const filteredPropKeys = Object.keys(props).filter(filter);
 
     expect(filteredPropKeys).toEqual(['a']);

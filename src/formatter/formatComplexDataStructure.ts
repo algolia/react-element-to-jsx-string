@@ -14,6 +14,7 @@ export default (
   options: Options
 ): string => {
   const normalizedValue = sortObject(value);
+
   const stringifiedValue = prettyPrint(normalizedValue, {
     transform: (currentObj, prop, originalResult) => {
       const currentValue = currentObj[prop];
