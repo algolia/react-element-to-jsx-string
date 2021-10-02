@@ -68,6 +68,7 @@ describe('formatPropValue', () => {
         showFunctions: true,
       })
     ).toBe('{function Myfunction() {}}');
+
     expect(
       formatPropValue(doThings, false, 0, {
         functionValue,
@@ -80,6 +81,7 @@ describe('formatPropValue', () => {
     expect(formatPropValue(<div />, false, 0, {})).toBe(
       '{<MockedFormatTreeNodeResult />}'
     );
+
     expect(parseReactElement).toHaveBeenCalledTimes(1);
     expect(formatTreeNode).toHaveBeenCalledTimes(1);
   });
