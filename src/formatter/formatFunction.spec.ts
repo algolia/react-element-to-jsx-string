@@ -1,7 +1,7 @@
 import formatFunction from './formatFunction';
 
 jest.mock(
-  './formatReactElementNode.js',
+  './formatReactElementNode',
   () => (node) => `<${node.displayName} />`
 );
 
@@ -35,7 +35,7 @@ describe('formatFunction', () => {
       formatFunction(() => 1, {
         showFunctions: true,
       })
-    ).toEqual('function () {return 1;}');
+    ).toEqual('() => 1');
   });
 
   it('should use the functionValue option', () => {

@@ -887,10 +887,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('should return the actual functions when "showFunctions" is true', () => {
-    /* eslint-disable arrow-body-style */
-    const fn = () => {
+    function fn() {
       return 'value';
-    };
+    }
 
     expect(
       reactElementToJSXString(<div fn={fn} />, {
@@ -900,10 +899,9 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('should expose the multiline "functionValue" formatter', () => {
-    /* eslint-disable arrow-body-style */
-    const fn = () => {
+    function fn() {
       return 'value';
-    };
+    }
 
     expect(
       reactElementToJSXString(<div fn={fn} />, {
