@@ -22,7 +22,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run test
       - run: yarn run lint
-      - run: yarn run flow
+      - run: yarn run tsc --noEmit
       - run: yarn run smoke cjs 15.6.2
       - run: yarn run smoke esm 15.6.2
       - run: yarn run smoke cjs 16.7.0

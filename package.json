@@ -84,6 +84,8 @@
     "react-is": "17.0.2"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.ts"]
+    "setupFilesAfterEnv": [
+      "<rootDir>tests/setupTests.ts"
+    ]
   }
 }

@@ -1,5 +1,4 @@
 **/*.spec.js
-**/*.spec.js.flow
 
 .github/
 !dist/
@@ -9,7 +8,6 @@ tests/
 .babelrc
 .eslintignore
 .eslintrc.js
-.flowconfig
 .travis.yml
 .prettier
 .prettierignore
