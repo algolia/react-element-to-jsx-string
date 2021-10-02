@@ -19,7 +19,7 @@ function safeSortObject(value: any, seen: WeakSet<any>): any {
 
   // make a copy of array with each item passed through the sorting algorithm
   if (Array.isArray(value)) {
-    return value.map(v => safeSortObject(v, seen));
+    return value.map((v) => safeSortObject(v, seen));
   }
 
   // make a copy of object with key sorted
@@ -31,9 +31,11 @@ function safeSortObject(value: any, seen: WeakSet<any>): any {
       }
       if (key === 'current' || seen.has(value[key])) {
         // eslint-disable-next-line no-param-reassign
+        // @ts-expect-error: flow to TS
         result[key] = '[Circular]';
       } else {
         // eslint-disable-next-line no-param-reassign
+        // @ts-expect-error: flow to TS
         result[key] = safeSortObject(value[key], seen);
       }
 

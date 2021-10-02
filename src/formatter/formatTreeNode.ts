@@ -2,6 +2,7 @@ import formatReactElementNode from './formatReactElementNode';
 import formatReactFragmentNode from './formatReactFragmentNode';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
+
 const jsxStopChars = ['<', '>', '{', '}'];
 
 const shouldBeEscaped = (s: string) =>
@@ -53,5 +54,6 @@ export default (
     return formatReactFragmentNode(node, inline, lvl, options);
   }
 
+  // @ts-expect-error: So should never be executed
   throw new TypeError(`Unknow format type "${node.type}"`);
 };
