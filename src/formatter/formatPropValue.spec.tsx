@@ -44,7 +44,9 @@ describe('formatPropValue', () => {
   });
 
   it('should show the function prop value implementation if "showFunctions" option is true', () => {
-    const doThings = (a) => a * 2;
+    function doThings(a) {
+      return a * 2;
+    }
 
     expect(
       formatPropValue(doThings, false, 0, {
