@@ -79,6 +79,7 @@ describe('formatProp', () => {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     };
+
     formatPropValue.mockReturnValue('{true}');
 
     expect(
@@ -98,6 +99,7 @@ describe('formatProp', () => {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     };
+
     formatPropValue.mockReturnValue('{false}');
 
     expect(
@@ -116,6 +118,7 @@ describe('formatProp', () => {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     };
+
     formatPropValue.mockReturnValue('{true}');
 
     expect(
@@ -135,6 +138,7 @@ describe('formatProp', () => {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     };
+
     formatPropValue.mockReturnValue('{false}');
 
     expect(
@@ -198,6 +202,7 @@ describe('formatProp', () => {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     };
+
     formatPropValue.mockReturnValue('"MockedPropValue"');
 
     expect(

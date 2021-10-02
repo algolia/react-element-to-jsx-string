@@ -1,5 +1,6 @@
 import React from 'react';
 import formatReactElementNode from './formatReactElementNode';
+
 const defaultOptions = {
   filterProps: [],
   showDefaultProps: true,
@@ -8,6 +9,7 @@ const defaultOptions = {
   useBooleanShorthandSyntax: true,
   sortProps: true,
 };
+
 describe('formatReactElementNode', () => {
   it('should format a react element with a string a children', () => {
     const tree = {
@@ -22,10 +24,12 @@ describe('formatReactElementNode', () => {
         },
       ],
     };
+
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(`<h1>
   Hello world
 </h1>`);
   });
+
   it('should format a single depth react element', () => {
     const tree = {
       type: 'ReactElement',
@@ -38,10 +42,12 @@ describe('formatReactElementNode', () => {
       },
       childrens: [],
     };
+
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
       '<aaa foo="41" />'
     );
   });
+
   it('should format a react element with an object as props', () => {
     const tree = {
       type: 'ReactElement',
@@ -64,6 +70,7 @@ describe('formatReactElementNode', () => {
       },
       childrens: [],
     };
+
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(`<div
   a={{
     aa: '1',
@@ -73,6 +80,7 @@ describe('formatReactElementNode', () => {
   }}
  />`);
   });
+
   it('should format a react element with another react element as props', () => {
     const tree = {
       type: 'ReactElement',
@@ -85,10 +93,12 @@ describe('formatReactElementNode', () => {
       },
       childrens: [],
     };
+
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
       '<div a={<span b="42" />} />'
     );
   });
+
   it('should format a react element with multiline children', () => {
     const tree = {
       type: 'ReactElement',
@@ -102,12 +112,14 @@ describe('formatReactElementNode', () => {
         },
       ],
     };
+
     expect(formatReactElementNode(tree, false, 0, defaultOptions))
       .toEqual(`<div>
   first line
   second line
   third line
 </div>`);
+
     expect(formatReactElementNode(tree, false, 2, defaultOptions))
       .toEqual(`<div>
       first line
@@ -115,6 +127,7 @@ describe('formatReactElementNode', () => {
       third line
     </div>`);
   });
+
   it('should allow filtering props by function', () => {
     const tree = {
       type: 'ReactElement',
@@ -135,6 +148,7 @@ describe('formatReactElementNode', () => {
       ...defaultOptions,
       filterProps: (val, key) => !key.startsWith('on'),
     };
+
     expect(formatReactElementNode(tree, false, 0, options))
       .toEqual(`<h1 className="myClass">
   Hello world
