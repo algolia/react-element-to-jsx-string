@@ -4,7 +4,6 @@ import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
 const jsxStopChars = ['<', '>', '{', '}'];
-
 const shouldBeEscaped = (s: string) =>
   jsxStopChars.some((jsxStopChar) => s.includes(jsxStopChar));
 
@@ -18,7 +17,6 @@ const escape = (s: string) => {
 
 const preserveTrailingSpace = (s: string) => {
   let result = s;
-
   if (result.endsWith(' ')) {
     result = result.replace(/^(.*?)(\s+)$/, "$1{'$2'}");
   }

@@ -1,8 +1,10 @@
 import formatTreeNode from './formatTreeNode';
+
 jest.mock(
   './formatReactElementNode',
   () => () => '<MockedFormatReactElementNodeResult />'
 );
+
 describe('formatTreeNode', () => {
   it('should format number tree node', () => {
     expect(
@@ -17,6 +19,7 @@ describe('formatTreeNode', () => {
       )
     ).toBe('42');
   });
+
   it('should format string tree node', () => {
     expect(
       formatTreeNode(
@@ -30,6 +33,7 @@ describe('formatTreeNode', () => {
       )
     ).toBe('foo');
   });
+
   it('should format react element tree node', () => {
     expect(
       formatTreeNode(
@@ -43,6 +47,7 @@ describe('formatTreeNode', () => {
       )
     ).toBe('<MockedFormatReactElementNodeResult />');
   });
+
   const jsxDelimiters = ['<', '>', '{', '}'];
   jsxDelimiters.forEach((char) => {
     it(`should escape string that contains the JSX delimiter "${char}"`, () => {
@@ -59,6 +64,7 @@ describe('formatTreeNode', () => {
       ).toBe(`{\`I contain ${char}, is will be escaped\`}`);
     });
   });
+
   it('should preserve the format of string', () => {
     expect(
       formatTreeNode(
@@ -72,6 +78,7 @@ describe('formatTreeNode', () => {
       )
     ).toBe(`foo
 bar`);
+
     expect(
       formatTreeNode(
         {

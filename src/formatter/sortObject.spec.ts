@@ -1,4 +1,5 @@
 import sortObject from './sortObject';
+
 describe('sortObject', () => {
   it('should sort keys in objects', () => {
     const fixture = {
@@ -14,6 +15,7 @@ describe('sortObject', () => {
         },
       ],
     };
+
     expect(JSON.stringify(sortObject(fixture))).toEqual(
       JSON.stringify({
         a: [
@@ -30,6 +32,7 @@ describe('sortObject', () => {
       })
     );
   });
+
   it('should process an array', () => {
     const fixture = [
       {
@@ -43,6 +46,7 @@ describe('sortObject', () => {
         a: 3,
       },
     ];
+
     expect(JSON.stringify(sortObject(fixture))).toEqual(
       JSON.stringify([
         {
@@ -58,6 +62,7 @@ describe('sortObject', () => {
       ])
     );
   });
+
   it('should not break special values', () => {
     const date = new Date();
     const regexp = /test/g;
@@ -66,6 +71,7 @@ describe('sortObject', () => {
       b: regexp,
       c: date,
     };
+
     expect(sortObject(fixture)).toEqual({
       a: [date, regexp],
       b: regexp,
