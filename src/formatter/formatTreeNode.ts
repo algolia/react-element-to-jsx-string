@@ -1,7 +1,7 @@
 import formatReactElementNode from './formatReactElementNode';
 import formatReactFragmentNode from './formatReactFragmentNode';
-import type { Options } from './../options';
-import type { TreeNode } from './../tree';
+import type { Options } from '../options';
+import type { TreeNode } from '../tree';
 
 const jsxStopChars = ['<', '>', '{', '}'];
 const shouldBeEscaped = (s: string) =>

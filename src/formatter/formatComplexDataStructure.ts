@@ -1,11 +1,11 @@
 import { isValidElement } from 'react';
 import { prettyPrint } from '@base2/pretty-print-object';
 import sortObject from './sortObject';
-import parseReactElement from './../parser/parseReactElement';
+import parseReactElement from '../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
 import formatFunction from './formatFunction';
 import spacer from './spacer';
-import type { Options } from './../options';
+import type { Options } from '../options';
 
 export default (
   value: Record<string, any> | Array<any>,

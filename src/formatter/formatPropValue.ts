@@ -3,8 +3,8 @@ import { isValidElement } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
-import type { Options } from './../options';
-import parseReactElement from './../parser/parseReactElement';
+import type { Options } from '../options';
+import parseReactElement from '../parser/parseReactElement';
 
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
@@ -49,7 +49,7 @@ const formatPropValue = (
   }
 
   if (propValue instanceof Date) {
-    if (isNaN(propValue.valueOf())) {
+    if (Number.isNaN(propValue.valueOf())) {
       return `{new Date(NaN)}`;
     }
 
