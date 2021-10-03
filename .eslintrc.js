@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['algolia', 'algolia/jest', 'algolia/react'],
+  extends: ['airbnb', 'airbnb-typescript', 'prettier'],
+
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+  },
 
   env: {
     es6: true,
@@ -12,10 +16,10 @@ module.exports = {
   },
 
   rules: {
-    'max-params': ['error', 10],
-    'no-warning-comments': 'error',
-
-    'import/no-commonjs': 'off',
+    'import/no-cycle': 'off', // TODO: We have to fix our cycle issue before being able to activate it again
+    'no-underscore-dangle': 'off',
+    'prefer-destructuring': 'off',
+    'react/jsx-fragments': 'off',
   },
 
   overrides: [

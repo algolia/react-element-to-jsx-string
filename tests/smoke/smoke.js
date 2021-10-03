@@ -4,7 +4,7 @@
 
 require = require('esm')(module);
 
-const requireReactElementToJsxString = buildType => {
+const requireReactElementToJsxString = (buildType) => {
   if (buildType === 'esm') {
     return require(`./../../dist/esm`).default;
   } else if (buildType === 'cjs') {

@@ -30,7 +30,7 @@ const deleteExistingDependencies = () => () => {
   }
 };
 
-const preparePackageJson = reactVersion => () => {
+const preparePackageJson = (reactVersion) => () => {
   const packageJson = {
     name: 'smoke',
     version: '0.0.1',
@@ -67,4 +67,4 @@ Promise.resolve()
   .then(deleteExistingDependencies())
   .then(preparePackageJson(requestedReactVersion))
   .then(installDependencies())
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
