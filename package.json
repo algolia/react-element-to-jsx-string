@@ -81,7 +81,7 @@
   "dependencies": {
     "@base2/pretty-print-object": "1.0.1",
     "is-plain-object": "5.0.0",
-    "react-is": "^17.0.2"
+    "react-is": "17.0.2"
   },
   "jest": {
     "setupFilesAfterEnv": ["<rootDir>tests/setupTests.js"]
