@@ -12,14 +12,14 @@ import {
   isSuspense,
   Memo,
 } from 'react-is';
-import type { Options } from './../options';
+import type { Options } from '../options';
 import {
   createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
-} from './../tree';
-import type { TreeNode } from './../tree';
+} from '../tree';
+import type { TreeNode } from '../tree';
 
 const supportFragment = Boolean(Fragment);
 
@@ -110,7 +110,9 @@ const filterProps = (
   const filteredProps: Record<string, any> = {};
   Object.keys(originalProps)
     .filter((key) => cb(originalProps[key], key))
-    .forEach((key) => (filteredProps[key] = originalProps[key]));
+    .forEach((key) => {
+      filteredProps[key] = originalProps[key];
+    });
   return filteredProps;
 };
 
@@ -122,9 +124,13 @@ const parseReactElement = (
 
   if (typeof element === 'string') {
     return createStringTreeNode(element);
-  } else if (typeof element === 'number') {
+  }
+
+  if (typeof element === 'number') {
     return createNumberTreeNode(element);
-  } else if (!React.isValidElement(element)) {
+  }
+
+  if (!React.isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
     );

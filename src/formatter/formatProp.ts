@@ -1,6 +1,6 @@
 import spacer from './spacer';
 import formatPropValue from './formatPropValue';
-import type { Options } from './../options';
+import type { Options } from '../options';
 
 export default (
   name: string,

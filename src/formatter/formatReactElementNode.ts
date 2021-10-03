@@ -4,8 +4,8 @@ import formatProp from './formatProp';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import sortPropsByNames from './sortPropsByNames';
 import createPropFilter from './createPropFilter';
-import type { Options } from './../options';
-import type { ReactElementTreeNode } from './../tree';
+import type { Options } from '../options';
+import type { ReactElementTreeNode } from '../tree';
 
 const compensateMultilineStringElementIndentation = (
   element: any,

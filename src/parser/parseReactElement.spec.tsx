@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-brace-presence */
+
 import React, { Fragment } from 'react';
 import parseReactElement from './parseReactElement';
 

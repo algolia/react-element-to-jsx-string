@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactElement } from 'react';
 
 export type Options = {
   filterProps: string[];
@@ -11,5 +11,5 @@ export type Options = {
   sortProps: boolean;
 
   maxInlineAttributesLineLength?: number;
-  displayName?: (element: React.ReactElement) => string;
+  displayName?: (element: ReactElement) => string;
 };

@@ -3,8 +3,8 @@ import {
   createNumberTreeNode,
   createStringTreeNode,
   createReactElementTreeNode,
-} from './../tree';
-import type { TreeNode } from './../tree';
+} from '../tree';
+import type { TreeNode } from '../tree';
 
 test('mergeSiblingPlainStringChildrenReducer should merge sibling string tree nodes', () => {
   const childrens: TreeNode[] = [

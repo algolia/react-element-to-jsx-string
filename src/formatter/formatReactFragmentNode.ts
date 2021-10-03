@@ -1,11 +1,12 @@
 import type { Key } from 'react';
 import formatReactElementNode from './formatReactElementNode';
-import type { Options } from './../options';
+import type { Options } from '../options';
 import type {
   ReactElementTreeNode,
   ReactFragmentTreeNode,
   TreeNode,
-} from './../tree';
+} from '../tree';
+
 const REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX = '';
 const REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX = 'React.Fragment';
 
