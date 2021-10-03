@@ -1,5 +1,5 @@
-import { createStringTreeNode } from './../tree';
-import type { TreeNode } from './../tree';
+import { createStringTreeNode } from '../tree';
+import type { TreeNode } from '../tree';
 
 export default (
   previousNodes: TreeNode[],

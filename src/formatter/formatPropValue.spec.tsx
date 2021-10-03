@@ -1,6 +1,6 @@
 import React from 'react';
 import formatPropValue from './formatPropValue';
-import parseReactElement from './../parser/parseReactElement';
+import parseReactElement from '../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
 import formatComplexDataStructure from './formatComplexDataStructure';
 
