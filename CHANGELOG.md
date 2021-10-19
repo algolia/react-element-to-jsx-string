@@ -1,3 +1,12 @@
+## [14.3.4](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.3...v14.3.4) (2021-10-19)
+
+
+### Bug Fixes
+
+* stringifying elements with props containing circular references ([#660](https://github.com/algolia/react-element-to-jsx-string/issues/660)) ([f203060](https://github.com/algolia/react-element-to-jsx-string/commit/f203060004e59af945019dad32a05f67508cc947))
+
+
+
 ## [14.3.3](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.2...v14.3.3) (2021-10-19)
 
 
