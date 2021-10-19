@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
+import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json';
 
 const extractExternals = () => [
@@ -9,8 +10,11 @@ const extractExternals = () => [
   ...Object.keys(pkg.peerDependencies || {}),
 ];
 
-export default {
-  input: 'src/index.js',
+/**
+ * @type {import('rollup').RollupOptions}
+ */
+const config = {
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
@@ -25,15 +29,16 @@ export default {
   ],
   external: extractExternals(),
   plugins: [
-    babel({
-      babelrc: false,
-      exclude: 'node_modules/**',
-      presets: [
-        '@babel/preset-env',
-        '@babel/preset-react',
-        '@babel/preset-typescript',
-      ],
-    }),
+    typescript(),
+    // babel({
+    //   babelrc: false,
+    //   exclude: 'node_modules/**',
+    //   presets: [
+    //     '@babel/preset-env',
+    //     '@babel/preset-react',
+    //     '@babel/preset-typescript',
+    //   ],
+    // }),
     resolve({
       mainFields: ['module', 'main', 'jsnext', 'browser'],
     }),
@@ -41,3 +46,5 @@ export default {
     builtins(),
   ],
 };
+
+export default config;

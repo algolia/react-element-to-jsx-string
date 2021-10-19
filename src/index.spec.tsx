@@ -2,7 +2,12 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/jsx-curly-brace-presence */
+/* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-string-refs */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable react/destructuring-assignment */
 
 import React, { Fragment, Component } from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
@@ -842,6 +847,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: false })', () => {
     expect(
       reactElementToJSXString(
+        // eslint-disable-next-line react/jsx-boolean-value
         <TestComponent testTrue={true} testFalse={false} />,
         {
           useBooleanShorthandSyntax: false,

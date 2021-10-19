@@ -9,14 +9,15 @@
   "scripts": {
     "build": "rollup -c",
     "prebuild": "rm -rf dist/",
+    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "lint": "eslint --ext ts --ext tsx src/",
     "lint:fix": "yarn run lint -- --fix",
     "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "release": "./release.sh",
-    "smoke": "node tests/smoke/run",
-    "ts:progress": "tsc > tserrors.txt"
+    "smoke": "node tests/smoke/run"
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -30,6 +31,7 @@
     "@babel/preset-env": "7.15.6",
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@rollup/plugin-typescript": "^8.2.5",
     "@types/enzyme": "^3.10.9",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^27.0.2",
@@ -83,8 +85,6 @@
     "react-is": "17.0.2"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setupTests.ts"
-    ]
+    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.ts"]
   }
 }
