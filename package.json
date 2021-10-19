@@ -10,14 +10,15 @@
   "scripts": {
     "build": "rollup -c",
     "prebuild": "rm -rf dist/",
+    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "lint": "eslint --ext ts --ext tsx src/",
     "lint:fix": "yarn run lint -- --fix",
     "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "release": "./release.sh",
-    "smoke": "node tests/smoke/run",
-    "ts:progress": "tsc > tserrors.txt"
+    "smoke": "node tests/smoke/run"
   },
   "author": {
     "name": "Algolia, Inc.",

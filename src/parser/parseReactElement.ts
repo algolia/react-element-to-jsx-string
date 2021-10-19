@@ -1,5 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement, ReactNode } from 'react';
 import {
   ForwardRef,
   isContextConsumer,
@@ -104,7 +103,7 @@ const onlyMeaningfulChildren = (children: ReactNode): boolean =>
   children !== '';
 
 const filterProps = (
-  originalProps: Record<string, any>,
+  originalProps: Record<string, unknown>,
   cb: (propsValue: any, propsName: string) => boolean
 ): Record<string, any> => {
   const filteredProps: Record<string, any> = {};
@@ -137,6 +136,7 @@ const parseReactElement = (
   }
 
   const displayName = displayNameFn(element);
+  // @ts-expect-error: flow to TS
   const props = filterProps(element.props, noChildren);
 
   const key = element.key;
@@ -148,9 +148,11 @@ const parseReactElement = (
 
   // @ts-expect-error: flow to TS
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
+  // @ts-expect-error: flow to TS
   const children = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
-    .map((child: ReactElement<any>) => parseReactElement(child, options));
+    // @ts-expect-error: flow to TS
+    .map((child: ReactNode) => parseReactElement(child, options));
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, children);
