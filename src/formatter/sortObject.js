@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from 'react';
 
-export default function sortObject(value: any): any {
+function safeSortObject(value: any, seen: WeakSet<any>): any {
   // return non-object value as is
   if (value === null || typeof value !== 'object') {
     return value;
@@ -16,9 +16,11 @@ export default function sortObject(value: any): any {
     return value;
   }
 
-  // make a copy of array with each item passed through sortObject()
+  seen.add(value);
+
+  // make a copy of array with each item passed through the sorting algorithm
   if (Array.isArray(value)) {
-    return value.map(sortObject);
+    return value.map(v => safeSortObject(v, seen));
   }
 
   // make a copy of object with key sorted
@@ -28,13 +30,17 @@ export default function sortObject(value: any): any {
       if (key === '_owner') {
         return result;
       }
-      if (key === 'current') {
+      if (key === 'current' || seen.has(value[key])) {
         // eslint-disable-next-line no-param-reassign
         result[key] = '[Circular]';
       } else {
         // eslint-disable-next-line no-param-reassign
-        result[key] = sortObject(value[key]);
+        result[key] = safeSortObject(value[key], seen);
       }
       return result;
     }, {});
+}
+
+export default function sortObject(value: any): any {
+  return safeSortObject(value, new WeakSet());
 }
