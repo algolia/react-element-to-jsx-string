@@ -1355,4 +1355,23 @@ describe('reactElementToJSXString(ReactElement)', () => {
   ]}
  />`);
   });
+
+  it('should stringify element with a prop that has circular references', () => {
+    const parent = {};
+    const child = {};
+    parent.child = child;
+    child.parent = parent;
+
+    function Comp() {
+      return null;
+    }
+
+    expect(reactElementToJSXString(<Comp prop={parent} />)).toEqual(`<Comp
+  prop={{
+    child: {
+      parent: '[Circular]'
+    }
+  }}
+ />`);
+  });
 });
