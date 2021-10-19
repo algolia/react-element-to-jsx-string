@@ -1,3 +1,19 @@
+## [14.3.3](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.2...v14.3.3) (2021-10-19)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency react-is to 17.0.2 ([a62c5fd](https://github.com/algolia/react-element-to-jsx-string/commit/a62c5fdaa33d4e891631ba48661f8466c96d809d))
+* fixed crashing on circular React elements ([#619](https://github.com/algolia/react-element-to-jsx-string/issues/619)) ([ea73118](https://github.com/algolia/react-element-to-jsx-string/commit/ea73118d80e668510d7de1ec23215248ef72b0a1))
+* handle invalid Date objects ([#605](https://github.com/algolia/react-element-to-jsx-string/issues/605)) ([#606](https://github.com/algolia/react-element-to-jsx-string/issues/606)) ([dbbd9e5](https://github.com/algolia/react-element-to-jsx-string/commit/dbbd9e5e0bb1e766910809da77e5a6126897202a))
+
+
+### Features
+
+* support more element types ([#617](https://github.com/algolia/react-element-to-jsx-string/issues/617)) ([bf7f4cf](https://github.com/algolia/react-element-to-jsx-string/commit/bf7f4cf8d31494997b9d5f36f238286d67cd6ae1))
+
+
+
 ## [14.3.2](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.1...v14.3.2) (2020-10-28)
 
 
