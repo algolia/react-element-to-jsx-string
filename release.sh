@@ -13,11 +13,11 @@ if [[ $# -eq 0 ]] ; then
   exit 1
 fi
 
-mversion $1
-conventional-changelog --infile CHANGELOG.md --same-file --preset angular
-doctoc README.md
+yarn run mversion $1
+yarn run conventional-changelog --infile CHANGELOG.md --same-file --preset angular
+yarn run doctoc README.md
 git commit -am "$(json -f package.json version)"
 git tag v`json -f package.json version`
-git push
-git push --tags
+git push origin master
+git push --tags origin master
 npm publish
