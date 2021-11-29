@@ -2,11 +2,11 @@
 
 import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
+import type { Options } from './../options';
+import parseReactElement from './../parser/parseReactElement';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
-import type { Options } from './../options';
-import parseReactElement from './../parser/parseReactElement';
 
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
@@ -51,6 +51,14 @@ const formatPropValue = (
       lvl,
       options
     )}}`;
+  }
+
+  // handle forwardRef and memo
+  if (isPlainObject(propValue) && propValue.$$typeof) {
+    return `{${propValue.displayName ||
+      propValue.type?.name ||
+      propValue.render?.name ||
+      'Component'}}`;
   }
 
   if (propValue instanceof Date) {

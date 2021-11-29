@@ -135,4 +135,32 @@ describe('formatPropValue', () => {
 
     expect(formatPropValue(new Map(), false, 0, {})).toBe('{[object Map]}');
   });
+
+  it('should format a memoized React component prop value', () => {
+    const Component = React.memo(function Foo() {
+      return <div />;
+    });
+
+    expect(formatPropValue(Component, false, 0, {})).toBe('{Foo}');
+
+    const Unnamed = React.memo(function() {
+      return <div />;
+    });
+
+    expect(formatPropValue(Unnamed, false, 0, {})).toBe('{Component}');
+  });
+
+  it('should format a forwarded React component prop value', () => {
+    const Component = React.forwardRef(function Foo(props, forwardedRef) {
+      return <div {...props} ref={forwardedRef} />;
+    });
+
+    expect(formatPropValue(Component, false, 0, {})).toBe('{Foo}');
+
+    const Unnamed = React.forwardRef(function(props, forwardedRef) {
+      return <div {...props} ref={forwardedRef} />;
+    });
+
+    expect(formatPropValue(Unnamed, false, 0, {})).toBe('{Component}');
+  });
 });
