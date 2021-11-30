@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Element as ReactElement, Fragment } from 'react';
+import React, { type Element as ReactElement, Fragment } from 'react';
 import {
   isContextConsumer,
   isContextProvider,

@@ -1,6 +1,6 @@
 /* @flow */
 
-const getFunctionTypeName = (functionType): string => {
+const getFunctionTypeName = (functionType: Function): string => {
   if (!functionType.name || functionType.name === '_default') {
     return 'Component';
   }
