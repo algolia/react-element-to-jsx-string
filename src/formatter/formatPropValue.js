@@ -2,12 +2,12 @@
 
 import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
-import { ForwardRef, Memo } from 'react-is';
 import type { Options } from './../options';
 import parseReactElement from './../parser/parseReactElement';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
+import getWrappedComponentDisplayName from './getWrappedComponentDisplayName';
 
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
@@ -55,18 +55,8 @@ const formatPropValue = (
   }
 
   // handle memo & forwardRef
-  if (
-    isPlainObject(propValue) &&
-    (propValue.$$typeof === Memo || propValue.$$typeof === ForwardRef)
-  ) {
-    // render = forwardRef
-    // type = memo
-    const target = propValue.render || propValue.type;
-
-    // go deeper if necessary
-    return target.$$typeof
-      ? formatPropValue(target, inline, lvl, options)
-      : `{${propValue.displayName || target.name || 'Component'}}`;
+  if (isPlainObject(propValue) && propValue.$$typeof) {
+    return `{${getWrappedComponentDisplayName(propValue)}}`;
   }
 
   if (propValue instanceof Date) {

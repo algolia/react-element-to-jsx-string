@@ -1,8 +1,7 @@
 /* @flow */
 
-import React, { type Element as ReactElement, Fragment } from 'react';
+import React, { Element as ReactElement, Fragment } from 'react';
 import {
-  ForwardRef,
   isContextConsumer,
   isContextProvider,
   isForwardRef,
@@ -11,38 +10,19 @@ import {
   isProfiler,
   isStrictMode,
   isSuspense,
-  Memo,
 } from 'react-is';
+import getFunctionTypeName from '../formatter/getFunctionTypeName';
+import getWrappedComponentDisplayName from '../formatter/getWrappedComponentDisplayName';
 import type { Options } from './../options';
+import type { TreeNode } from './../tree';
 import {
-  createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
+  createStringTreeNode,
 } from './../tree';
-import type { TreeNode } from './../tree';
 
 const supportFragment = Boolean(Fragment);
-
-const getFunctionTypeName = (functionType): string => {
-  if (!functionType.name || functionType.name === '_default') {
-    return 'No Display Name';
-  }
-  return functionType.name;
-};
-
-const getWrappedComponentDisplayName = (Component: *): string => {
-  switch (true) {
-    case Boolean(Component.displayName):
-      return Component.displayName;
-    case Component.$$typeof === Memo:
-      return getWrappedComponentDisplayName(Component.type);
-    case Component.$$typeof === ForwardRef:
-      return getWrappedComponentDisplayName(Component.render);
-    default:
-      return getFunctionTypeName(Component);
-  }
-};
 
 // heavily inspired by:
 // https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
