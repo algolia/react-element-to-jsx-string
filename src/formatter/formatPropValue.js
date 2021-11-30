@@ -2,6 +2,7 @@
 
 import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
+import { ForwardRef, Memo } from 'react-is';
 import type { Options } from './../options';
 import parseReactElement from './../parser/parseReactElement';
 import formatComplexDataStructure from './formatComplexDataStructure';
@@ -53,12 +54,19 @@ const formatPropValue = (
     )}}`;
   }
 
-  // handle forwardRef and memo
-  if (isPlainObject(propValue) && propValue.$$typeof) {
-    return `{${propValue.displayName ||
-      propValue.type?.name ||
-      propValue.render?.name ||
-      'Component'}}`;
+  // handle memo & forwardRef
+  if (
+    isPlainObject(propValue) &&
+    (propValue.$$typeof === Memo || propValue.$$typeof === ForwardRef)
+  ) {
+    // render = forwardRef
+    // type = memo
+    const target = propValue.render || propValue.type;
+
+    // go deeper if necessary
+    return target.$$typeof
+      ? formatPropValue(target, inline, lvl, options)
+      : `{${propValue.displayName || target.name || 'Component'}}`;
   }
 
   if (propValue instanceof Date) {

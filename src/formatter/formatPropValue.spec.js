@@ -163,4 +163,14 @@ describe('formatPropValue', () => {
 
     expect(formatPropValue(Unnamed, false, 0, {})).toBe('{Component}');
   });
+
+  it('should format a memoized & forwarded React component prop value', () => {
+    const Component = React.memo(
+      React.forwardRef(function Foo(props, forwardedRef) {
+        return <div {...props} ref={forwardedRef} />;
+      })
+    );
+
+    expect(formatPropValue(Component, false, 0, {})).toBe('{Foo}');
+  });
 });
