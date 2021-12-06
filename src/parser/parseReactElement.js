@@ -81,7 +81,7 @@ const constructSelector = element => {
   if (element.id) {
     selector = `#${element.id}`;
   } else if (element.classList.length) {
-    selector += `.${element.classList.join('.')}`;
+    selector += `.${Array.from(element.classList).join('.')}`;
   }
 
   return selector;
