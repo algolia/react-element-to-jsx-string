@@ -192,6 +192,29 @@ describe('parseReactElement', () => {
       parseReactElement(ReactDOM.createPortal(<div />, document.body), options)
     ).toEqual({
       type: 'ReactPortal',
+      containerSelector: 'body',
+      childrens: [
+        {
+          type: 'ReactElement',
+          displayName: 'div',
+          defaultProps: {},
+          props: {},
+          childrens: [],
+        },
+      ],
+    });
+  });
+
+  it('should create a more specific target selector for portals if possible', () => {
+    const targetRoot = document.createElement('div');
+    targetRoot.id = 'foo';
+    document.body.appendChild(targetRoot);
+
+    expect(
+      parseReactElement(ReactDOM.createPortal(<div />, targetRoot), options)
+    ).toEqual({
+      type: 'ReactPortal',
+      containerSelector: '#foo',
       childrens: [
         {
           type: 'ReactElement',

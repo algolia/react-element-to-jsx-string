@@ -75,6 +75,18 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
   return filteredProps;
 };
 
+const constructSelector = element => {
+  let selector = element.nodeName.toLowerCase();
+
+  if (element.id) {
+    selector = `#${element.id}`;
+  } else if (element.classList.length) {
+    selector += `.${element.classList.join('.')}`;
+  }
+
+  return selector;
+};
+
 const parseReactElement = (
   element: ReactElement<*> | string | number,
   options: Options
@@ -92,7 +104,9 @@ const parseReactElement = (
     return createNumberTreeNode(element);
   } else if (isPortal(element)) {
     return createReactPortalTreeNode(
-      // $FlowFixMe
+      // $FlowFixMe need react-dom flowtypes
+      constructSelector(element.containerInfo),
+      // $FlowFixMe need react-dom flowtypes
       processChildren(element.children)
     );
   } else if (!React.isValidElement(element)) {

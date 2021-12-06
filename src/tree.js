@@ -32,6 +32,7 @@ export type ReactFragmentTreeNode = {|
 
 export type ReactPortalTreeNode = {|
   type: 'ReactPortal',
+  containerSelector: string,
   childrens: TreeNode[],
 |};
 
@@ -75,8 +76,10 @@ export const createReactFragmentTreeNode = (
 });
 
 export const createReactPortalTreeNode = (
+  containerSelector: string,
   childrens: TreeNode[]
 ): ReactPortalTreeNode => ({
   type: 'ReactPortal',
+  containerSelector,
   childrens,
 });

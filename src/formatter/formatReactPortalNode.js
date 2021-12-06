@@ -34,7 +34,7 @@ export default (
   lvl: number,
   options: Options
 ): string => {
-  const { type, childrens } = node;
+  const { type, containerSelector, childrens } = node;
 
   if (type !== 'ReactPortal') {
     throw new Error(
@@ -43,11 +43,15 @@ export default (
   }
 
   return `
-      {ReactDOM.createPortal(${formatReactElementNode(
-        toReactElementTreeNode('', undefined, childrens),
-        inline,
-        lvl,
-        options
-      )}, document.body)}
+      {ReactDOM.createPortal(${
+        childrens.length
+          ? `\n${formatReactElementNode(
+              toReactElementTreeNode('', undefined, childrens),
+              inline,
+              lvl + 2,
+              options
+            )}\n`
+          : 'null'
+      }, document.querySelector(\`${containerSelector}\`))}
   `.trim();
 };

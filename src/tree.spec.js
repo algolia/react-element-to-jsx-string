@@ -54,8 +54,9 @@ describe('createReactFragmentTreeNode', () => {
 
 describe('createReactPortalTreeNode', () => {
   it('generate a react portal typed node payload', () => {
-    expect(createReactPortalTreeNode(['abc'])).toEqual({
+    expect(createReactPortalTreeNode('#root', ['abc'])).toEqual({
       type: 'ReactPortal',
+      containerSelector: '#root',
       childrens: ['abc'],
     });
   });
