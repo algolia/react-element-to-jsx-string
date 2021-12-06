@@ -7,6 +7,7 @@ import {
   isForwardRef,
   isLazy,
   isMemo,
+  isPortal,
   isProfiler,
   isStrictMode,
   isSuspense,
@@ -19,6 +20,7 @@ import {
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
+  createReactPortalTreeNode,
   createStringTreeNode,
 } from './../tree';
 
@@ -79,10 +81,20 @@ const parseReactElement = (
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 
+  const processChildren = children =>
+    React.Children.toArray(children)
+      .filter(onlyMeaningfulChildren)
+      .map(child => parseReactElement(child, options));
+
   if (typeof element === 'string') {
     return createStringTreeNode(element);
   } else if (typeof element === 'number') {
     return createNumberTreeNode(element);
+  } else if (isPortal(element)) {
+    return createReactPortalTreeNode(
+      // $FlowFixMe
+      processChildren(element.children)
+    );
   } else if (!React.isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
@@ -103,9 +115,7 @@ const parseReactElement = (
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = React.Children.toArray(element.props.children)
-    .filter(onlyMeaningfulChildren)
-    .map(child => parseReactElement(child, options));
+  const childrens = processChildren(element.props.children);
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, childrens);

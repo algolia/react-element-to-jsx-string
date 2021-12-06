@@ -30,11 +30,17 @@ export type ReactFragmentTreeNode = {|
   childrens: TreeNode[],
 |};
 
+export type ReactPortalTreeNode = {|
+  type: 'ReactPortal',
+  childrens: TreeNode[],
+|};
+
 export type TreeNode =
   | StringTreeNode
   | NumberTreeNode
   | ReactElementTreeNode
-  | ReactFragmentTreeNode;
+  | ReactFragmentTreeNode
+  | ReactPortalTreeNode;
 
 export const createStringTreeNode = (value: string): StringTreeNode => ({
   type: 'string',
@@ -65,5 +71,12 @@ export const createReactFragmentTreeNode = (
 ): ReactFragmentTreeNode => ({
   type: 'ReactFragment',
   key,
+  childrens,
+});
+
+export const createReactPortalTreeNode = (
+  childrens: TreeNode[]
+): ReactPortalTreeNode => ({
+  type: 'ReactPortal',
   childrens,
 });

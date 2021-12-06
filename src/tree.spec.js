@@ -5,6 +5,7 @@ import {
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
+  createReactPortalTreeNode,
 } from './tree';
 
 describe('createStringTreeNode', () => {
@@ -46,6 +47,15 @@ describe('createReactFragmentTreeNode', () => {
     expect(createReactFragmentTreeNode('foo', ['abc'])).toEqual({
       type: 'ReactFragment',
       key: 'foo',
+      childrens: ['abc'],
+    });
+  });
+});
+
+describe('createReactPortalTreeNode', () => {
+  it('generate a react portal typed node payload', () => {
+    expect(createReactPortalTreeNode(['abc'])).toEqual({
+      type: 'ReactPortal',
       childrens: ['abc'],
     });
   });

@@ -192,7 +192,6 @@ describe('parseReactElement', () => {
       parseReactElement(ReactDOM.createPortal(<div />, document.body), options)
     ).toEqual({
       type: 'ReactPortal',
-      key: 'foo',
       childrens: [
         {
           type: 'ReactElement',
