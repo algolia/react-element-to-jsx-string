@@ -2,6 +2,7 @@
 
 import formatReactElementNode from './formatReactElementNode';
 import formatReactFragmentNode from './formatReactFragmentNode';
+import formatReactPortalNode from './formatReactPortalNode';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
@@ -52,6 +53,10 @@ export default (
 
   if (node.type === 'ReactFragment') {
     return formatReactFragmentNode(node, inline, lvl, options);
+  }
+
+  if (node.type === 'ReactPortal') {
+    return formatReactPortalNode(node, inline, lvl, options);
   }
 
   throw new TypeError(`Unknow format type "${node.type}"`);
