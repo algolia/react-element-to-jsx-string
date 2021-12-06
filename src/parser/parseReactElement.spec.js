@@ -1,6 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
 /* @flow */
 
 import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import parseReactElement from './parseReactElement';
 
 const options = {};
@@ -172,6 +176,24 @@ describe('parseReactElement', () => {
           props: {},
           childrens: [],
         },
+        {
+          type: 'ReactElement',
+          displayName: 'div',
+          defaultProps: {},
+          props: {},
+          childrens: [],
+        },
+      ],
+    });
+  });
+
+  it('should parse a react dom portal', () => {
+    expect(
+      parseReactElement(ReactDOM.createPortal(<div />, document.body), options)
+    ).toEqual({
+      type: 'ReactPortal',
+      key: 'foo',
+      childrens: [
         {
           type: 'ReactElement',
           displayName: 'div',
