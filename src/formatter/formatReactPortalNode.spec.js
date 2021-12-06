@@ -28,9 +28,9 @@ describe('formatReactPortalNode', () => {
     expect(formatReactPortalNode(tree, false, 0, defaultOptions))
       .toMatchInlineSnapshot(`
       "{ReactDOM.createPortal(
-      <>
-            Hello world
-          </>
+        <>
+          Hello world
+        </>
       , document.querySelector(\`body\`))}"
     `);
   });
@@ -58,10 +58,10 @@ describe('formatReactPortalNode', () => {
     expect(formatReactPortalNode(tree, false, 0, defaultOptions))
       .toMatchInlineSnapshot(`
       "{ReactDOM.createPortal(
-      <>
-            <div a=\\"foo\\" />
-            <div b=\\"bar\\" />
-          </>
+        <>
+          <div a=\\"foo\\" />
+          <div b=\\"bar\\" />
+        </>
       , document.querySelector(\`body\`))}"
     `);
   });

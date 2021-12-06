@@ -8,6 +8,7 @@ import type {
   ReactPortalTreeNode,
   TreeNode,
 } from './../tree';
+import spacer from './spacer';
 
 const toReactElementTreeNode = (
   displayName: string,
@@ -45,10 +46,10 @@ export default (
   return `
       {ReactDOM.createPortal(${
         childrens.length
-          ? `\n${formatReactElementNode(
+          ? `\n${spacer(lvl + 1, options.tabStop)}${formatReactElementNode(
               toReactElementTreeNode('', undefined, childrens),
               inline,
-              lvl + 2,
+              lvl + 1,
               options
             )}\n`
           : 'null'
