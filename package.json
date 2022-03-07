@@ -51,7 +51,7 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "eslint": "6.8.0",
-    "eslint-config-algolia": "14.0.1",
+    "eslint-config-algolia": "17.0.1",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jest": "22.21.0",
