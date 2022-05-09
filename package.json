@@ -1,6 +1,6 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "14.3.4",
+  "version": "15.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -24,7 +24,10 @@
     "smoke": "node tests/smoke/run"
   },
   "lint-staged": {
-    "*.js": ["prettier --write \"**/*.{js,json}\"", "git add"]
+    "*.js": [
+      "prettier --write \"**/*.{js,json}\"",
+      "git add"
+    ]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -84,6 +87,8 @@
     "react-is": "18.1.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>tests/setupTests.js"
+    ]
   }
 }
