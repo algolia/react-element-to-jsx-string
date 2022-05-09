@@ -29,6 +29,8 @@ jobs:
       - run: yarn run smoke esm 16.7.0
       - run: yarn run smoke cjs 17.0.1
       - run: yarn run smoke esm 17.0.1
+      - run: yarn run smoke cjs 18.0.0
+      - run: yarn run smoke esm 18.0.0
       - run: yarn run smoke cjs latest
       - run: yarn run smoke esm latest
       - run: yarn run smoke cjs next
