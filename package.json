@@ -36,9 +36,9 @@
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
   "devDependencies": {
-    "@babel/cli": "7.17.6",
-    "@babel/core": "7.17.9",
-    "@babel/preset-env": "7.16.11",
+    "@babel/cli": "7.17.10",
+    "@babel/core": "7.17.10",
+    "@babel/preset-env": "7.17.10",
     "@babel/preset-flow": "7.16.7",
     "@babel/preset-react": "7.16.7",
     "@commitlint/cli": "8.3.6",
