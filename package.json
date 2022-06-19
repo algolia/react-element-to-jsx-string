@@ -67,9 +67,9 @@
     "lint-staged": "10.5.4",
     "mversion": "2.0.1",
     "prettier": "1.19.1",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "react-test-renderer": "18.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-test-renderer": "18.2.0",
     "rollup": "2.75.6",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-node-builtins": "2.1.2",
@@ -84,7 +84,7 @@
   "dependencies": {
     "@base2/pretty-print-object": "1.0.2",
     "is-plain-object": "5.0.0",
-    "react-is": "18.1.0"
+    "react-is": "18.2.0"
   },
   "jest": {
     "setupFilesAfterEnv": [
