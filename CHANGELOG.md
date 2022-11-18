@@ -1,3 +1,12 @@
+# [15.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.4...v15.0.0) (2022-05-09)
+
+
+### Bug Fixes
+
+* add react 18 support, fixes [#728](https://github.com/algolia/react-element-to-jsx-string/issues/728) ([#729](https://github.com/algolia/react-element-to-jsx-string/issues/729)) ([8e17e12](https://github.com/algolia/react-element-to-jsx-string/commit/8e17e1283fd48108663c7fedf7d174c957c00f68))
+
+
+
 ## [14.3.4](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.3...v14.3.4) (2021-10-19)
 
 

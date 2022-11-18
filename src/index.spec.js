@@ -8,7 +8,7 @@
 
 import React, { Fragment, Component } from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
 
@@ -1140,18 +1140,22 @@ describe('reactElementToJSXString(ReactElement)', () => {
           <div>
             {insideString}
 
-            <div id="hello" />
+            <div>Hello world!</div>
 
             <p>Start editing to see some magic happen :)</p>
           </div>
         );
       }
     }
-    expect(mount(<App />).find('#hello')).toHaveLength(1);
+
+    render(<App />);
+
+    expect(screen.getByText('Hello world!')).toBeInTheDocument();
   });
 
   it('should not cause recursive loop when an element contains a ref', () => {
-    expect.assertions(1);
+    expect.assertions(2);
+
     class App extends Component {
       constructor(props) {
         super(props);
@@ -1167,10 +1171,18 @@ describe('reactElementToJSXString(ReactElement)', () => {
         );
       }
       render() {
-        return <input ref={this.inputRef} />;
+        return (
+          <>
+            <input ref={this.inputRef} />
+            <div>Hello world!</div>
+          </>
+        );
       }
     }
-    mount(<App />);
+
+    render(<App />);
+
+    expect(screen.getByText('Hello world!')).toBeInTheDocument();
   });
 
   it('should use inferred function name as display name for `forwardRef` element', () => {
