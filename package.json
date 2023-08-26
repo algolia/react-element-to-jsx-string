@@ -46,7 +46,7 @@
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "babel-eslint": "10.1.0",
-    "babel-jest": "24.9.0",
+    "babel-jest": "25.5.1",
     "babel-register": "6.26.0",
     "conventional-changelog-cli": "2.2.2",
     "doctoc": "1.4.0",
