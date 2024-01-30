@@ -725,6 +725,26 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<div aprop="test" key="yes"><div aprop="test" key="abc" /></div>', () => {
+    expect(
+      reactElementToJSXString(
+        <div aprop="test" key="yes">
+          <div aprop="test" key="abc" />
+        </div>
+      )
+    ).toEqual(
+      `<div
+  key="yes"
+  aprop="test"
+>
+  <div
+    key="abc"
+    aprop="test"
+  />
+</div>`
+    );
+  });
+
   it('reactElementToJSXString(<div>\\n  {null}\\n</div>', () => {
     const element = <div>{null}</div>;
 
