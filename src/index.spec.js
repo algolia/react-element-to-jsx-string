@@ -825,6 +825,22 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: true })', () => {
+    expect(
+      reactElementToJSXString(
+        <TestComponent testTrue={true} testFalse={false} />,
+        {
+          useBooleanShorthandSyntax: true,
+        }
+      )
+    ).toEqual(
+      `<TestComponent
+  testFalse={false}
+  testTrue
+/>`
+    );
+  });
+
   it('should render default props', () => {
     expect(reactElementToJSXString(<DefaultPropsComponent />)).toEqual(
       `<DefaultPropsComponent
@@ -888,10 +904,10 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<div primary />');
   });
 
-  it('should omit attributes with false as value', () => {
+  it('should not omit attributes with false as value', () => {
     expect(
       reactElementToJSXString(<div primary={false} />) // eslint-disable-line react/jsx-boolean-value
-    ).toEqual('<div />');
+    ).toEqual('<div primary={false} />');
   });
 
   it('should return the actual functions when "showFunctions" is true', () => {
