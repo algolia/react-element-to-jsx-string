@@ -7,7 +7,7 @@
 /* eslint-disable react/no-string-refs */
 
 import React, { Fragment, Component } from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import ShallowRenderer from 'react-shallow-renderer';
 import { render, screen } from '@testing-library/react';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
@@ -654,7 +654,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
     }
 
     const NestedSpan = myDecorator(<span />);
-    const renderer = createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(<NestedSpan />);
     expect(reactElementToJSXString(renderer.getRenderOutput())).toEqual(
       `<div>
@@ -671,7 +671,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       }
     }
 
-    const renderer = createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(<InlineProps name="John" />);
     const actualElement = renderer.getRenderOutput();
     expect(reactElementToJSXString(actualElement)).toEqual(
@@ -1294,6 +1294,21 @@ describe('reactElementToJSXString(ReactElement)', () => {
         <Ctx.Provider value={null}>
           <App />
         </Ctx.Provider>
+      )
+    ).toEqual(`<Context.Provider value={null}>
+  <App />
+</Context.Provider>`);
+  });
+
+  it('should stringify `Context` correctly', () => {
+    const Ctx = React.createContext();
+    const App = () => {};
+
+    expect(
+      reactElementToJSXString(
+        <Ctx value={null}>
+          <App />
+        </Ctx>
       )
     ).toEqual(`<Context.Provider value={null}>
   <App />

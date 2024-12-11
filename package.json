@@ -43,8 +43,9 @@
     "@babel/preset-react": "7.24.1",
     "@commitlint/cli": "8.3.6",
     "@commitlint/config-angular": "8.3.6",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "5.17.0",
-    "@testing-library/react": "13.4.0",
+    "@testing-library/react": "16.1.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "24.9.0",
     "babel-register": "6.26.0",
@@ -67,9 +68,9 @@
     "lint-staged": "10.5.4",
     "mversion": "2.0.1",
     "prettier": "1.19.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-test-renderer": "18.2.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-shallow-renderer": "16.15.0",
     "rollup": "2.79.1",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-node-builtins": "2.1.2",
@@ -78,13 +79,13 @@
     "rollup-plugin-sourcemaps": "0.6.3"
   },
   "peerDependencies": {
-    "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0",
-    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0"
+    "react": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@base2/pretty-print-object": "1.0.2",
     "is-plain-object": "5.0.0",
-    "react-is": "18.2.0"
+    "react-is": "19.0.0"
   },
   "jest": {
     "setupFilesAfterEnv": [

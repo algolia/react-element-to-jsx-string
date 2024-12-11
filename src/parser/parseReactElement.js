@@ -61,7 +61,7 @@ const getReactElementDisplayName = (element: ReactElement<*>): string => {
     case isContextConsumer(element):
       return `${element.type._context.displayName || 'Context'}.Consumer`;
     case isContextProvider(element):
-      return `${element.type._context.displayName || 'Context'}.Provider`;
+      return `${element.type.displayName || 'Context'}.Provider`;
     case isLazy(element):
       return 'Lazy';
     case isProfiler(element):
