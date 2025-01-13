@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 
 import React, { Fragment } from 'react';
+import { describe, it, expect } from 'vitest';
 import parseReactElement from './parseReactElement';
 
 const options = {};

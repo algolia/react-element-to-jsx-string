@@ -1,15 +1,15 @@
-import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
+import { isPlainObject } from './isPlainObject';
 import type { Options } from '../options';
 import parseReactElement from '../parser/parseReactElement';
 
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
 const formatPropValue = (
-  propValue: any,
+  propValue: unknown,
   inline: boolean,
   lvl: number,
   options: Options
@@ -56,7 +56,11 @@ const formatPropValue = (
     return `{new Date("${propValue.toISOString()}")}`;
   }
 
-  if (isPlainObject(propValue) || Array.isArray(propValue)) {
+  if (isPlainObject(propValue)) {
+    return `{${formatComplexDataStructure(propValue, inline, lvl, options)}}`;
+  }
+
+  if (Array.isArray(propValue)) {
     return `{${formatComplexDataStructure(propValue, inline, lvl, options)}}`;
   }
 

@@ -1,20 +1,23 @@
 import React from 'react';
+import { describe, it, expect, vitest, beforeEach } from 'vitest';
 import formatPropValue from './formatPropValue';
 import parseReactElement from '../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
 import formatComplexDataStructure from './formatComplexDataStructure';
 
-jest.mock('./../parser/parseReactElement');
-jest.mock('./formatTreeNode', () =>
-  jest.fn().mockReturnValue('<MockedFormatTreeNodeResult />')
-);
-jest.mock('./formatComplexDataStructure', () =>
-  jest.fn().mockReturnValue('*Mocked formatComplexDataStructure result*')
-);
+vitest.mock('./../parser/parseReactElement');
+vitest.mock('./formatTreeNode');
+vitest.mock('./formatComplexDataStructure');
 
 describe('formatPropValue', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vitest
+      .mocked(formatTreeNode)
+      .mockReturnValue('<MockedFormatTreeNodeResult />');
+
+    vitest
+      .mocked(formatComplexDataStructure)
+      .mockReturnValue('*Mocked formatComplexDataStructure result*');
   });
 
   it('should format an integer prop value', () => {

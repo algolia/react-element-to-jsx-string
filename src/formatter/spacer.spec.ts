@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import spacer from './spacer';
 
 describe('spacer', () => {

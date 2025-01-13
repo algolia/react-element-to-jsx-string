@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @jest-environment happy-dom
  */
 
 /* eslint-disable react/prefer-stateless-function */
@@ -12,6 +12,7 @@
 
 import React, { Fragment, Component } from 'react';
 import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
 
@@ -901,7 +902,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       reactElementToJSXString(<div fn={fn} />, {
         showFunctions: true,
       })
-    ).toEqual(`<div fn={function fn() {return 'value';}} />`);
+    ).toEqual(`<div fn={function fn() {return "value";}} />`);
   });
 
   it('should expose the multiline "functionValue" formatter', () => {
@@ -916,7 +917,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       })
     ).toEqual(`<div
   fn={function fn() {
-      return 'value';
+      return "value";
     }}
  />`);
   });
@@ -1134,6 +1135,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
         );
       }
     }
+  );
 
     render(<App />);
 

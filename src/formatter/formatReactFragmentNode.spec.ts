@@ -1,3 +1,4 @@
+import { describe, it, expect, vitest } from 'vitest';
 import formatReactFragmentNode from './formatReactFragmentNode';
 
 const defaultOptions = {

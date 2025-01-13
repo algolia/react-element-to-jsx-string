@@ -1,6 +1,7 @@
+import { describe, it, expect, vitest } from 'vitest';
 import formatFunction from './formatFunction';
 
-jest.mock(
+vitest.mock(
   './formatReactElementNode',
   () => (node) => `<${node.displayName} />`
 );

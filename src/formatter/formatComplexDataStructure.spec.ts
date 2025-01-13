@@ -1,10 +1,11 @@
+import { describe, it, expect, vitest, beforeAll } from 'vitest';
 import React from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
+// import formatReactElementNode from './formatReactElementNode';
 
-jest.mock(
-  './formatReactElementNode',
-  () => (node) => `<${node.displayName} />`
-);
+vitest.mock('./formatReactElementNode', () => ({
+  default: (node) => `<${node.displayName} />`,
+}));
 
 const createFakeReactElement = (tagName = 'Foo') =>
   React.createElement(tagName, {}, null);
@@ -14,6 +15,13 @@ const options = {
 };
 
 describe('formatComplexDataStructure', () => {
+  // FIXME: How to convert the vitest.mock factory into a mock?
+  // beforeAll(() => {
+  //   vitest
+  //     .mocked(formatReactElementNode)
+  //     .mockImplementation((node) => `<${node.displayName} />`);
+  // });
+
   it('should format an object', () => {
     const fixture = {
       a: 1,

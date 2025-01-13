@@ -53,5 +53,5 @@ export default (
   }
 
   // @ts-expect-error: So should never be executed
-  throw new TypeError(`Unknow format type "${node.type}"`);
+  throw new TypeError(`Unknown format type "${node.type}"`);
 };

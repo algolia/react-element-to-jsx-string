@@ -5,9 +5,9 @@ import type { Options } from '../options';
 export default (
   name: string,
   hasValue: boolean,
-  value: any,
+  value: unknown,
   hasDefaultValue: boolean,
-  defaultValue: any,
+  defaultValue: unknown,
   inline: boolean,
   lvl: number,
   options: Options

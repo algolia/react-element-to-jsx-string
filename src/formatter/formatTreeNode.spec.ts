@@ -1,11 +1,16 @@
+import { describe, it, expect, vitest, beforeEach } from 'vitest';
 import formatTreeNode from './formatTreeNode';
+import formatReactElementNode from './formatReactElementNode';
 
-jest.mock(
-  './formatReactElementNode',
-  () => () => '<MockedFormatReactElementNodeResult />'
-);
+vitest.mock('./formatReactElementNode');
 
 describe('formatTreeNode', () => {
+  beforeEach(() => {
+    vitest
+      .mocked(formatReactElementNode)
+      .mockReturnValue('<MockedFormatReactElementNodeResult />');
+  });
+
   it('should format number tree node', () => {
     expect(
       formatTreeNode(

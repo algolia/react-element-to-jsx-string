@@ -8,7 +8,7 @@ import spacer from './spacer';
 import type { Options } from '../options';
 
 export default (
-  value: Record<string, any> | Array<any>,
+  value: Record<string, unknown> | Array<unknown>,
   inline: boolean,
   lvl: number,
   options: Options
