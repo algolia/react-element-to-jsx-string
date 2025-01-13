@@ -5,9 +5,9 @@
 /* @flow */
 
 /* eslint-disable react/no-string-refs */
+/* eslint-disable react/prop-types */
 
 import React, { Fragment, Component } from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
 import { render, screen } from '@testing-library/react';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
@@ -640,47 +640,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
-  it('reactElementToJSXString(decorator(<span />)', () => {
-    function myDecorator(ComposedComponent) {
-      class MyDecorator extends React.Component {
-        render() {
-          return (
-            <div>{React.createElement(ComposedComponent.type, this.props)}</div>
-          );
-        }
-      }
-      MyDecorator.displayName = `${ComposedComponent.name}-Decorated`;
-      return MyDecorator;
-    }
-
-    const NestedSpan = myDecorator(<span />);
-    const renderer = createRenderer();
-    renderer.render(<NestedSpan />);
-    expect(reactElementToJSXString(renderer.getRenderOutput())).toEqual(
-      `<div>
-  <span />
-</div>`
-    );
-  });
-
-  it('reactElementToJSXString(<div>Hello {this.props.name}</div>', () => {
-    /* eslint-disable react/prop-types */
-    class InlineProps extends React.Component {
-      render() {
-        return <div>Hello {this.props.name}</div>;
-      }
-    }
-
-    const renderer = createRenderer();
-    renderer.render(<InlineProps name="John" />);
-    const actualElement = renderer.getRenderOutput();
-    expect(reactElementToJSXString(actualElement)).toEqual(
-      `<div>
-  Hello John
-</div>`
-    );
-  });
-
   it('reactElementToJSXString(<div type={Symbol("test")}/>)', () => {
     expect(reactElementToJSXString(<div type={Symbol('test')} />)).toEqual(
       "<div type={Symbol('test')} />"
@@ -1294,6 +1253,21 @@ describe('reactElementToJSXString(ReactElement)', () => {
         <Ctx.Provider value={null}>
           <App />
         </Ctx.Provider>
+      )
+    ).toEqual(`<Context.Provider value={null}>
+  <App />
+</Context.Provider>`);
+  });
+
+  it('should stringify `Context` correctly', () => {
+    const Ctx = React.createContext();
+    const App = () => {};
+
+    expect(
+      reactElementToJSXString(
+        <Ctx value={null}>
+          <App />
+        </Ctx>
       )
     ).toEqual(`<Context.Provider value={null}>
   <App />

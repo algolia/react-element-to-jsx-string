@@ -61,7 +61,7 @@ const getReactElementDisplayName = (element: ReactElement<*>): string => {
     case isContextConsumer(element):
       return `${element.type._context.displayName || 'Context'}.Consumer`;
     case isContextProvider(element):
-      return `${element.type._context.displayName || 'Context'}.Provider`;
+      return `${element.type.displayName || 'Context'}.Provider`;
     case isLazy(element):
       return 'Lazy';
     case isProfiler(element):
@@ -112,9 +112,6 @@ const parseReactElement = (
   const displayName = displayNameFn(element);
 
   const props = filterProps(element.props, noChildren);
-  if (element.ref !== null) {
-    props.ref = element.ref;
-  }
 
   const key = element.key;
   if (typeof key === 'string' && key.search(/^\./)) {
