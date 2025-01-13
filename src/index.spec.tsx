@@ -1135,7 +1135,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
         );
       }
     }
-  );
 
     render(<App />);
 
