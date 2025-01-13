@@ -20,7 +20,7 @@ function safeSortObject(value: any, seen: WeakSet<any>): any {
 
   // make a copy of array with each item passed through the sorting algorithm
   if (Array.isArray(value)) {
-    return value.map(v => safeSortObject(v, seen));
+    return value.map((v) => safeSortObject(v, seen));
   }
 
   // make a copy of object with key sorted

@@ -21,6 +21,7 @@ import {
   createReactFragmentTreeNode,
 } from './../tree';
 import type { TreeNode } from './../tree';
+import type { ComponentType } from 'react';
 
 const supportFragment = Boolean(Fragment);
 
@@ -31,22 +32,24 @@ const getFunctionTypeName = (functionType): string => {
   return functionType.name;
 };
 
-const getWrappedComponentDisplayName = (Component: *): string => {
-  switch (true) {
-    case Boolean(Component.displayName):
-      return Component.displayName;
-    case Component.$$typeof === Memo:
-      return getWrappedComponentDisplayName(Component.type);
-    case Component.$$typeof === ForwardRef:
-      return getWrappedComponentDisplayName(Component.render);
-    default:
-      return getFunctionTypeName(Component);
+const getWrappedComponentDisplayName = (
+  Component: ComponentElement<any>
+): string => {
+  console.log(Component);
+  if (Component.displayName !== undefined && Component.displayName !== null) {
+    return Component.displayName;
+  } else if (isMemo(Component) && 'type' in Component) {
+    return getWrappedComponentDisplayName(Component.type);
+  } else if (Component.$$typeof === ForwardRef) {
+    return getWrappedComponentDisplayName(Component.render);
   }
+
+  return getFunctionTypeName(Component);
 };
 
 // heavily inspired by:
 // https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
-const getReactElementDisplayName = (element: ReactElement<*>): string => {
+const getReactElementDisplayName = (element: ReactElement<any>): string => {
   switch (true) {
     case typeof element.type === 'string':
       return element.type;
@@ -87,14 +90,14 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
   const filteredProps = {};
 
   Object.keys(originalProps)
-    .filter(key => cb(originalProps[key], key))
-    .forEach(key => (filteredProps[key] = originalProps[key]));
+    .filter((key) => cb(originalProps[key], key))
+    .forEach((key) => (filteredProps[key] = originalProps[key]));
 
   return filteredProps;
 };
 
 const parseReactElement = (
-  element: ReactElement<*> | string | number,
+  element: ReactElement<any> | string | number,
   options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
@@ -125,7 +128,7 @@ const parseReactElement = (
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
   const childrens = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
-    .map(child => parseReactElement(child, options));
+    .map((child) => parseReactElement(child, options));
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, childrens);

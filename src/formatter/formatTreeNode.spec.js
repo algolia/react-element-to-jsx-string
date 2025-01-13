@@ -2,8 +2,9 @@
 
 import formatTreeNode from './formatTreeNode';
 
-jest.mock('./formatReactElementNode', () => () =>
-  '<MockedFormatReactElementNodeResult />'
+jest.mock(
+  './formatReactElementNode',
+  () => () => '<MockedFormatReactElementNodeResult />'
 );
 
 describe('formatTreeNode', () => {
@@ -34,7 +35,7 @@ describe('formatTreeNode', () => {
   });
 
   const jsxDelimiters = ['<', '>', '{', '}'];
-  jsxDelimiters.forEach(char => {
+  jsxDelimiters.forEach((char) => {
     it(`should escape string that contains the JSX delimiter "${char}"`, () => {
       expect(
         formatTreeNode(

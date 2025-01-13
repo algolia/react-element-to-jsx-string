@@ -6,7 +6,7 @@ export const inlineFunction = (fn: any): string =>
   fn
     .toString()
     .split('\n')
-    .map(line => line.trim())
+    .map((line) => line.trim())
     .join('');
 
 export const preserveFunctionLineBreak = (fn: any): string => fn.toString();

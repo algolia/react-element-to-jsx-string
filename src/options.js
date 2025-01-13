@@ -13,5 +13,5 @@ export type Options = {|
   sortProps: boolean,
 
   maxInlineAttributesLineLength?: number,
-  displayName?: (element: React.Element<*>) => string,
+  displayName?: (element: React.Element<any>) => string,
 |};

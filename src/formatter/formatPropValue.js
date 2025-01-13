@@ -26,12 +26,11 @@ const formatPropValue = (
 
   // > "Symbols (new in ECMAScript 2015, not yet supported in Flow)"
   // @see: https://flow.org/en/docs/types/primitives/
-  // $FlowFixMe: Flow does not support Symbol
   if (typeof propValue === 'symbol') {
-    const symbolDescription = propValue
-      .valueOf()
-      .toString()
-      .replace(/Symbol\((.*)\)/, '$1');
+    const symbolDescription = (propValue.valueOf()?.toString() ?? '').replace(
+      /Symbol\((.*)\)/,
+      '$1'
+    );
 
     if (!symbolDescription) {
       return `{Symbol()}`;

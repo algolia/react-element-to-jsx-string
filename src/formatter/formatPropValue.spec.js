@@ -39,7 +39,7 @@ describe('formatPropValue', () => {
   });
 
   it('should replace a function prop value by a an empty generic function by default', () => {
-    const doThings = a => a * 2;
+    const doThings = (a) => a * 2;
 
     expect(formatPropValue(doThings, false, 0, {})).toBe(
       '{function noRefCheck() {}}'
@@ -47,7 +47,7 @@ describe('formatPropValue', () => {
   });
 
   it('should show the function prop value implementation if "showFunctions" option is true', () => {
-    const doThings = a => a * 2;
+    const doThings = (a) => a * 2;
 
     expect(formatPropValue(doThings, false, 0, { showFunctions: true })).toBe(
       '{function doThings(a) {return a * 2;}}'
@@ -55,9 +55,9 @@ describe('formatPropValue', () => {
   });
 
   it('should format the function prop value with the "functionValue" option', () => {
-    const doThings = a => a * 2;
+    const doThings = (a) => a * 2;
 
-    const functionValue = fn => {
+    const functionValue = (fn) => {
       expect(fn).toBe(doThings);
 
       return 'function Myfunction() {}';

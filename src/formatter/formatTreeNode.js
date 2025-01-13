@@ -7,7 +7,7 @@ import type { TreeNode } from './../tree';
 
 const jsxStopChars = ['<', '>', '{', '}'];
 const shouldBeEscaped = (s: string) =>
-  jsxStopChars.some(jsxStopChar => s.includes(jsxStopChar));
+  jsxStopChars.some((jsxStopChar) => s.includes(jsxStopChar));
 
 const escape = (s: string) => {
   if (!shouldBeEscaped(s)) {

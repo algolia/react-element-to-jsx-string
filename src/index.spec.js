@@ -782,7 +782,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<TestComponent />, { displayName: toUpper })', () => {
     expect(
       reactElementToJSXString(<TestComponent />, {
-        displayName: element => element.type.name.toUpperCase(),
+        displayName: (element) => element.type.name.toUpperCase(),
       })
     ).toEqual('<TESTCOMPONENT />');
   });
@@ -863,7 +863,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<div co={<div a="1" />} />, { displayName: toUpper })', () => {
     expect(
       reactElementToJSXString(<div co={<div a="1" />} />, {
-        displayName: element => element.type.toUpperCase(),
+        displayName: (element) => element.type.toUpperCase(),
       })
     ).toEqual('<DIV co={<DIV a="1" />} />');
   });
@@ -871,7 +871,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<div co={{a: <div a="1" />}} />, { displayName: toUpper })', () => {
     expect(
       reactElementToJSXString(<div co={{ a: <div a="1" /> }} />, {
-        displayName: element => element.type.toUpperCase(),
+        displayName: (element) => element.type.toUpperCase(),
       })
     ).toEqual(
       `<DIV
@@ -1053,7 +1053,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
   it('sends the original fn to functionValue', () => {
     const fn = () => {};
-    const functionValue = receivedFn => expect(receivedFn).toBe(fn);
+    const functionValue = (receivedFn) => expect(receivedFn).toBe(fn);
     reactElementToJSXString(<div fn={fn} />, { functionValue });
   });
   it('should return noRefCheck when "showFunctions" is false and "functionValue" is not provided', () => {
@@ -1323,7 +1323,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
     expect(
       reactElementToJSXString(
-        <Ctx.Consumer>{theme => <Button theme={theme} />}</Ctx.Consumer>
+        <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>
       )
     ).toEqual(`<Context.Consumer />`);
   });
@@ -1336,7 +1336,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
     expect(
       reactElementToJSXString(
-        <Ctx.Consumer>{theme => <Button theme={theme} />}</Ctx.Consumer>
+        <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>
       )
     ).toEqual(`<MyCtx.Consumer />`);
   });

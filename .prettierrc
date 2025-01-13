@@ -1,23 +1,12 @@
 {
+  "$schema": "https://json.schemastore.org/prettierrc",
   "parser": "flow",
   "singleQuote": true,
   "trailingComma": "es5",
   "overrides": [
     {
-      "files": ".prettierrc",
+      "files": [".babelrc", ".prettierrc", "*.json"],
       "options": { "parser": "json" }
-    },
-    {
-      "files": ".babelrc",
-      "options": { "parser": "json" }
-    },
-    {
-      "files": "*.json",
-      "options": { "parser": "json" }
-    },
-    {
-      "files": "package.json",
-      "options": { "printWidth": 999 }
     }
   ]
 }

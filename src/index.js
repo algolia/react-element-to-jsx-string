@@ -18,8 +18,8 @@ const reactElementToJsxString = (
     sortProps = true,
     maxInlineAttributesLineLength,
     displayName,
-  }: Options = {}
-) => {
+  }: Partial<Options> = {}
+): string => {
   if (!element) {
     throw new Error('react-element-to-jsx-string: Expected a ReactElement');
   }

@@ -8,9 +8,11 @@ import sortPropsByNames from './sortPropsByNames';
 import createPropFilter from './createPropFilter';
 import type { Options } from './../options';
 import type { ReactElementTreeNode } from './../tree';
+import { type Element as ReactElement } from 'react';
+import type { TreeNode } from '../tree';
 
 const compensateMultilineStringElementIndentation = (
-  element,
+  element: TreeNode,
   formattedElement: string,
   inline: boolean,
   lvl: number,
@@ -34,26 +36,25 @@ const compensateMultilineStringElementIndentation = (
   return formattedElement;
 };
 
-const formatOneChildren = (
-  inline: boolean,
-  lvl: number,
-  options: Options
-) => element =>
-  compensateMultilineStringElementIndentation(
-    element,
-    formatTreeNode(element, inline, lvl, options),
-    inline,
-    lvl,
-    options
-  );
+const formatOneChildren =
+  (inline: boolean, lvl: number, options: Options) => (element: TreeNode) =>
+    compensateMultilineStringElementIndentation(
+      element,
+      formatTreeNode(element, inline, lvl, options),
+      inline,
+      lvl,
+      options
+    );
 
-const onlyPropsWithOriginalValue = (defaultProps, props) => propName => {
-  const haveDefaultValue = Object.keys(defaultProps).includes(propName);
-  return (
-    !haveDefaultValue ||
-    (haveDefaultValue && defaultProps[propName] !== props[propName])
-  );
-};
+const onlyPropsWithOriginalValue =
+  (defaultProps: Record<string, any>, props: Record<string, any>) =>
+  (propName: string) => {
+    const haveDefaultValue = Object.keys(defaultProps).includes(propName);
+    return (
+      !haveDefaultValue ||
+      (haveDefaultValue && defaultProps[propName] !== props[propName])
+    );
+  };
 
 const isInlineAttributeTooLong = (
   attributes: string[],
@@ -132,17 +133,19 @@ export default (
   Object.keys(props)
     .filter(propFilter)
     .filter(onlyPropsWithOriginalValue(defaultProps, props))
-    .forEach(propName => visibleAttributeNames.push(propName));
+    .forEach((propName) => visibleAttributeNames.push(propName));
 
   Object.keys(defaultProps)
     .filter(propFilter)
     .filter(() => showDefaultProps)
-    .filter(defaultPropName => !visibleAttributeNames.includes(defaultPropName))
-    .forEach(defaultPropName => visibleAttributeNames.push(defaultPropName));
+    .filter(
+      (defaultPropName) => !visibleAttributeNames.includes(defaultPropName)
+    )
+    .forEach((defaultPropName) => visibleAttributeNames.push(defaultPropName));
 
   const attributes = sortPropsByNames(sortProps)(visibleAttributeNames);
 
-  attributes.forEach(attributeName => {
+  attributes.forEach((attributeName) => {
     const {
       attributeFormattedInline,
       attributeFormattedMultiline,
