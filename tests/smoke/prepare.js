@@ -46,6 +46,8 @@ const preparePackageJson = reactVersion => () => {
     path.join(__dirname, 'package.json'),
     JSON.stringify(packageJson, null, 2)
   );
+
+  fs.writeFileSync(path.join(__dirname, 'yarn.lock'), '');
 };
 
 const installDependencies = () => () =>
@@ -54,7 +56,7 @@ const installDependencies = () => () =>
       return;
     }
 
-    execSync('yarn install --no-lockfile', {
+    execSync('yarn install', {
       cwd: __dirname,
       stdio: 'inherit',
     });
