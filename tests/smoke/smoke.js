@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console, import/no-extraneous-dependencies, no-global-assign */
+/* eslint-disable no-console, import/no-extraneous-dependencies, no-global-assign, import/extensions */
 
 require = require('esm')(module);
 

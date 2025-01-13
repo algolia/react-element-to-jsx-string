@@ -1,4 +1,5 @@
-index-dist.js
-node_modules/
+.yarn/
 dist/
+node_modules/
+index-dist.js
 npm-debug.log
