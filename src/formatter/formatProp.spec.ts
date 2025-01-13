@@ -1,7 +1,8 @@
+import { describe, it, expect, vitest, beforeEach } from 'vitest';
 import formatProp from './formatProp';
 import formatPropValue from './formatPropValue';
 
-jest.mock('./formatPropValue');
+vitest.mock('./formatPropValue');
 
 const defaultOptions = {
   useBooleanShorthandSyntax: true,
@@ -10,8 +11,8 @@ const defaultOptions = {
 
 describe('formatProp', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.resetAllMocks();
+    vitest.clearAllMocks();
+    vitest.resetAllMocks();
   });
 
   it('should format prop with only a value', () => {
