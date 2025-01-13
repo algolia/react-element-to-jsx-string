@@ -5,6 +5,7 @@
 /* @flow */
 
 /* eslint-disable react/no-string-refs */
+/* eslint-disable react/prop-types */
 
 import React, { Fragment, Component } from 'react';
 import { render, screen } from '@testing-library/react';
