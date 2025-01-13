@@ -13,3 +13,13 @@ export type Options = {
   maxInlineAttributesLineLength?: number;
   displayName?: (element: ReactElement) => string;
 };
+
+export const defaultOptions = {
+  filterProps: [],
+  showDefaultProps: true,
+  showFunctions: false,
+  tabStop: 2,
+  useBooleanShorthandSyntax: true,
+  useFragmentShortSyntax: true,
+  sortProps: true,
+} as const;

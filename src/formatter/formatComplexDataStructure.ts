@@ -5,13 +5,13 @@ import parseReactElement from '../parser/parseReactElement';
 import formatTreeNode from './formatTreeNode';
 import formatFunction from './formatFunction';
 import spacer from './spacer';
-import type { Options } from '../options';
+import { defaultOptions, type Options } from '../options';
 
 export default (
   value: Record<string, unknown> | Array<unknown>,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Partial<Options>
 ): string => {
   const normalizedValue = sortObject(value);
 
@@ -45,8 +45,10 @@ export default (
       .replace(/ ]/g, ']');
   }
 
+  const tabStop = options.tabStop ?? defaultOptions.tabStop;
+
   // Replace tabs with spaces, and add necessary indentation in front of each new line
   return stringifiedValue
-    .replace(/\t/g, spacer(1, options.tabStop))
-    .replace(/\n([^$])/g, `\n${spacer(lvl + 1, options.tabStop)}$1`);
+    .replace(/\t/g, spacer(1, tabStop))
+    .replace(/\n([^$])/g, `\n${spacer(lvl + 1, tabStop)}$1`);
 };
