@@ -1175,12 +1175,12 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('should use inferred function name as display name for `forwardRef` element', () => {
-    const Tag = React.forwardRef(function Tag({ text }, ref) {
+    const Tag = React.forwardRef(function TagWithRef({ text }, ref) {
       return <span ref={ref}>{text}</span>;
     });
 
     expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-      `<Tag text="some label" />`
+      `<TagWithRef text="some label" />`
     );
   });
 
@@ -1196,12 +1196,12 @@ describe('reactElementToJSXString(ReactElement)', () => {
   });
 
   it('should use inferred function name as display name for `memo` element', () => {
-    const Tag = React.memo(function Tag({ text }) {
+    const Tag = React.memo(function TagMemoized({ text }) {
       return <span>{text}</span>;
     });
 
     expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-      `<Tag text="some label" />`
+      `<TagMemoized text="some label" />`
     );
   });
 
@@ -1218,27 +1218,27 @@ describe('reactElementToJSXString(ReactElement)', () => {
 
   it('should use inferred function name as display name for a `forwardRef` wrapped in `memo`', () => {
     const Tag = React.memo(
-      React.forwardRef(function Tag({ text }, ref) {
+      React.forwardRef(function TagWithRef({ text }, ref) {
         return <span ref={ref}>{text}</span>;
       })
     );
 
     expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-      `<Tag text="some label" />`
+      `<TagWithRef text="some label" />`
     );
   });
 
   it('should use inferred function name as display name for a component wrapped in `memo` multiple times', () => {
     const Tag = React.memo(
       React.memo(
-        React.memo(function Tag({ text }) {
+        React.memo(function TagReallyMemoized({ text }) {
           return <span>{text}</span>;
         })
       )
     );
 
     expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-      `<Tag text="some label" />`
+      `<TagReallyMemoized text="some label" />`
     );
   });
 
@@ -1370,7 +1370,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       return tags;
     }
 
-    const Tag = React.forwardRef(function Tag({ text }, ref) {
+    const Tag = React.forwardRef(function TagWithRef({ text }, ref) {
       return <span ref={ref}>{text}</span>;
     });
     Tag.emotionReal = Tag;
@@ -1381,7 +1381,7 @@ describe('reactElementToJSXString(ReactElement)', () => {
       )
     ).toEqual(`<TagList
   tags={[
-    <Tag key="oops" text="oops, circular"/>
+    <TagWithRef key="oops" text="oops, circular"/>
   ]}
  />`);
   });
