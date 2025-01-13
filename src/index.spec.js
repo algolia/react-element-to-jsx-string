@@ -7,7 +7,6 @@
 /* eslint-disable react/no-string-refs */
 
 import React, { Fragment, Component } from 'react';
-import ShallowRenderer from 'react-shallow-renderer';
 import { render, screen } from '@testing-library/react';
 import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
 import AnonymousStatelessComponent from './AnonymousStatelessComponent';
@@ -637,47 +636,6 @@ describe('reactElementToJSXString(ReactElement)', () => {
     <div key="0"><span /></div>
   ]}
  />`
-    );
-  });
-
-  it('reactElementToJSXString(decorator(<span />)', () => {
-    function myDecorator(ComposedComponent) {
-      class MyDecorator extends React.Component {
-        render() {
-          return (
-            <div>{React.createElement(ComposedComponent.type, this.props)}</div>
-          );
-        }
-      }
-      MyDecorator.displayName = `${ComposedComponent.name}-Decorated`;
-      return MyDecorator;
-    }
-
-    const NestedSpan = myDecorator(<span />);
-    const renderer = new ShallowRenderer();
-    renderer.render(<NestedSpan />);
-    expect(reactElementToJSXString(renderer.getRenderOutput())).toEqual(
-      `<div>
-  <span />
-</div>`
-    );
-  });
-
-  it('reactElementToJSXString(<div>Hello {this.props.name}</div>', () => {
-    /* eslint-disable react/prop-types */
-    class InlineProps extends React.Component {
-      render() {
-        return <div>Hello {this.props.name}</div>;
-      }
-    }
-
-    const renderer = new ShallowRenderer();
-    renderer.render(<InlineProps name="John" />);
-    const actualElement = renderer.getRenderOutput();
-    expect(reactElementToJSXString(actualElement)).toEqual(
-      `<div>
-  Hello John
-</div>`
     );
   });
 

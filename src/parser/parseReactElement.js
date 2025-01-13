@@ -112,9 +112,6 @@ const parseReactElement = (
   const displayName = displayNameFn(element);
 
   const props = filterProps(element.props, noChildren);
-  if (element.ref !== null) {
-    props.ref = element.ref;
-  }
 
   const key = element.key;
   if (typeof key === 'string' && key.search(/^\./)) {
