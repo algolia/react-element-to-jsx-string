@@ -5,13 +5,10 @@
 src/
 tests/
 
-.babelrc
 .eslintignore
 .eslintrc.js
-.travis.yml
 .prettier
 .prettierignore
 commitlint.config.js
 release.sh
 renovate.json
-rollup.config.js
