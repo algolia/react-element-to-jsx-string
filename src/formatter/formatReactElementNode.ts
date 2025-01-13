@@ -4,7 +4,7 @@ import formatProp from './formatProp';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import sortPropsByNames from './sortPropsByNames';
 import createPropFilter from './createPropFilter';
-import type { Options } from '../options';
+import { defaultOptions, type Options } from '../options';
 import type { ReactElementTreeNode } from '../tree';
 
 const compensateMultilineStringElementIndentation = (
@@ -92,7 +92,7 @@ export default (
   node: ReactElementTreeNode,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Partial<Options>
 ): string => {
   const {
     type,
@@ -113,7 +113,7 @@ export default (
     maxInlineAttributesLineLength,
     showDefaultProps,
     sortProps,
-    tabStop,
+    tabStop = defaultOptions.tabStop,
   } = options;
 
   let out = `<${displayName}`;

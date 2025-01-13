@@ -117,7 +117,7 @@ const filterProps = (
 
 const parseReactElement = (
   element: ReactElement<any> | string | number,
-  options: Options
+  options: Partial<Options>
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 

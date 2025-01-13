@@ -1,10 +1,10 @@
-import { describe, it, expect, vitest, beforeAll } from 'vitest';
-import React from 'react';
+import { describe, it, expect, vitest } from 'vitest';
+import React, { NamedExoticComponent } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
-// import formatReactElementNode from './formatReactElementNode';
+import { Options } from '../options';
 
 vitest.mock('./formatReactElementNode', () => ({
-  default: (node) => `<${node.displayName} />`,
+  default: (node: NamedExoticComponent) => `<${node.displayName} />`,
 }));
 
 const createFakeReactElement = (tagName = 'Foo') =>
@@ -12,7 +12,7 @@ const createFakeReactElement = (tagName = 'Foo') =>
 
 const options = {
   tabStop: 2,
-};
+} as any as Options;
 
 describe('formatComplexDataStructure', () => {
   // FIXME: How to convert the vitest.mock factory into a mock?

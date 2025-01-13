@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
-import type { Options } from './options';
+import { defaultOptions, type Options } from './options';
 
 const reactElementToJsxString = (
   element: ReactElement<any> | string | number,
@@ -10,7 +10,7 @@ const reactElementToJsxString = (
     showDefaultProps = true,
     showFunctions = false,
     functionValue,
-    tabStop = 2,
+    tabStop = defaultOptions.tabStop,
     useBooleanShorthandSyntax = true,
     useFragmentShortSyntax = true,
     sortProps = true,

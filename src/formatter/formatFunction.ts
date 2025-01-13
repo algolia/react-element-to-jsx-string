@@ -14,7 +14,7 @@ export const preserveFunctionLineBreak = (fn: Function): string =>
 
 const defaultFunctionValue = inlineFunction;
 
-export default (fn: Function, options: Options): string => {
+export default (fn: Function, options: Partial<Options>): string => {
   const { functionValue = defaultFunctionValue, showFunctions } = options;
 
   if (!showFunctions && functionValue === defaultFunctionValue) {

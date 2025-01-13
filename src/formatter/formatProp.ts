@@ -1,6 +1,6 @@
 import spacer from './spacer';
 import formatPropValue from './formatPropValue';
-import type { Options } from '../options';
+import { defaultOptions, type Options } from '../options';
 
 export default (
   name: string,
@@ -10,7 +10,7 @@ export default (
   defaultValue: unknown,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Partial<Options>
 ): {
   attributeFormattedInline: string;
   attributeFormattedMultiline: string;
@@ -24,7 +24,8 @@ export default (
 
   const usedValue = hasValue ? value : defaultValue;
 
-  const { useBooleanShorthandSyntax, tabStop } = options;
+  const { useBooleanShorthandSyntax, tabStop = defaultOptions.tabStop } =
+    options;
 
   const formattedPropValue = formatPropValue(usedValue, inline, lvl, options);
 

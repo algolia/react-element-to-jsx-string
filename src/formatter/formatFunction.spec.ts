@@ -1,9 +1,10 @@
 import { describe, it, expect, vitest } from 'vitest';
 import formatFunction from './formatFunction';
+import { NamedExoticComponent } from 'react';
 
 vitest.mock(
   './formatReactElementNode',
-  () => (node) => `<${node.displayName} />`
+  () => (node: NamedExoticComponent) => `<${node.displayName} />`
 );
 
 function hello() {
