@@ -1,4 +1,5 @@
 import React from 'react';
+import { describe, it, expect, vitest } from 'vitest';
 import formatReactElementNode from './formatReactElementNode';
 
 const defaultOptions = {

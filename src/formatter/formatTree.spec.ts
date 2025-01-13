@@ -1,10 +1,13 @@
+import { describe, it, expect, vitest } from 'vitest';
 import formatTree from './formatTree';
 import formatTreeNode from './formatTreeNode';
 
-jest.mock('./formatTreeNode', () => jest.fn(() => '<MockedComponent />'));
+vitest.mock('./formatTreeNode');
 
 describe('formatTree', () => {
   it('should format the node as a root node', () => {
+    vitest.mocked(formatTreeNode).mockReturnValue('<MockedComponent />');
+
     const tree = {};
     const options = {};
 
