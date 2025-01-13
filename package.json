@@ -2,6 +2,7 @@
   "name": "react-element-to-jsx-string",
   "version": "17.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
+  "packageManager": "pnpm@9.15.2",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "browser": "dist/cjs/index.js",
