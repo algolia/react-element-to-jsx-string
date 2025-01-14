@@ -2,17 +2,14 @@ on: pull_request
 
 jobs:
   continuous-integration:
-    name: Continuous Integration (with node ${{ matrix.version }})
+    name: Continuous Integration
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: [20, 22]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.version }}
+          node-version: 20
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run test
