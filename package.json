@@ -3,6 +3,7 @@
   "version": "17.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "packageManager": "pnpm@9.15.2",
+  "type": "module",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "browser": "dist/index.js",
