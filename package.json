@@ -17,7 +17,8 @@
     "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "test": "vitest",
     "release": "./release.sh",
-    "smoke": "node tests/smoke/run"
+    "smoke": "node tests/smoke/run",
+    "typecheck": "tsc --noEmit"
   },
   "author": {
     "name": "Algolia, Inc.",
