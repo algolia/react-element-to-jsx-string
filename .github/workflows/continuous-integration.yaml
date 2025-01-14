@@ -13,9 +13,9 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run test
+      - run: pnpm run typecheck
       # FIXME: To be reactivated
       # - run: pnpm run lint
-      - run: pnpm run tsc --noEmit
       # - run: pnpm run smoke cjs 19.0.0
       # - run: pnpm run smoke esm 19.0.0
       # - run: pnpm run smoke cjs latest
