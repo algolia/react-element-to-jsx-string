@@ -2,7 +2,7 @@ on: pull_request
 
 jobs:
   continuous-integration:
-    name: Continuous Integration
+    name: Continuous Integration (with node ${{ matrix.version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
