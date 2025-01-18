@@ -1,6 +1,6 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "16.0.0",
+  "version": "17.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
   "main": "dist/cjs/index.js",

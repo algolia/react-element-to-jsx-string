@@ -1,3 +1,20 @@
+# [17.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v15.0.0...v17.0.0) (2025-01-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @base2/pretty-print-object to v1.0.2 ([3431228](https://github.com/algolia/react-element-to-jsx-string/commit/34312289d8b25d7d57c95c15a5b018a55d83546c))
+
+
+* React 19 (#865) ([e391aae](https://github.com/algolia/react-element-to-jsx-string/commit/e391aae7f0a113b44a7f55ca176cf93d6e6dfe11)), closes [#865](https://github.com/algolia/react-element-to-jsx-string/issues/865)
+
+
+### BREAKING CHANGES
+
+* To simplify the library maintenance, this major version only support React 19.
+
+
+
 # [15.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v14.3.4...v15.0.0) (2022-05-09)
 
 
