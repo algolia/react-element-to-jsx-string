@@ -1,19 +1,14 @@
 **/*.spec.js
-**/*.spec.js.flow
 
 .github/
 !dist/
 src/
 tests/
 
-.babelrc
 .eslintignore
 .eslintrc.js
-.flowconfig
-.travis.yml
 .prettier
 .prettierignore
 commitlint.config.js
 release.sh
 renovate.json
-rollup.config.js
