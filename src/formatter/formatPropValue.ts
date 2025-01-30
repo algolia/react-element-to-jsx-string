@@ -12,7 +12,7 @@ const formatPropValue = (
   propValue: unknown,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): string => {
   if (typeof propValue === 'number') {
     return `{${String(propValue)}}`;

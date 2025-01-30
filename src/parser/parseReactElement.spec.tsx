@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import { describe, it, expect } from 'vitest';
 import parseReactElement from './parseReactElement';
+import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
 
-const options = {};
+const options = generateOptionsFixture({});
 
 describe('parseReactElement', () => {
   it('should parse a react element with a string as children', () => {
@@ -54,6 +55,7 @@ describe('parseReactElement', () => {
   });
 
   it('should parse a single depth react element', () => {
+    // @ts-expect-error `aaa` is not a valid dom element
     expect(parseReactElement(<aaa foo="41" />, options)).toEqual({
       type: 'ReactElement',
       displayName: 'aaa',
@@ -66,9 +68,11 @@ describe('parseReactElement', () => {
   });
 
   it('should parse a react element with an object as props', () => {
+    const Foo = (props: { a: unknown }) => <></>;
+
     expect(
       parseReactElement(
-        <div
+        <Foo
           a={{
             aa: '1',
             bb: {
@@ -80,7 +84,7 @@ describe('parseReactElement', () => {
       )
     ).toEqual({
       type: 'ReactElement',
-      displayName: 'div',
+      displayName: 'Foo',
       defaultProps: {},
       props: {
         a: {
@@ -95,19 +99,24 @@ describe('parseReactElement', () => {
   });
 
   it('should parse a react element with another react element as props', () => {
-    expect(parseReactElement(<div a={<span b="42" />} />, options)).toEqual({
+    const Foo = (props: { a: unknown }) => <></>;
+    const Bar = (props: { b: unknown }) => <></>;
+
+    expect(parseReactElement(<Foo a={<Bar b="42" />} />, options)).toEqual({
       type: 'ReactElement',
-      displayName: 'div',
+      displayName: 'Foo',
       defaultProps: {},
       props: {
-        a: <span b="42" />,
+        a: <Bar b="42" />,
       },
       childrens: [],
     });
   });
 
   it('should parse the react element defaultProps', () => {
-    const Foo = () => {};
+    const Foo = (props: { foo?: string }) => {
+      return <>Hello</>;
+    };
     Foo.defaultProps = {
       bar: 'Hello Bar!',
       baz: 'Hello Baz!',
@@ -144,7 +153,7 @@ describe('parseReactElement', () => {
   });
 
   it('should extract the component ref', () => {
-    const refFn = () => 'foo';
+    const refFn = () => {};
 
     expect(parseReactElement(<div ref={refFn} />, options)).toEqual({
       type: 'ReactElement',
@@ -156,6 +165,29 @@ describe('parseReactElement', () => {
       childrens: [],
     });
 
+    const refObject = { current: null };
+
+    expect(parseReactElement(<div ref={refObject} />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {
+        ref: refObject,
+      },
+      childrens: [],
+    });
+
+    expect(parseReactElement(<div ref={null} />, options)).toEqual({
+      type: 'ReactElement',
+      displayName: 'div',
+      defaultProps: {},
+      props: {
+        ref: null,
+      },
+      childrens: [],
+    });
+
+    // @ts-expect-error Illegal ref type
     // eslint-disable-next-line react/no-string-refs
     expect(parseReactElement(<div ref="foo" />, options)).toEqual({
       type: 'ReactElement',

@@ -92,7 +92,7 @@ export default (
   node: ReactElementTreeNode,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): string => {
   const {
     type,

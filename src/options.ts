@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 
 export type Options = {
-  filterProps: string[];
+  filterProps: Array<string> | ((propValue: unknown, key: string) => boolean);
   showDefaultProps: boolean;
   showFunctions: boolean;
   functionValue?: (...args: Array<any>) => any;
@@ -22,4 +22,4 @@ export const defaultOptions = {
   useBooleanShorthandSyntax: true,
   useFragmentShortSyntax: true,
   sortProps: true,
-} as const;
+};

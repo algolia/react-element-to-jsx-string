@@ -40,21 +40,21 @@
     "@commitlint/config-angular": "^19.7.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
-    "@types/react": "^19.0.6",
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@types/react-is": "^19.0.0",
     "conventional-changelog-cli": "2.1.1",
     "doctoc": "1.4.0",
     "esm": "3.2.25",
-    "happy-dom": "^16.5.3",
+    "happy-dom": "^16.7.3",
     "mversion": "2.0.1",
     "prettier": "3.4.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-is": "19.0.0",
-    "tsup": "^8.3.5",
+    "tsup": "^8.3.6",
     "typescript": "^5.7.3",
-    "vitest": "^2.1.8"
+    "vitest": "^3.0.4"
   }
 }

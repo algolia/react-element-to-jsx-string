@@ -1,27 +1,28 @@
 import React from 'react';
-import { describe, it, expect, vitest } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import formatReactElementNode from './formatReactElementNode';
+import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
 
-const defaultOptions = {
+const defaultOptions = generateOptionsFixture({
   filterProps: [],
   showDefaultProps: true,
   showFunctions: false,
   tabStop: 2,
   useBooleanShorthandSyntax: true,
   sortProps: true,
-};
+});
 
 describe('formatReactElementNode', () => {
   it('should format a react element with a string a children', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'h1',
       defaultProps: {},
       props: {},
       childrens: [
         {
+          type: 'string' as const,
           value: 'Hello world',
-          type: 'string',
         },
       ],
     };
@@ -33,7 +34,7 @@ describe('formatReactElementNode', () => {
 
   it('should format a single depth react element', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'aaa',
       props: {
         foo: '41',
@@ -51,7 +52,7 @@ describe('formatReactElementNode', () => {
 
   it('should format a react element with an object as props', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'div',
       defaultProps: {
         a: {
@@ -84,31 +85,31 @@ describe('formatReactElementNode', () => {
 
   it('should format a react element with another react element as props', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'div',
       defaultProps: {
-        a: <span b="42" />,
+        a: <span title="51" />,
       },
       props: {
-        a: <span b="42" />,
+        a: <span title="42" />,
       },
       childrens: [],
     };
 
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
-      '<div a={<span b="42" />} />'
+      '<div a={<span title="42" />} />'
     );
   });
 
   it('should format a react element with multiline children', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'div',
       defaultProps: {},
       props: {},
       childrens: [
         {
-          type: 'string',
+          type: 'string' as const,
           value: 'first line\nsecond line\nthird line',
         },
       ],
@@ -131,7 +132,7 @@ describe('formatReactElementNode', () => {
 
   it('should allow filtering props by function', () => {
     const tree = {
-      type: 'ReactElement',
+      type: 'ReactElement' as const,
       displayName: 'h1',
       defaultProps: {},
       props: {
@@ -140,14 +141,15 @@ describe('formatReactElementNode', () => {
       },
       childrens: [
         {
+          type: 'string' as const,
           value: 'Hello world',
-          type: 'string',
         },
       ],
     };
+
     const options = {
       ...defaultOptions,
-      filterProps: (val, key) => !key.startsWith('on'),
+      filterProps: (val: unknown, key: string) => !key.startsWith('on'),
     };
 
     expect(formatReactElementNode(tree, false, 0, options))

@@ -1,4 +1,4 @@
-import { describe, it, expect, vitest, test } from 'vitest';
+import { expect, test } from 'vitest';
 import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
 import {
   createNumberTreeNode,
@@ -38,7 +38,7 @@ test('mergeSiblingPlainStringChildrenReducer should consider number as string', 
 
   expect(
     [
-      createStringTreeNode(5),
+      createStringTreeNode('5'),
       createNumberTreeNode(1),
       createStringTreeNode('a'),
     ].reduce(mergeSiblingPlainStringChildrenReducer, [])
@@ -52,13 +52,19 @@ test('mergeSiblingPlainStringChildrenReducer should consider number as string', 
 
 test('mergeSiblingPlainStringChildrenReducer should detect non string node', () => {
   const childrens: TreeNode[] = [
-    createReactElementTreeNode('MyFoo', {}, {}, ['foo']),
+    createReactElementTreeNode('MyFoo', {}, {}, [
+      { type: 'string', value: 'foo' },
+    ]),
     createStringTreeNode('a'),
-    createNumberTreeNode('b'),
-    createReactElementTreeNode('MyBar', {}, {}, ['bar']),
+    createNumberTreeNode(123),
+    createReactElementTreeNode('MyBar', {}, {}, [
+      { type: 'string', value: 'bar' },
+    ]),
     createStringTreeNode('c'),
     createNumberTreeNode(42),
-    createReactElementTreeNode('MyBaz', {}, {}, ['baz']),
+    createReactElementTreeNode('MyBaz', {}, {}, [
+      { type: 'string', value: 'baz' },
+    ]),
   ];
 
   expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
@@ -67,18 +73,18 @@ test('mergeSiblingPlainStringChildrenReducer should detect non string node', () 
       displayName: 'MyFoo',
       props: {},
       defaultProps: {},
-      childrens: ['foo'],
+      childrens: [{ type: 'string', value: 'foo' }],
     },
     {
       type: 'string',
-      value: 'ab',
+      value: 'a123',
     },
     {
       type: 'ReactElement',
       displayName: 'MyBar',
       props: {},
       defaultProps: {},
-      childrens: ['bar'],
+      childrens: [{ type: 'string', value: 'bar' }],
     },
     {
       type: 'string',
@@ -89,7 +95,7 @@ test('mergeSiblingPlainStringChildrenReducer should detect non string node', () 
       displayName: 'MyBaz',
       props: {},
       defaultProps: {},
-      childrens: ['baz'],
+      childrens: [{ type: 'string', value: 'baz' }],
     },
   ]);
 });

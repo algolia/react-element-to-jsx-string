@@ -39,7 +39,7 @@ export default (
   node: ReactFragmentTreeNode,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): string => {
   const { type, key, childrens } = node;
 

@@ -20,13 +20,15 @@ export type ReactElementTreeNode = {
   displayName: string;
   props: PropsType;
   defaultProps: DefaultPropsType;
-  childrens: TreeNode[];
+  // TODO: Fix typo `children`
+  childrens: Array<TreeNode>;
 };
 
 export type ReactFragmentTreeNode = {
   type: 'ReactFragment';
-  key: Key | null | undefined;
-  childrens: TreeNode[];
+  key?: Key | null | undefined;
+  // TODO: Fix typo `children`
+  childrens: Array<TreeNode>;
 };
 
 export type TreeNode =
@@ -49,7 +51,7 @@ export const createReactElementTreeNode = (
   displayName: string,
   props: PropsType,
   defaultProps: DefaultPropsType,
-  childrens: TreeNode[]
+  childrens: Array<TreeNode>
 ): ReactElementTreeNode => ({
   type: 'ReactElement',
   displayName,
@@ -60,7 +62,7 @@ export const createReactElementTreeNode = (
 
 export const createReactFragmentTreeNode = (
   key: Key | null | undefined,
-  childrens: TreeNode[]
+  childrens: Array<TreeNode>
 ): ReactFragmentTreeNode => ({
   type: 'ReactFragment',
   key,
