@@ -11,7 +11,7 @@ export default (
   value: Record<string, unknown> | Array<unknown>,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): string => {
   const normalizedValue = sortObject(value);
 

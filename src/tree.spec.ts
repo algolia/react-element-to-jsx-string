@@ -35,7 +35,12 @@ describe('createReactElementTreeNode', () => {
         {
           bar: 51,
         },
-        ['abc']
+        [
+          {
+            type: 'string',
+            value: 'abc',
+          },
+        ]
       )
     ).toEqual({
       type: 'ReactElement',
@@ -46,17 +51,34 @@ describe('createReactElementTreeNode', () => {
       defaultProps: {
         bar: 51,
       },
-      childrens: ['abc'],
+      childrens: [
+        {
+          type: 'string',
+          value: 'abc',
+        },
+      ],
     });
   });
 });
 
 describe('createReactFragmentTreeNode', () => {
   it('generate a react fragment typed node payload', () => {
-    expect(createReactFragmentTreeNode('foo', ['abc'])).toEqual({
+    expect(
+      createReactFragmentTreeNode('foo', [
+        {
+          type: 'string',
+          value: 'abc',
+        },
+      ])
+    ).toEqual({
       type: 'ReactFragment',
       key: 'foo',
-      childrens: ['abc'],
+      childrens: [
+        {
+          type: 'string',
+          value: 'abc',
+        },
+      ],
     });
   });
 });

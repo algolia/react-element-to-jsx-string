@@ -32,7 +32,7 @@ export default (
   node: TreeNode,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): string => {
   if (node.type === 'number') {
     return String(node.value);

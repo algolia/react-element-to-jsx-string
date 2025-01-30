@@ -53,7 +53,6 @@ const getWrappedComponentDisplayName = (Component: any): string => {
 const getReactElementDisplayName = (element: ReactElement): string => {
   switch (true) {
     case typeof element.type === 'string':
-      // @ts-expect-error: flow to TS
       return element.type;
 
     case typeof element.type === 'function':
@@ -75,6 +74,7 @@ const getReactElementDisplayName = (element: ReactElement): string => {
       return `${element.type._context.displayName || 'Context'}.Consumer`;
 
     case isContextProvider(element):
+      // @ts-expect-error: flow to TS
       return `${element.type.displayName || 'Context'}.Provider`;
     case isLazy(element):
       return 'Lazy';
@@ -115,10 +115,7 @@ const filterProps = (
   return filteredProps;
 };
 
-const parseReactElement = (
-  element: ReactElement<any> | string | number,
-  options: Partial<Options>
-): TreeNode => {
+const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 
   if (typeof element === 'string') {
@@ -151,8 +148,7 @@ const parseReactElement = (
   // @ts-expect-error: flow to TS
   const children = React.Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
-    // @ts-expect-error: flow to TS
-    .map((child: ReactNode) => parseReactElement(child, options));
+    .map((oneChild) => parseReactElement(oneChild, options));
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, children);

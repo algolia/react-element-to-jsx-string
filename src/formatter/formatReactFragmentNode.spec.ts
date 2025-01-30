@@ -1,4 +1,4 @@
-import { describe, it, expect, vitest } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import formatReactFragmentNode from './formatReactFragmentNode';
 
 const defaultOptions = {
@@ -14,11 +14,11 @@ const defaultOptions = {
 describe('formatReactFragmentNode', () => {
   it('should format a react fragment with a string as children', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       childrens: [
         {
+          type: 'string' as const,
           value: 'Hello world',
-          type: 'string',
         },
       ],
     };
@@ -30,12 +30,12 @@ describe('formatReactFragmentNode', () => {
 
   it('should format a react fragment with a key', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       key: 'foo',
       childrens: [
         {
+          type: 'string' as const,
           value: 'Hello world',
-          type: 'string',
         },
       ],
     };
@@ -48,19 +48,21 @@ describe('formatReactFragmentNode', () => {
 
   it('should format a react fragment with multiple childrens', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       childrens: [
         {
-          type: 'ReactElement',
+          type: 'ReactElement' as const,
           displayName: 'div',
+          defaultProps: {},
           props: {
             a: 'foo',
           },
           childrens: [],
         },
         {
-          type: 'ReactElement',
+          type: 'ReactElement' as const,
           displayName: 'div',
+          defaultProps: {},
           props: {
             b: 'bar',
           },
@@ -77,7 +79,7 @@ describe('formatReactFragmentNode', () => {
 
   it('should format an empty react fragment', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       childrens: [],
     };
 
@@ -88,7 +90,7 @@ describe('formatReactFragmentNode', () => {
 
   it('should format an empty react fragment with key', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       key: 'foo',
       childrens: [],
     };
@@ -100,11 +102,11 @@ describe('formatReactFragmentNode', () => {
 
   it('should format a react fragment using the explicit syntax', () => {
     const tree = {
-      type: 'ReactFragment',
+      type: 'ReactFragment' as const,
       childrens: [
         {
+          type: 'string' as const,
           value: 'Hello world',
-          type: 'string',
         },
       ],
     };

@@ -10,7 +10,7 @@ export default (
   defaultValue: unknown,
   inline: boolean,
   lvl: number,
-  options: Partial<Options>
+  options: Options
 ): {
   attributeFormattedInline: string;
   attributeFormattedMultiline: string;

@@ -2,6 +2,7 @@ import { describe, it, expect, vitest } from 'vitest';
 import formatTree from './formatTree';
 import formatTreeNode from './formatTreeNode';
 import { createStringTreeNode } from '../tree';
+import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
 
 vitest.mock('./formatTreeNode');
 
@@ -10,7 +11,7 @@ describe('formatTree', () => {
     vitest.mocked(formatTreeNode).mockReturnValue('<MockedComponent />');
 
     const tree = createStringTreeNode('42');
-    const options = {};
+    const options = generateOptionsFixture({});
 
     const result = formatTree(tree, options);
 

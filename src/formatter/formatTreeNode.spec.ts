@@ -1,6 +1,7 @@
 import { describe, it, expect, vitest, beforeEach } from 'vitest';
 import formatTreeNode from './formatTreeNode';
 import formatReactElementNode from './formatReactElementNode';
+import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
 
 vitest.mock('./formatReactElementNode');
 
@@ -20,7 +21,7 @@ describe('formatTreeNode', () => {
         },
         true,
         0,
-        {}
+        generateOptionsFixture({})
       )
     ).toBe('42');
   });
@@ -34,7 +35,7 @@ describe('formatTreeNode', () => {
         },
         true,
         0,
-        {}
+        generateOptionsFixture({})
       )
     ).toBe('foo');
   });
@@ -45,10 +46,13 @@ describe('formatTreeNode', () => {
         {
           type: 'ReactElement',
           displayName: 'Foo',
+          childrens: [],
+          props: {},
+          defaultProps: {},
         },
         true,
         0,
-        {}
+        generateOptionsFixture({})
       )
     ).toBe('<MockedFormatReactElementNodeResult />');
   });
@@ -64,7 +68,7 @@ describe('formatTreeNode', () => {
           },
           true,
           0,
-          {}
+          generateOptionsFixture({})
         )
       ).toBe(`{\`I contain ${char}, is will be escaped\`}`);
     });
@@ -79,7 +83,7 @@ describe('formatTreeNode', () => {
         },
         true,
         0,
-        {}
+        generateOptionsFixture({})
       )
     ).toBe(`foo
 bar`);
@@ -98,9 +102,9 @@ bar`);
         },
         false,
         0,
-        {
+        generateOptionsFixture({
           tabStop: 2,
-        }
+        })
       )
     ).toBe(`{\`{
   "foo": "bar"
