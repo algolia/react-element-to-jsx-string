@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 
-import React, { Fragment, ReactNode } from 'react';
+import { Fragment } from 'react';
 import { describe, it, expect } from 'vitest';
 import parseReactElement from './parseReactElement';
 import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
@@ -133,7 +133,6 @@ describe('parseReactElement', () => {
       },
       props: {
         bar: 'Hello world!',
-        baz: 'Hello Baz!',
         foo: 'Hello Foo!',
       },
       childrens: [],
