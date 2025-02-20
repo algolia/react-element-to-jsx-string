@@ -1,24 +1,24 @@
-import spacer from './spacer';
-import formatTreeNode from './formatTreeNode';
-import formatProp from './formatProp';
-import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
-import sortPropsByNames from './sortPropsByNames';
-import createPropFilter from './createPropFilter';
-import { defaultOptions, type Options } from '../options';
-import type { ReactElementTreeNode } from '../tree';
+import { type Options, defaultOptions } from "../options";
+import type { ReactElementTreeNode } from "../tree";
+import createPropFilter from "./createPropFilter";
+import formatProp from "./formatProp";
+import formatTreeNode from "./formatTreeNode";
+import mergeSiblingPlainStringChildrenReducer from "./mergeSiblingPlainStringChildrenReducer";
+import sortPropsByNames from "./sortPropsByNames";
+import spacer from "./spacer";
 
 const compensateMultilineStringElementIndentation = (
   element: any,
   formattedElement: string,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ) => {
   const { tabStop } = options;
 
-  if (element.type === 'string') {
+  if (element.type === "string") {
     return formattedElement
-      .split('\n')
+      .split("\n")
       .map((line, offset) => {
         if (offset === 0) {
           return line;
@@ -26,7 +26,7 @@ const compensateMultilineStringElementIndentation = (
 
         return `${spacer(lvl, tabStop)}${line}`;
       })
-      .join('\n');
+      .join("\n");
   }
 
   return formattedElement;
@@ -39,7 +39,7 @@ const formatOneChildren =
       formatTreeNode(element, inline, lvl, options),
       inline,
       lvl,
-      options
+      options,
     );
 
 const onlyPropsWithOriginalValue =
@@ -57,7 +57,7 @@ const isInlineAttributeTooLong = (
   inlineAttributeString: string,
   lvl: number,
   tabStop: number,
-  maxInlineAttributesLineLength: number | null | undefined
+  maxInlineAttributesLineLength: number | null | undefined,
 ): boolean => {
   if (!maxInlineAttributesLineLength) {
     return attributes.length > 1;
@@ -76,14 +76,14 @@ const shouldRenderMultilineAttr = (
   inline: boolean,
   lvl: number,
   tabStop: number,
-  maxInlineAttributesLineLength: number | null | undefined
+  maxInlineAttributesLineLength: number | null | undefined,
 ): boolean =>
   (isInlineAttributeTooLong(
     attributes,
     inlineAttributeString,
     lvl,
     tabStop,
-    maxInlineAttributesLineLength
+    maxInlineAttributesLineLength,
   ) ||
     containsMultilineAttr) &&
   !inline;
@@ -92,19 +92,19 @@ export default (
   node: ReactElementTreeNode,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ): string => {
   const {
     type,
-    displayName = '',
-    childrens,
+    displayName = "",
+    children,
     props = {},
     defaultProps = {},
   } = node;
 
-  if (type !== 'ReactElement') {
+  if (type !== "ReactElement") {
     throw new Error(
-      `The "formatReactElementNode" function could only format node of type "ReactElement". Given:  ${type}`
+      `The "formatReactElementNode" function could only format node of type "ReactElement". Given:  ${type}`,
     );
   }
 
@@ -135,7 +135,7 @@ export default (
     .filter(propFilter)
     .filter(() => showDefaultProps)
     .filter(
-      (defaultPropName) => !visibleAttributeNames.includes(defaultPropName)
+      (defaultPropName) => !visibleAttributeNames.includes(defaultPropName),
     )
     .forEach((defaultPropName) => visibleAttributeNames.push(defaultPropName));
 
@@ -154,7 +154,7 @@ export default (
       defaultProps[attributeName],
       inline,
       lvl,
-      options
+      options,
     );
 
     if (isMultilineAttribute) {
@@ -175,7 +175,7 @@ export default (
       inline,
       lvl,
       tabStop,
-      maxInlineAttributesLineLength
+      maxInlineAttributesLineLength,
     )
   ) {
     out = outMultilineAttr;
@@ -183,23 +183,23 @@ export default (
     out = outInlineAttr;
   }
 
-  if (childrens && childrens.length > 0) {
+  if (children && children.length > 0) {
     const newLvl = lvl + 1;
 
-    out += '>';
+    out += ">";
 
     if (!inline) {
-      out += '\n';
+      out += "\n";
       out += spacer(newLvl, tabStop);
     }
 
-    out += childrens
+    out += children
       .reduce(mergeSiblingPlainStringChildrenReducer, [])
       .map(formatOneChildren(inline, newLvl, options))
-      .join(!inline ? `\n${spacer(newLvl, tabStop)}` : '');
+      .join(!inline ? `\n${spacer(newLvl, tabStop)}` : "");
 
     if (!inline) {
-      out += '\n';
+      out += "\n";
       out += spacer(newLvl - 1, tabStop);
     }
 
@@ -211,13 +211,13 @@ export default (
         outInlineAttr,
         lvl,
         tabStop,
-        maxInlineAttributesLineLength
+        maxInlineAttributesLineLength,
       )
     ) {
-      out += ' ';
+      out += " ";
     }
 
-    out += '/>';
+    out += "/>";
   }
 
   return out;

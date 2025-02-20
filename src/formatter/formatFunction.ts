@@ -1,13 +1,13 @@
-import type { Options } from '../options';
+import type { Options } from "../options";
 
 function noRefCheck() {}
 
 export const inlineFunction = (fn: Function): string =>
   fn
     .toString()
-    .split('\n')
+    .split("\n")
     .map((line) => line.trim())
-    .join('');
+    .join("");
 
 export const preserveFunctionLineBreak = (fn: Function): string =>
   fn.toString();

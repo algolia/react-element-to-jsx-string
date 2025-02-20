@@ -1,13 +1,13 @@
-import formatReactElementNode from './formatReactElementNode';
-import formatReactFragmentNode from './formatReactFragmentNode';
-import type { Options } from '../options';
-import type { TreeNode } from '../tree';
+import type { Options } from "../options";
+import type { TreeNode } from "../tree";
+import formatReactElementNode from "./formatReactElementNode";
+import formatReactFragmentNode from "./formatReactFragmentNode";
 
-const jsxStopChars = ['<', '>', '{', '}'];
+const jsxStopChars = ["<", ">", "{", "}"];
 const shouldBeEscaped = (s: string) =>
   jsxStopChars.some((jsxStopChar) => s.includes(jsxStopChar));
 
-const escape = (s: string) => {
+const escapeJsxStopChars = (s: string) => {
   if (!shouldBeEscaped(s)) {
     return s;
   }
@@ -17,11 +17,11 @@ const escape = (s: string) => {
 
 const preserveTrailingSpace = (s: string) => {
   let result = s;
-  if (result.endsWith(' ')) {
+  if (result.endsWith(" ")) {
     result = result.replace(/^(.*?)(\s+)$/, "$1{'$2'}");
   }
 
-  if (result.startsWith(' ')) {
+  if (result.startsWith(" ")) {
     result = result.replace(/^(\s+)(.*)$/, "{'$1'}$2");
   }
 
@@ -32,23 +32,23 @@ export default (
   node: TreeNode,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ): string => {
-  if (node.type === 'number') {
+  if (node.type === "number") {
     return String(node.value);
   }
 
-  if (node.type === 'string') {
+  if (node.type === "string") {
     return node.value
-      ? `${preserveTrailingSpace(escape(String(node.value)))}`
-      : '';
+      ? `${preserveTrailingSpace(escapeJsxStopChars(String(node.value)))}`
+      : "";
   }
 
-  if (node.type === 'ReactElement') {
+  if (node.type === "ReactElement") {
     return formatReactElementNode(node, inline, lvl, options);
   }
 
-  if (node.type === 'ReactFragment') {
+  if (node.type === "ReactFragment") {
     return formatReactFragmentNode(node, inline, lvl, options);
   }
 

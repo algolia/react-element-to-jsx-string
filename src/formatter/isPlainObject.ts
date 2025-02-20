@@ -5,31 +5,31 @@
  * Released under the MIT License.
  */
 
-function isObject(o: any) {
-  return Object.prototype.toString.call(o) === '[object Object]';
+// biome-ignore lint/complexity/noBannedTypes: In this case there nothing to replace Object
+function isObject(o: unknown): o is Object {
+  return Object.prototype.toString.call(o) === "[object Object]";
 }
 
-export function isPlainObject(o: any): o is Record<string, unknown> {
-  var ctor, prot;
-
+export function isPlainObject(o: unknown): o is Record<string, unknown> {
   if (isObject(o) === false) {
     return false;
   }
 
   // If has modified constructor
-  ctor = o.constructor;
+  const ctor = o.constructor;
   if (ctor === undefined) {
     return true;
   }
 
   // If has modified prototype
-  prot = ctor.prototype;
+  const prot = ctor.prototype;
   if (isObject(prot) === false) {
     return false;
   }
 
   // If constructor does not have an Object-specific method
-  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+  // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+  if (prot.hasOwnProperty("isPrototypeOf") === false) {
     return false;
   }
 

@@ -1,105 +1,105 @@
-import { expect, test } from 'vitest';
-import mergeSiblingPlainStringChildrenReducer from './mergeSiblingPlainStringChildrenReducer';
+import { expect, test } from "vitest";
 import {
   createNumberTreeNode,
-  createStringTreeNode,
   createReactElementTreeNode,
-} from '../tree';
-import type { TreeNode } from '../tree';
+  createStringTreeNode,
+} from "../tree";
+import type { TreeNode } from "../tree";
+import mergeSiblingPlainStringChildrenReducer from "./mergeSiblingPlainStringChildrenReducer";
 
-test('mergeSiblingPlainStringChildrenReducer should merge sibling string tree nodes', () => {
-  const childrens: TreeNode[] = [
-    createStringTreeNode('a'),
-    createStringTreeNode('b'),
-    createStringTreeNode('c'),
+test("mergeSiblingPlainStringChildrenReducer should merge sibling string tree nodes", () => {
+  const children: TreeNode[] = [
+    createStringTreeNode("a"),
+    createStringTreeNode("b"),
+    createStringTreeNode("c"),
   ];
 
-  expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
+  expect(children.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
     {
-      type: 'string',
-      value: 'abc',
+      type: "string",
+      value: "abc",
     },
   ]);
 });
 
-test('mergeSiblingPlainStringChildrenReducer should consider number as string', () => {
+test("mergeSiblingPlainStringChildrenReducer should consider number as string", () => {
   expect(
     [
-      createStringTreeNode('a'),
+      createStringTreeNode("a"),
       createNumberTreeNode(51),
-      createStringTreeNode('c'),
-    ].reduce(mergeSiblingPlainStringChildrenReducer, [])
+      createStringTreeNode("c"),
+    ].reduce(mergeSiblingPlainStringChildrenReducer, []),
   ).toEqual([
     {
-      type: 'string',
-      value: 'a51c',
+      type: "string",
+      value: "a51c",
     },
   ]);
 
   expect(
     [
-      createStringTreeNode('5'),
+      createStringTreeNode("5"),
       createNumberTreeNode(1),
-      createStringTreeNode('a'),
-    ].reduce(mergeSiblingPlainStringChildrenReducer, [])
+      createStringTreeNode("a"),
+    ].reduce(mergeSiblingPlainStringChildrenReducer, []),
   ).toEqual([
     {
-      type: 'string',
-      value: '51a',
+      type: "string",
+      value: "51a",
     },
   ]);
 });
 
-test('mergeSiblingPlainStringChildrenReducer should detect non string node', () => {
-  const childrens: TreeNode[] = [
-    createReactElementTreeNode('MyFoo', {}, {}, [
-      { type: 'string', value: 'foo' },
+test("mergeSiblingPlainStringChildrenReducer should detect non string node", () => {
+  const children: TreeNode[] = [
+    createReactElementTreeNode("MyFoo", {}, {}, [
+      { type: "string", value: "foo" },
     ]),
-    createStringTreeNode('a'),
+    createStringTreeNode("a"),
     createNumberTreeNode(123),
-    createReactElementTreeNode('MyBar', {}, {}, [
-      { type: 'string', value: 'bar' },
+    createReactElementTreeNode("MyBar", {}, {}, [
+      { type: "string", value: "bar" },
     ]),
-    createStringTreeNode('c'),
+    createStringTreeNode("c"),
     createNumberTreeNode(42),
-    createReactElementTreeNode('MyBaz', {}, {}, [
-      { type: 'string', value: 'baz' },
+    createReactElementTreeNode("MyBaz", {}, {}, [
+      { type: "string", value: "baz" },
     ]),
   ];
 
-  expect(childrens.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
+  expect(children.reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([
     {
-      type: 'ReactElement',
-      displayName: 'MyFoo',
+      type: "ReactElement",
+      displayName: "MyFoo",
       props: {},
       defaultProps: {},
-      childrens: [{ type: 'string', value: 'foo' }],
+      children: [{ type: "string", value: "foo" }],
     },
     {
-      type: 'string',
-      value: 'a123',
+      type: "string",
+      value: "a123",
     },
     {
-      type: 'ReactElement',
-      displayName: 'MyBar',
+      type: "ReactElement",
+      displayName: "MyBar",
       props: {},
       defaultProps: {},
-      childrens: [{ type: 'string', value: 'bar' }],
+      children: [{ type: "string", value: "bar" }],
     },
     {
-      type: 'string',
-      value: 'c42',
+      type: "string",
+      value: "c42",
     },
     {
-      type: 'ReactElement',
-      displayName: 'MyBaz',
+      type: "ReactElement",
+      displayName: "MyBaz",
       props: {},
       defaultProps: {},
-      childrens: [{ type: 'string', value: 'baz' }],
+      children: [{ type: "string", value: "baz" }],
     },
   ]);
 });
 
-test('mergeSiblingPlainStringChildrenReducer should reduce empty array to an empty array', () => {
+test("mergeSiblingPlainStringChildrenReducer should reduce empty array to an empty array", () => {
   expect([].reduce(mergeSiblingPlainStringChildrenReducer, [])).toEqual([]);
 });

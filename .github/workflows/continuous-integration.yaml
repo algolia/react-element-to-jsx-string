@@ -10,13 +10,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: "pnpm"
       - run: pnpm install
       - run: pnpm run test
       - run: pnpm run typecheck
+      - run: pnpm biome ci --colors=off
       - run: pnpm run build
       # FIXME: To be reactivated
-      # - run: pnpm run lint
       # - run: pnpm run smoke cjs 19.0.0
       # - run: pnpm run smoke esm 19.0.0
       # - run: pnpm run smoke cjs latest

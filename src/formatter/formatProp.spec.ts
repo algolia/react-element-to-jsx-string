@@ -1,26 +1,26 @@
-import { describe, it, expect, vitest, beforeEach } from 'vitest';
-import formatProp from './formatProp';
-import formatPropValue from './formatPropValue';
-import { Options } from '../options';
+import { beforeEach, describe, expect, it, vitest } from "vitest";
+import type { Options } from "../options";
+import formatProp from "./formatProp";
+import formatPropValue from "./formatPropValue";
 
-vitest.mock('./formatPropValue');
+vitest.mock("./formatPropValue");
 
 const defaultOptions = {
   useBooleanShorthandSyntax: true,
   tabStop: 2,
 } as any as Options;
 
-describe('formatProp', () => {
+describe("formatProp", () => {
   beforeEach(() => {
     vitest.clearAllMocks();
     vitest.resetAllMocks();
   });
 
-  it('should format prop with only a value', () => {
+  it("should format prop with only a value", () => {
     vitest.mocked(formatPropValue).mockReturnValue('"MockedPropValue"');
 
     expect(
-      formatProp('foo', true, 'bar', false, null, true, 0, defaultOptions)
+      formatProp("foo", true, "bar", false, null, true, 0, defaultOptions),
     ).toEqual({
       attributeFormattedInline: ' foo="MockedPropValue"',
       attributeFormattedMultiline: `
@@ -29,18 +29,18 @@ describe('formatProp', () => {
     });
 
     expect(formatPropValue).toHaveBeenCalledWith(
-      'bar',
+      "bar",
       true,
       0,
-      defaultOptions
+      defaultOptions,
     );
   });
 
-  it('should format prop with only a default value', () => {
+  it("should format prop with only a default value", () => {
     vitest.mocked(formatPropValue).mockReturnValue('"MockedPropValue"');
 
     expect(
-      formatProp('foo', false, null, true, 'baz', true, 0, defaultOptions)
+      formatProp("foo", false, null, true, "baz", true, 0, defaultOptions),
     ).toEqual({
       attributeFormattedInline: ' foo="MockedPropValue"',
       attributeFormattedMultiline: `
@@ -49,18 +49,18 @@ describe('formatProp', () => {
     });
 
     expect(formatPropValue).toHaveBeenCalledWith(
-      'baz',
+      "baz",
       true,
       0,
-      defaultOptions
+      defaultOptions,
     );
   });
 
-  it('should format prop with a value and a default value', () => {
+  it("should format prop with a value and a default value", () => {
     vitest.mocked(formatPropValue).mockReturnValue('"MockedPropValue"');
 
     expect(
-      formatProp('foo', true, 'bar', true, 'baz', true, 0, defaultOptions)
+      formatProp("foo", true, "bar", true, "baz", true, 0, defaultOptions),
     ).toEqual({
       attributeFormattedInline: ' foo="MockedPropValue"',
       attributeFormattedMultiline: `
@@ -69,25 +69,25 @@ describe('formatProp', () => {
     });
 
     expect(formatPropValue).toHaveBeenCalledWith(
-      'bar',
+      "bar",
       true,
       0,
-      defaultOptions
+      defaultOptions,
     );
   });
 
-  it('should format a truthy boolean prop (with short syntax)', () => {
+  it("should format a truthy boolean prop (with short syntax)", () => {
     const options = {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     } as Options;
 
-    vitest.mocked(formatPropValue).mockReturnValue('{true}');
+    vitest.mocked(formatPropValue).mockReturnValue("{true}");
 
     expect(
-      formatProp('foo', true, true, false, false, true, 0, options)
+      formatProp("foo", true, true, false, false, true, 0, options),
     ).toEqual({
-      attributeFormattedInline: ' foo',
+      attributeFormattedInline: " foo",
       attributeFormattedMultiline: `
   foo`,
       isMultilineAttribute: false,
@@ -96,37 +96,37 @@ describe('formatProp', () => {
     expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
   });
 
-  it('should ignore a falsy boolean prop (with short syntax)', () => {
+  it("should ignore a falsy boolean prop (with short syntax)", () => {
     const options = {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
     } as Options;
 
-    vitest.mocked(formatPropValue).mockReturnValue('{false}');
+    vitest.mocked(formatPropValue).mockReturnValue("{false}");
 
     expect(
-      formatProp('foo', true, false, false, null, true, 0, options)
+      formatProp("foo", true, false, false, null, true, 0, options),
     ).toEqual({
-      attributeFormattedInline: '',
-      attributeFormattedMultiline: '',
+      attributeFormattedInline: "",
+      attributeFormattedMultiline: "",
       isMultilineAttribute: false,
     });
 
     expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
   });
 
-  it('should format a truthy boolean prop (with explicit syntax)', () => {
+  it("should format a truthy boolean prop (with explicit syntax)", () => {
     const options = {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     } as Options;
 
-    vitest.mocked(formatPropValue).mockReturnValue('{true}');
+    vitest.mocked(formatPropValue).mockReturnValue("{true}");
 
     expect(
-      formatProp('foo', true, true, false, false, true, 0, options)
+      formatProp("foo", true, true, false, false, true, 0, options),
     ).toEqual({
-      attributeFormattedInline: ' foo={true}',
+      attributeFormattedInline: " foo={true}",
       attributeFormattedMultiline: `
   foo={true}`,
       isMultilineAttribute: false,
@@ -135,18 +135,18 @@ describe('formatProp', () => {
     expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
   });
 
-  it('should format a falsy boolean prop (with explicit syntax)', () => {
+  it("should format a falsy boolean prop (with explicit syntax)", () => {
     const options = {
       useBooleanShorthandSyntax: false,
       tabStop: 2,
     } as Options;
 
-    vitest.mocked(formatPropValue).mockReturnValue('{false}');
+    vitest.mocked(formatPropValue).mockReturnValue("{false}");
 
     expect(
-      formatProp('foo', true, false, false, false, true, 0, options)
+      formatProp("foo", true, false, false, false, true, 0, options),
     ).toEqual({
-      attributeFormattedInline: ' foo={false}',
+      attributeFormattedInline: " foo={false}",
       attributeFormattedMultiline: `
   foo={false}`,
       isMultilineAttribute: false,
@@ -155,7 +155,7 @@ describe('formatProp', () => {
     expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
   });
 
-  it('should format a mulitline props', () => {
+  it("should format a mulitline props", () => {
     vitest.mocked(formatPropValue).mockReturnValue(`{[
 "a",
 "b"
@@ -163,15 +163,15 @@ describe('formatProp', () => {
 
     expect(
       formatProp(
-        'foo',
+        "foo",
         true,
-        ['a', 'b'],
+        ["a", "b"],
         false,
         false,
         false,
         0,
-        defaultOptions
-      )
+        defaultOptions,
+      ),
     ).toEqual({
       attributeFormattedInline: ` foo={[
 "a",
@@ -186,14 +186,14 @@ describe('formatProp', () => {
     });
 
     expect(formatPropValue).toHaveBeenCalledWith(
-      ['a', 'b'],
+      ["a", "b"],
       false,
       0,
-      defaultOptions
+      defaultOptions,
     );
   });
 
-  it('should indent the formatted string', () => {
+  it("should indent the formatted string", () => {
     /*
      * lvl 4 and tabStop 2 :
      *  - 4 * 2 = 8 spaces
@@ -208,7 +208,7 @@ describe('formatProp', () => {
     vitest.mocked(formatPropValue).mockReturnValue('"MockedPropValue"');
 
     expect(
-      formatProp('foo', true, 'bar', false, null, true, 4, options)
+      formatProp("foo", true, "bar", false, null, true, 4, options),
     ).toEqual({
       attributeFormattedInline: ' foo="MockedPropValue"',
       attributeFormattedMultiline: `
@@ -217,6 +217,6 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith('bar', true, 4, options);
+    expect(formatPropValue).toHaveBeenCalledWith("bar", true, 4, options);
   });
 });

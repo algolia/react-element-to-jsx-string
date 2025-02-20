@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
-import sortObject from './sortObject';
+import { describe, expect, it } from "vitest";
+import sortObject from "./sortObject";
 
-describe('sortObject', () => {
-  it('should sort keys in objects', () => {
+describe("sortObject", () => {
+  it("should sort keys in objects", () => {
     const fixture = {
       c: 2,
       b: {
         x: 1,
-        c: 'ccc',
+        c: "ccc",
       },
       a: [
         {
@@ -26,15 +26,15 @@ describe('sortObject', () => {
           },
         ],
         b: {
-          c: 'ccc',
+          c: "ccc",
           x: 1,
         },
         c: 2,
-      })
+      }),
     );
   });
 
-  it('should process an array', () => {
+  it("should process an array", () => {
     const fixture = [
       {
         foo: 1,
@@ -60,11 +60,11 @@ describe('sortObject', () => {
           b: 1,
           c: 2,
         },
-      ])
+      ]),
     );
   });
 
-  it('should not break special values', () => {
+  it("should not break special values", () => {
     const date = new Date();
     const regexp = /test/g;
     const fixture = {

@@ -1,7 +1,7 @@
-import { defaultOptions, type Options } from '../options';
+import { type Options, defaultOptions } from "../options";
 
 export function generateOptionsFixture(
-  fixtureOptions: Partial<Options>
+  fixtureOptions: Partial<Options>,
 ): Options {
   return {
     ...defaultOptions,

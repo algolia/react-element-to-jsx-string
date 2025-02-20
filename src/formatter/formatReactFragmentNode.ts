@@ -1,19 +1,19 @@
-import type { Key } from 'react';
-import formatReactElementNode from './formatReactElementNode';
-import type { Options } from '../options';
+import type { Key } from "react";
+import type { Options } from "../options";
 import type {
   ReactElementTreeNode,
   ReactFragmentTreeNode,
   TreeNode,
-} from '../tree';
+} from "../tree";
+import formatReactElementNode from "./formatReactElementNode";
 
-const REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX = '';
-const REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX = 'React.Fragment';
+const REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX = "";
+const REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX = "React.Fragment";
 
 const toReactElementTreeNode = (
   displayName: string,
   key: Key | null | undefined,
-  childrens: TreeNode[]
+  children: TreeNode[],
 ): ReactElementTreeNode => {
   let props = {};
   if (key) {
@@ -23,35 +23,35 @@ const toReactElementTreeNode = (
   }
 
   return {
-    type: 'ReactElement',
+    type: "ReactElement",
     displayName,
     props,
     defaultProps: {},
-    childrens,
+    children,
   };
 };
 
 const isKeyedFragment = ({ key }: ReactFragmentTreeNode) => Boolean(key);
-const hasNoChildren = ({ childrens }: ReactFragmentTreeNode) =>
-  childrens.length === 0;
+const hasNoChildren = ({ children }: ReactFragmentTreeNode) =>
+  children.length === 0;
 
 export default (
   node: ReactFragmentTreeNode,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ): string => {
-  const { type, key, childrens } = node;
+  const { type, key, children } = node;
 
-  if (type !== 'ReactFragment') {
+  if (type !== "ReactFragment") {
     throw new Error(
-      `The "formatReactFragmentNode" function could only format node of type "ReactFragment". Given: ${type}`
+      `The "formatReactFragmentNode" function could only format node of type "ReactFragment". Given: ${type}`,
     );
   }
 
   const { useFragmentShortSyntax } = options;
 
-  let displayName;
+  let displayName: string;
   if (useFragmentShortSyntax) {
     if (hasNoChildren(node) || isKeyedFragment(node)) {
       displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
@@ -63,9 +63,9 @@ export default (
   }
 
   return formatReactElementNode(
-    toReactElementTreeNode(displayName, key, childrens),
+    toReactElementTreeNode(displayName, key, children),
     inline,
     lvl,
-    options
+    options,
   );
 };

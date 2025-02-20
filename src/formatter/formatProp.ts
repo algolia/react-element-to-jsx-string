@@ -1,6 +1,6 @@
-import spacer from './spacer';
-import formatPropValue from './formatPropValue';
-import { defaultOptions, type Options } from '../options';
+import { type Options, defaultOptions } from "../options";
+import formatPropValue from "./formatPropValue";
+import spacer from "./spacer";
 
 export default (
   name: string,
@@ -10,7 +10,7 @@ export default (
   defaultValue: unknown,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ): {
   attributeFormattedInline: string;
   attributeFormattedMultiline: string;
@@ -18,7 +18,7 @@ export default (
 } => {
   if (!hasValue && !hasDefaultValue) {
     throw new Error(
-      `The prop "${name}" has no value and no default: could not be formatted`
+      `The prop "${name}" has no value and no default: could not be formatted`,
     );
   }
 
@@ -29,19 +29,19 @@ export default (
 
   const formattedPropValue = formatPropValue(usedValue, inline, lvl, options);
 
-  let attributeFormattedInline = ' ';
+  let attributeFormattedInline = " ";
   let attributeFormattedMultiline = `\n${spacer(lvl + 1, tabStop)}`;
-  const isMultilineAttribute = formattedPropValue.includes('\n');
+  const isMultilineAttribute = formattedPropValue.includes("\n");
 
   if (
     useBooleanShorthandSyntax &&
-    formattedPropValue === '{false}' &&
+    formattedPropValue === "{false}" &&
     !hasDefaultValue
   ) {
     // If a boolean is false and not different from it's default, we do not render the attribute
-    attributeFormattedInline = '';
-    attributeFormattedMultiline = '';
-  } else if (useBooleanShorthandSyntax && formattedPropValue === '{true}') {
+    attributeFormattedInline = "";
+    attributeFormattedMultiline = "";
+  } else if (useBooleanShorthandSyntax && formattedPropValue === "{true}") {
     attributeFormattedInline += `${name}`;
     attributeFormattedMultiline += `${name}`;
   } else {

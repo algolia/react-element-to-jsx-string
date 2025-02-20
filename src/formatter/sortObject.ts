@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-function safeSortObject(value: any, seen: WeakSet<any>): any {
+function safeSortObject(value: any, seen: WeakSet<object>): any {
   // return non-object value as is
-  if (value === null || typeof value !== 'object') {
+  if (value === null || typeof value !== "object") {
     return value;
   }
 
@@ -26,13 +26,13 @@ function safeSortObject(value: any, seen: WeakSet<any>): any {
   return Object.keys(value)
     .sort()
     .reduce((result, key) => {
-      if (key === '_owner') {
+      if (key === "_owner") {
         return result;
       }
-      if (key === 'current' || seen.has(value[key])) {
+      if (key === "current" || seen.has(value[key])) {
         // eslint-disable-next-line no-param-reassign
         // @ts-expect-error: flow to TS
-        result[key] = '[Circular]';
+        result[key] = "[Circular]";
       } else {
         // eslint-disable-next-line no-param-reassign
         // @ts-expect-error: flow to TS

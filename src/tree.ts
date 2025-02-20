@@ -1,34 +1,32 @@
 /* eslint-disable no-use-before-define */
 
-import type { Key } from 'react';
+import type { Key } from "react";
 
-type PropsType = Record<string, any>;
-type DefaultPropsType = Record<string, any>;
+type PropsType = Record<string, unknown>;
+type DefaultPropsType = Record<string, unknown>;
 
 export type StringTreeNode = {
-  type: 'string';
+  type: "string";
   value: string;
 };
 
 export type NumberTreeNode = {
-  type: 'number';
+  type: "number";
   value: number;
 };
 
 export type ReactElementTreeNode = {
-  type: 'ReactElement';
+  type: "ReactElement";
   displayName: string;
   props: PropsType;
   defaultProps: DefaultPropsType;
-  // TODO: Fix typo `children`
-  childrens: Array<TreeNode>;
+  children: Array<TreeNode>;
 };
 
 export type ReactFragmentTreeNode = {
-  type: 'ReactFragment';
+  type: "ReactFragment";
   key?: Key | null | undefined;
-  // TODO: Fix typo `children`
-  childrens: Array<TreeNode>;
+  children: Array<TreeNode>;
 };
 
 export type TreeNode =
@@ -38,12 +36,12 @@ export type TreeNode =
   | ReactFragmentTreeNode;
 
 export const createStringTreeNode = (value: string): StringTreeNode => ({
-  type: 'string',
+  type: "string",
   value,
 });
 
 export const createNumberTreeNode = (value: number): NumberTreeNode => ({
-  type: 'number',
+  type: "number",
   value,
 });
 
@@ -51,20 +49,20 @@ export const createReactElementTreeNode = (
   displayName: string,
   props: PropsType,
   defaultProps: DefaultPropsType,
-  childrens: Array<TreeNode>
+  children: Array<TreeNode>,
 ): ReactElementTreeNode => ({
-  type: 'ReactElement',
+  type: "ReactElement",
   displayName,
   props,
   defaultProps,
-  childrens,
+  children,
 });
 
 export const createReactFragmentTreeNode = (
   key: Key | null | undefined,
-  childrens: Array<TreeNode>
+  children: Array<TreeNode>,
 ): ReactFragmentTreeNode => ({
-  type: 'ReactFragment',
+  type: "ReactFragment",
   key,
-  childrens,
+  children,
 });

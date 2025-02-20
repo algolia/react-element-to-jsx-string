@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
-import formatTree from './formatter/formatTree';
-import parseReactElement from './parser/parseReactElement';
-import { defaultOptions, type Options } from './options';
+import type { ReactNode } from "react";
+import formatTree from "./formatter/formatTree";
+import { type Options, defaultOptions } from "./options";
+import parseReactElement from "./parser/parseReactElement";
 
 const reactElementToJsxString = (
   element: ReactNode,
@@ -16,10 +16,10 @@ const reactElementToJsxString = (
     sortProps = true,
     maxInlineAttributesLineLength,
     displayName,
-  }: Partial<Options> = {}
+  }: Partial<Options> = {},
 ): string => {
   if (!element) {
-    return '';
+    return "";
   }
 
   const options: Options = {
@@ -43,4 +43,4 @@ export default reactElementToJsxString;
 export {
   inlineFunction,
   preserveFunctionLineBreak,
-} from './formatter/formatFunction';
+} from "./formatter/formatFunction";

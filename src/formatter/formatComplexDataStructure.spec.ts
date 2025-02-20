@@ -1,32 +1,22 @@
-import { describe, it, expect, vitest } from 'vitest';
-import { createElement, NamedExoticComponent } from 'react';
-import formatComplexDataStructure from './formatComplexDataStructure';
-import { Options } from '../options';
+import { type NamedExoticComponent, createElement } from "react";
+import { describe, expect, it, vitest } from "vitest";
+import type { Options } from "../options";
+import formatComplexDataStructure from "./formatComplexDataStructure";
 
-vitest.mock('./formatReactElementNode', () => ({
+vitest.mock("./formatReactElementNode", () => ({
   default: (node: NamedExoticComponent) => `<${node.displayName} />`,
 }));
 
-const createFakeReactElement = (tagName = 'Foo') =>
-  createElement(tagName, {}, null);
-
 const options = {
   tabStop: 2,
-} as any as Options;
+} as unknown as Options;
 
-describe('formatComplexDataStructure', () => {
-  // FIXME: How to convert the vitest.mock factory into a mock?
-  // beforeAll(() => {
-  //   vitest
-  //     .mocked(formatReactElementNode)
-  //     .mockImplementation((node) => `<${node.displayName} />`);
-  // });
-
-  it('should format an object', () => {
+describe("formatComplexDataStructure", () => {
+  it("should format an object", () => {
     const fixture = {
       a: 1,
       b: {
-        c: 'ccc',
+        c: "ccc",
       },
     };
     expect(formatComplexDataStructure(fixture, false, 0, options)).toEqual(`{
@@ -37,28 +27,28 @@ describe('formatComplexDataStructure', () => {
   }`);
   });
 
-  it('should format inline an object', () => {
+  it("should format inline an object", () => {
     const fixture = {
       a: 1,
       b: {
-        c: 'ccc',
+        c: "ccc",
       },
     };
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
-      "{a: 1, b: {c: 'ccc'}}"
+      "{a: 1, b: {c: 'ccc'}}",
     );
   });
 
-  it('should format an empty object', () => {
-    expect(formatComplexDataStructure({}, false, 0, options)).toEqual('{}');
+  it("should format an empty object", () => {
+    expect(formatComplexDataStructure({}, false, 0, options)).toEqual("{}");
   });
 
-  it('should order the object keys', () => {
+  it("should order the object keys", () => {
     const fixture = {
       b: {
-        d: 'ddd',
-        c: 'ccc',
+        d: "ddd",
+        c: "ccc",
       },
       a: 1,
     };
@@ -72,8 +62,8 @@ describe('formatComplexDataStructure', () => {
   }`);
   });
 
-  it('should format an array', () => {
-    const fixture = [1, '2', true, false, null];
+  it("should format an array", () => {
+    const fixture = [1, "2", true, false, null];
 
     expect(formatComplexDataStructure(fixture, false, 0, options)).toEqual(`[
     1,
@@ -84,17 +74,17 @@ describe('formatComplexDataStructure', () => {
   ]`);
   });
 
-  it('should format inline an array ', () => {
-    const fixture = [1, '2', true, false, null];
+  it("should format inline an array ", () => {
+    const fixture = [1, "2", true, false, null];
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
-      "[1, '2', true, false, null]"
+      "[1, '2', true, false, null]",
     );
   });
 
-  it('should format an object that contains a react element', () => {
+  it("should format an object that contains a react element", () => {
     const fixture = {
-      a: createFakeReactElement('BarBar'),
+      a: createElement("BarBar", {}, null),
     };
 
     expect(formatComplexDataStructure(fixture, false, 0, options)).toEqual(`{
@@ -102,31 +92,31 @@ describe('formatComplexDataStructure', () => {
   }`);
   });
 
-  it('should format an empty array', () => {
-    expect(formatComplexDataStructure([], false, 0, options)).toEqual('[]');
+  it("should format an empty array", () => {
+    expect(formatComplexDataStructure([], false, 0, options)).toEqual("[]");
   });
 
-  it('should format an object that contains a date', () => {
+  it("should format an object that contains a date", () => {
     const fixture = {
-      a: new Date('2017-11-13T00:00:00.000Z'),
+      a: new Date("2017-11-13T00:00:00.000Z"),
     };
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
-      `{a: new Date('2017-11-13T00:00:00.000Z')}`
+      `{a: new Date('2017-11-13T00:00:00.000Z')}`,
     );
   });
 
-  it('should format an object that contains a regexp', () => {
+  it("should format an object that contains a regexp", () => {
     const fixture = {
       a: /test/g,
     };
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
-      `{a: /test/g}`
+      "{a: /test/g}",
     );
   });
 
-  it('should replace a function with noRefCheck', () => {
+  it("should replace a function with noRefCheck", () => {
     const fixture = {
       a: function hello() {
         return 1;
@@ -134,11 +124,11 @@ describe('formatComplexDataStructure', () => {
     };
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
-      '{a: function noRefCheck() {}}'
+      "{a: function noRefCheck() {}}",
     );
   });
 
-  it('should format a function', () => {
+  it("should format a function", () => {
     const fixture = {
       a: function hello() {
         return 1;
@@ -149,11 +139,11 @@ describe('formatComplexDataStructure', () => {
       formatComplexDataStructure(fixture, true, 0, {
         ...options,
         showFunctions: true,
-      })
-    ).toEqual('{a: function hello() {return 1;}}');
+      }),
+    ).toEqual("{a: function hello() {return 1;}}");
   });
 
-  it('should use the functionValue option', () => {
+  it("should use the functionValue option", () => {
     const fixture = {
       a: function hello() {
         return 1;
@@ -163,8 +153,8 @@ describe('formatComplexDataStructure', () => {
     expect(
       formatComplexDataStructure(fixture, true, 0, {
         ...options,
-        functionValue: () => '<Test />',
-      })
-    ).toEqual('{a: <Test />}');
+        functionValue: () => "<Test />",
+      }),
+    ).toEqual("{a: <Test />}");
   });
 });

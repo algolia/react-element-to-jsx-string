@@ -1,34 +1,34 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from "vitest";
 import {
-  createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
-} from './tree';
+  createStringTreeNode,
+} from "./tree";
 
-describe('createStringTreeNode', () => {
-  it('generate a string typed node payload', () => {
-    expect(createStringTreeNode('foo')).toEqual({
-      type: 'string',
-      value: 'foo',
+describe("createStringTreeNode", () => {
+  it("generate a string typed node payload", () => {
+    expect(createStringTreeNode("foo")).toEqual({
+      type: "string",
+      value: "foo",
     });
   });
 });
 
-describe('createNumberTreeNode', () => {
-  it('generate a number typed node payload', () => {
+describe("createNumberTreeNode", () => {
+  it("generate a number typed node payload", () => {
     expect(createNumberTreeNode(42)).toEqual({
-      type: 'number',
+      type: "number",
       value: 42,
     });
   });
 });
 
-describe('createReactElementTreeNode', () => {
-  it('generate a react element typed node payload', () => {
+describe("createReactElementTreeNode", () => {
+  it("generate a react element typed node payload", () => {
     expect(
       createReactElementTreeNode(
-        'MyComponent',
+        "MyComponent",
         {
           foo: 42,
         },
@@ -37,46 +37,46 @@ describe('createReactElementTreeNode', () => {
         },
         [
           {
-            type: 'string',
-            value: 'abc',
+            type: "string",
+            value: "abc",
           },
-        ]
-      )
+        ],
+      ),
     ).toEqual({
-      type: 'ReactElement',
-      displayName: 'MyComponent',
+      type: "ReactElement",
+      displayName: "MyComponent",
       props: {
         foo: 42,
       },
       defaultProps: {
         bar: 51,
       },
-      childrens: [
+      children: [
         {
-          type: 'string',
-          value: 'abc',
+          type: "string",
+          value: "abc",
         },
       ],
     });
   });
 });
 
-describe('createReactFragmentTreeNode', () => {
-  it('generate a react fragment typed node payload', () => {
+describe("createReactFragmentTreeNode", () => {
+  it("generate a react fragment typed node payload", () => {
     expect(
-      createReactFragmentTreeNode('foo', [
+      createReactFragmentTreeNode("foo", [
         {
-          type: 'string',
-          value: 'abc',
+          type: "string",
+          value: "abc",
         },
-      ])
+      ]),
     ).toEqual({
-      type: 'ReactFragment',
-      key: 'foo',
-      childrens: [
+      type: "ReactFragment",
+      key: "foo",
+      children: [
         {
-          type: 'string',
-          value: 'abc',
+          type: "string",
+          value: "abc",
         },
       ],
     });

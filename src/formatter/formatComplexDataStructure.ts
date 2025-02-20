@@ -1,17 +1,17 @@
-import { isValidElement } from 'react';
-import { prettyPrint } from '@base2/pretty-print-object';
-import sortObject from './sortObject';
-import parseReactElement from '../parser/parseReactElement';
-import formatTreeNode from './formatTreeNode';
-import formatFunction from './formatFunction';
-import spacer from './spacer';
-import { defaultOptions, type Options } from '../options';
+import { prettyPrint } from "@base2/pretty-print-object";
+import { isValidElement } from "react";
+import { type Options, defaultOptions } from "../options";
+import parseReactElement from "../parser/parseReactElement";
+import formatFunction from "./formatFunction";
+import formatTreeNode from "./formatTreeNode";
+import sortObject from "./sortObject";
+import spacer from "./spacer";
 
 export default (
   value: Record<string, unknown> | Array<unknown>,
   inline: boolean,
   lvl: number,
-  options: Options
+  options: Options,
 ): string => {
   const normalizedValue = sortObject(value);
 
@@ -24,11 +24,11 @@ export default (
           parseReactElement(currentValue, options),
           true,
           lvl,
-          options
+          options,
         );
       }
 
-      if (typeof currentValue === 'function') {
+      if (typeof currentValue === "function") {
         return formatFunction(currentValue, options);
       }
 
@@ -38,11 +38,11 @@ export default (
 
   if (inline) {
     return stringifiedValue
-      .replace(/\s+/g, ' ')
-      .replace(/{ /g, '{')
-      .replace(/ }/g, '}')
-      .replace(/\[ /g, '[')
-      .replace(/ ]/g, ']');
+      .replace(/\s+/g, " ")
+      .replace(/{ /g, "{")
+      .replace(/ }/g, "}")
+      .replace(/\[ /g, "[")
+      .replace(/ ]/g, "]");
   }
 
   const tabStop = options.tabStop ?? defaultOptions.tabStop;

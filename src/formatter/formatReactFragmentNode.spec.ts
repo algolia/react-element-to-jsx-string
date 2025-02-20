@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import formatReactFragmentNode from './formatReactFragmentNode';
+import { describe, expect, it } from "vitest";
+import formatReactFragmentNode from "./formatReactFragmentNode";
 
 const defaultOptions = {
   filterProps: [],
@@ -11,14 +11,14 @@ const defaultOptions = {
   sortProps: true,
 };
 
-describe('formatReactFragmentNode', () => {
-  it('should format a react fragment with a string as children', () => {
+describe("formatReactFragmentNode", () => {
+  it("should format a react fragment with a string as children", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      childrens: [
+      type: "ReactFragment" as const,
+      children: [
         {
-          type: 'string' as const,
-          value: 'Hello world',
+          type: "string" as const,
+          value: "Hello world",
         },
       ],
     };
@@ -28,45 +28,46 @@ describe('formatReactFragmentNode', () => {
 </>`);
   });
 
-  it('should format a react fragment with a key', () => {
+  it("should format a react fragment with a key", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      key: 'foo',
-      childrens: [
+      type: "ReactFragment" as const,
+      key: "foo",
+      children: [
         {
-          type: 'string' as const,
-          value: 'Hello world',
+          type: "string" as const,
+          value: "Hello world",
         },
       ],
     };
 
-    expect(formatReactFragmentNode(tree, false, 0, defaultOptions))
-      .toEqual(`<React.Fragment key="foo">
+    expect(
+      formatReactFragmentNode(tree, false, 0, defaultOptions),
+    ).toEqual(`<React.Fragment key="foo">
   Hello world
 </React.Fragment>`);
   });
 
-  it('should format a react fragment with multiple childrens', () => {
+  it("should format a react fragment with multiple children", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      childrens: [
+      type: "ReactFragment" as const,
+      children: [
         {
-          type: 'ReactElement' as const,
-          displayName: 'div',
+          type: "ReactElement" as const,
+          displayName: "div",
           defaultProps: {},
           props: {
-            a: 'foo',
+            a: "foo",
           },
-          childrens: [],
+          children: [],
         },
         {
-          type: 'ReactElement' as const,
-          displayName: 'div',
+          type: "ReactElement" as const,
+          displayName: "div",
           defaultProps: {},
           props: {
-            b: 'bar',
+            b: "bar",
           },
-          childrens: [],
+          children: [],
         },
       ],
     };
@@ -77,36 +78,36 @@ describe('formatReactFragmentNode', () => {
 </>`);
   });
 
-  it('should format an empty react fragment', () => {
+  it("should format an empty react fragment", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      childrens: [],
+      type: "ReactFragment" as const,
+      children: [],
     };
 
     expect(formatReactFragmentNode(tree, false, 0, defaultOptions)).toEqual(
-      '<React.Fragment />'
+      "<React.Fragment />",
     );
   });
 
-  it('should format an empty react fragment with key', () => {
+  it("should format an empty react fragment with key", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      key: 'foo',
-      childrens: [],
+      type: "ReactFragment" as const,
+      key: "foo",
+      children: [],
     };
 
     expect(formatReactFragmentNode(tree, false, 0, defaultOptions)).toEqual(
-      '<React.Fragment key="foo" />'
+      '<React.Fragment key="foo" />',
     );
   });
 
-  it('should format a react fragment using the explicit syntax', () => {
+  it("should format a react fragment using the explicit syntax", () => {
     const tree = {
-      type: 'ReactFragment' as const,
-      childrens: [
+      type: "ReactFragment" as const,
+      children: [
         {
-          type: 'string' as const,
-          value: 'Hello world',
+          type: "string" as const,
+          value: "Hello world",
         },
       ],
     };
@@ -117,7 +118,7 @@ describe('formatReactFragmentNode', () => {
         ...{
           useFragmentShortSyntax: false,
         },
-      })
+      }),
     ).toEqual(`<React.Fragment>
   Hello world
 </React.Fragment>`);

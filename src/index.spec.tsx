@@ -10,36 +10,36 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable react/destructuring-assignment */
 
+import { render, screen } from "@testing-library/react";
 import {
-  Fragment,
   Component,
+  type ComponentProps,
+  type ComponentType,
+  Fragment,
+  Profiler,
   type ReactNode,
+  type Ref,
+  StrictMode,
+  Suspense,
+  createContext,
+  createElement,
+  createRef,
   forwardRef,
   lazy,
-  Profiler,
-  createElement,
-  createContext,
-  Suspense,
   memo,
-  StrictMode,
-  createRef,
-  ComponentType,
-  Ref,
-  ComponentProps,
-} from 'react';
-import { render, screen } from '@testing-library/react';
-import { expect, test } from 'vitest';
-import reactElementToJSXString, { preserveFunctionLineBreak } from './index';
+} from "react";
+import { expect, test } from "vitest";
+import reactElementToJSXString, { preserveFunctionLineBreak } from "./index";
 
-class TestComponent extends Component<Record<string, unknown>> { }
+class TestComponent extends Component<Record<string, unknown>> {}
 
-class CustomComponent extends Component<unknown> { }
+class CustomComponent extends Component<unknown> {}
 
 // Declare a custom element to simplify test and simulate a native dom element with
 declare module "react/jsx-runtime" {
   namespace JSX {
     interface IntrinsicElements {
-      "custom": ComponentProps<typeof CustomComponent>;
+      custom: ComponentProps<typeof CustomComponent>;
     }
   }
 }
@@ -50,7 +50,7 @@ function NamedStatelessComponent(props: { children?: ReactNode }) {
 
 class DefaultPropsComponent extends Component {
   static defaultProps = {
-    test: 'test',
+    test: "test",
     boolean: true,
     number: 0,
     undefinedProp: undefined,
@@ -58,68 +58,66 @@ class DefaultPropsComponent extends Component {
 }
 
 class DisplayNamePrecedence extends Component {
-  static displayName = 'This should take precedence';
+  static displayName = "This should take precedence";
 }
 
 function generateAnonymousStatelessComponent(): ComponentType<{
   children?: ReactNode;
 }> {
-  return function (props: { children?: ReactNode }) {
-    return <div>{props.children}</div>;
-  };
+  return (props: { children?: ReactNode }) => <div>{props.children}</div>;
 }
 
-test('reactElementToJSXString(<TestComponent/>)', () => {
+test("reactElementToJSXString(<TestComponent/>)", () => {
   expect(reactElementToJSXString(<TestComponent />)).toEqual(
-    '<TestComponent />'
+    "<TestComponent />",
   );
 });
 
-test('reactElementToJSXString(<NamedStatelessComponent/>)', () => {
+test("reactElementToJSXString(<NamedStatelessComponent/>)", () => {
   expect(reactElementToJSXString(<NamedStatelessComponent />)).toEqual(
-    '<NamedStatelessComponent />'
+    "<NamedStatelessComponent />",
   );
 });
 
-test('reactElementToJSXString(<AnonymousStatelessComponent/>)', () => {
+test("reactElementToJSXString(<AnonymousStatelessComponent/>)", () => {
   const AnonymousStatelessComponent = generateAnonymousStatelessComponent();
 
   expect(reactElementToJSXString(<AnonymousStatelessComponent />)).toEqual(
-    '<No Display Name />'
+    "<No Display Name />",
   );
 });
 
-test('reactElementToJSXString(<AnonymousStatelessComponent/>) with a displayName', () => {
+test("reactElementToJSXString(<AnonymousStatelessComponent/>) with a displayName", () => {
   const AnonymousStatelessComponent = generateAnonymousStatelessComponent();
-  AnonymousStatelessComponent.displayName = 'I have a name!';
+  AnonymousStatelessComponent.displayName = "I have a name!";
 
   expect(reactElementToJSXString(<AnonymousStatelessComponent />)).toEqual(
-    '<I have a name! />'
+    "<I have a name! />",
   );
 });
 
 test("reactElementToJSXString(createElement('div'))", () => {
-  expect(reactElementToJSXString(createElement('div'))).toEqual('<div />');
+  expect(reactElementToJSXString(createElement("div"))).toEqual("<div />");
 });
 
 test("reactElementToJSXString(createElement('div', {title: 'hello \"you\"'}))", () => {
   expect(
     reactElementToJSXString(
-      createElement('div', {
+      createElement("div", {
         title: 'hello "you"',
-      })
-    )
+      }),
+    ),
   ).toEqual('<div title="hello &quot;you&quot;" />');
 });
 
 test("reactElementToJSXString(createElement('div', {title: '<'hello' you & you>'}))", () => {
   expect(
     reactElementToJSXString(
-      createElement('div', {
+      createElement("div", {
         title: "<'hello' you & you>",
-      })
-    )
-  ).toEqual('<div title="<\'hello\' you & you>" />');
+      }),
+    ),
+  ).toEqual("<div title=\"<'hello' you & you>\" />");
 });
 
 test("reactElementToJSXString(<div obj={{ nested: <div arr={['hello', 'you']} /> }} />)", () => {
@@ -127,10 +125,10 @@ test("reactElementToJSXString(<div obj={{ nested: <div arr={['hello', 'you']} />
     reactElementToJSXString(
       <custom
         obj={{
-          nested: <custom arr={['hello', 'you']}>Hello "' you</custom>,
+          nested: <custom arr={["hello", "you"]}>Hello "' you</custom>,
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   obj={{
     nested: <custom arr={['hello', 'you']}>Hello "' you</custom>
@@ -143,14 +141,14 @@ test("reactElementToJSXString(<div nested={{ hello: 'world', foo: 'esca\\'\"ped'
     reactElementToJSXString(
       <custom
         nested={{
-          hello: 'world',
-          foo: 'esca\'"ped',
+          hello: "world",
+          foo: "esca'\"ped",
           bar: 42,
-          baz: ['abc', 'def'],
+          baz: ["abc", "def"],
         }}
         root="root"
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   nested={{
     bar: 42,
@@ -168,45 +166,47 @@ test("reactElementToJSXString(<div nested={{ hello: 'world', foo: 'esca\\'\"ped'
 test("reactElementToJSXString(createElement('custom', {title: Symbol('hello \"you\"')})", () => {
   expect(
     reactElementToJSXString(
-      createElement('custom', {
+      createElement("custom", {
         title: Symbol('hello "you"'),
-      })
-    )
-  ).toEqual('<custom title={Symbol(\'hello "you"\')} />');
+      }),
+    ),
+  ).toEqual("<custom title={Symbol('hello \"you\"')} />");
 });
 
-test('reactElementToJSXString(<custom/>)', () => {
-  expect(reactElementToJSXString(<custom />)).toEqual('<custom />');
+test("reactElementToJSXString(<custom/>)", () => {
+  expect(reactElementToJSXString(<custom />)).toEqual("<custom />");
 });
 
-test('reactElementToJSXString(<custom fn={() => {}}/>)', () => {
-  expect(reactElementToJSXString(<custom fn={() => { }} />)).toEqual(
-    '<custom fn={function noRefCheck() {}} />'
+test("reactElementToJSXString(<custom fn={() => {}}/>)", () => {
+  expect(reactElementToJSXString(<custom fn={() => {}} />)).toEqual(
+    "<custom fn={function noRefCheck() {}} />",
   );
 });
 
-test('reactElementToJSXString(<custom fn={function hello(){}}/>)', () => {
+test("reactElementToJSXString(<custom fn={function hello(){}}/>)", () => {
   // eslint-disable-next-line react/jsx-no-bind
 
-  expect(reactElementToJSXString(<custom fn={function hello() { }} />)).toEqual(
-    '<custom fn={function noRefCheck() {}} />'
+  expect(reactElementToJSXString(<custom fn={function hello() {}} />)).toEqual(
+    "<custom fn={function noRefCheck() {}} />",
   );
 });
 
 test('reactElementToJSXString(<custom co={<div a="1" />} />)', () => {
   expect(reactElementToJSXString(<custom co={<custom a="1" />} />)).toEqual(
-    '<custom co={<custom a="1" />} />'
+    '<custom co={<custom a="1" />} />',
   );
 });
 
-test('reactElementToJSXString(<custom re={/^Hello world$/} />)', () => {
+test("reactElementToJSXString(<custom re={/^Hello world$/} />)", () => {
   expect(reactElementToJSXString(<custom re={/^Hello world$/} />)).toEqual(
-    '<custom re={/^Hello world$/} />'
+    "<custom re={/^Hello world$/} />",
   );
 });
 
-test('reactElementToJSXString(<custom int={8}/>)', () => {
-  expect(reactElementToJSXString(<custom int={8} />)).toEqual('<custom int={8} />');
+test("reactElementToJSXString(<custom int={8}/>)", () => {
+  expect(reactElementToJSXString(<custom int={8} />)).toEqual(
+    "<custom int={8} />",
+  );
 });
 
 test("reactElementToJSXString(<custom obj={{hello: 'world'}}/>)", () => {
@@ -214,10 +214,10 @@ test("reactElementToJSXString(<custom obj={{hello: 'world'}}/>)", () => {
     reactElementToJSXString(
       <custom
         obj={{
-          hello: 'world',
+          hello: "world",
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   obj={{
     hello: 'world'
@@ -225,16 +225,16 @@ test("reactElementToJSXString(<custom obj={{hello: 'world'}}/>)", () => {
  />`);
 });
 
-test('reactElementToJSXString(<custom a="1" obj={{hello: \'world\'}}/>)', () => {
+test("reactElementToJSXString(<custom a=\"1\" obj={{hello: 'world'}}/>)", () => {
   expect(
     reactElementToJSXString(
       <custom
         a="1"
         obj={{
-          hello: 'world',
+          hello: "world",
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a="1"
   obj={{
@@ -243,16 +243,16 @@ test('reactElementToJSXString(<custom a="1" obj={{hello: \'world\'}}/>)', () => 
 />`);
 });
 
-test('reactElementToJSXString(<div obj={{hello: \'world\'}} a="1"/>)', () => {
+test("reactElementToJSXString(<div obj={{hello: 'world'}} a=\"1\"/>)", () => {
   expect(
     reactElementToJSXString(
       <custom
         obj={{
-          hello: 'world',
+          hello: "world",
         }}
         a="1"
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a="1"
   obj={{
@@ -261,27 +261,27 @@ test('reactElementToJSXString(<div obj={{hello: \'world\'}} a="1"/>)', () => {
 />`);
 });
 
-test('reactElementToJSXString(<script type="application/json+ld">{`{ hello: \'world\' }`}</script>)', () => {
+test("reactElementToJSXString(<script type=\"application/json+ld\">{`{ hello: 'world' }`}</script>)", () => {
   expect(
     reactElementToJSXString(
-      <script type="application/json+ld">{`{ hello: 'world' }`}</script>
-    )
+      <script type="application/json+ld">{`{ hello: 'world' }`}</script>,
+    ),
   ).toEqual(`<script type="application/json+ld">
   {\`{ hello: 'world' }\`}
 </script>`);
 });
 
-test('reactElementToJSXString(<script type="application/json+ld">&#123; hello: \'world\' &#125;</script>)', () => {
+test("reactElementToJSXString(<script type=\"application/json+ld\">&#123; hello: 'world' &#125;</script>)", () => {
   expect(
     reactElementToJSXString(
-      <script type="application/json+ld">&#123; hello: 'world' &#125;</script>
-    )
+      <script type="application/json+ld">&#123; hello: 'world' &#125;</script>,
+    ),
   ).toEqual(`<script type="application/json+ld">
   {\`{ hello: 'world' }\`}
 </script>`);
 });
 
-test('reactElementToJSXString(<div obj={{hello: [1, 2], world: {nested: true}}}/>)', () => {
+test("reactElementToJSXString(<div obj={{hello: [1, 2], world: {nested: true}}}/>)", () => {
   expect(
     reactElementToJSXString(
       <custom
@@ -291,8 +291,8 @@ test('reactElementToJSXString(<div obj={{hello: [1, 2], world: {nested: true}}}/
             nested: true,
           },
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   obj={{
     hello: [
@@ -306,8 +306,8 @@ test('reactElementToJSXString(<div obj={{hello: [1, 2], world: {nested: true}}}/
  />`);
 });
 
-test('reactElementToJSXString(<div></div>)', () => {
-  expect(reactElementToJSXString(<div />)).toEqual('<div />');
+test("reactElementToJSXString(<div></div>)", () => {
+  expect(reactElementToJSXString(<div />)).toEqual("<div />");
 });
 
 test('reactElementToJSXString(<div z="3" a="1" b="2"/>)', () => {
@@ -325,7 +325,7 @@ test('reactElementToJSXString(<custom z="3" a="1" b="2"/>, {sortProps: false})',
   expect(
     reactElementToJSXString(<custom z="3" a="1" b="2" />, {
       sortProps: false,
-    })
+    }),
   ).toEqual(`<custom
   z="3"
   a="1"
@@ -334,7 +334,9 @@ test('reactElementToJSXString(<custom z="3" a="1" b="2"/>, {sortProps: false})',
 });
 
 test('reactElementToJSXString(<custom a="1">Hello</custom>)', () => {
-  expect(reactElementToJSXString(<custom a="1">Hello</custom>)).toEqual(`<custom a="1">
+  expect(
+    reactElementToJSXString(<custom a="1">Hello</custom>),
+  ).toEqual(`<custom a="1">
   Hello
 </custom>`);
 });
@@ -344,8 +346,8 @@ test('reactElementToJSXString(<custom a="1" b="5">Hello</custom>)', () => {
     reactElementToJSXString(
       <custom a="1" b="5">
         Hello
-      </custom>
-    )
+      </custom>,
+    ),
   ).toEqual(`<custom
   a="1"
   b="5"
@@ -354,21 +356,22 @@ test('reactElementToJSXString(<custom a="1" b="5">Hello</custom>)', () => {
 </custom>`);
 });
 
-test('reactElementToJSXString(<div>Hello</div>)', () => {
+test("reactElementToJSXString(<div>Hello</div>)", () => {
   expect(reactElementToJSXString(<div>Hello</div>)).toEqual(`<div>
   Hello
 </div>`);
 });
 
-test('reactElementToJSXString(<div>Hello "Jonh" and \'Mike\'</div>)', () => {
-  expect(reactElementToJSXString(<div>Hello "Jonh" and 'Mike'</div>))
-    .toEqual(`<div>
+test("reactElementToJSXString(<div>Hello \"Jonh\" and 'Mike'</div>)", () => {
+  expect(
+    reactElementToJSXString(<div>Hello "Jonh" and 'Mike'</div>),
+  ).toEqual(`<div>
   Hello "Jonh" and 'Mike'
 </div>`);
 });
 
-test('reactElementToJSXString(<div>{`foo\nbar`}</div>)', () => {
-  expect(reactElementToJSXString(<div>{`foo\nbar`}</div>)).toEqual(`<div>
+test("reactElementToJSXString(<div>{`foo\nbar`}</div>)", () => {
+  expect(reactElementToJSXString(<div>{"foo\nbar"}</div>)).toEqual(`<div>
   foo
   bar
 </div>`);
@@ -376,9 +379,9 @@ test('reactElementToJSXString(<div>{`foo\nbar`}</div>)', () => {
   expect(
     reactElementToJSXString(
       <div>
-        <div>{`foo\nbar`}</div>
-      </div>
-    )
+        <div>{"foo\nbar"}</div>
+      </div>,
+    ),
   ).toEqual(`<div>
   <div>
     foo
@@ -387,23 +390,23 @@ test('reactElementToJSXString(<div>{`foo\nbar`}</div>)', () => {
 </div>`);
 });
 
-test('reactElementToJSXString(<div>Hello</div>, {tabStop: 4})', () => {
+test("reactElementToJSXString(<div>Hello</div>, {tabStop: 4})", () => {
   expect(
     reactElementToJSXString(<div>Hello</div>, {
       tabStop: 4,
-    })
+    }),
   ).toEqual(`<div>
     Hello
 </div>`);
 });
 
-test('reactElementToJSXString(<div><div>Hello</div></div>)', () => {
+test("reactElementToJSXString(<div><div>Hello</div></div>)", () => {
   expect(
     reactElementToJSXString(
       <div>
         <div>Hello</div>
-      </div>
-    )
+      </div>,
+    ),
   ).toEqual(`<div>
   <div>
     Hello
@@ -411,7 +414,7 @@ test('reactElementToJSXString(<div><div>Hello</div></div>)', () => {
 </div>`);
 });
 
-test('reactElementToJSXString(<div><div>Hello</div></div>, {tabStop: 4})', () => {
+test("reactElementToJSXString(<div><div>Hello</div></div>, {tabStop: 4})", () => {
   expect(
     reactElementToJSXString(
       <div>
@@ -419,8 +422,8 @@ test('reactElementToJSXString(<div><div>Hello</div></div>, {tabStop: 4})', () =>
       </div>,
       {
         tabStop: 4,
-      }
-    )
+      },
+    ),
   ).toEqual(`<div>
     <div>
         Hello
@@ -433,8 +436,8 @@ test('reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>)', () => {
     reactElementToJSXString(
       <custom a="1" b="2">
         <div>Hello</div>
-      </custom>
-    )
+      </custom>,
+    ),
   ).toEqual(`<custom
   a="1"
   b="2"
@@ -453,8 +456,8 @@ test('reactElementToJSXString(<div a="1" b="2"><div>Hello</div></div>, {tabStop:
       </custom>,
       {
         tabStop: 4,
-      }
-    )
+      },
+    ),
   ).toEqual(`<custom
     a="1"
     b="2"
@@ -470,23 +473,23 @@ test('reactElementToJSXString(<div a={{a: "1", b: {c: "3"}}}><div b={{c: {d: "4"
     reactElementToJSXString(
       <custom
         a={{
-          a: '1',
+          a: "1",
           b: {
-            c: '3',
+            c: "3",
           },
         }}
       >
         <custom
           b={{
             c: {
-              d: '4',
+              d: "4",
             },
           }}
         >
           Hello
         </custom>
-      </custom>
-    )
+      </custom>,
+    ),
   ).toEqual(`<custom
   a={{
     a: '1',
@@ -507,20 +510,20 @@ test('reactElementToJSXString(<div a={{a: "1", b: {c: "3"}}}><div b={{c: {d: "4"
 </custom>`);
 });
 
-test('reactElementToJSXString()', () => {
+test("reactElementToJSXString()", () => {
   // @ts-expect-error Wrong call: first argument is missing
-  expect(reactElementToJSXString()).toBe('');
+  expect(reactElementToJSXString()).toBe("");
 });
 
-test('reactElementToJSXString(null)', () => {
-  expect(reactElementToJSXString(null)).toBe('');
+test("reactElementToJSXString(null)", () => {
+  expect(reactElementToJSXString(null)).toBe("");
 });
 
-test('reactElementToJSXString(undefined)', () => {
-  expect(reactElementToJSXString(undefined)).toBe('');
+test("reactElementToJSXString(undefined)", () => {
+  expect(reactElementToJSXString(undefined)).toBe("");
 });
 
-test('ignores object keys order (sortobject)', () => {
+test("ignores object keys order (sortobject)", () => {
   expect(
     reactElementToJSXString(
       <custom
@@ -528,8 +531,8 @@ test('ignores object keys order (sortobject)', () => {
           a: 1,
           b: 2,
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(
     reactElementToJSXString(
       <custom
@@ -537,32 +540,32 @@ test('ignores object keys order (sortobject)', () => {
           b: 2,
           a: 1,
         }}
-      />
-    )
+      />,
+    ),
   );
 });
 
-test('reactElementToJSXString(<div a={null} />', () => {
+test("reactElementToJSXString(<div a={null} />", () => {
   expect(reactElementToJSXString(<custom a={null} />)).toEqual(
-    reactElementToJSXString(<custom a={null} />)
+    reactElementToJSXString(<custom a={null} />),
   );
 });
 
-test('reactElementToJSXString(<div title={undefined} />', () => {
+test("reactElementToJSXString(<div title={undefined} />", () => {
   expect(reactElementToJSXString(<div title={undefined} />)).toEqual(
-    reactElementToJSXString(<div title={undefined} />)
+    reactElementToJSXString(<div title={undefined} />),
   );
 });
 
-test('reactElementToJSXString(<custom a={{b: function hello() {}}} />', () => {
+test("reactElementToJSXString(<custom a={{b: function hello() {}}} />", () => {
   expect(
     reactElementToJSXString(
       <custom
         a={{
-          b: function hello() { },
+          b: function hello() {},
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a={{
     b: function noRefCheck() {}
@@ -570,7 +573,7 @@ test('reactElementToJSXString(<custom a={{b: function hello() {}}} />', () => {
  />`);
 });
 
-test('reactElementToJSXString(<div a={{b: {c: {d: <div />, e: null}}}} />', () => {
+test("reactElementToJSXString(<div a={{b: {c: {d: <div />, e: null}}}} />", () => {
   expect(
     reactElementToJSXString(
       <custom
@@ -582,8 +585,8 @@ test('reactElementToJSXString(<div a={{b: {c: {d: <div />, e: null}}}} />', () =
             },
           },
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a={{
     b: {
@@ -596,15 +599,15 @@ test('reactElementToJSXString(<div a={{b: {c: {d: <div />, e: null}}}} />', () =
  />`);
 });
 
-test('reactElementToJSXString(<div a={{b: {}}} />', () => {
+test("reactElementToJSXString(<div a={{b: {}}} />", () => {
   expect(
     reactElementToJSXString(
       <custom
         a={{
           b: {},
         }}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a={{
     b: {}
@@ -612,45 +615,47 @@ test('reactElementToJSXString(<div a={{b: {}}} />', () => {
  />`);
 });
 
-test('reactElementToJSXString(<div a={{}} />', () => {
-  expect(reactElementToJSXString(<div style={{}} />)).toEqual('<div style={{}} />');
+test("reactElementToJSXString(<div a={{}} />", () => {
+  expect(reactElementToJSXString(<div style={{}} />)).toEqual(
+    "<div style={{}} />",
+  );
 });
 
-test('reactElementToJSXString(<div><span /><span /></div>)', () => {
+test("reactElementToJSXString(<div><span /><span /></div>)", () => {
   expect(
     reactElementToJSXString(
       <div>
         <span />
         <span />
-      </div>
-    )
+      </div>,
+    ),
   ).toEqual(`<div>
   <span />
   <span />
 </div>`);
 });
 
-test('reactElementToJSXString(<div>foo<div /></div>)', () => {
+test("reactElementToJSXString(<div>foo<div /></div>)", () => {
   expect(
     reactElementToJSXString(
       <div>
         foo
         <div />
-      </div>
-    )
+      </div>,
+    ),
   ).toEqual(`<div>
   foo
   <div />
 </div>`);
 });
 
-test('reactElementToJSXString(<div>\nfoo bar <span> baz </span> qux quux\n</div>)', () => {
+test("reactElementToJSXString(<div>\nfoo bar <span> baz </span> qux quux\n</div>)", () => {
   expect(
     reactElementToJSXString(
       <div>
         foo bar <span> baz </span> qux quux
-      </div>
-    )
+      </div>,
+    ),
   ).toEqual(`<div>
   foo bar{' '}
   <span>
@@ -660,7 +665,7 @@ test('reactElementToJSXString(<div>\nfoo bar <span> baz </span> qux quux\n</div>
 </div>`);
 });
 
-test('reactElementToJSXString(<div a={[1, 2, 3, 4]} />', () => {
+test("reactElementToJSXString(<div a={[1, 2, 3, 4]} />", () => {
   expect(reactElementToJSXString(<custom a={[1, 2, 3, 4]} />)).toEqual(`<custom
   a={[
     1,
@@ -677,11 +682,11 @@ test("reactElementToJSXString(<div a={[{Hello: ', world!'}]} />)", () => {
       <custom
         a={[
           {
-            Hello: ', world!',
+            Hello: ", world!",
           },
         ]}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a={[
     {
@@ -691,7 +696,7 @@ test("reactElementToJSXString(<div a={[{Hello: ', world!'}]} />)", () => {
  />`);
 });
 
-test('reactElementToJSXString(<div a={[{}]} />', () => {
+test("reactElementToJSXString(<div a={[{}]} />", () => {
   expect(reactElementToJSXString(<custom a={[{}]} />)).toEqual(`<custom
   a={[
     {}
@@ -699,8 +704,10 @@ test('reactElementToJSXString(<div a={[{}]} />', () => {
  />`);
 });
 
-test('reactElementToJSXString(<div a={[]} />', () => {
-  expect(reactElementToJSXString(<custom a={[]} />)).toEqual('<custom a={[]} />');
+test("reactElementToJSXString(<div a={[]} />", () => {
+  expect(reactElementToJSXString(<custom a={[]} />)).toEqual(
+    "<custom a={[]} />",
+  );
 });
 
 test('reactElementToJSXString(<div a={[<div key="0"><span /></div>]} />', () => {
@@ -712,8 +719,8 @@ test('reactElementToJSXString(<div a={[<div key="0"><span /></div>]} />', () => 
             <span />
           </div>,
         ]}
-      />
-    )
+      />,
+    ),
   ).toEqual(`<custom
   a={[
     <div key="0"><span /></div>
@@ -721,13 +728,15 @@ test('reactElementToJSXString(<div a={[<div key="0"><span /></div>]} />', () => 
  />`);
 });
 test('reactElementToJSXString(<custom type={Symbol("test")}/>)', () => {
-  expect(reactElementToJSXString(<custom type={Symbol('test')} />)).toEqual(
-    "<custom type={Symbol('test')} />"
+  expect(reactElementToJSXString(<custom type={Symbol("test")} />)).toEqual(
+    "<custom type={Symbol('test')} />",
   );
 });
 
 test('reactElementToJSXString(<custom aprop="test" ref="yes" />', () => {
-  expect(reactElementToJSXString(<custom aprop="test" ref="yes" />)).toEqual(`<custom
+  expect(
+    reactElementToJSXString(<custom aprop="test" ref="yes" />),
+  ).toEqual(`<custom
   ref="yes"
   aprop="test"
 />`);
@@ -738,8 +747,8 @@ test('reactElementToJSXString(<div aprop="a" ref="yes"><span ref="wee" zprop="z"
     reactElementToJSXString(
       <custom aprop="a" ref="yes">
         <custom ref="wee" zprop="z" />
-      </custom>
-    )
+      </custom>,
+    ),
   ).toEqual(`<custom
   ref="yes"
   aprop="a"
@@ -752,71 +761,74 @@ test('reactElementToJSXString(<div aprop="a" ref="yes"><span ref="wee" zprop="z"
 });
 
 test('reactElementToJSXString(<custom aprop="test" key="yes" />', () => {
-  expect(reactElementToJSXString(<custom aprop="test" key="yes" />)).toEqual(`<custom
+  expect(
+    reactElementToJSXString(<custom aprop="test" key="yes" />),
+  ).toEqual(`<custom
   key="yes"
   aprop="test"
 />`);
 });
 
-test('reactElementToJSXString(<div>\\n  {null}\\n</div>', () => {
+test("reactElementToJSXString(<div>\\n  {null}\\n</div>", () => {
   const element = <div>{null}</div>;
 
-  expect(reactElementToJSXString(element)).toEqual('<div />');
+  expect(reactElementToJSXString(element)).toEqual("<div />");
 });
 
-test('reactElementToJSXString(<div>{true}</div>)', () => {
-  expect(reactElementToJSXString(<div>{true}</div>)).toEqual('<div />');
+test("reactElementToJSXString(<div>{true}</div>)", () => {
+  expect(reactElementToJSXString(<div>{true}</div>)).toEqual("<div />");
 });
 
-test('reactElementToJSXString(<div>{false}</div>)', () => {
-  expect(reactElementToJSXString(<div>{false}</div>)).toEqual('<div />');
+test("reactElementToJSXString(<div>{false}</div>)", () => {
+  expect(reactElementToJSXString(<div>{false}</div>)).toEqual("<div />");
 });
 
-test('reactElementToJSXString(<div>\n{false}\n</div>)', () => {
-  expect(reactElementToJSXString(<div>{false}</div>)).toEqual('<div />');
+test("reactElementToJSXString(<div>\n{false}\n</div>)", () => {
+  expect(reactElementToJSXString(<div>{false}</div>)).toEqual("<div />");
 });
 
-test('reactElementToJSXString(<div> {false} </div>)', () => {
+test("reactElementToJSXString(<div> {false} </div>)", () => {
   expect(reactElementToJSXString(<div> {false} </div>)).toEqual(`<div>
   {'  '}
 </div>`);
 });
 
-test('reactElementToJSXString(<div>{null}</div>)', () => {
-  expect(reactElementToJSXString(<div>{null}</div>)).toEqual('<div />');
+test("reactElementToJSXString(<div>{null}</div>)", () => {
+  expect(reactElementToJSXString(<div>{null}</div>)).toEqual("<div />");
 });
 
-test('reactElementToJSXString(<div>{123}</div>)', () => {
+test("reactElementToJSXString(<div>{123}</div>)", () => {
   expect(reactElementToJSXString(<div>{123}</div>)).toEqual(`<div>
   123
 </div>`);
 });
 
 test("reactElementToJSXString(<div>{''}</div>)", () => {
-  expect(reactElementToJSXString(<div>{''}</div>)).toEqual(
-    reactElementToJSXString(<div />)
+  expect(reactElementToJSXString(<div>{""}</div>)).toEqual(
+    reactElementToJSXString(<div />),
   );
 });
 
-test('reactElementToJSXString(<div>String with {1} js expression</div>)', () => {
-  expect(reactElementToJSXString(<div>String with {1} js number</div>))
-    .toEqual(`<div>
+test("reactElementToJSXString(<div>String with {1} js expression</div>)", () => {
+  expect(
+    reactElementToJSXString(<div>String with {1} js number</div>),
+  ).toEqual(`<div>
   String with 1 js number
 </div>`);
 });
 
-test('reactElementToJSXString(<TestComponent />, { displayName: toUpper })', () => {
+test("reactElementToJSXString(<TestComponent />, { displayName: toUpper })", () => {
   expect(
     reactElementToJSXString(<TestComponent />, {
       displayName: (element) => {
         if (typeof element.type === "string") {
-          return "unknown"
+          return "unknown";
         }
 
-        return element.type.name.toUpperCase()
+        return element.type.name.toUpperCase();
       },
-    })
-  ).toEqual('<TESTCOMPONENT />');
+    }),
+  ).toEqual("<TESTCOMPONENT />");
 });
 
 test("reactElementToJSXString(<TestComponent />, { filterProps: ['key', 'className'] })", () => {
@@ -824,9 +836,9 @@ test("reactElementToJSXString(<TestComponent />, { filterProps: ['key', 'classNa
     reactElementToJSXString(
       <TestComponent a="b" key="aKey" className="aClass" />,
       {
-        filterProps: ['key', 'className'],
-      }
-    )
+        filterProps: ["key", "className"],
+      },
+    ),
   ).toEqual('<TestComponent a="b" />');
 });
 
@@ -835,30 +847,31 @@ test("reactElementToJSXString(<TestComponent />, { filterProps: () => !key.start
     reactElementToJSXString(
       <TestComponent a="b" someProp="foo" someOtherProp={false} />,
       {
-        filterProps: (val, key) => !key.startsWith('some'),
-      }
-    )
+        filterProps: (val, key) => !key.startsWith("some"),
+      },
+    ),
   ).toEqual('<TestComponent a="b" />');
 });
 
-test('reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: false })', () => {
+test("reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: false })", () => {
   expect(
     reactElementToJSXString(
       // eslint-disable-next-line react/jsx-boolean-value
       <custom testTrue={true} testFalse={false} />,
       {
         useBooleanShorthandSyntax: false,
-      }
-    )
+      },
+    ),
   ).toEqual(`<custom
   testFalse={false}
   testTrue={true}
 />`);
 });
 
-test('should render default props', () => {
-  expect(reactElementToJSXString(<DefaultPropsComponent />))
-    .toEqual(`<DefaultPropsComponent
+test("should render default props", () => {
+  expect(
+    reactElementToJSXString(<DefaultPropsComponent />),
+  ).toEqual(`<DefaultPropsComponent
   boolean
   number={0}
   test="test"
@@ -870,15 +883,15 @@ test('should not render default props if "showDefaultProps" option is false', ()
   expect(
     reactElementToJSXString(<DefaultPropsComponent />, {
       showDefaultProps: false,
-    })
-  ).toEqual('<DefaultPropsComponent />');
+    }),
+  ).toEqual("<DefaultPropsComponent />");
 });
 
 test('should render props that differ from their defaults if "showDefaultProps" option is false', () => {
   expect(
     reactElementToJSXString(<DefaultPropsComponent test="foo" />, {
       showDefaultProps: false,
-    })
+    }),
   ).toEqual('<DefaultPropsComponent test="foo" />');
 });
 
@@ -886,8 +899,8 @@ test('should render boolean props if value is `false`, default is `true` and "sh
   expect(
     reactElementToJSXString(<DefaultPropsComponent boolean={false} />, {
       showDefaultProps: false,
-    })
-  ).toEqual('<DefaultPropsComponent boolean={false} />');
+    }),
+  ).toEqual("<DefaultPropsComponent boolean={false} />");
 });
 
 test('reactElementToJSXString(<div co={<div a="1" />} />, { displayName: toUpper })', () => {
@@ -895,12 +908,12 @@ test('reactElementToJSXString(<div co={<div a="1" />} />, { displayName: toUpper
     reactElementToJSXString(<custom co={<custom a="1" />} />, {
       displayName: (element) => {
         if (typeof element.type === "string") {
-          return element.type.toUpperCase()
+          return element.type.toUpperCase();
         }
 
-        return "unknown"
+        return "unknown";
       },
-    })
+    }),
   ).toEqual('<CUSTOM co={<CUSTOM a="1" />} />');
 });
 
@@ -915,13 +928,13 @@ test('reactElementToJSXString(<div co={{a: <div a="1" />}} />, { displayName: to
       {
         displayName: (element) => {
           if (typeof element.type === "string") {
-            return element.type.toUpperCase()
+            return element.type.toUpperCase();
           }
 
-          return "unknown"
+          return "unknown";
         },
-      }
-    )
+      },
+    ),
   ).toEqual(`<CUSTOM
   co={{
     a: <CUSTOM a="1" />
@@ -929,40 +942,40 @@ test('reactElementToJSXString(<div co={{a: <div a="1" />}} />, { displayName: to
  />`);
 });
 
-test('should omit true as value', () => {
+test("should omit true as value", () => {
   expect(
-    reactElementToJSXString(<custom primary={true} />) // eslint-disable-line react/jsx-boolean-value
-  ).toEqual('<custom primary />');
+    reactElementToJSXString(<custom primary={true} />), // eslint-disable-line react/jsx-boolean-value
+  ).toEqual("<custom primary />");
 });
 
-test('should omit attributes with false as value', () => {
+test("should omit attributes with false as value", () => {
   expect(
-    reactElementToJSXString(<custom primary={false} />) // eslint-disable-line react/jsx-boolean-value
-  ).toEqual('<custom />');
+    reactElementToJSXString(<custom primary={false} />), // eslint-disable-line react/jsx-boolean-value
+  ).toEqual("<custom />");
 });
 
 test('should return the actual functions when "showFunctions" is true', () => {
   function fn() {
-    return 'value';
+    return "value";
   }
 
   expect(
     reactElementToJSXString(<custom fn={fn} />, {
       showFunctions: true,
-    })
+    }),
   ).toEqual(`<custom fn={function fn() {return "value";}} />`);
 });
 
 test('should expose the multiline "functionValue" formatter', () => {
   function fn() {
-    return 'value';
+    return "value";
   }
 
   expect(
     reactElementToJSXString(<custom fn={fn} />, {
       showFunctions: true,
       functionValue: preserveFunctionLineBreak,
-    })
+    }),
   ).toEqual(`<custom
   fn={function fn() {
     return "value";
@@ -970,9 +983,9 @@ test('should expose the multiline "functionValue" formatter', () => {
  />`);
 });
 
-test('reactElementToJSXString(<DisplayNamePrecedence />)', () => {
+test("reactElementToJSXString(<DisplayNamePrecedence />)", () => {
   expect(reactElementToJSXString(<DisplayNamePrecedence />)).toEqual(
-    '<This should take precedence />'
+    "<This should take precedence />",
   );
 });
 
@@ -982,7 +995,7 @@ test('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributes
   expect(
     reactElementToJSXString(<custom aprop="1" bprop="2" />, {
       maxInlineAttributesLineLength: 100,
-    })
+    }),
   ).toEqual('<custom aprop="1" bprop="2" />');
 });
 
@@ -993,7 +1006,7 @@ test('reactElementToJSXString(<div title="1"/>, { maxInlineAttributesLineLength:
   expect(
     reactElementToJSXString(<div title="1" />, {
       maxInlineAttributesLineLength: 5,
-    })
+    }),
   ).toEqual(`<div
   title="1"
 />`);
@@ -1004,7 +1017,7 @@ test('reactElementToJSXString(<div aprop="1" bprop="2" />, { maxInlineAttributes
   expect(
     reactElementToJSXString(<div aria-label="2" title="1" />, {
       maxInlineAttributesLineLength: 10,
-    })
+    }),
   ).toEqual(`<div
   aria-label="2"
   title="1"
@@ -1021,8 +1034,8 @@ test('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlin
       </div>,
       {
         maxInlineAttributesLineLength: 100,
-      }
-    )
+      },
+    ),
   ).toEqual(`<div slot="2" title="1">
   content
 </div>`);
@@ -1032,7 +1045,7 @@ test('reactElementToJSXString(<div title="1">content</div>, { maxInlineAttribute
   expect(
     reactElementToJSXString(<div title="1">content</div>, {
       maxInlineAttributesLineLength: 5,
-    })
+    }),
   ).toEqual(`<div
   title="1"
 >
@@ -1048,8 +1061,8 @@ test('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlin
       </div>,
       {
         maxInlineAttributesLineLength: 10,
-      }
-    )
+      },
+    ),
   ).toEqual(`<div
   slot="2"
   title="1"
@@ -1059,7 +1072,7 @@ test('reactElementToJSXString(<div aprop="1" bprop="2">content</div>, { maxInlin
 });
 
 // Multi-level inline attribute test
-test('reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttributesLineLength: 24 }))', () => {
+test("reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttributesLineLength: 24 }))", () => {
   expect(
     reactElementToJSXString(
       <div data-a="1" data-b="2">
@@ -1069,8 +1082,8 @@ test('reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttribut
       </div>,
       {
         maxInlineAttributesLineLength: 26,
-      }
-    )
+      },
+    ),
   ).toEqual(`<div data-a="1" data-b="2">
   <div
     data-c="3"
@@ -1081,17 +1094,17 @@ test('reactElementToJSXString(<div><div>content</div></div>, { maxInlineAttribut
 </div>`);
 });
 
-test('should return functionValue result when it returns a string', () => {
+test("should return functionValue result when it returns a string", () => {
   expect(
-    reactElementToJSXString(<div onClick={() => 'value'} />, {
+    reactElementToJSXString(<div onClick={() => "value"} />, {
       showFunctions: true,
-      functionValue: () => '...',
-    })
-  ).toEqual('<div onClick={...} />');
+      functionValue: () => "...",
+    }),
+  ).toEqual("<div onClick={...} />");
 });
 
-test('sends the original fn to functionValue', () => {
-  const fn = () => { };
+test("sends the original fn to functionValue", () => {
+  const fn = () => {};
   const functionValue = (receivedFn: unknown) => expect(receivedFn).toBe(fn);
   reactElementToJSXString(<div onClick={fn} />, {
     functionValue,
@@ -1099,19 +1112,19 @@ test('sends the original fn to functionValue', () => {
 });
 
 test('should return noRefCheck when "showFunctions" is false and "functionValue" is not provided', () => {
-  expect(reactElementToJSXString(<div onClick={() => { }} />)).toEqual(
-    '<div onClick={function noRefCheck() {}} />'
+  expect(reactElementToJSXString(<div onClick={() => {}} />)).toEqual(
+    "<div onClick={function noRefCheck() {}} />",
   );
 });
 
-test('reactElementToJSXString(<Fragment><h1>foo</h1><p>bar</p></Fragment>)', () => {
+test("reactElementToJSXString(<Fragment><h1>foo</h1><p>bar</p></Fragment>)", () => {
   expect(
     reactElementToJSXString(
       <Fragment>
         <h1>foo</h1>
         <p>bar</p>
-      </Fragment>
-    )
+      </Fragment>,
+    ),
   ).toEqual(`<>
   <h1>
     foo
@@ -1128,19 +1141,19 @@ test('reactElementToJSXString(<Fragment key="foo"><div /><div /></Fragment>)', (
       <Fragment key="foo">
         <div />
         <div />
-      </Fragment>
-    )
+      </Fragment>,
+    ),
   ).toEqual(`<React.Fragment key="foo">
   <div />
   <div />
 </React.Fragment>`);
 });
 
-test('reactElementToJSXString(<Fragment />)', () => {
-  expect(reactElementToJSXString(<Fragment />)).toEqual(`<React.Fragment />`);
+test("reactElementToJSXString(<Fragment />)", () => {
+  expect(reactElementToJSXString(<Fragment />)).toEqual("<React.Fragment />");
 });
 
-test('reactElementToJSXString(<div render={<Fragment><div /><div /></Fragment>} />)', () => {
+test("reactElementToJSXString(<div render={<Fragment><div /><div /></Fragment>} />)", () => {
   expect(
     reactElementToJSXString(
       <custom
@@ -1150,12 +1163,12 @@ test('reactElementToJSXString(<div render={<Fragment><div /><div /></Fragment>} 
             <div />
           </Fragment>
         }
-      />
-    )
-  ).toEqual(`<custom render={<><div /><div /></>} />`);
+      />,
+    ),
+  ).toEqual("<custom render={<><div /><div /></>} />");
 });
 
-test('should not cause recursive loop when prop object contains an element', () => {
+test("should not cause recursive loop when prop object contains an element", () => {
   const Test = () => <div>Test</div>;
 
   const Container = ({
@@ -1190,13 +1203,13 @@ test('should not cause recursive loop when prop object contains an element', () 
 
   render(<App />);
 
-  expect(screen.getByText('Hello world!')).toBeInTheDocument();
+  expect(screen.getByText("Hello world!")).toBeInTheDocument();
 });
 
-test('should not cause recursive loop when an element contains a ref', () => {
+test("should not cause recursive loop when an element contains a ref", () => {
   expect.assertions(2);
 
-  type AppProps = {};
+  type AppProps = unknown;
   class App extends Component<AppProps> {
     private inputRef: Ref<HTMLInputElement>;
 
@@ -1206,8 +1219,9 @@ test('should not cause recursive loop when an element contains a ref', () => {
     }
 
     componentDidMount() {
-      expect(reactElementToJSXString(<input ref={this.inputRef} />))
-        .toEqual(`<input
+      expect(
+        reactElementToJSXString(<input ref={this.inputRef} />),
+      ).toEqual(`<input
   ref={{
     current: '[Circular]'
   }}
@@ -1226,101 +1240,101 @@ test('should not cause recursive loop when an element contains a ref', () => {
 
   render(<App />);
 
-  expect(screen.getByText('Hello world!')).toBeInTheDocument();
+  expect(screen.getByText("Hello world!")).toBeInTheDocument();
 });
 
-test('should use inferred function name as display name for `forwardRef` element', () => {
+test("should use inferred function name as display name for `forwardRef` element", () => {
   const Tag = forwardRef<HTMLSpanElement, { text: string }>(function TagWithRef(
     { text },
-    ref
+    ref,
   ) {
     return <span ref={ref}>{text}</span>;
   });
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<TagWithRef text="some label" />`
+    `<TagWithRef text="some label" />`,
   );
 });
 
-test('should use `displayName` instead of inferred function name as display name for `forwardRef` element', () => {
+test("should use `displayName` instead of inferred function name as display name for `forwardRef` element", () => {
   const Tag = forwardRef<HTMLSpanElement, { text: string }>(function Tag(
     { text },
-    ref
+    ref,
   ) {
     return <span ref={ref}>{text}</span>;
   });
-  Tag.displayName = 'MyTag';
+  Tag.displayName = "MyTag";
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<MyTag text="some label" />`
+    `<MyTag text="some label" />`,
   );
 });
 
-test('should use inferred function name as display name for `memo` element', () => {
+test("should use inferred function name as display name for `memo` element", () => {
   const Tag = memo(function TagMemoized({ text }: { text: string }) {
     return <span>{text}</span>;
   });
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<TagMemoized text="some label" />`
+    `<TagMemoized text="some label" />`,
   );
 });
 
-test('should use `displayName` instead of inferred function name as display name for `memo` element', () => {
+test("should use `displayName` instead of inferred function name as display name for `memo` element", () => {
   const Tag = memo(function Tag({ text }: { text: string }) {
     return <span>{text}</span>;
   });
-  Tag.displayName = 'MyTag';
+  Tag.displayName = "MyTag";
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<MyTag text="some label" />`
+    `<MyTag text="some label" />`,
   );
 });
 
-test('should use inferred function name as display name for a `forwardRef` wrapped in `memo`', () => {
+test("should use inferred function name as display name for a `forwardRef` wrapped in `memo`", () => {
   const Tag = memo(
     forwardRef<HTMLSpanElement, { text: string }>(function TagWithRef(
       { text },
-      ref
+      ref,
     ) {
       return <span ref={ref}>{text}</span>;
-    })
+    }),
   );
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<TagWithRef text="some label" />`
+    `<TagWithRef text="some label" />`,
   );
 });
 
-test('should use inferred function name as display name for a component wrapped in `memo` multiple times', () => {
+test("should use inferred function name as display name for a component wrapped in `memo` multiple times", () => {
   const Tag = memo(
     memo(
       memo(function TagReallyMemoized({ text }: { text: string }) {
         return <span>{text}</span>;
-      })
-    )
+      }),
+    ),
   );
 
   expect(reactElementToJSXString(<Tag text="some label" />)).toEqual(
-    `<TagReallyMemoized text="some label" />`
+    `<TagReallyMemoized text="some label" />`,
   );
 });
 
-test('should stringify `StrictMode` correctly', () => {
+test("should stringify `StrictMode` correctly", () => {
   const App = () => null;
 
   expect(
     reactElementToJSXString(
       <StrictMode>
         <App />
-      </StrictMode>
-    )
+      </StrictMode>,
+    ),
   ).toEqual(`<StrictMode>
   <App />
 </StrictMode>`);
 });
 
-test('should stringify `Suspense` correctly', () => {
+test("should stringify `Suspense` correctly", () => {
   const Spinner = () => null;
   const ProfilePage = () => null;
 
@@ -1328,22 +1342,22 @@ test('should stringify `Suspense` correctly', () => {
     reactElementToJSXString(
       <Suspense fallback={<Spinner />}>
         <ProfilePage />
-      </Suspense>
-    )
+      </Suspense>,
+    ),
   ).toEqual(`<Suspense fallback={<Spinner />}>
   <ProfilePage />
 </Suspense>`);
 });
 
-test('should stringify `Profiler` correctly', () => {
+test("should stringify `Profiler` correctly", () => {
   const Navigation = () => null;
 
   expect(
     reactElementToJSXString(
-      <Profiler id="Navigation" onRender={() => { }}>
+      <Profiler id="Navigation" onRender={() => {}}>
         <Navigation />
-      </Profiler>
-    )
+      </Profiler>,
+    ),
   ).toEqual(`<Profiler
   id="Navigation"
   onRender={function noRefCheck() {}}
@@ -1352,7 +1366,7 @@ test('should stringify `Profiler` correctly', () => {
 </Profiler>`);
 });
 
-test('should stringify `Contex.Provider` correctly', () => {
+test("should stringify `Contex.Provider` correctly", () => {
   const Ctx = createContext(null);
   const App = () => <></>;
 
@@ -1360,14 +1374,14 @@ test('should stringify `Contex.Provider` correctly', () => {
     reactElementToJSXString(
       <Ctx.Provider value={null}>
         <App />
-      </Ctx.Provider>
-    )
+      </Ctx.Provider>,
+    ),
   ).toEqual(`<Context.Provider value={null}>
   <App />
 </Context.Provider>`);
 });
 
-test('should stringify `Context` correctly', () => {
+test("should stringify `Context` correctly", () => {
   const Ctx = createContext(null);
   const App = () => <></>;
 
@@ -1375,16 +1389,16 @@ test('should stringify `Context` correctly', () => {
     reactElementToJSXString(
       <Ctx value={null}>
         <App />
-      </Ctx>
-    )
+      </Ctx>,
+    ),
   ).toEqual(`<Context.Provider value={null}>
   <App />
 </Context.Provider>`);
 });
 
-test('should stringify `Contex.Provider` with `displayName` correctly', () => {
+test("should stringify `Contex.Provider` with `displayName` correctly", () => {
   const Ctx = createContext(null);
-  Ctx.displayName = 'MyCtx';
+  Ctx.displayName = "MyCtx";
 
   const App = () => <></>;
 
@@ -1392,51 +1406,51 @@ test('should stringify `Contex.Provider` with `displayName` correctly', () => {
     reactElementToJSXString(
       <Ctx.Provider value={null}>
         <App />
-      </Ctx.Provider>
-    )
+      </Ctx.Provider>,
+    ),
   ).toEqual(`<MyCtx.Provider value={null}>
   <App />
 </MyCtx.Provider>`);
 });
 
-test('should stringify `Contex.Consumer` correctly', () => {
+test("should stringify `Contex.Consumer` correctly", () => {
   const Ctx = createContext(null);
   const Button = (props: { theme: unknown }) => null;
 
   expect(
     reactElementToJSXString(
-      <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>
-    )
-  ).toEqual(`<Context.Consumer />`);
+      <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>,
+    ),
+  ).toEqual("<Context.Consumer />");
 });
 
-test('should stringify `Contex.Consumer` with `displayName` correctly', () => {
+test("should stringify `Contex.Consumer` with `displayName` correctly", () => {
   const Ctx = createContext(null);
-  Ctx.displayName = 'MyCtx';
+  Ctx.displayName = "MyCtx";
 
-  const Button = ({ }: { theme: unknown }) => null;
+  const Button = (props: { theme: unknown }) => null;
 
   expect(
     reactElementToJSXString(
-      <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>
-    )
-  ).toEqual(`<MyCtx.Consumer />`);
+      <Ctx.Consumer>{(theme) => <Button theme={theme} />}</Ctx.Consumer>,
+    ),
+  ).toEqual("<MyCtx.Consumer />");
 });
 
-test('should stringify `lazy` component correctly', () => {
-  const Lazy = lazy(() => new Promise(() => { }));
+test("should stringify `lazy` component correctly", () => {
+  const Lazy = lazy(() => new Promise(() => {}));
 
-  expect(reactElementToJSXString(<Lazy />)).toEqual(`<Lazy />`);
+  expect(reactElementToJSXString(<Lazy />)).toEqual("<Lazy />");
 });
 
-test('should stringify `forwardRef` element with a circular property', () => {
+test("should stringify `forwardRef` element with a circular property", () => {
   function TagList({ tags }: { tags: Array<ReactNode> }) {
     return tags;
   }
 
   const Tag = forwardRef<HTMLSpanElement, { text: string }>(function TagWithRef(
     { text },
-    ref
+    ref,
   ) {
     return <span ref={ref}>{text}</span>;
   });
@@ -1445,8 +1459,8 @@ test('should stringify `forwardRef` element with a circular property', () => {
 
   expect(
     reactElementToJSXString(
-      <TagList tags={[<Tag key="oops" text="oops, circular" />]} />
-    )
+      <TagList tags={[<Tag key="oops" text="oops, circular" />]} />,
+    ),
   ).toEqual(`<TagList
   tags={[
     <TagWithRef key="oops" text="oops, circular"/>
@@ -1454,7 +1468,7 @@ test('should stringify `forwardRef` element with a circular property', () => {
  />`);
 });
 
-test('should stringify element with a prop that has circular references', () => {
+test("should stringify element with a prop that has circular references", () => {
   const parent: { child?: unknown } = {};
   const child: { parent?: unknown } = {};
   parent.child = child;

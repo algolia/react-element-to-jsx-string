@@ -1,7 +1,7 @@
 // TODO: To be renamed `createPropsFilter`
-export default function createPropFilter<Value extends unknown>(
+export default function createPropFilter<Value>(
   props: Record<string, Value>,
-  filter: string[] | ((propValue: Value, key: string) => boolean)
+  filter: string[] | ((propValue: Value, key: string) => boolean),
 ) {
   if (Array.isArray(filter)) {
     return (key: string) => filter.indexOf(key) === -1;

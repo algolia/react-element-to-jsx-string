@@ -1,9 +1,9 @@
-const isKeyOrRefProps = (propName: string) => ['key', 'ref'].includes(propName);
+const isKeyOrRefProps = (propName: string) => ["key", "ref"].includes(propName);
 
 export default (shouldSortUserProps: boolean) =>
   (props: string[]): string[] => {
-    const haveKeyProp = props.includes('key');
-    const haveRefProp = props.includes('ref');
+    const haveKeyProp = props.includes("key");
+    const haveRefProp = props.includes("ref");
 
     const userPropsOnly = props.filter((oneProp) => !isKeyOrRefProps(oneProp));
 
@@ -12,11 +12,11 @@ export default (shouldSortUserProps: boolean) =>
       : [...userPropsOnly];
 
     if (haveRefProp) {
-      sortedProps.unshift('ref');
+      sortedProps.unshift("ref");
     }
 
     if (haveKeyProp) {
-      sortedProps.unshift('key');
+      sortedProps.unshift("key");
     }
 
     return sortedProps;

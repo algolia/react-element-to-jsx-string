@@ -1,12 +1,13 @@
 import {
   Children,
   Fragment,
+  type ReactElement,
+  type ReactNode,
   isValidElement,
-  ReactElement,
-  ReactNode,
-} from 'react';
+} from "react";
 import {
   ForwardRef,
+  Memo,
   isContextConsumer,
   isContextProvider,
   isForwardRef,
@@ -15,24 +16,23 @@ import {
   isProfiler,
   isStrictMode,
   isSuspense,
-  Memo,
-} from 'react-is';
-import type { Options } from '../options';
+} from "react-is";
+import type { Options } from "../options";
 import {
-  createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
-} from '../tree';
-import type { TreeNode } from '../tree';
+  createStringTreeNode,
+} from "../tree";
+import type { TreeNode } from "../tree";
 
 const supportFragment = Boolean(Fragment);
 
 const getFunctionTypeName = (
-  functionType: (...args: Array<any>) => any
+  functionType: (...args: Array<any>) => any,
 ): string => {
-  if (!functionType.name || functionType.name === '_default') {
-    return 'No Display Name';
+  if (!functionType.name || functionType.name === "_default") {
+    return "No Display Name";
   }
 
   return functionType.name;
@@ -58,10 +58,10 @@ const getWrappedComponentDisplayName = (Component: any): string => {
 // https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
 const getReactElementDisplayName = (element: ReactElement): string => {
   switch (true) {
-    case typeof element.type === 'string':
+    case typeof element.type === "string":
       return element.type;
 
-    case typeof element.type === 'function':
+    case typeof element.type === "function":
       // @ts-expect-error: flow to TS
       if (element.type.displayName) {
         // @ts-expect-error: flow to TS
@@ -77,40 +77,40 @@ const getReactElementDisplayName = (element: ReactElement): string => {
 
     case isContextConsumer(element):
       // @ts-expect-error: flow to TS
-      return `${element.type._context.displayName || 'Context'}.Consumer`;
+      return `${element.type._context.displayName || "Context"}.Consumer`;
 
     case isContextProvider(element):
       // @ts-expect-error: flow to TS
-      return `${element.type.displayName || 'Context'}.Provider`;
+      return `${element.type.displayName || "Context"}.Provider`;
     case isLazy(element):
-      return 'Lazy';
+      return "Lazy";
 
     case isProfiler(element):
-      return 'Profiler';
+      return "Profiler";
 
     case isStrictMode(element):
-      return 'StrictMode';
+      return "StrictMode";
 
     case isSuspense(element):
-      return 'Suspense';
+      return "Suspense";
 
     default:
-      return 'UnknownElementType';
+      return "UnknownElementType";
   }
 };
 
 const noChildren = (propsValue: unknown, propName: string) =>
-  propName !== 'children';
+  propName !== "children";
 
 const onlyMeaningfulChildren = (children: ReactNode): boolean =>
   children !== true &&
   children !== false &&
   children !== null &&
-  children !== '';
+  children !== "";
 
 const filterProps = (
   originalProps: Record<string, unknown>,
-  cb: (propsValue: any, propsName: string) => boolean
+  cb: (propsValue: any, propsName: string) => boolean,
 ): Record<string, any> => {
   const filteredProps: Record<string, any> = {};
   Object.keys(originalProps)
@@ -124,17 +124,17 @@ const filterProps = (
 const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 
-  if (typeof element === 'string') {
+  if (typeof element === "string") {
     return createStringTreeNode(element);
   }
 
-  if (typeof element === 'number') {
+  if (typeof element === "number") {
     return createNumberTreeNode(element);
   }
 
   if (!isValidElement(element)) {
     throw new Error(
-      `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
+      `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``,
     );
   }
 
@@ -144,7 +144,7 @@ const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
 
   const key = element.key;
 
-  if (typeof key === 'string' && key.search(/^\./)) {
+  if (typeof key === "string" && key.search(/^\./)) {
     // React automatically add key=".X" when there are some children
     props.key = key;
   }

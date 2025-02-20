@@ -1,14 +1,11 @@
-**/*.spec.js
-
 .github/
 !dist/
 src/
 tests/
 
-.eslintignore
-.eslintrc.js
-.prettier
-.prettierignore
+**/*.spec.js
+
+biome.json
 commitlint.config.js
 release.sh
 renovate.json

@@ -1,7 +1,6 @@
-import React from 'react';
-import { describe, it, expect } from 'vitest';
-import formatReactElementNode from './formatReactElementNode';
-import { generateOptionsFixture } from '../__tests__/generateOptionsFixture';
+import { describe, expect, it } from "vitest";
+import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
+import formatReactElementNode from "./formatReactElementNode";
 
 const defaultOptions = generateOptionsFixture({
   filterProps: [],
@@ -12,17 +11,17 @@ const defaultOptions = generateOptionsFixture({
   sortProps: true,
 });
 
-describe('formatReactElementNode', () => {
-  it('should format a react element with a string a children', () => {
+describe("formatReactElementNode", () => {
+  it("should format a react element with a string a children", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'h1',
+      type: "ReactElement" as const,
+      displayName: "h1",
       defaultProps: {},
       props: {},
-      childrens: [
+      children: [
         {
-          type: 'string' as const,
-          value: 'Hello world',
+          type: "string" as const,
+          value: "Hello world",
         },
       ],
     };
@@ -32,45 +31,45 @@ describe('formatReactElementNode', () => {
 </h1>`);
   });
 
-  it('should format a single depth react element', () => {
+  it("should format a single depth react element", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'aaa',
+      type: "ReactElement" as const,
+      displayName: "aaa",
       props: {
-        foo: '41',
+        foo: "41",
       },
       defaultProps: {
-        foo: '41',
+        foo: "41",
       },
-      childrens: [],
+      children: [],
     };
 
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
-      '<aaa foo="41" />'
+      '<aaa foo="41" />',
     );
   });
 
-  it('should format a react element with an object as props', () => {
+  it("should format a react element with an object as props", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'div',
+      type: "ReactElement" as const,
+      displayName: "div",
       defaultProps: {
         a: {
-          aa: '1',
+          aa: "1",
           bb: {
-            cc: '3',
+            cc: "3",
           },
         },
       },
       props: {
         a: {
-          aa: '1',
+          aa: "1",
           bb: {
-            cc: '3',
+            cc: "3",
           },
         },
       },
-      childrens: [],
+      children: [],
     };
 
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(`<div
@@ -83,77 +82,80 @@ describe('formatReactElementNode', () => {
  />`);
   });
 
-  it('should format a react element with another react element as props', () => {
+  it("should format a react element with another react element as props", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'div',
+      type: "ReactElement" as const,
+      displayName: "div",
       defaultProps: {
         a: <span title="51" />,
       },
       props: {
         a: <span title="42" />,
       },
-      childrens: [],
+      children: [],
     };
 
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
-      '<div a={<span title="42" />} />'
+      '<div a={<span title="42" />} />',
     );
   });
 
-  it('should format a react element with multiline children', () => {
+  it("should format a react element with multiline children", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'div',
+      type: "ReactElement" as const,
+      displayName: "div",
       defaultProps: {},
       props: {},
-      childrens: [
+      children: [
         {
-          type: 'string' as const,
-          value: 'first line\nsecond line\nthird line',
+          type: "string" as const,
+          value: "first line\nsecond line\nthird line",
         },
       ],
     };
 
-    expect(formatReactElementNode(tree, false, 0, defaultOptions))
-      .toEqual(`<div>
+    expect(
+      formatReactElementNode(tree, false, 0, defaultOptions),
+    ).toEqual(`<div>
   first line
   second line
   third line
 </div>`);
 
-    expect(formatReactElementNode(tree, false, 2, defaultOptions))
-      .toEqual(`<div>
+    expect(
+      formatReactElementNode(tree, false, 2, defaultOptions),
+    ).toEqual(`<div>
       first line
       second line
       third line
     </div>`);
   });
 
-  it('should allow filtering props by function', () => {
+  it("should allow filtering props by function", () => {
     const tree = {
-      type: 'ReactElement' as const,
-      displayName: 'h1',
+      type: "ReactElement" as const,
+      displayName: "h1",
       defaultProps: {},
       props: {
-        className: 'myClass',
+        className: "myClass",
         onClick: () => {},
       },
-      childrens: [
+      children: [
         {
-          type: 'string' as const,
-          value: 'Hello world',
+          type: "string" as const,
+          value: "Hello world",
         },
       ],
     };
 
     const options = {
       ...defaultOptions,
-      filterProps: (val: unknown, key: string) => !key.startsWith('on'),
+      filterProps: (val: unknown, key: string) => !key.startsWith("on"),
     };
 
-    expect(formatReactElementNode(tree, false, 0, options))
-      .toEqual(`<h1 className="myClass">
+    expect(
+      formatReactElementNode(tree, false, 0, options),
+    ).toEqual(`<h1 className="myClass">
   Hello world
 </h1>`);
   });
