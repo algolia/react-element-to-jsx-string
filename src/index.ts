@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react';
+import type { ReactNode } from 'react';
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
 import { defaultOptions, type Options } from './options';
 
 const reactElementToJsxString = (
-  element: ReactElement<any> | string | number,
+  element: ReactNode,
   {
     filterProps = [],
     showDefaultProps = true,
@@ -19,7 +19,7 @@ const reactElementToJsxString = (
   }: Partial<Options> = {}
 ): string => {
   if (!element) {
-    throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+    return '';
   }
 
   const options: Options = {

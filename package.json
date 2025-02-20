@@ -48,7 +48,7 @@
     "conventional-changelog-cli": "2.1.1",
     "doctoc": "1.4.0",
     "esm": "3.2.25",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "^17.1.0",
     "mversion": "2.0.1",
     "prettier": "3.4.2",
     "react": "19.0.0",
@@ -56,6 +56,6 @@
     "react-is": "19.0.0",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
-    "vitest": "^3.0.4"
+    "vitest": "^3.0.5"
   }
 }

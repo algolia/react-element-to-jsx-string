@@ -1,4 +1,10 @@
-import React, { Fragment, ReactElement, ReactNode } from 'react';
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+} from 'react';
 import {
   ForwardRef,
   isContextConsumer,
@@ -126,7 +132,7 @@ const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
     return createNumberTreeNode(element);
   }
 
-  if (!React.isValidElement(element)) {
+  if (!isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
     );
@@ -146,7 +152,7 @@ const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
   // @ts-expect-error: flow to TS
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
   // @ts-expect-error: flow to TS
-  const children = React.Children.toArray(element.props.children)
+  const children = Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map((oneChild) => parseReactElement(oneChild, options));
 

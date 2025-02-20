@@ -1,5 +1,5 @@
 import { describe, it, expect, vitest } from 'vitest';
-import React, { NamedExoticComponent } from 'react';
+import { createElement, NamedExoticComponent } from 'react';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import { Options } from '../options';
 
@@ -8,7 +8,7 @@ vitest.mock('./formatReactElementNode', () => ({
 }));
 
 const createFakeReactElement = (tagName = 'Foo') =>
-  React.createElement(tagName, {}, null);
+  createElement(tagName, {}, null);
 
 const options = {
   tabStop: 2,
