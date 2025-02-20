@@ -14,7 +14,7 @@
     "build:esm": "tsc --module esnext --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "lint": "eslint --ext ts --ext tsx src/",
-    "lint:fix": "yarn run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "test": "vitest",
     "release": "./release.sh",
