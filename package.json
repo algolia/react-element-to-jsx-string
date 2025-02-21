@@ -2,33 +2,23 @@
   "name": "react-element-to-jsx-string",
   "version": "17.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "browser": "dist/cjs/index.js",
-  "types": "index.d.ts",
+  "packageManager": "pnpm@9.15.2",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "browser": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
-    "build:flow": "flow-copy-source -v --ignore=*.spec.js src/ dist/cjs",
+    "build": "tsup",
     "prebuild": "rm -rf dist/",
-    "postbuild": "npm run build:flow",
-    "prepare": "npm run build",
-    "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
-    "flow": "flow",
-    "precommit": "lint-staged",
-    "prepublishOnly": "npm run build",
-    "prettier:fix": "prettier --write \"**/*.{js,json}\"",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "lint": "biome check",
+    "lint:fix": "pnpm run check --fix",
+    "test": "vitest",
     "release": "./release.sh",
-    "smoke": "node tests/smoke/run"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write \"**/*.{js,json}\"",
-      "git add"
-    ]
+    "smoke": "node tests/smoke/run",
+    "typecheck": "tsc --noEmit"
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -36,61 +26,35 @@
   },
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
-  "devDependencies": {
-    "@babel/cli": "7.26.4",
-    "@babel/core": "7.26.9",
-    "@babel/preset-env": "7.26.9",
-    "@babel/preset-flow": "7.25.9",
-    "@babel/preset-react": "7.26.3",
-    "@commitlint/cli": "8.3.6",
-    "@commitlint/config-angular": "8.3.6",
-    "@testing-library/dom": "10.4.0",
-    "@testing-library/jest-dom": "5.17.0",
-    "@testing-library/react": "16.2.0",
-    "babel-eslint": "10.1.0",
-    "babel-jest": "24.9.0",
-    "babel-register": "6.26.0",
-    "conventional-changelog-cli": "2.2.2",
-    "doctoc": "1.4.0",
-    "eslint": "6.8.0",
-    "eslint-config-algolia": "14.0.1",
-    "eslint-config-prettier": "6.15.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jest": "22.21.0",
-    "eslint-plugin-prettier": "3.4.1",
-    "eslint-plugin-react": "7.31.1",
-    "esm": "3.2.25",
-    "expect": "27.5.1",
-    "flow-bin": "0.119.1",
-    "flow-copy-source": "2.0.9",
-    "husky": "3.1.0",
-    "jest": "27.5.1",
-    "json": "10.0.0",
-    "lint-staged": "10.5.4",
-    "mversion": "2.0.1",
-    "prettier": "1.19.1",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-is": "19.0.0",
-    "rollup": "2.79.1",
-    "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-node-builtins": "2.1.2",
-    "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-sourcemaps": "0.6.3"
+  "dependencies": {
+    "@base2/pretty-print-object": "1.0.2"
   },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-is": "^19.0.0"
   },
-  "dependencies": {
-    "@base2/pretty-print-object": "1.0.2",
-    "is-plain-object": "5.0.0"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setupTests.js"
-    ]
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-angular": "^19.7.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/react-is": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "conventional-changelog-cli": "2.1.1",
+    "doctoc": "1.4.0",
+    "esm": "3.2.25",
+    "happy-dom": "^17.1.0",
+    "mversion": "2.0.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-is": "19.0.0",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
   }
 }
