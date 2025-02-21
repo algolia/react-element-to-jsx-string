@@ -1105,7 +1105,13 @@ test("should return functionValue result when it returns a string", () => {
 
 test("sends the original fn to functionValue", () => {
   const fn = () => {};
-  const functionValue = (receivedFn: unknown) => expect(receivedFn).toBe(fn);
+
+  const functionValue = (receivedFn: unknown) => {
+    expect(receivedFn).toBe(fn);
+
+    return "";
+  };
+
   reactElementToJSXString(<div onClick={fn} />, {
     functionValue,
   });

@@ -4,7 +4,7 @@ export type Options = {
   filterProps: Array<string> | ((propValue: unknown, key: string) => boolean);
   showDefaultProps: boolean;
   showFunctions: boolean;
-  functionValue?: (...args: Array<any>) => any;
+  functionValue?: (fn: Function) => string;
   tabStop: number;
   useBooleanShorthandSyntax: boolean;
   useFragmentShortSyntax: boolean;

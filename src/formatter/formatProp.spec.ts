@@ -8,7 +8,7 @@ vitest.mock("./formatPropValue");
 const defaultOptions = {
   useBooleanShorthandSyntax: true,
   tabStop: 2,
-} as any as Options;
+} as unknown as Options;
 
 describe("formatProp", () => {
   beforeEach(() => {
