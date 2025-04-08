@@ -7,12 +7,8 @@ function safeSortObject(value: any, seen: WeakSet<any>): any {
     return value;
   }
 
-  // return date, regexp and react element values as is
-  if (
-    value instanceof Date ||
-    value instanceof RegExp ||
-    React.isValidElement(value)
-  ) {
+  // return date and regexp values as is
+  if (value instanceof Date || value instanceof RegExp) {
     return value;
   }
 
