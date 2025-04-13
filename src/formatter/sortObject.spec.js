@@ -1,5 +1,6 @@
 /* @flow */
 
+import React from 'react';
 import sortObject from './sortObject';
 
 describe('sortObject', () => {
@@ -41,5 +42,25 @@ describe('sortObject', () => {
       b: regexp,
       c: date,
     });
+  });
+
+  it('should remove _owner key from react elements', () => {
+    const fixture = {
+      _owner: "_owner that doesn't belong to react element",
+      component: <div />,
+    };
+
+    expect(JSON.stringify(sortObject(fixture))).toEqual(
+      JSON.stringify({
+        _owner: "_owner that doesn't belong to react element",
+        component: {
+          $$typeof: Symbol('react.transitional.element'),
+          type: 'div',
+          key: null,
+          props: {},
+          _store: {},
+        },
+      })
+    );
   });
 });
