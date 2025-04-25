@@ -1,3 +1,7 @@
+## [17.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v17.0.0...v17.0.1) (2025-04-25)
+
+
+
 # [17.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v15.0.0...v17.0.0) (2025-01-18)
 
 
