@@ -3,6 +3,7 @@
 import {
   createStringTreeNode,
   createNumberTreeNode,
+  createFunctionTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
 } from './tree';
@@ -21,6 +22,16 @@ describe('createNumberTreeNode', () => {
     expect(createNumberTreeNode(42)).toEqual({
       type: 'number',
       value: 42,
+    });
+  });
+});
+
+describe('createFunctionTreeNode', () => {
+  it('generate a number typed node payload', () => {
+    const fun = () => null;
+    expect(createFunctionTreeNode(fun)).toEqual({
+      type: 'function',
+      value: fun,
     });
   });
 });
