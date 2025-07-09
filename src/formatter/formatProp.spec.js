@@ -30,6 +30,7 @@ describe('formatProp', () => {
 
     expect(formatPropValue).toHaveBeenCalledWith(
       'bar',
+      'foo',
       true,
       0,
       defaultOptions
@@ -50,6 +51,7 @@ describe('formatProp', () => {
 
     expect(formatPropValue).toHaveBeenCalledWith(
       'baz',
+      'foo',
       true,
       0,
       defaultOptions
@@ -70,6 +72,7 @@ describe('formatProp', () => {
 
     expect(formatPropValue).toHaveBeenCalledWith(
       'bar',
+      'foo',
       true,
       0,
       defaultOptions
@@ -93,7 +96,7 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
+    expect(formatPropValue).toHaveBeenCalledWith(true, 'foo', true, 0, options);
   });
 
   it('should ignore a falsy boolean prop (with short syntax)', () => {
@@ -112,7 +115,13 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
+    expect(formatPropValue).toHaveBeenCalledWith(
+      false,
+      'foo',
+      true,
+      0,
+      options
+    );
   });
 
   it('should format a truthy boolean prop (with explicit syntax)', () => {
@@ -132,7 +141,7 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
+    expect(formatPropValue).toHaveBeenCalledWith(true, 'foo', true, 0, options);
   });
 
   it('should format a falsy boolean prop (with explicit syntax)', () => {
@@ -152,7 +161,13 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith(false, true, 0, options);
+    expect(formatPropValue).toHaveBeenCalledWith(
+      false,
+      'foo',
+      true,
+      0,
+      options
+    );
   });
 
   it('should format a mulitline props', () => {
@@ -187,6 +202,7 @@ describe('formatProp', () => {
 
     expect(formatPropValue).toHaveBeenCalledWith(
       ['a', 'b'],
+      'foo',
       false,
       0,
       defaultOptions
@@ -217,6 +233,12 @@ describe('formatProp', () => {
       isMultilineAttribute: false,
     });
 
-    expect(formatPropValue).toHaveBeenCalledWith('bar', true, 4, options);
+    expect(formatPropValue).toHaveBeenCalledWith(
+      'bar',
+      'foo',
+      true,
+      4,
+      options
+    );
   });
 });
