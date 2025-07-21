@@ -107,8 +107,9 @@ describe('formatProp', () => {
     expect(
       formatProp('foo', true, false, false, null, true, 0, options)
     ).toEqual({
-      attributeFormattedInline: '',
-      attributeFormattedMultiline: '',
+      attributeFormattedInline: ' foo={false}',
+      attributeFormattedMultiline: `
+  foo={false}`,
       isMultilineAttribute: false,
     });
 
