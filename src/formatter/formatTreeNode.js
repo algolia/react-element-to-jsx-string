@@ -2,6 +2,7 @@
 
 import formatReactElementNode from './formatReactElementNode';
 import formatReactFragmentNode from './formatReactFragmentNode';
+import formatFunction from './formatFunction';
 import type { Options } from './../options';
 import type { TreeNode } from './../tree';
 
@@ -44,6 +45,10 @@ export default (
     return node.value
       ? `${preserveTrailingSpace(escape(String(node.value)))}`
       : '';
+  }
+
+  if (node.type === 'function') {
+    return `{${formatFunction(node.value, 'children', inline, lvl, options)}}`;
   }
 
   if (node.type === 'ReactElement') {
