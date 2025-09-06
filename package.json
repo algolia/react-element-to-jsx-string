@@ -38,7 +38,7 @@
   "repository": "algolia/react-element-to-jsx-string",
   "devDependencies": {
     "@babel/cli": "7.28.3",
-    "@babel/core": "7.28.3",
+    "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
     "@babel/preset-flow": "7.27.1",
     "@babel/preset-react": "7.27.1",
