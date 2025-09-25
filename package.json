@@ -25,10 +25,7 @@
     "smoke": "node tests/smoke/run"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write \"**/*.{js,json}\"",
-      "git add"
-    ]
+    "*.js": ["prettier --write \"**/*.{js,json}\"", "git add"]
   },
   "author": {
     "name": "Algolia, Inc.",
@@ -89,8 +86,6 @@
     "is-plain-object": "5.0.0"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setupTests.js"
-    ]
+    "setupFilesAfterEnv": ["<rootDir>tests/setupTests.js"]
   }
 }
