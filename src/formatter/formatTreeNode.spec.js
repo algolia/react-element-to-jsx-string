@@ -6,6 +6,10 @@ jest.mock('./formatReactElementNode', () => () =>
   '<MockedFormatReactElementNodeResult />'
 );
 
+jest.mock('./formatReactPortalNode', () => () =>
+  '<MockedFormatReactPortalNodeResult />'
+);
+
 describe('formatTreeNode', () => {
   it('should format number tree node', () => {
     expect(formatTreeNode({ type: 'number', value: 42 }, true, 0, {})).toBe(
@@ -17,6 +21,20 @@ describe('formatTreeNode', () => {
     expect(formatTreeNode({ type: 'string', value: 'foo' }, true, 0, {})).toBe(
       'foo'
     );
+  });
+
+  it('should format react portal tree node', () => {
+    expect(
+      formatTreeNode(
+        {
+          type: 'ReactPortal',
+          childrens: ['abc'],
+        },
+        true,
+        0,
+        {}
+      )
+    ).toBe('<MockedFormatReactPortalNodeResult />');
   });
 
   it('should format react element tree node', () => {
