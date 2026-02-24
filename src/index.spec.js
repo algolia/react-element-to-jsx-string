@@ -866,6 +866,29 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual(`<div fn={function fn() {return 'value';}} />`);
   });
 
+  it('should ident deeply nested multi-line functions correctly', () => {
+    /* eslint-disable arrow-body-style */
+    const fn = () => {
+      return 'value';
+    };
+
+    expect(
+      reactElementToJSXString(
+        <div fn={fn}>
+          <div fn={fn}>
+            <div fn={fn} />
+          </div>
+        </div>,
+        {
+          showFunctions: true,
+          functionValue: preserveFunctionLineBreak,
+        }
+      )
+    ).toEqual(
+      "<div\n  fn={function fn() {\n      return 'value';\n    }}\n>\n  <div\n    fn={function fn() {\n        return 'value';\n      }}\n  >\n    <div\n      fn={function fn() {\n          return 'value';\n        }}\n     />\n  </div>\n</div>"
+    );
+  });
+
   it('should expose the multiline "functionValue" formatter', () => {
     /* eslint-disable arrow-body-style */
     const fn = () => {
@@ -1074,6 +1097,17 @@ describe('reactElementToJSXString(ReactElement)', () => {
         />
       )
     ).toEqual(`<div render={<><div /><div /></>} />`);
+  });
+
+  it('reactElementToJSXString(<div>{() => <div />}</div>)', () => {
+    const renderJSX = jsx =>
+      reactElementToJSXString(jsx, {
+        showFunctions: (_, prop) => prop === 'children',
+        functionValue: fn => `() => ${renderJSX(fn())}`,
+      });
+    expect(renderJSX(<div>{() => <div />}</div>)).toEqual(
+      `<div>\n  {() => <div />}\n</div>`
+    );
   });
 
   it('should not cause recursive loop when prop object contains an element', () => {
