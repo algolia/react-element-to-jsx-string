@@ -9,6 +9,19 @@ import formatFunction from './formatFunction';
 import spacer from './spacer';
 import type { Options } from './../options';
 
+const escapeStringForSingleQuotedLiteral = (s: string): string =>
+  // Avoid regex literals with control characters to keep ESLint happy.
+  s
+    .replace(/\\/g, '\\\\') // Keep backslashes literal (avoid \1-style escapes)
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n')
+    .replace(/\t/g, '\\t')
+    .split(String.fromCharCode(8))
+    .join('\\b')
+    .split(String.fromCharCode(12))
+    .join('\\f');
+
 export default (
   value: Object | Array<any>,
   inline: boolean,
@@ -28,6 +41,13 @@ export default (
           lvl,
           options
         );
+      }
+
+      if (typeof currentValue === 'string') {
+        // pretty-print-object can output strings without escaping backslashes
+        // enough for JS string literal correctness, e.g. "\1" vs "\\1".
+        // We always output a valid single-quoted JS literal here.
+        return `'${escapeStringForSingleQuotedLiteral(currentValue)}'`;
       }
 
       if (typeof currentValue === 'function') {

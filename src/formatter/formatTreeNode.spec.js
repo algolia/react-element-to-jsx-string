@@ -68,4 +68,16 @@ bar`);
   "foo": "bar"
 }\`}`);
   });
+
+  it('should escape newlines when preserving leading/trailing spaces', () => {
+    expect(
+      formatTreeNode({ type: 'string', value: '   \n  ' }, true, 0, {})
+    ).toBe(`{'   \\n  '}`);
+  });
+
+  it('should escape template string interpolation marker', () => {
+    expect(formatTreeNode({ type: 'string', value: '${' }, true, 0, {})).toBe(
+      '{`\\${`}'
+    );
+  });
 });
