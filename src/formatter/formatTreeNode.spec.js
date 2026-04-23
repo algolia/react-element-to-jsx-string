@@ -77,7 +77,7 @@ bar`);
 
   it('should escape template string interpolation marker', () => {
     expect(formatTreeNode({ type: 'string', value: '${' }, true, 0, {})).toBe(
-      '{`\\${`}'
+      ['{`\\', '{`}'].join('$')
     );
   });
 });
