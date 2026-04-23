@@ -162,6 +162,18 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it("reactElementToJSXString(<div {...{'foo.bar': 'value'}} />)", () => {
+    expect(
+      reactElementToJSXString(<div {...{ 'foo.bar': 'value' }} />)
+    ).toEqual(`<div {...{'foo.bar': 'value'}} />`);
+  });
+
+  it("reactElementToJSXString(<div {...{'@name': 'value'}} />)", () => {
+    expect(reactElementToJSXString(<div {...{ '@name': 'value' }} />)).toEqual(
+      `<div {...{'@name': 'value'}} />`
+    );
+  });
+
   it('reactElementToJSXString(<div re={/^Hello world$/} />)', () => {
     expect(reactElementToJSXString(<div re={/^Hello world$/} />)).toEqual(
       '<div re={/^Hello world$/} />'
@@ -1359,5 +1371,13 @@ describe('reactElementToJSXString(ReactElement)', () => {
     }
   }}
  />`);
+  });
+
+  it('should escape ${ for string interpolation', () => {
+    expect(reactElementToJSXString(<div>${'{'}</div>)).toEqual(
+      `<div>
+  {\`\\\${\`}
+</div>`
+    );
   });
 });

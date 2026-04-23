@@ -2,8 +2,10 @@
 
 import formatProp from './formatProp';
 import formatPropValue from './formatPropValue';
+import formatComplexDataStructure from './formatComplexDataStructure';
 
 jest.mock('./formatPropValue');
+jest.mock('./formatComplexDataStructure');
 
 const defaultOptions = {
   useBooleanShorthandSyntax: true,
@@ -218,5 +220,49 @@ describe('formatProp', () => {
     });
 
     expect(formatPropValue).toHaveBeenCalledWith('bar', true, 4, options);
+  });
+
+  it('should format non-jsx prop names with object spread syntax', () => {
+    formatComplexDataStructure.mockReturnValue(
+      `{'foo.bar': "MockedPropValue"}`
+    );
+
+    expect(
+      formatProp('foo.bar', true, 'bar', false, null, true, 0, defaultOptions)
+    ).toEqual({
+      attributeFormattedInline: ` {...{'foo.bar': "MockedPropValue"}}`,
+      attributeFormattedMultiline: `
+  {...{'foo.bar': "MockedPropValue"}}`,
+      isMultilineAttribute: false,
+    });
+
+    expect(formatComplexDataStructure).toHaveBeenCalledWith(
+      { 'foo.bar': 'bar' },
+      true,
+      0,
+      defaultOptions
+    );
+    expect(formatPropValue).not.toHaveBeenCalled();
+  });
+
+  it('should format non-jsx boolean prop names with object spread syntax', () => {
+    formatComplexDataStructure.mockReturnValue(`{'@flag': true}`);
+
+    expect(
+      formatProp('@flag', true, true, false, null, true, 0, defaultOptions)
+    ).toEqual({
+      attributeFormattedInline: ` {...{'@flag': true}}`,
+      attributeFormattedMultiline: `
+  {...{'@flag': true}}`,
+      isMultilineAttribute: false,
+    });
+
+    expect(formatComplexDataStructure).toHaveBeenCalledWith(
+      { '@flag': true },
+      true,
+      0,
+      defaultOptions
+    );
+    expect(formatPropValue).not.toHaveBeenCalled();
   });
 });
