@@ -28,7 +28,13 @@ export default (
 
   const { useBooleanShorthandSyntax, tabStop } = options;
 
-  const formattedPropValue = formatPropValue(usedValue, inline, lvl, options);
+  const formattedPropValue = formatPropValue(
+    usedValue,
+    name,
+    inline,
+    lvl,
+    options
+  );
 
   let attributeFormattedInline = ' ';
   let attributeFormattedMultiline = `\n${spacer(lvl + 1, tabStop)}`;
