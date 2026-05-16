@@ -32,6 +32,8 @@ class DisplayNamePrecedence extends React.Component {}
 
 DisplayNamePrecedence.displayName = 'This should take precedence';
 
+const MemoizedNamedStatelessComponent = React.memo(NamedStatelessComponent);
+
 describe('reactElementToJSXString(ReactElement)', () => {
   it('reactElementToJSXString(<TestComponent/>)', () => {
     expect(reactElementToJSXString(<TestComponent />)).toEqual(
@@ -45,9 +47,15 @@ describe('reactElementToJSXString(ReactElement)', () => {
     );
   });
 
+  it('reactElementToJSXString(<MemoizedNamedStatelessComponent/>)', () => {
+    expect(
+      reactElementToJSXString(<MemoizedNamedStatelessComponent />)
+    ).toEqual('<NamedStatelessComponent />');
+  });
+
   it('reactElementToJSXString(<AnonymousStatelessComponent/>)', () => {
     expect(reactElementToJSXString(<AnonymousStatelessComponent />)).toEqual(
-      '<No Display Name />'
+      '<Component />'
     );
   });
 

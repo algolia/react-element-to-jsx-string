@@ -2,11 +2,12 @@
 
 import { isPlainObject } from 'is-plain-object';
 import { isValidElement } from 'react';
+import type { Options } from './../options';
+import parseReactElement from './../parser/parseReactElement';
 import formatComplexDataStructure from './formatComplexDataStructure';
 import formatFunction from './formatFunction';
 import formatTreeNode from './formatTreeNode';
-import type { Options } from './../options';
-import parseReactElement from './../parser/parseReactElement';
+import getWrappedComponentDisplayName from './getWrappedComponentDisplayName';
 
 const escape = (s: string): string => s.replace(/"/g, '&quot;');
 
@@ -51,6 +52,11 @@ const formatPropValue = (
       lvl,
       options
     )}}`;
+  }
+
+  // handle memo & forwardRef
+  if (isPlainObject(propValue) && propValue.$$typeof) {
+    return `{${getWrappedComponentDisplayName(propValue)}}`;
   }
 
   if (propValue instanceof Date) {
