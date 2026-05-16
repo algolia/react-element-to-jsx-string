@@ -14,17 +14,30 @@ const escape = (s: string) => {
     return s;
   }
 
-  return `{\`${s}\`}`;
+  const escapedString = s.replace('${', '\\${').replace('`', '\\`');
+
+  return `{\`${escapedString}\`}`;
 };
 
 const preserveTrailingSpace = (s: string) => {
+  const escapeNewlinesInSingleQuotedString = (str: string) =>
+    // When we wrap whitespace into a JSX expression like `{'...'}`
+    // the content must be valid JS inside single quotes.
+    str.replace(/\r/g, '\\r').replace(/\n/g, '\\n');
+
   let result = s;
   if (result.endsWith(' ')) {
-    result = result.replace(/^(.*?)(\s+)$/, "$1{'$2'}");
+    result = result.replace(/^(.*?)(\s+)$/, (m, p1, p2) => {
+      const escapedP2 = escapeNewlinesInSingleQuotedString(p2);
+      return `${p1}{'${escapedP2}'}`;
+    });
   }
 
   if (result.startsWith(' ')) {
-    result = result.replace(/^(\s+)(.*)$/, "{'$1'}$2");
+    result = result.replace(/^(\s+)(.*)$/, (m, p1, p2) => {
+      const escapedP1 = escapeNewlinesInSingleQuotedString(p1);
+      return `{'${escapedP1}'}${p2}`;
+    });
   }
 
   return result;
