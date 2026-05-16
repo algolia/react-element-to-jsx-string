@@ -7,11 +7,23 @@
   "module": "dist/esm/index.js",
   "browser": "dist/cjs/index.js",
   "types": "index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/esm/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "require": {
+      "types": "./index.d.ts",
+      "default": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
     "build": "rollup -c",
     "build:flow": "flow-copy-source -v --ignore=*.spec.js src/ dist/cjs",
     "prebuild": "rm -rf dist/",
     "postbuild": "npm run build:flow",
+    "postbuild:flow": "npm run build:esm",
+    "build:esm": "./esm-dist.sh",
     "prepare": "npm run build",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
