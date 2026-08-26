@@ -114,9 +114,20 @@ const parseReactElement = (
   const props = filterProps(element.props, noChildren);
 
   const key = element.key;
-  if (typeof key === 'string' && key.search(/^\./)) {
-    // React automatically add key=".X" when there are some children
-    props.key = key;
+  if (typeof key === 'string') {
+    let originalKey = key;
+    // React automatically adds ".$" to the original key when the element is a child which has a key prop
+    if (key.indexOf('.$') === 0) {
+      originalKey = key.slice('.$'.length);
+    }
+    // React automatically adds key=".X" when there are some children
+    else if (key.indexOf('.') === 0) {
+      originalKey = null;
+    }
+
+    if (originalKey) {
+      props.key = originalKey;
+    }
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
