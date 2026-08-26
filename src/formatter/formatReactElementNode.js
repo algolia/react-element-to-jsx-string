@@ -119,7 +119,7 @@ export default (
     tabStop,
   } = options;
 
-  let out = `<${displayName}`;
+  let out = `<${String(displayName)}`;
 
   let outInlineAttr = out;
   let outMultilineAttr = out;
@@ -203,7 +203,7 @@ export default (
       out += '\n';
       out += spacer(newLvl - 1, tabStop);
     }
-    out += `</${displayName}>`;
+    out += `</${String(displayName)}>`;
   } else {
     if (
       !isInlineAttributeTooLong(
