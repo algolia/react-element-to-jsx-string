@@ -57,10 +57,10 @@ describe('formatReactElementNode', () => {
       type: 'ReactElement',
       displayName: 'div',
       defaultProps: {
-        a: { aa: '1', bb: { cc: '3' } },
+        a: { aa: '\\1', bb: { cc: '3' } },
       },
       props: {
-        a: { aa: '1', bb: { cc: '3' } },
+        a: { aa: '\\1', bb: { cc: '3' } },
       },
       childrens: [],
     };
@@ -68,7 +68,7 @@ describe('formatReactElementNode', () => {
     expect(formatReactElementNode(tree, false, 0, defaultOptions)).toEqual(
       `<div
   a={{
-    aa: '1',
+    aa: '\\\\1',
     bb: {
       cc: '3'
     }
