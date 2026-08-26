@@ -84,18 +84,24 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, default props are omitted unless they differ from from the default value.
 
-**options.showFunctions: boolean, default false**
+**options.showFunctions: boolean | (fn: Function, prop: string) => boolean, default false**
 
   If true, functions bodies are shown.
 
   If false, functions bodies are replaced with `function noRefCheck() {}`.
 
-**options.functionValue: function, default `(fn) => fn`**
+  If a function is passed, it will be called for each function prop with its value and key, and will not print bodies of functions that return false.
+
+**options.functionValue: (fn: Function, prop: string) => Function | string, default undefined**
 
   Allows you to override the default formatting of function values.
 
   `functionValue` receives the original function reference as input
-  and should send any value as output.
+  and should return a new function or formatted string.
+
+  Pre-defined inline and multi-line formatters are exported as `inlineFunction` and `preserveFunctionLineBreak` respectively.
+
+  The default formatting depends on context: multi-line for function children and inline for props.
 
 **options.tabStop: number, default 2**
 

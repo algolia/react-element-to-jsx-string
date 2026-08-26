@@ -182,4 +182,25 @@ describe('parseReactElement', () => {
       ],
     });
   });
+
+  it('should parse children function', () => {
+    const RenderProp = ({ children }) => children({});
+    const fun = () => <div />;
+    expect(
+      parseReactElement(<RenderProp key="foo">{fun}</RenderProp>, options)
+    ).toEqual({
+      type: 'ReactElement',
+      displayName: 'RenderProp',
+      defaultProps: {},
+      props: {
+        key: 'foo',
+      },
+      childrens: [
+        {
+          type: 'function',
+          value: fun,
+        },
+      ],
+    });
+  });
 });

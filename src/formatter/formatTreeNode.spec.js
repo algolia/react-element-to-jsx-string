@@ -19,6 +19,25 @@ describe('formatTreeNode', () => {
     );
   });
 
+  it('should format function tree node', () => {
+    function fun(a) {
+      return a + 1;
+    }
+    expect(
+      formatTreeNode(
+        {
+          type: 'function',
+          value: fun,
+        },
+        true,
+        0,
+        {
+          showFunctions: true,
+        }
+      )
+    ).toBe('{function fun(a) {return a + 1;}}');
+  });
+
   it('should format react element tree node', () => {
     expect(
       formatTreeNode(
