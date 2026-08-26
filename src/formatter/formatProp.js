@@ -34,15 +34,7 @@ export default (
   let attributeFormattedMultiline = `\n${spacer(lvl + 1, tabStop)}`;
   const isMultilineAttribute = formattedPropValue.includes('\n');
 
-  if (
-    useBooleanShorthandSyntax &&
-    formattedPropValue === '{false}' &&
-    !hasDefaultValue
-  ) {
-    // If a boolean is false and not different from it's default, we do not render the attribute
-    attributeFormattedInline = '';
-    attributeFormattedMultiline = '';
-  } else if (useBooleanShorthandSyntax && formattedPropValue === '{true}') {
+  if (useBooleanShorthandSyntax && formattedPropValue === '{true}') {
     attributeFormattedInline += `${name}`;
     attributeFormattedMultiline += `${name}`;
   } else {
