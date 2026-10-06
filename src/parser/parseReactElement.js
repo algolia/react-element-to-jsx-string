@@ -2,47 +2,29 @@
 
 import React, { type Element as ReactElement, Fragment } from 'react';
 import {
-  ForwardRef,
   isContextConsumer,
   isContextProvider,
   isForwardRef,
   isLazy,
   isMemo,
+  isPortal,
   isProfiler,
   isStrictMode,
   isSuspense,
-  Memo,
 } from 'react-is';
+import getFunctionTypeName from '../formatter/getFunctionTypeName';
+import getWrappedComponentDisplayName from '../formatter/getWrappedComponentDisplayName';
 import type { Options } from './../options';
+import type { TreeNode } from './../tree';
 import {
-  createStringTreeNode,
   createNumberTreeNode,
   createReactElementTreeNode,
   createReactFragmentTreeNode,
+  createReactPortalTreeNode,
+  createStringTreeNode,
 } from './../tree';
-import type { TreeNode } from './../tree';
 
 const supportFragment = Boolean(Fragment);
-
-const getFunctionTypeName = (functionType): string => {
-  if (!functionType.name || functionType.name === '_default') {
-    return 'No Display Name';
-  }
-  return functionType.name;
-};
-
-const getWrappedComponentDisplayName = (Component: *): string => {
-  switch (true) {
-    case Boolean(Component.displayName):
-      return Component.displayName;
-    case Component.$$typeof === Memo:
-      return getWrappedComponentDisplayName(Component.type);
-    case Component.$$typeof === ForwardRef:
-      return getWrappedComponentDisplayName(Component.render);
-    default:
-      return getFunctionTypeName(Component);
-  }
-};
 
 // heavily inspired by:
 // https://github.com/facebook/react/blob/3746eaf985dd92f8aa5f5658941d07b6b855e9d9/packages/react-devtools-shared/src/backend/renderer.js#L399-L496
@@ -93,16 +75,40 @@ const filterProps = (originalProps: {}, cb: (any, string) => boolean) => {
   return filteredProps;
 };
 
+const constructSelector = element => {
+  let selector = element.nodeName.toLowerCase();
+
+  if (element.id) {
+    selector = `#${element.id}`;
+  } else if (element.classList.length) {
+    selector += `.${Array.from(element.classList).join('.')}`;
+  }
+
+  return selector;
+};
+
 const parseReactElement = (
   element: ReactElement<*> | string | number,
   options: Options
 ): TreeNode => {
   const { displayName: displayNameFn = getReactElementDisplayName } = options;
 
+  const processChildren = children =>
+    React.Children.toArray(children)
+      .filter(onlyMeaningfulChildren)
+      .map(child => parseReactElement(child, options));
+
   if (typeof element === 'string') {
     return createStringTreeNode(element);
   } else if (typeof element === 'number') {
     return createNumberTreeNode(element);
+  } else if (isPortal(element)) {
+    return createReactPortalTreeNode(
+      // $FlowFixMe need react-dom flowtypes
+      constructSelector(element.containerInfo),
+      // $FlowFixMe need react-dom flowtypes
+      processChildren(element.children)
+    );
   } else if (!React.isValidElement(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``
@@ -120,9 +126,7 @@ const parseReactElement = (
   }
 
   const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  const childrens = React.Children.toArray(element.props.children)
-    .filter(onlyMeaningfulChildren)
-    .map(child => parseReactElement(child, options));
+  const childrens = processChildren(element.props.children);
 
   if (supportFragment && element.type === Fragment) {
     return createReactFragmentTreeNode(key, childrens);
