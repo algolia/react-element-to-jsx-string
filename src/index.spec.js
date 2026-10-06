@@ -853,10 +853,10 @@ describe('reactElementToJSXString(ReactElement)', () => {
     ).toEqual('<div primary />');
   });
 
-  it('should omit attributes with false as value', () => {
+  it('should render attributes with false as value', () => {
     expect(
       reactElementToJSXString(<div primary={false} />) // eslint-disable-line react/jsx-boolean-value
-    ).toEqual('<div />');
+    ).toEqual('<div primary={false} />');
   });
 
   it('should return the actual functions when "showFunctions" is true', () => {
