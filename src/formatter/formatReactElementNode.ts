@@ -1,5 +1,5 @@
 import { type Options, defaultOptions } from "../options";
-import type { ReactElementTreeNode } from "../tree";
+import type { ReactElementTreeNode, TreeNode } from "../tree";
 import createPropFilter from "./createPropFilter";
 import formatProp from "./formatProp";
 import formatTreeNode from "./formatTreeNode";
@@ -8,7 +8,7 @@ import sortPropsByNames from "./sortPropsByNames";
 import spacer from "./spacer";
 
 const compensateMultilineStringElementIndentation = (
-  element: any,
+  element: TreeNode,
   formattedElement: string,
   inline: boolean,
   lvl: number,
@@ -33,7 +33,7 @@ const compensateMultilineStringElementIndentation = (
 };
 
 const formatOneChildren =
-  (inline: boolean, lvl: number, options: Options) => (element: any) =>
+  (inline: boolean, lvl: number, options: Options) => (element: TreeNode) =>
     compensateMultilineStringElementIndentation(
       element,
       formatTreeNode(element, inline, lvl, options),
@@ -43,7 +43,7 @@ const formatOneChildren =
     );
 
 const onlyPropsWithOriginalValue =
-  (defaultProps: Record<string, any>, props: Record<string, any>) =>
+  (defaultProps: Record<string, unknown>, props: Record<string, unknown>) =>
   (propName: string) => {
     const haveDefaultValue = Object.keys(defaultProps).includes(propName);
     return (

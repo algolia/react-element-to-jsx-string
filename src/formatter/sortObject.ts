@@ -1,6 +1,9 @@
 import * as React from "react";
 
-function safeSortObject(value: any, seen: WeakSet<object>): any {
+const isSeen = (value: unknown, seen: WeakSet<object>): boolean =>
+  typeof value === "object" && value !== null && seen.has(value);
+
+function safeSortObject(value: unknown, seen: WeakSet<object>): unknown {
   // return non-object value as is
   if (value === null || typeof value !== "object") {
     return value;
@@ -25,23 +28,23 @@ function safeSortObject(value: any, seen: WeakSet<object>): any {
   }
 
   // make a copy of object with key sorted
-  return Object.keys(value)
+  const record = value as Record<string, unknown>;
+
+  return Object.keys(record)
     .sort()
-    .reduce((result, key) => {
-      if (key === "current" || seen.has(value[key])) {
-        // eslint-disable-next-line no-param-reassign
-        // @ts-expect-error: flow to TS
+    .reduce<Record<string, unknown>>((result, key) => {
+      const keyValue = record[key];
+
+      if (key === "current" || isSeen(keyValue, seen)) {
         result[key] = "[Circular]";
       } else {
-        // eslint-disable-next-line no-param-reassign
-        // @ts-expect-error: flow to TS
-        result[key] = safeSortObject(value[key], seen);
+        result[key] = safeSortObject(keyValue, seen);
       }
 
       return result;
     }, {});
 }
 
-export default function sortObject(value: any): any {
+export default function sortObject(value: unknown): unknown {
   return safeSortObject(value, new WeakSet());
 }

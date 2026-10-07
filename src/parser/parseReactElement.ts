@@ -29,9 +29,24 @@ import type { TreeNode } from "../tree";
 
 const supportFragment = Boolean(Fragment);
 
-const getFunctionTypeName = (
-  functionType: (...args: Array<any>) => any,
-): string => {
+type ElementProps = Record<string, unknown> & { children?: ReactNode };
+
+// What `element.type` can be at runtime: a function or class component, or a
+// memo, forwardRef or context object wrapping one.
+type ComponentLike = {
+  name?: string;
+  displayName?: string;
+  defaultProps?: Record<string, unknown>;
+  $$typeof?: symbol;
+  type?: ComponentLike; // memo
+  render?: ComponentLike; // forwardRef
+  _context?: ComponentLike; // context consumer
+};
+
+const getComponent = (element: ReactElement): ComponentLike =>
+  typeof element.type === "string" ? {} : (element.type as ComponentLike);
+
+const getFunctionTypeName = (functionType: ComponentLike): string => {
   if (!functionType.name || functionType.name === "_default") {
     return "No Display Name";
   }
@@ -39,15 +54,16 @@ const getFunctionTypeName = (
   return functionType.name;
 };
 
-const getWrappedComponentDisplayName = (Component: any): string => {
-  switch (true) {
-    case Boolean(Component.displayName):
-      return Component.displayName;
+const getWrappedComponentDisplayName = (Component: ComponentLike): string => {
+  if (Component.displayName) {
+    return Component.displayName;
+  }
 
-    case Component.$$typeof === Memo:
+  switch (true) {
+    case Component.$$typeof === Memo && Component.type !== undefined:
       return getWrappedComponentDisplayName(Component.type);
 
-    case Component.$$typeof === ForwardRef:
+    case Component.$$typeof === ForwardRef && Component.render !== undefined:
       return getWrappedComponentDisplayName(Component.render);
 
     default:
@@ -63,26 +79,20 @@ const getReactElementDisplayName = (element: ReactElement): string => {
       return element.type;
 
     case typeof element.type === "function":
-      // @ts-expect-error: flow to TS
-      if (element.type.displayName) {
-        // @ts-expect-error: flow to TS
-        return element.type.displayName;
-      }
-
-      // @ts-expect-error: flow to TS
-      return getFunctionTypeName(element.type);
+      return (
+        getComponent(element).displayName ||
+        getFunctionTypeName(getComponent(element))
+      );
 
     case isForwardRef(element):
     case isMemo(element):
-      return getWrappedComponentDisplayName(element.type);
+      return getWrappedComponentDisplayName(getComponent(element));
 
     case isContextConsumer(element):
-      // @ts-expect-error: flow to TS
-      return `${element.type._context.displayName || "Context"}.Consumer`;
+      return `${getComponent(element)._context?.displayName || "Context"}.Consumer`;
 
     case isContextProvider(element):
-      // @ts-expect-error: flow to TS
-      return `${element.type.displayName || "Context"}.Provider`;
+      return `${getComponent(element).displayName || "Context"}.Provider`;
     case isLazy(element):
       return "Lazy";
 
@@ -111,9 +121,9 @@ const onlyMeaningfulChildren = (children: ReactNode): boolean =>
 
 const filterProps = (
   originalProps: Record<string, unknown>,
-  cb: (propsValue: any, propsName: string) => boolean,
-): Record<string, any> => {
-  const filteredProps: Record<string, any> = {};
+  cb: (propsValue: unknown, propsName: string) => boolean,
+): Record<string, unknown> => {
+  const filteredProps: Record<string, unknown> = {};
   Object.keys(originalProps)
     .filter((key) => cb(originalProps[key], key))
     .forEach((key) => {
@@ -133,14 +143,13 @@ const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
     return createNumberTreeNode(element);
   }
 
-  if (!isValidElement(element)) {
+  if (!isValidElement<ElementProps>(element)) {
     throw new Error(
       `react-element-to-jsx-string: Expected a React.Element, got \`${typeof element}\``,
     );
   }
 
   const displayName = displayNameFn(element);
-  // @ts-expect-error: flow to TS
   const props = filterProps(element.props, noChildren);
 
   const key = element.key;
@@ -150,9 +159,10 @@ const parseReactElement = (element: ReactNode, options: Options): TreeNode => {
     props.key = key;
   }
 
-  // @ts-expect-error: flow to TS
-  const defaultProps = filterProps(element.type.defaultProps || {}, noChildren);
-  // @ts-expect-error: flow to TS
+  const defaultProps = filterProps(
+    getComponent(element).defaultProps || {},
+    noChildren,
+  );
   const children = Children.toArray(element.props.children)
     .filter(onlyMeaningfulChildren)
     .map((oneChild) => parseReactElement(oneChild, options));
