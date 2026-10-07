@@ -81,6 +81,7 @@ jobs:
   publish:
     needs: pack
     runs-on: ubuntu-latest
+    environment: npm # requires a maintainer's approval before publishing
     permissions:
       contents: write # create the git tag and the GitHub release
       id-token: write # npm trusted publishing
