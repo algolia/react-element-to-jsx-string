@@ -56,7 +56,6 @@
     "@types/react-is": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "conventional-changelog-cli": "2.1.1",
-    "doctoc": "1.4.0",
     "esm": "3.2.25",
     "happy-dom": "^17.1.0",
     "mversion": "2.0.1",

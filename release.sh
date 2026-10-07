@@ -15,7 +15,6 @@ fi
 
 yarn run mversion $1
 yarn run conventional-changelog --infile CHANGELOG.md --same-file --preset angular
-yarn run doctoc README.md
 git commit -am "$(json -f package.json version)"
 git tag v`json -f package.json version`
 git push origin master
