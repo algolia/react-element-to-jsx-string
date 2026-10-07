@@ -52,6 +52,9 @@ export default (
     return formatReactFragmentNode(node, inline, lvl, options);
   }
 
-  // @ts-expect-error: So should never be executed
-  throw new TypeError(`Unknown format type "${node.type}"`);
+  // Fails to compile if a node type is not handled above
+  const unhandledNode: never = node;
+  throw new TypeError(
+    `Unknown format type "${(unhandledNode as { type: unknown }).type}"`,
+  );
 };

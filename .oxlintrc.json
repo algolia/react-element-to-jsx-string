@@ -9,5 +9,13 @@
     "typescript/no-explicit-any": "error",
     "typescript/no-unsafe-function-type": "warn"
   },
-  "ignorePatterns": ["tests/smoke/**"]
+  "ignorePatterns": ["tests/smoke/**"],
+  "overrides": [
+    {
+      "files": ["**/*.spec.tsx"],
+      "rules": {
+        "react/no-string-refs": "off"
+      }
+    }
+  ]
 }

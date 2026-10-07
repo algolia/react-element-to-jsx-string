@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-curly-brace-presence */
-
-import { Fragment } from "react";
+import { Fragment, createElement } from "react";
 import { describe, expect, it } from "vitest";
 
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
@@ -56,8 +54,10 @@ describe("parseReactElement", () => {
   });
 
   it("should parse a single depth react element", () => {
-    // @ts-expect-error `aaa` is not a valid dom element
-    expect(parseReactElement(<aaa foo="41" />, options)).toEqual({
+    // `aaa` is not a known DOM element, so it can't be written in JSX
+    expect(
+      parseReactElement(createElement("aaa", { foo: "41" }), options),
+    ).toEqual({
       type: "ReactElement",
       displayName: "aaa",
       props: {
@@ -188,7 +188,6 @@ describe("parseReactElement", () => {
     });
 
     // @ts-expect-error Illegal ref type
-    // eslint-disable-next-line react/no-string-refs
     expect(parseReactElement(<div ref="foo" />, options)).toEqual({
       type: "ReactElement",
       displayName: "div",

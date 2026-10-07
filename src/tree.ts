@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 import type { Key } from "react";
 
 type PropsType = Record<string, unknown>;

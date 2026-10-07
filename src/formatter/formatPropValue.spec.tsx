@@ -38,7 +38,6 @@ describe("formatPropValue", () => {
     expect(
       formatPropValue(Symbol("Foo"), false, 0, generateOptionsFixture({})),
     ).toBe("{Symbol('Foo')}");
-    // eslint-disable-next-line symbol-description
     expect(
       formatPropValue(Symbol(), false, 0, generateOptionsFixture({})),
     ).toBe("{Symbol()}");

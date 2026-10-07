@@ -1,14 +1,6 @@
 /**
- * @jest-environment happy-dom
+ * @vitest-environment happy-dom
  */
-
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable react/no-string-refs */
-/* eslint-disable react/prop-types */
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable react/destructuring-assignment */
 
 import { render, screen } from "@testing-library/react";
 import {
@@ -185,8 +177,6 @@ test("reactElementToJSXString(<custom fn={() => {}}/>)", () => {
 });
 
 test("reactElementToJSXString(<custom fn={function hello(){}}/>)", () => {
-  // eslint-disable-next-line react/jsx-no-bind
-
   expect(reactElementToJSXString(<custom fn={function hello() {}} />)).toEqual(
     "<custom fn={function noRefCheck() {}} />",
   );
@@ -312,8 +302,6 @@ test("reactElementToJSXString(<div></div>)", () => {
 });
 
 test('reactElementToJSXString(<div z="3" a="1" b="2"/>)', () => {
-  /* eslint react/jsx-sort-props: 0 */
-
   expect(reactElementToJSXString(<custom z="3" a="1" b="2" />)).toEqual(`<custom
   a="1"
   b="2"
@@ -322,7 +310,6 @@ test('reactElementToJSXString(<div z="3" a="1" b="2"/>)', () => {
 });
 
 test('reactElementToJSXString(<custom z="3" a="1" b="2"/>, {sortProps: false})', () => {
-  /* eslint react/jsx-sort-props: 0 */
   expect(
     reactElementToJSXString(<custom z="3" a="1" b="2" />, {
       sortProps: false,
@@ -851,13 +838,9 @@ test("reactElementToJSXString(<TestComponent />, { filterProps: () => !key.start
 
 test("reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: false })", () => {
   expect(
-    reactElementToJSXString(
-      // eslint-disable-next-line react/jsx-boolean-value
-      <custom testTrue={true} testFalse={false} />,
-      {
-        useBooleanShorthandSyntax: false,
-      },
-    ),
+    reactElementToJSXString(<custom testTrue={true} testFalse={false} />, {
+      useBooleanShorthandSyntax: false,
+    }),
   ).toEqual(`<custom
   testFalse={false}
   testTrue={true}
@@ -944,15 +927,15 @@ test('reactElementToJSXString(<div co={{a: <div a="1" />}} />, { displayName: to
 });
 
 test("should omit true as value", () => {
-  expect(
-    reactElementToJSXString(<custom primary={true} />), // eslint-disable-line react/jsx-boolean-value
-  ).toEqual("<custom primary />");
+  expect(reactElementToJSXString(<custom primary={true} />)).toEqual(
+    "<custom primary />",
+  );
 });
 
 test("should render attributes with false as value", () => {
-  expect(
-    reactElementToJSXString(<custom primary={false} />), // eslint-disable-line react/jsx-boolean-value
-  ).toEqual("<custom primary={false} />");
+  expect(reactElementToJSXString(<custom primary={false} />)).toEqual(
+    "<custom primary={false} />",
+  );
 });
 
 test('should return the actual functions when "showFunctions" is true', () => {
@@ -1460,8 +1443,7 @@ test("should stringify `forwardRef` element with a circular property", () => {
   ) {
     return <span ref={ref}>{text}</span>;
   });
-  //@ts-expect-error Setting a property on a function is not allowed in TS
-  Tag.emotionReal = Tag;
+  Object.assign(Tag, { emotionReal: Tag });
 
   expect(
     reactElementToJSXString(
