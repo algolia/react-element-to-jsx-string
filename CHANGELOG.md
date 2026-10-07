@@ -1,3 +1,5 @@
+# react-element-to-jsx-string
+
 # [18.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v17.0.1...v18.0.0) (2026-10-07)
 
 
