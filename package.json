@@ -48,16 +48,16 @@
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-angular": "^19.7.0",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@types/react-is": "^19.0.0",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/react-is": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
     "conventional-changelog-cli": "2.1.1",
     "esm": "3.2.25",
-    "happy-dom": "^17.1.0",
+    "happy-dom": "^20.14.5",
     "mversion": "2.0.1",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
@@ -66,6 +66,6 @@
     "react-is": "19.3.0",
     "tsdown": "^0.23.0",
     "typescript": "^5.7.3",
-    "vitest": "^3.0.5"
+    "vitest": "^5.0.3"
   }
 }

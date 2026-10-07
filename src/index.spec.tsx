@@ -960,11 +960,13 @@ test('should expose the multiline "functionValue" formatter', () => {
       showFunctions: true,
       functionValue: preserveFunctionLineBreak,
     }),
-  ).toEqual(`<custom
-  fn={function fn() {
-    return "value";
-  }}
- />`);
+  ).toMatchInlineSnapshot(`
+    "<custom
+      fn={function fn() {
+    		return "value";
+    	}}
+     />"
+  `);
 });
 
 test("reactElementToJSXString(<DisplayNamePrecedence />)", () => {
