@@ -1,0 +1,38 @@
+# Comment on each PR whether it has a changeset and what it will release
+# (non-blocking: https://changesets.dev/guide/automating#non-blocking)
+
+name: Changeset status
+
+on:
+  # pull_request_target can comment on PRs from forks. No PR code is run: the
+  # status only reads the changed files
+  pull_request_target:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+
+jobs:
+  pr-status:
+    # Skip the "Version Packages" PR (it never has changesets) and Renovate PRs
+    if: ${{ !startsWith(github.head_ref, 'changeset-release/') && github.event.pull_request.user.login != 'renovate[bot]' }}
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+    outputs:
+      comment-body: ${{ steps.pr-status.outputs.comment-body }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: pr-status
+        uses: changesets/action/pr-status@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
+
+  pr-comment:
+    needs: pr-status
+    runs-on: ubuntu-slim
+    permissions:
+      pull-requests: write # create or update the comment
+    steps:
+      - uses: changesets/action/pr-comment@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
+        with:
+          body: ${{ needs.pr-status.outputs.comment-body }}
