@@ -1421,7 +1421,7 @@ test("should stringify `Contex.Provider` with `displayName` correctly", () => {
 
 test("should stringify `Contex.Consumer` correctly", () => {
   const Ctx = createContext(null);
-  const Button = (props: { theme: unknown }) => null;
+  const Button = (_props: { theme: unknown }) => null;
 
   expect(
     reactElementToJSXString(
@@ -1434,7 +1434,7 @@ test("should stringify `Contex.Consumer` with `displayName` correctly", () => {
   const Ctx = createContext(null);
   Ctx.displayName = "MyCtx";
 
-  const Button = (props: { theme: unknown }) => null;
+  const Button = (_props: { theme: unknown }) => null;
 
   expect(
     reactElementToJSXString(
@@ -1480,7 +1480,7 @@ test("should stringify element with a prop that has circular references", () => 
   parent.child = child;
   child.parent = parent;
 
-  function Comp(props: { foo: typeof parent }) {
+  function Comp(_props: { foo: typeof parent }) {
     return null;
   }
 

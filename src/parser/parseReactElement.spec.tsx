@@ -69,7 +69,7 @@ describe("parseReactElement", () => {
   });
 
   it("should parse a react element with an object as props", () => {
-    const Foo = (props: { a: unknown }) => <></>;
+    const Foo = (_props: { a: unknown }) => <></>;
 
     expect(
       parseReactElement(
@@ -100,8 +100,8 @@ describe("parseReactElement", () => {
   });
 
   it("should parse a react element with another react element as props", () => {
-    const Foo = (props: { a: unknown }) => <></>;
-    const Bar = (props: { b: unknown }) => <></>;
+    const Foo = (_props: { a: unknown }) => <></>;
+    const Bar = (_props: { b: unknown }) => <></>;
 
     expect(parseReactElement(<Foo a={<Bar b="42" />} />, options)).toEqual({
       type: "ReactElement",
@@ -115,7 +115,7 @@ describe("parseReactElement", () => {
   });
 
   it("should parse the react element defaultProps", () => {
-    const Foo = (props: { foo?: string }) => {
+    const Foo = (_props: { foo?: string }) => {
       return <>Hello</>;
     };
     Foo.defaultProps = {

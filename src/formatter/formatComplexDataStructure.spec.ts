@@ -75,7 +75,7 @@ describe("formatComplexDataStructure", () => {
   ]`);
   });
 
-  it("should format inline an array ", () => {
+  it("should format inline an array", () => {
     const fixture = [1, "2", true, false, null];
 
     expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(

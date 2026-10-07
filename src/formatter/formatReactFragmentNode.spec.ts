@@ -115,9 +115,7 @@ describe("formatReactFragmentNode", () => {
     expect(
       formatReactFragmentNode(tree, false, 0, {
         ...defaultOptions,
-        ...{
-          useFragmentShortSyntax: false,
-        },
+        useFragmentShortSyntax: false,
       }),
     ).toEqual(`<React.Fragment>
   Hello world
