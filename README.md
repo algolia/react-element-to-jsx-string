@@ -134,10 +134,25 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
 ## Environment requirements
 
-The environment you use to use `react-element-to-jsx-string` should have [ES2015](https://babeljs.io/learn-es2015/) support.
+`react-element-to-jsx-string` is published as an ES module only, with its TypeScript types included.
 
-Use the [Babel polyfill](https://babeljs.io/docs/usage/polyfill/) or any other method that will make you
-environment behave like an ES2015 environment.
+- **React**: 19 or later (`react`, `react-dom` and `react-is` are peer dependencies).
+- **Node.js**: 24 or later.
+- **Browsers**: any browser that supports ES2020, such as Chrome and Edge 80, Firefox 74 and Safari 13.1, or later versions.
+- **Bundlers** (Vite, webpack 5, Rollup, esbuild…): any version that supports the `exports` field of `package.json`.
+- **TypeScript**: use `"moduleResolution": "bundler"`, `"node16"` or `"nodenext"`.
+
+Use `import` to load it:
+
+```js
+import reactElementToJSXString from 'react-element-to-jsx-string';
+```
+
+CommonJS code can still `require()` it. The default export is then on `.default`:
+
+```js
+const reactElementToJSXString = require('react-element-to-jsx-string').default;
+```
 
 ## Test
 
