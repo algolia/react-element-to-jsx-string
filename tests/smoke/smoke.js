@@ -1,35 +1,24 @@
-#!/usr/bin/env node
+// Run by run.js in a temporary project where the packed package is installed.
 
-/* eslint-disable no-console, import/no-extraneous-dependencies, no-global-assign */
+import assert from "node:assert/strict";
 
-require = require('esm')(module);
-
-const requireReactElementToJsxString = buildType => {
-  if (buildType === 'esm') {
-    return require(`./../../dist/esm`).default;
-  } else if (buildType === 'cjs') {
-    return require('./../../dist/cjs').default;
-  }
-
-  throw new Error(`Unknown build type: "${buildType}"`);
-};
-
-const expect = require('expect');
-const React = require('react');
-const reactElementToJsxString = requireReactElementToJsxString(process.argv[2]);
+import React from "react";
+import reactElementToJsxString from "react-element-to-jsx-string";
 
 console.log(`Tested "react" version: "${React.version}"`);
 
 const tree = React.createElement(
-  'div',
+  "div",
   { foo: 51 },
-  React.createElement('h1', {}, 'Hello world')
+  React.createElement("h1", {}, "Hello world"),
 );
 
-expect(reactElementToJsxString(tree)).toEqual(
-  `<div foo={51}>
+const expected = `<div foo={51}>
   <h1>
     Hello world
   </h1>
-</div>`
-);
+</div>`;
+
+assert.equal(reactElementToJsxString(tree), expected);
+
+console.log("Smoke test passed");

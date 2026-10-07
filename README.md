@@ -1,15 +1,15 @@
 # react-element-to-jsx-string
 
-[![Version][version-svg]][package-url] [![Build Status][travis-svg]][travis-url] [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url]
+[![Version][version-svg]][package-url] [![Build Status][ci-svg]][ci-url] [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url]
 
-[travis-svg]: https://img.shields.io/travis/algolia/react-element-to-jsx-string/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/algolia/react-element-to-jsx-string
-[license-image]: http://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[ci-svg]: https://img.shields.io/github/actions/workflow/status/algolia/react-element-to-jsx-string/continuous-integration.yaml?style=flat-square
+[ci-url]: https://github.com/algolia/react-element-to-jsx-string/actions/workflows/continuous-integration.yaml
+[license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 [license-url]: LICENSE
 [downloads-image]: https://img.shields.io/npm/dm/react-element-to-jsx-string.svg?style=flat-square
-[downloads-url]: http://npm-stat.com/charts.html?package=react-element-to-jsx-string
+[downloads-url]: https://npm-stat.com/charts.html?package=react-element-to-jsx-string
 [version-svg]: https://img.shields.io/npm/v/react-element-to-jsx-string.svg?style=flat-square
-[package-url]: https://npmjs.org/package/react-element-to-jsx-string
+[package-url]: https://www.npmjs.com/package/react-element-to-jsx-string
 
 Turn a ReactElement into the corresponding JSX string.
 
@@ -17,32 +17,16 @@ Useful for unit testing and any other need you may think of.
 
 Features:
 - supports nesting and deep nesting like `<div a={{b: {c: {d: <div />}}}} />`
-- props: supports string, number, function (inlined as `prop={function noRefCheck() {}}`), object, ReactElement (inlined), regex, booleans (with or without [shorthand syntax](https://facebook.github.io/react/docs/jsx-in-depth.html#boolean-attributes)), ...
+- props: supports string, number, function (inlined as `prop={function noRefCheck() {}}`), object, ReactElement (inlined), regex, booleans (with or without [shorthand syntax](https://react.dev/learn/passing-props-to-a-component)), ...
 - order props alphabetically
 - sort object keys in a deterministic order (`o={{a: 1, b:2}} === o={{b:2, a:1}}`)
 - handle `ref` and `key` attributes, they are always on top of props
 - React's documentation indent style for JSX
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Setup](#setup)
-- [Usage](#usage)
-- [API](#api)
-  - [reactElementToJSXString(ReactElement[, options])](#reactelementtojsxstringreactelement-options)
-- [Environment requirements](#environment-requirements)
-- [Test](#test)
-- [Build](#build)
-- [Release](#release)
-- [Thanks](#thanks)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Setup
 
 ```sh
-yarn add react-element-to-jsx-string [--dev]
+npm install react-element-to-jsx-string [--save-dev]
 ```
 
 ## Usage
@@ -70,7 +54,7 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   Just return the name you want for the provided ReactElement, as a string.
 
-**options.filterProps: string[] | (val: any, key: string) => boolean, default []**
+**options.filterProps: string[] | (value: unknown, key: string) => boolean, default []**
 
   If an array of strings is passed, filter out any prop who's name is in
   the array. For example ['key'] will suppress the key="" prop from being added.
@@ -90,12 +74,22 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, functions bodies are replaced with `function noRefCheck() {}`.
 
-**options.functionValue: function, default `(fn) => fn`**
+**options.functionValue: function, default `inlineFunction`**
 
   Allows you to override the default formatting of function values.
 
   `functionValue` receives the original function reference as input
-  and should send any value as output.
+  and should send any value as output. The value is converted to a string.
+
+  Two formatters are exported:
+  - `inlineFunction` (the default) puts the function source on one line.
+  - `preserveFunctionLineBreak` keeps the function source as written.
+
+  ```js
+  import reactElementToJSXString, { preserveFunctionLineBreak } from 'react-element-to-jsx-string';
+
+  reactElementToJSXString(element, { showFunctions: true, functionValue: preserveFunctionLineBreak });
+  ```
 
 **options.tabStop: number, default 2**
 
@@ -103,7 +97,7 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
 **options.useBooleanShorthandSyntax: boolean, default true**
 
-  If true, Boolean prop values will be omitted for [shorthand syntax](https://facebook.github.io/react/docs/jsx-in-depth.html#boolean-attributes).
+  If true, `true` prop values use the shorthand syntax: `prop` instead of `prop={true}`.
 
   If false, Boolean prop values will be explicitly output like `prop={true}` and `prop={false}`
 
@@ -126,31 +120,55 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 
   If false, fragment will always be represented with the JSX explicit syntax `<React.Fragment>...</React.Fragment>`.
 
-  According to [the specs](https://reactjs.org/docs/fragments.html):
+  According to [the specs](https://react.dev/reference/react/Fragment):
   - A keyed fragment will always use the explicit syntax: `<React.Fragment key={...}>...</React.Fragment>`
   - An empty fragment will always use the explicit syntax: `<React.Fragment />`
 
-  Note: to use fragment you must use React >= 16.2
-
 ## Environment requirements
 
-The environment you use to use `react-element-to-jsx-string` should have [ES2015](https://babeljs.io/learn-es2015/) support.
+`react-element-to-jsx-string` is published as an ES module only, with its TypeScript types included.
 
-Use the [Babel polyfill](https://babeljs.io/docs/usage/polyfill/) or any other method that will make you
-environment behave like an ES2015 environment.
+- **React**: 19 or later (`react`, `react-dom` and `react-is` are peer dependencies).
+- **Node.js**: 24 or later.
+- **Browsers**: any browser that supports ES2020, such as Chrome and Edge 80, Firefox 74 and Safari 13.1, or later versions.
+- **Bundlers** (Vite, webpack 5, Rollup, esbuild…): any version that supports the `exports` field of `package.json`.
+- **TypeScript**: use `"moduleResolution": "bundler"`, `"node16"` or `"nodenext"`.
+
+Use `import` to load it:
+
+```js
+import reactElementToJSXString from 'react-element-to-jsx-string';
+```
+
+CommonJS code can still `require()` it. The default export is then on `.default`:
+
+```js
+const reactElementToJSXString = require('react-element-to-jsx-string').default;
+```
 
 ## Test
 
+The project uses [pnpm](https://pnpm.io/) and Node.js 24 or later.
+
 ```sh
-yarn test
-yarn test:watch
+pnpm install
+pnpm test             # unit tests, in watch mode
+pnpm run typecheck
+pnpm run lint         # oxlint (pnpm run lint:fix to fix)
+pnpm run format       # oxfmt check (pnpm run format:fix to fix)
+```
+
+Smoke test: install the built package in a temporary project with a given React version, and check it works.
+
+```sh
+pnpm run build
+pnpm run smoke 19.0.0  # or latest, next…
 ```
 
 ## Build
 
 ```sh
-yarn build
-yarn build:watch
+pnpm run build
 ```
 
 ## Release

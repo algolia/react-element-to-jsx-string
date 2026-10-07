@@ -1,0 +1,232 @@
+import { Fragment, createElement } from "react";
+import { describe, expect, it } from "vitest";
+
+import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
+import parseReactElement from "./parseReactElement";
+
+const options = generateOptionsFixture({});
+
+describe("parseReactElement", () => {
+  it("should parse a react element with a string as children", () => {
+    expect(parseReactElement(<h1>Hello world</h1>, options)).toEqual({
+      type: "ReactElement",
+      displayName: "h1",
+      defaultProps: {},
+      props: {},
+      children: [
+        {
+          type: "string",
+          value: "Hello world",
+        },
+      ],
+    });
+  });
+
+  it("should filter empty children", () => {
+    expect(
+      parseReactElement(
+        <h1>
+          Hello
+          {null}
+          {true}
+          {false}
+          {""}
+          world
+        </h1>,
+        options,
+      ),
+    ).toEqual({
+      type: "ReactElement",
+      displayName: "h1",
+      defaultProps: {},
+      props: {},
+      children: [
+        {
+          type: "string",
+          value: "Hello",
+        },
+        {
+          type: "string",
+          value: "world",
+        },
+      ],
+    });
+  });
+
+  it("should parse a single depth react element", () => {
+    // `aaa` is not a known DOM element, so it can't be written in JSX
+    expect(
+      parseReactElement(createElement("aaa", { foo: "41" }), options),
+    ).toEqual({
+      type: "ReactElement",
+      displayName: "aaa",
+      props: {
+        foo: "41",
+      },
+      defaultProps: {},
+      children: [],
+    });
+  });
+
+  it("should parse a react element with an object as props", () => {
+    const Foo = (_props: { a: unknown }) => <></>;
+
+    expect(
+      parseReactElement(
+        <Foo
+          a={{
+            aa: "1",
+            bb: {
+              cc: "3",
+            },
+          }}
+        />,
+        options,
+      ),
+    ).toEqual({
+      type: "ReactElement",
+      displayName: "Foo",
+      defaultProps: {},
+      props: {
+        a: {
+          aa: "1",
+          bb: {
+            cc: "3",
+          },
+        },
+      },
+      children: [],
+    });
+  });
+
+  it("should parse a react element with another react element as props", () => {
+    const Foo = (_props: { a: unknown }) => <></>;
+    const Bar = (_props: { b: unknown }) => <></>;
+
+    expect(parseReactElement(<Foo a={<Bar b="42" />} />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "Foo",
+      defaultProps: {},
+      props: {
+        a: <Bar b="42" />,
+      },
+      children: [],
+    });
+  });
+
+  it("should parse the react element defaultProps", () => {
+    const Foo = (_props: { foo?: string }) => {
+      return <>Hello</>;
+    };
+    Foo.defaultProps = {
+      bar: "Hello Bar!",
+      baz: "Hello Baz!",
+    };
+
+    expect(
+      parseReactElement(<Foo foo="Hello Foo!" bar="Hello world!" />, options),
+    ).toEqual({
+      type: "ReactElement",
+      displayName: "Foo",
+      defaultProps: {
+        bar: "Hello Bar!",
+        baz: "Hello Baz!",
+      },
+      props: {
+        bar: "Hello world!",
+        foo: "Hello Foo!",
+      },
+      children: [],
+    });
+  });
+
+  it("should extract the component key", () => {
+    expect(parseReactElement(<div key="foo-1" />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "div",
+      defaultProps: {},
+      props: {
+        key: "foo-1",
+      },
+      children: [],
+    });
+  });
+
+  it("should extract the component ref", () => {
+    const refFn = () => {};
+
+    expect(parseReactElement(<div ref={refFn} />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "div",
+      defaultProps: {},
+      props: {
+        ref: refFn,
+      },
+      children: [],
+    });
+
+    const refObject = { current: null };
+
+    expect(parseReactElement(<div ref={refObject} />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "div",
+      defaultProps: {},
+      props: {
+        ref: refObject,
+      },
+      children: [],
+    });
+
+    expect(parseReactElement(<div ref={null} />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "div",
+      defaultProps: {},
+      props: {
+        ref: null,
+      },
+      children: [],
+    });
+
+    // @ts-expect-error Illegal ref type
+    expect(parseReactElement(<div ref="foo" />, options)).toEqual({
+      type: "ReactElement",
+      displayName: "div",
+      defaultProps: {},
+      props: {
+        ref: "foo",
+      },
+      children: [],
+    });
+  });
+
+  it("should parse a react fragment", () => {
+    expect(
+      parseReactElement(
+        <Fragment key="foo">
+          <div />
+          <div />
+        </Fragment>,
+        options,
+      ),
+    ).toEqual({
+      type: "ReactFragment",
+      key: "foo",
+      children: [
+        {
+          type: "ReactElement",
+          displayName: "div",
+          defaultProps: {},
+          props: {},
+          children: [],
+        },
+        {
+          type: "ReactElement",
+          displayName: "div",
+          defaultProps: {},
+          props: {},
+          children: [],
+        },
+      ],
+    });
+  });
+});
