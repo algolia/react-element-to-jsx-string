@@ -3,7 +3,7 @@ import { isValidElement } from "react";
 import type { Options } from "../options";
 import parseReactElement from "../parser/parseReactElement";
 import formatComplexDataStructure from "./formatComplexDataStructure";
-import formatFunction from "./formatFunction";
+import formatFunction, { isFunction } from "./formatFunction";
 import formatTreeNode from "./formatTreeNode";
 import { isPlainObject } from "./isPlainObject";
 
@@ -36,7 +36,7 @@ const formatPropValue = (
     return `{Symbol('${symbolDescription}')}`;
   }
 
-  if (typeof propValue === "function") {
+  if (isFunction(propValue)) {
     return `{${formatFunction(propValue, options)}}`;
   }
 

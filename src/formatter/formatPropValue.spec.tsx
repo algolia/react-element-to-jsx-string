@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vitest } from "vitest";
 
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
+import type { AnyFunction } from "../options";
 import parseReactElement from "../parser/parseReactElement";
 import formatComplexDataStructure from "./formatComplexDataStructure";
 import formatPropValue from "./formatPropValue";
@@ -71,7 +72,7 @@ describe("formatPropValue", () => {
   it('should format the function prop value with the "functionValue" option', () => {
     const doThings = (a: number) => a * 2;
 
-    const functionValue = (fn: Function) => {
+    const functionValue = (fn: AnyFunction) => {
       expect(fn).toBe(doThings);
 
       return "function Myfunction() {}";

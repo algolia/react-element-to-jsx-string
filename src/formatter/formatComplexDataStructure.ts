@@ -3,7 +3,7 @@ import { isValidElement } from "react";
 
 import { type Options, defaultOptions } from "../options";
 import parseReactElement from "../parser/parseReactElement";
-import formatFunction from "./formatFunction";
+import formatFunction, { isFunction } from "./formatFunction";
 import formatTreeNode from "./formatTreeNode";
 import sortObject from "./sortObject";
 import spacer from "./spacer";
@@ -29,7 +29,7 @@ export default (
         );
       }
 
-      if (typeof currentValue === "function") {
+      if (isFunction(currentValue)) {
         return formatFunction(currentValue, options);
       }
 

@@ -2,7 +2,7 @@ import type { NamedExoticComponent } from "react";
 import { describe, expect, it, vitest } from "vitest";
 
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
-import formatFunction from "./formatFunction";
+import formatFunction, { isFunction } from "./formatFunction";
 
 vitest.mock(
   "./formatReactElementNode",
@@ -86,5 +86,28 @@ describe("formatFunction", () => {
         }),
       ),
     ).toEqual("<Test />");
+  });
+});
+
+describe("isFunction", () => {
+  it("should return true for any kind of function", () => {
+    expect(isFunction(hello)).toBe(true);
+    expect(isFunction(() => 1)).toBe(true);
+    expect(isFunction(async () => 1)).toBe(true);
+    expect(isFunction(function* generator() {})).toBe(true);
+    expect(isFunction(class Foo {})).toBe(true);
+    expect(isFunction(Math.max)).toBe(true);
+  });
+
+  it("should return false for non-function values", () => {
+    expect(isFunction(undefined)).toBe(false);
+    expect(isFunction(null)).toBe(false);
+    expect(isFunction(1)).toBe(false);
+    expect(isFunction("function hello() {}")).toBe(false);
+    expect(isFunction(true)).toBe(false);
+    expect(isFunction(Symbol("fn"))).toBe(false);
+    expect(isFunction({})).toBe(false);
+    expect(isFunction([])).toBe(false);
+    expect(isFunction({ call: () => 1, apply: () => 1 })).toBe(false);
   });
 });
