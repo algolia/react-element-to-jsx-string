@@ -31,9 +31,9 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
       - id: select-mode
-        uses: changesets/action/select-mode@v2
+        uses: changesets/action/select-mode@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
 
   version:
     if: needs.select-mode.outputs.mode == 'version'
@@ -51,8 +51,8 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - run: pnpm install --frozen-lockfile
-      - uses: changesets/action/version@v2
+      - run: pnpm install
+      - uses: changesets/action/version@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
 
   pack:
     if: needs.select-mode.outputs.mode == 'publish'
@@ -71,10 +71,10 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
       - run: pnpm run build
       - id: pack
-        uses: changesets/action/pack@v2
+        uses: changesets/action/pack@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
         with:
           publish-plan-artifact-id: ${{ needs.select-mode.outputs.publish-plan-artifact-id }}
 
@@ -93,8 +93,8 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - run: pnpm install --frozen-lockfile
-      - uses: changesets/action/publish@v2
+      - run: pnpm install
+      - uses: changesets/action/publish@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
         with:
           pack-dir-artifact-id: ${{ needs.pack.outputs.pack-dir-artifact-id }}
           create-github-releases: true
