@@ -17,7 +17,6 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run format
       - run: pnpm run build
-      # FIXME: To be reactivated
-      # - run: pnpm run smoke esm 19.0.0
-      # - run: pnpm run smoke esm latest
-      # - run: pnpm run smoke esm next
+      - run: pnpm run smoke 19.0.0
+      - run: pnpm run smoke latest
+      - run: pnpm run smoke next

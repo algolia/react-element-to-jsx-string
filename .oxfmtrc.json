@@ -11,7 +11,7 @@
   "arrowParens": "always",
   "bracketSameLine": false,
   "bracketSpacing": true,
-  "ignorePatterns": ["tests/smoke/**", "**/*.md"],
+  "ignorePatterns": ["**/*.md"],
   "sortImports": true,
   "sortPackageJson": false
 }

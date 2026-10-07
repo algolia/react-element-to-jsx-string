@@ -22,14 +22,13 @@
   },
   "scripts": {
     "build": "tsdown",
-    "prebuild": "rm -rf dist/",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --check",
     "format:fix": "oxfmt",
     "test": "vitest",
     "release": "./release.sh",
-    "smoke": "node tests/smoke/run",
+    "smoke": "node tests/smoke/run.js",
     "typecheck": "tsc --noEmit"
   },
   "author": {
