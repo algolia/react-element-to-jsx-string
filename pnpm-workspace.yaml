@@ -1,0 +1,10 @@
+minimumReleaseAge: 1440 # one day
+minimumReleaseAgeExcludePrune: true
+minimumReleaseAgeExclude:
+  - "@babel/runtime"
+  - "@base2/pretty-print-object"
+  - "tinybench"
+
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 129600 # three months
+trustPolicyExcludePrune: true
