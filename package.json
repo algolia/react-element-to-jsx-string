@@ -38,7 +38,7 @@
   "license": "MIT",
   "repository": "algolia/react-element-to-jsx-string",
   "dependencies": {
-    "@base2/pretty-print-object": "1.0.2"
+    "@base2/pretty-print-object": "1.0.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",

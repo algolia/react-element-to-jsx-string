@@ -107,6 +107,22 @@ describe("formatComplexDataStructure", () => {
     );
   });
 
+  it("should format an object that contains an invalid date", () => {
+    const fixture = {
+      a: new Date(Number.NaN),
+    };
+
+    expect(formatComplexDataStructure(fixture, true, 0, options)).toEqual(
+      "{a: Invalid Date}",
+    );
+  });
+
+  it("should format an array that contains an invalid date", () => {
+    expect(
+      formatComplexDataStructure([new Date(Number.NaN)], true, 0, options),
+    ).toEqual("[Invalid Date]");
+  });
+
   it("should format an object that contains a regexp", () => {
     const fixture = {
       a: /test/g,
