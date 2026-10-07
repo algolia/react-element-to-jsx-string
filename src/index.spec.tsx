@@ -868,6 +868,12 @@ test("reactElementToJSXString(<TestComponent />, { useBooleanShorthandSyntax: fa
 />`);
 });
 
+test("reactElementToJSXString(<TestComponent prop={false} />)", () => {
+  expect(reactElementToJSXString(<TestComponent prop={false} />)).toEqual(
+    "<TestComponent prop={false} />",
+  );
+});
+
 test("should render default props", () => {
   expect(
     reactElementToJSXString(<DefaultPropsComponent />),
@@ -948,10 +954,10 @@ test("should omit true as value", () => {
   ).toEqual("<custom primary />");
 });
 
-test("should omit attributes with false as value", () => {
+test("should render attributes with false as value", () => {
   expect(
     reactElementToJSXString(<custom primary={false} />), // eslint-disable-line react/jsx-boolean-value
-  ).toEqual("<custom />");
+  ).toEqual("<custom primary={false} />");
 });
 
 test('should return the actual functions when "showFunctions" is true', () => {

@@ -96,7 +96,7 @@ describe("formatProp", () => {
     expect(formatPropValue).toHaveBeenCalledWith(true, true, 0, options);
   });
 
-  it("should ignore a falsy boolean prop (with short syntax)", () => {
+  it("should format a falsy boolean prop (with short syntax)", () => {
     const options = {
       useBooleanShorthandSyntax: true,
       tabStop: 2,
@@ -107,8 +107,9 @@ describe("formatProp", () => {
     expect(
       formatProp("foo", true, false, false, null, true, 0, options),
     ).toEqual({
-      attributeFormattedInline: "",
-      attributeFormattedMultiline: "",
+      attributeFormattedInline: " foo={false}",
+      attributeFormattedMultiline: `
+  foo={false}`,
       isMultilineAttribute: false,
     });
 

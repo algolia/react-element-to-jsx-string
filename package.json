@@ -1,6 +1,6 @@
 {
   "name": "react-element-to-jsx-string",
-  "version": "17.0.0",
+  "version": "18.0.0",
   "description": "Turn a ReactElement into the corresponding JSX string.",
   "packageManager": "pnpm@9.15.2",
   "type": "module",
@@ -50,9 +50,9 @@
     "esm": "3.2.25",
     "happy-dom": "^17.1.0",
     "mversion": "2.0.1",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-is": "19.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-is": "19.3.0",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"

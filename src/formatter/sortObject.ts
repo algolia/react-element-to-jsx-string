@@ -6,13 +6,15 @@ function safeSortObject(value: any, seen: WeakSet<object>): any {
     return value;
   }
 
-  // return date, regexp and react element values as is
-  if (
-    value instanceof Date ||
-    value instanceof RegExp ||
-    React.isValidElement(value)
-  ) {
+  // return date and regexp values as is
+  if (value instanceof Date || value instanceof RegExp) {
     return value;
+  }
+
+  // return react element as is but remove _owner key because it can lead to recursion
+  if (React.isValidElement(value)) {
+    const { _owner, ...copyObj } = value as typeof value & { _owner?: unknown };
+    return copyObj;
   }
 
   seen.add(value);
@@ -26,9 +28,6 @@ function safeSortObject(value: any, seen: WeakSet<object>): any {
   return Object.keys(value)
     .sort()
     .reduce((result, key) => {
-      if (key === "_owner") {
-        return result;
-      }
       if (key === "current" || seen.has(value[key])) {
         // eslint-disable-next-line no-param-reassign
         // @ts-expect-error: flow to TS

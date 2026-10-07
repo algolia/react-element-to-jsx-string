@@ -1,3 +1,17 @@
+# [18.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v17.0.1...v18.0.0) (2026-10-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency is-plain-object to v5.1.0 ([#971](https://github.com/algolia/react-element-to-jsx-string/issues/971)) ([e719a42](https://github.com/algolia/react-element-to-jsx-string/commit/e719a42827c362c251f308f35578237242fc89cc))
+* **package:** use ESM build for browser entry ([#974](https://github.com/algolia/react-element-to-jsx-string/issues/974)) ([54b9de8](https://github.com/algolia/react-element-to-jsx-string/commit/54b9de8c4b945a0e5202a6eda75e12de9dc14ac8))
+
+
+
+## [17.0.1](https://github.com/algolia/react-element-to-jsx-string/compare/v17.0.0...v17.0.1) (2025-04-25)
+
+
+
 # [17.0.0](https://github.com/algolia/react-element-to-jsx-string/compare/v15.0.0...v17.0.0) (2025-01-18)
 
 
