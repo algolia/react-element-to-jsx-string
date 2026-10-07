@@ -1,38 +1,31 @@
-/*!
- * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-
-import assert from "node:assert";
-
-import { describe, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { isPlainObject } from "./isPlainObject";
 
 describe("isPlainObject", () => {
-  it("should return `true` if the object is created by the `Object` constructor.", () => {
-    assert(isPlainObject(Object.create({})));
-    assert(isPlainObject(Object.create(Object.prototype)));
-    assert(isPlainObject({ foo: "bar" }));
-    assert(isPlainObject({}));
-    assert(isPlainObject(Object.create(null)));
+  it("should return true for objects created by the Object constructor", () => {
+    expect(isPlainObject({})).toBe(true);
+    expect(isPlainObject({ foo: "bar" })).toBe(true);
+    expect(isPlainObject(new Object())).toBe(true);
+    expect(isPlainObject(Object.create(Object.prototype))).toBe(true);
+    expect(isPlainObject(Object.create(null))).toBe(true);
   });
 
-  it("should return `false` if the object is not created by the `Object` constructor.", () => {
-    // oxlint-disable-next-line typescript/no-explicit-any -- old-style constructor function needs an untyped `this`
-    function Foo(this: any) {
-      this.abc = {};
+  it("should return false for other values", () => {
+    class Foo {
+      abc = {};
     }
 
-    assert(!isPlainObject(/foo/));
-    assert(!isPlainObject(() => {}));
-    assert(!isPlainObject(1));
-    assert(!isPlainObject(["foo", "bar"]));
-    assert(!isPlainObject([]));
-    // @ts-expect-error
-    assert(!isPlainObject(new Foo()));
-    assert(!isPlainObject(null));
+    expect(isPlainObject(new Foo())).toBe(false);
+    expect(isPlainObject(Object.create({}))).toBe(false);
+    expect(isPlainObject(/foo/)).toBe(false);
+    expect(isPlainObject(new Date())).toBe(false);
+    expect(isPlainObject(() => {})).toBe(false);
+    expect(isPlainObject(["foo", "bar"])).toBe(false);
+    expect(isPlainObject([])).toBe(false);
+    expect(isPlainObject(1)).toBe(false);
+    expect(isPlainObject("foo")).toBe(false);
+    expect(isPlainObject(null)).toBe(false);
+    expect(isPlainObject(undefined)).toBe(false);
   });
 });
