@@ -1,4 +1,5 @@
 import { expect, test } from "vitest";
+
 import sortPropsByNames from "./sortPropsByNames";
 
 test("sortPropsByNames should always move the `key` and `ref` keys first", () => {

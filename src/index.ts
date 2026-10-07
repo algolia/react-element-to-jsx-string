@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+
 import formatTree from "./formatter/formatTree";
 import { type Options, defaultOptions } from "./options";
 import parseReactElement from "./parser/parseReactElement";

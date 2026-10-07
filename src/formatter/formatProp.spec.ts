@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vitest } from "vitest";
+
 import type { Options } from "../options";
 import formatProp from "./formatProp";
 import formatPropValue from "./formatPropValue";

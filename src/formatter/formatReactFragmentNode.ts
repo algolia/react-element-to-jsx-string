@@ -1,4 +1,5 @@
 import type { Key } from "react";
+
 import type { Options } from "../options";
 import type {
   ReactElementTreeNode,

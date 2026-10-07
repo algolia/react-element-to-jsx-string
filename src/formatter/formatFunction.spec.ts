@@ -1,5 +1,6 @@
 import type { NamedExoticComponent } from "react";
 import { describe, expect, it, vitest } from "vitest";
+
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
 import formatFunction from "./formatFunction";
 

@@ -1,4 +1,5 @@
 import { describe, expect, it, vitest } from "vitest";
+
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
 import { createStringTreeNode } from "../tree";
 import formatTree from "./formatTree";

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import formatReactFragmentNode from "./formatReactFragmentNode";
 
 const defaultOptions = {
@@ -40,9 +41,8 @@ describe("formatReactFragmentNode", () => {
       ],
     };
 
-    expect(
-      formatReactFragmentNode(tree, false, 0, defaultOptions),
-    ).toEqual(`<React.Fragment key="foo">
+    expect(formatReactFragmentNode(tree, false, 0, defaultOptions))
+      .toEqual(`<React.Fragment key="foo">
   Hello world
 </React.Fragment>`);
   });

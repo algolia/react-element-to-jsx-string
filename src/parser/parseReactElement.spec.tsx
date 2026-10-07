@@ -2,6 +2,7 @@
 
 import { Fragment } from "react";
 import { describe, expect, it } from "vitest";
+
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
 import parseReactElement from "./parseReactElement";
 

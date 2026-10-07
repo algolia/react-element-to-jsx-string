@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "import", "react", "vitest"],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-unsafe-function-type": "warn"
+  },
+  "ignorePatterns": ["tests/smoke/**"]
+}

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vitest } from "vitest";
+
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
 import formatReactElementNode from "./formatReactElementNode";
 import formatTreeNode from "./formatTreeNode";

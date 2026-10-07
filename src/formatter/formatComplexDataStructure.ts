@@ -1,5 +1,6 @@
 import { prettyPrint } from "@base2/pretty-print-object";
 import { isValidElement } from "react";
+
 import { type Options, defaultOptions } from "../options";
 import parseReactElement from "../parser/parseReactElement";
 import formatFunction from "./formatFunction";

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { generateOptionsFixture } from "../__tests__/generateOptionsFixture";
 import formatReactElementNode from "./formatReactElementNode";
 
@@ -114,17 +115,15 @@ describe("formatReactElementNode", () => {
       ],
     };
 
-    expect(
-      formatReactElementNode(tree, false, 0, defaultOptions),
-    ).toEqual(`<div>
+    expect(formatReactElementNode(tree, false, 0, defaultOptions))
+      .toEqual(`<div>
   first line
   second line
   third line
 </div>`);
 
-    expect(
-      formatReactElementNode(tree, false, 2, defaultOptions),
-    ).toEqual(`<div>
+    expect(formatReactElementNode(tree, false, 2, defaultOptions))
+      .toEqual(`<div>
       first line
       second line
       third line
@@ -153,9 +152,8 @@ describe("formatReactElementNode", () => {
       filterProps: (val: unknown, key: string) => !key.startsWith("on"),
     };
 
-    expect(
-      formatReactElementNode(tree, false, 0, options),
-    ).toEqual(`<h1 className="myClass">
+    expect(formatReactElementNode(tree, false, 0, options))
+      .toEqual(`<h1 className="myClass">
   Hello world
 </h1>`);
   });

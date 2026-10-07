@@ -6,7 +6,9 @@
  */
 
 import assert from "node:assert";
+
 import { describe, it } from "vitest";
+
 import { isPlainObject } from "./isPlainObject";
 
 describe("isPlainObject", () => {
@@ -19,7 +21,7 @@ describe("isPlainObject", () => {
   });
 
   it("should return `false` if the object is not created by the `Object` constructor.", () => {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // oxlint-disable-next-line typescript/no-explicit-any -- old-style constructor function needs an untyped `this`
     function Foo(this: any) {
       this.abc = {};
     }

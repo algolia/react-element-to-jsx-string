@@ -17,6 +17,7 @@ import {
   isStrictMode,
   isSuspense,
 } from "react-is";
+
 import type { Options } from "../options";
 import {
   createNumberTreeNode,

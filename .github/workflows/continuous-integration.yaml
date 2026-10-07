@@ -15,6 +15,7 @@ jobs:
       - run: pnpm run test
       - run: pnpm run typecheck
       - run: pnpm run lint
+      - run: pnpm run format
       - run: pnpm run build
       # FIXME: To be reactivated
       # - run: pnpm run smoke esm 19.0.0

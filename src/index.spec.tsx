@@ -29,6 +29,7 @@ import {
   memo,
 } from "react";
 import { expect, test } from "vitest";
+
 import reactElementToJSXString, { preserveFunctionLineBreak } from "./index";
 
 class TestComponent extends Component<Record<string, unknown>> {}
@@ -334,9 +335,8 @@ test('reactElementToJSXString(<custom z="3" a="1" b="2"/>, {sortProps: false})',
 });
 
 test('reactElementToJSXString(<custom a="1">Hello</custom>)', () => {
-  expect(
-    reactElementToJSXString(<custom a="1">Hello</custom>),
-  ).toEqual(`<custom a="1">
+  expect(reactElementToJSXString(<custom a="1">Hello</custom>))
+    .toEqual(`<custom a="1">
   Hello
 </custom>`);
 });
@@ -363,9 +363,8 @@ test("reactElementToJSXString(<div>Hello</div>)", () => {
 });
 
 test("reactElementToJSXString(<div>Hello \"Jonh\" and 'Mike'</div>)", () => {
-  expect(
-    reactElementToJSXString(<div>Hello "Jonh" and 'Mike'</div>),
-  ).toEqual(`<div>
+  expect(reactElementToJSXString(<div>Hello "Jonh" and 'Mike'</div>))
+    .toEqual(`<div>
   Hello "Jonh" and 'Mike'
 </div>`);
 });
@@ -734,9 +733,8 @@ test('reactElementToJSXString(<custom type={Symbol("test")}/>)', () => {
 });
 
 test('reactElementToJSXString(<custom aprop="test" ref="yes" />', () => {
-  expect(
-    reactElementToJSXString(<custom aprop="test" ref="yes" />),
-  ).toEqual(`<custom
+  expect(reactElementToJSXString(<custom aprop="test" ref="yes" />))
+    .toEqual(`<custom
   ref="yes"
   aprop="test"
 />`);
@@ -761,9 +759,8 @@ test('reactElementToJSXString(<div aprop="a" ref="yes"><span ref="wee" zprop="z"
 });
 
 test('reactElementToJSXString(<custom aprop="test" key="yes" />', () => {
-  expect(
-    reactElementToJSXString(<custom aprop="test" key="yes" />),
-  ).toEqual(`<custom
+  expect(reactElementToJSXString(<custom aprop="test" key="yes" />))
+    .toEqual(`<custom
   key="yes"
   aprop="test"
 />`);
@@ -810,9 +807,8 @@ test("reactElementToJSXString(<div>{''}</div>)", () => {
 });
 
 test("reactElementToJSXString(<div>String with {1} js expression</div>)", () => {
-  expect(
-    reactElementToJSXString(<div>String with {1} js number</div>),
-  ).toEqual(`<div>
+  expect(reactElementToJSXString(<div>String with {1} js number</div>))
+    .toEqual(`<div>
   String with 1 js number
 </div>`);
 });
@@ -875,9 +871,8 @@ test("reactElementToJSXString(<TestComponent prop={false} />)", () => {
 });
 
 test("should render default props", () => {
-  expect(
-    reactElementToJSXString(<DefaultPropsComponent />),
-  ).toEqual(`<DefaultPropsComponent
+  expect(reactElementToJSXString(<DefaultPropsComponent />))
+    .toEqual(`<DefaultPropsComponent
   boolean
   number={0}
   test="test"
@@ -1231,9 +1226,8 @@ test("should not cause recursive loop when an element contains a ref", () => {
     }
 
     componentDidMount() {
-      expect(
-        reactElementToJSXString(<input ref={this.inputRef} />),
-      ).toEqual(`<input
+      expect(reactElementToJSXString(<input ref={this.inputRef} />))
+        .toEqual(`<input
   ref={{
     current: '[Circular]'
   }}

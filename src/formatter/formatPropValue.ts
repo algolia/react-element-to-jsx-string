@@ -1,4 +1,5 @@
 import { isValidElement } from "react";
+
 import type { Options } from "../options";
 import parseReactElement from "../parser/parseReactElement";
 import formatComplexDataStructure from "./formatComplexDataStructure";

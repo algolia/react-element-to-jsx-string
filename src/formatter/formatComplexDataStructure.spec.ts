@@ -1,5 +1,6 @@
 import { type NamedExoticComponent, createElement } from "react";
 import { describe, expect, it, vitest } from "vitest";
+
 import type { Options } from "../options";
 import formatComplexDataStructure from "./formatComplexDataStructure";
 
