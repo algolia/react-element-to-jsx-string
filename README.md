@@ -173,11 +173,16 @@ pnpm run build
 
 ## Release
 
-Decide if this is a `patch`, `minor` or `major` release, look at http://semver.org/
+Releases are made with [Changesets](https://changesets.dev).
 
-```sh
-npm run release [major|minor|patch|x.x.x]
-```
+1. In a pull request that changes the package, add a changeset: choose the version bump (`patch`, `minor` or `major`, see https://semver.org/) and describe the change for the changelog.
+
+   ```sh
+   pnpm changeset
+   ```
+
+2. Once merged on `master`, the changeset is added to a "Version Packages" pull request, which updates the version and `CHANGELOG.md`.
+3. Merging the "Version Packages" pull request publishes the package to npm from GitHub Actions, and creates the git tag and the GitHub release.
 
 ## Thanks
 

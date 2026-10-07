@@ -28,7 +28,6 @@
     "format": "oxfmt --check",
     "format:fix": "oxfmt",
     "test": "vitest",
-    "release": "./release.sh",
     "smoke": "node tests/smoke/run.js",
     "typecheck": "tsc --noEmit"
   },
@@ -37,7 +36,10 @@
     "url": "https://github.com/algolia"
   },
   "license": "MIT",
-  "repository": "algolia/react-element-to-jsx-string",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/algolia/react-element-to-jsx-string.git"
+  },
   "dependencies": {
     "@base2/pretty-print-object": "1.0.3"
   },
@@ -47,8 +49,7 @@
     "react-is": "^19.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-angular": "^19.7.0",
+    "@changesets/cli": "^3.0.3",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -56,10 +57,8 @@
     "@types/react-dom": "^19.3.0",
     "@types/react-is": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
-    "conventional-changelog-cli": "2.1.1",
     "esm": "3.2.25",
     "happy-dom": "^20.14.5",
-    "mversion": "2.0.1",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
     "react": "19.3.0",
