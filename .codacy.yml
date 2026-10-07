@@ -1,0 +1,17 @@
+---
+# Codacy analysis is disabled: linting and formatting are done by oxlint and
+# oxfmt in CI. Tools can't be disabled from this file (only in the Codacy UI),
+# so every language of the repository is disabled instead.
+languages:
+  typescript:
+    enabled: false
+  javascript:
+    enabled: false
+  json:
+    enabled: false
+  yaml:
+    enabled: false
+  markdown:
+    enabled: false
+  shell:
+    enabled: false
