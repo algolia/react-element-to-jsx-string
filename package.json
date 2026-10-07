@@ -22,6 +22,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "prepublishOnly": "pnpm run build",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --check",
