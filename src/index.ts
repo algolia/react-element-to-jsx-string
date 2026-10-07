@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 
 import formatTree from "./formatter/formatTree";
-import { type Options, defaultOptions } from "./options";
+import { type Options, type PublicOptions, defaultOptions } from "./options";
 import parseReactElement from "./parser/parseReactElement";
 
 const reactElementToJsxString = (
   element: ReactNode,
-  {
+  publicOptions: PublicOptions = {},
+): string => {
+  const {
     filterProps = [],
     showDefaultProps = true,
     showFunctions = false,
@@ -17,8 +19,8 @@ const reactElementToJsxString = (
     sortProps = true,
     maxInlineAttributesLineLength,
     displayName,
-  }: Partial<Options> = {},
-): string => {
+  } = publicOptions;
+
   if (!element) {
     return "";
   }
@@ -40,6 +42,8 @@ const reactElementToJsxString = (
 };
 
 export default reactElementToJsxString;
+
+export type { PublicOptions as Options };
 
 export {
   inlineFunction,

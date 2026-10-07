@@ -21,8 +21,8 @@ export default (fn: AnyFunction, options: Options): string => {
   const { functionValue = defaultFunctionValue, showFunctions } = options;
 
   if (!showFunctions && functionValue === defaultFunctionValue) {
-    return functionValue(noRefCheck);
+    return defaultFunctionValue(noRefCheck);
   }
 
-  return functionValue(fn);
+  return String(functionValue(fn));
 };

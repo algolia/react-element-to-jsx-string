@@ -1087,6 +1087,14 @@ test("should return functionValue result when it returns a string", () => {
   ).toEqual("<div onClick={...} />");
 });
 
+test("should convert a non-string functionValue result to a string", () => {
+  expect(
+    reactElementToJSXString(<div onClick={() => "value"} />, {
+      functionValue: () => 42,
+    }),
+  ).toEqual("<div onClick={42} />");
+});
+
 test("sends the original fn to functionValue", () => {
   const fn = () => {};
 
