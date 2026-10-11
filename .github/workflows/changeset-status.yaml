@@ -23,7 +23,7 @@ jobs:
     outputs:
       comment-body: ${{ steps.pr-status.outputs.comment-body }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - id: pr-status
         uses: changesets/action/pr-status@ae32849d5ba541f9ae29e40e22a623bc13562f51 #v2.1.2
 
