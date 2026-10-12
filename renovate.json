@@ -1,3 +1,30 @@
 {
-  "extends": ["config:js-app", "algolia"]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "security:minimumReleaseAgeNpm",
+    "schedule:earlyMondays"
+  ],
+  "timezone": "Europe/Paris",
+  "updateNotScheduled": false,
+  "prCreation": "not-pending",
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
+  "separateMultipleMajor": true,
+  "major": {
+    "automerge": false
+  },
+  "minor": {
+    "automerge": true
+  },
+  "patch": {
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "minimumReleaseAge": "7 days"
+    }
+  ]
 }
