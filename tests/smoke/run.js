@@ -20,7 +20,7 @@ if (!reactVersion) {
 }
 
 const rootDir = join(import.meta.dirname, "../..");
-if (!existsSync(join(rootDir, "dist/index.mjs"))) {
+if (!existsSync(join(rootDir, "dist/index.js"))) {
   throw new Error("The package is not built: run 'pnpm run build' first");
 }
 
