@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vitest/config";
+import { type ViteUserConfig, defineConfig } from "vitest/config";
 
-export default defineConfig({
+const config: ViteUserConfig = defineConfig({
   plugins: [react()],
   test: {
     globals: false,
@@ -10,3 +10,5 @@ export default defineConfig({
     mockReset: true,
   },
 });
+
+export default config;
