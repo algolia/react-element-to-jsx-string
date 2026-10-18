@@ -2,7 +2,7 @@
 export default function createPropFilter<Value>(
   props: Record<string, Value>,
   filter: string[] | ((propValue: Value, key: string) => boolean),
-) {
+): (key: string) => boolean {
   if (Array.isArray(filter)) {
     return (key: string) => filter.indexOf(key) === -1;
   }
