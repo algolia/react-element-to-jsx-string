@@ -1,6 +1,6 @@
-import { defineConfig } from "tsdown";
+import { type UserConfig, defineConfig } from "tsdown";
 
-export default defineConfig({
+const config: UserConfig = defineConfig({
   entry: ["src/index.ts"],
   format: ["esm"],
   sourcemap: true,
@@ -15,3 +15,5 @@ export default defineConfig({
   },
   target: ["node24", "es2020"],
 });
+
+export default config;

@@ -27,7 +27,7 @@ export type Options = {
 // Options accepted by reactElementToJSXString
 export type PublicOptions = Partial<Options>;
 
-export const defaultOptions = {
+export const defaultOptions: Options = {
   filterProps: [],
   showDefaultProps: true,
   showFunctions: false,

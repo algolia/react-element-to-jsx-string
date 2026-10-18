@@ -3,6 +3,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "declaration": true,
+    "isolatedDeclarations": true,
     "target": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,
