@@ -167,8 +167,8 @@ importers:
   .:
     dependencies:
       '@base2/pretty-print-object':
-        specifier: 1.0.3
-        version: 1.0.3
+        specifier: 1.0.4
+        version: 1.0.4
     devDependencies:
       '@arethetypeswrong/core':
         specifier: ^0.18.5
@@ -255,8 +255,8 @@ packages:
     resolution: {integrity: sha512-NpugTzbKgGrNe45Ui32cN8vCFFMxVtP/9rtfwv0nP5FRDAjvYBxJcLVpYA9mr1jxP6cnIT7x9LUzuDTbWYYNRA==}
     engines: {node: '>=6.9.0'}
 
-  '@base2/pretty-print-object@1.0.3':
-    resolution: {integrity: sha512-XLUpZd1fT9mhpWNKuqSv1weEihGomQErTgqqTqOqj2RmpN0tOCgC10pDDqr9WY4qMix1+MpUi3qE7BUl6FM7kA==}
+  '@base2/pretty-print-object@1.0.4':
+    resolution: {integrity: sha512-ol/E9YYLhsKfNeyhxH46KxGTb0tm1dd/1lH8dSsspOsSDWdzbz0Dft6GG23sI7aCZiVo1d+q+AVvXC/KgaMSeA==}
 
   '@braidai/lang@1.1.2':
     resolution: {integrity: sha512-qBcknbBufNHlui137Hft8xauQMTZDKdophmLFv05r2eNmdIv/MlPuP4TdUknHG68UdWLgVZwgxVe735HzJNIwA==}
@@ -1619,7 +1619,7 @@ snapshots:
 
   '@babel/runtime@7.29.10': {}
 
-  '@base2/pretty-print-object@1.0.3': {}
+  '@base2/pretty-print-object@1.0.4': {}
 
   '@braidai/lang@1.1.2': {}
 
