@@ -4,6 +4,8 @@ minimumReleaseAgeExclude:
   - "@babel/runtime"
   - "@base2/pretty-print-object"
   - "tinybench"
+  # Renovate security update: happy-dom@21.0.4
+  - happy-dom@21.0.4
 
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 129600 # three months
