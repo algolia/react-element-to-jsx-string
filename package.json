@@ -57,7 +57,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@types/react-is": "19.3.0",
-    "@vitejs/plugin-react": "6.1.2",
+    "@vitejs/plugin-react": "6.3.0",
     "esm": "3.2.25",
     "happy-dom": "21.0.4",
     "oxfmt": "0.73.0",
